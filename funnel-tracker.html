@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TGTG · Funnel Tracker</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
+<link rel="stylesheet" href="/brand.css">
+<style>
+.page{max-width:1060px;margin:0 auto;padding:28px 24px 80px 72px;}
+.eyebrow{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:3px;color:var(--teal);margin-bottom:8px;}
+.h1{font-size:26px;font-weight:900;letter-spacing:-1px;margin-bottom:6px;}
+.h1 em{color:var(--teal);font-style:normal;}
+.sub{font-size:13px;color:var(--m);line-height:1.65;margin-bottom:24px;}
+.funnel-row{display:grid;grid-template-columns:repeat(5,1fr);gap:0;background:#fff;border:1.5px solid var(--b1);border-radius:14px;overflow:hidden;margin-bottom:24px;box-shadow:0 1px 6px rgba(0,0,0,.05);}
+.funnel-stage{padding:20px 16px;border-right:1px solid var(--b1);text-align:center;position:relative;}
+.funnel-stage:last-child{border-right:none;}
+.fs-lbl{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--m);margin-bottom:8px;}
+.fs-n{font-size:36px;font-weight:900;letter-spacing:-2px;line-height:1;color:var(--teal);}
+.fs-conv{font-size:11px;color:var(--m);margin-top:6px;font-weight:700;}
+.fs-bar{height:4px;border-radius:2px;margin-top:10px;}
+.arrow{position:absolute;right:-1px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--b2);z-index:1;}
+.tbl{background:#fff;border:1.5px solid var(--b1);border-radius:14px;overflow:hidden;margin-bottom:24px;box-shadow:0 1px 6px rgba(0,0,0,.05);}
+.tbl-head{display:grid;grid-template-columns:1.4fr repeat(5,80px) 90px;padding:10px 16px;background:var(--cream);border-bottom:1px solid var(--b1);font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--m);}
+.tbl-row{display:grid;grid-template-columns:1.4fr repeat(5,80px) 90px;padding:11px 16px;border-bottom:1px solid #f0ebe3;align-items:center;}
+.tbl-row:last-child{border-bottom:none;}
+.rep-name{font-size:13px;font-weight:800;}
+.rep-sub{font-size:10px;color:var(--m);}
+.cell{font-size:12px;font-weight:700;text-align:center;}
+.cell.ok{color:var(--g);}
+.cell.warn{color:var(--r);}
+.cell.caution{color:var(--y);}
+.insight-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;}
+@media(max-width:640px){.insight-grid{grid-template-columns:1fr;}}
+.insight{background:#fff;border:1.5px solid var(--b1);border-radius:12px;padding:16px 18px;box-shadow:0 1px 4px rgba(0,0,0,.04);}
+.insight-icon{font-size:24px;margin-bottom:8px;}
+.insight-title{font-size:12px;font-weight:800;margin-bottom:4px;color:var(--t);}
+.insight-body{font-size:12px;color:var(--m);line-height:1.65;}
+.insight.flag{border-color:rgba(229,57,53,.25);background:rgba(229,57,53,.02);}
+.insight.flag .insight-title{color:var(--r);}
+.insight.ok{border-color:rgba(76,175,80,.25);background:rgba(76,175,80,.02);}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="eyebrow">Too Good To Go · Acquisition intelligence</div>
+  <div class="h1">Funnel <em>Tracker.</em></div>
+  <div class="sub">Dials → connects → pitches → sign-ups. Conversion at every stage. By rep, by Team Lead. Where the funnel is leaking tells you exactly what to coach.</div>
+
+  <div class="funnel-row">
+    <div class="funnel-stage"><div class="fs-lbl">Dials</div><div class="fs-n">1,847</div><div class="fs-conv">This week</div><div class="fs-bar" style="background:var(--teal);width:100%;"></div></div>
+    <div class="funnel-stage"><div class="fs-lbl">Connects</div><div class="fs-n">412</div><div class="fs-conv">22.3% connect rate</div><div class="fs-bar" style="background:var(--teal);width:22%;"></div></div>
+    <div class="funnel-stage"><div class="fs-lbl">Pitched</div><div class="fs-n">298</div><div class="fs-conv">72.3% of connects</div><div class="fs-bar" style="background:var(--y);width:72%;"></div></div>
+    <div class="funnel-stage"><div class="fs-lbl">Committed</div><div class="fs-n">89</div><div class="fs-conv">29.9% of pitches</div><div class="fs-bar" style="background:var(--r);width:30%;"></div></div>
+    <div class="funnel-stage"><div class="fs-lbl">Signed</div><div class="fs-n">67</div><div class="fs-conv">75.3% of committed</div><div class="fs-bar" style="background:var(--g);width:75%;"></div></div>
+  </div>
+
+  <div class="insight-grid">
+    <div class="insight flag">
+      <div class="insight-icon">⚠️</div>
+      <div class="insight-title">Pitch → Commitment is the leak (29.9%)</div>
+      <div class="insight-body">Nearly 1 in 3 pitches doesn't generate a commitment. The problem is after the Magic Bag explanation and before the close. Objection handling is inconsistent — some reps are retreating at the first "let me think about it."</div>
+    </div>
+    <div class="insight ok">
+      <div class="insight-icon">✅</div>
+      <div class="insight-title">Connect rate is healthy (22.3%)</div>
+      <div class="insight-body">Industry average for cold phone acquisition is 15–18%. The team is outperforming on dials-to-connect. This isn't the problem. Don't coach volume — coach what happens after the connect.</div>
+    </div>
+    <div class="insight flag">
+      <div class="insight-icon">📞</div>
+      <div class="insight-title">27% of connects aren't reaching pitch</div>
+      <div class="insight-body">412 connects, only 298 pitched. 114 calls are dropping between connect and pitch. Likely cause: opening isn't earning the right to continue. Listen to 10 of these calls this week.</div>
+    </div>
+  </div>
+
+  <div class="tbl">
+    <div class="tbl-head"><div>Rep</div><div>Dials</div><div>Connects</div><div>Con%</div><div>Pitched</div><div>Signed</div><div>Sign%</div></div>
+    <div class="tbl-row"><div><div class="rep-name">Sarah Osei</div><div class="rep-sub">Emma Clarke · Wk 18</div></div><div class="cell ok">84</div><div class="cell ok">21</div><div class="cell ok">25%</div><div class="cell">16</div><div class="cell ok">5</div><div class="cell ok">31%</div></div>
+    <div class="tbl-row"><div><div class="rep-name">Emma Walsh</div><div class="rep-sub">Zoe McDonald · Wk 22</div></div><div class="cell ok">88</div><div class="cell ok">22</div><div class="cell ok">25%</div><div class="cell">17</div><div class="cell ok">5</div><div class="cell ok">29%</div></div>
+    <div class="tbl-row"><div><div class="rep-name">Priya Sharma</div><div class="rep-sub">Marcus Williams · Wk 14</div></div><div class="cell ok">82</div><div class="cell">19</div><div class="cell">23%</div><div class="cell">14</div><div class="cell ok">4</div><div class="cell">29%</div></div>
+    <div class="tbl-row"><div><div class="rep-name">Ryan Murphy</div><div class="rep-sub">Zoe McDonald · Wk 13</div></div><div class="cell">76</div><div class="cell">17</div><div class="cell">22%</div><div class="cell">13</div><div class="cell">3</div><div class="cell">23%</div></div>
+    <div class="tbl-row"><div><div class="rep-name">James Park</div><div class="rep-sub">Emma Clarke · Wk 12</div></div><div class="cell">79</div><div class="cell">18</div><div class="cell">23%</div><div class="cell">12</div><div class="cell">3</div><div class="cell">25%</div></div>
+    <div class="tbl-row"><div><div class="rep-name">Fatima Ali</div><div class="rep-sub">Emma Clarke · Wk 9</div></div><div class="cell">71</div><div class="cell">15</div><div class="cell">21%</div><div class="cell">10</div><div class="cell">2</div><div class="cell">20%</div></div>
+    <div class="tbl-row"><div><div class="rep-name">Daniel Russo</div><div class="rep-sub">Marcus Williams · Wk 16</div></div><div class="cell caution">61</div><div class="cell caution">11</div><div class="cell caution">18%</div><div class="cell caution">8</div><div class="cell warn">1</div><div class="cell warn">13%</div></div>
+    <div class="tbl-row"><div><div class="rep-name">Tom Bradley</div><div class="rep-sub">Emma Clarke · Wk 6 · Ramp</div></div><div class="cell warn">58</div><div class="cell warn">10</div><div class="cell warn">17%</div><div class="cell warn">7</div><div class="cell warn">1</div><div class="cell warn">14%</div></div>
+  </div>
+</div>
+<script src="/nav.js"></script>
+</body>
+</html>

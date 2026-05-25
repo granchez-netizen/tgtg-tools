@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TGTG · Team Lead 1:1</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
+<link rel="stylesheet" href="/brand.css">
+<style>
+.page{max-width:860px;margin:0 auto;padding:32px 24px 80px 72px;}
+.eyebrow{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:3px;color:var(--teal);margin-bottom:8px;}
+.h1{font-size:26px;font-weight:900;letter-spacing:-1px;margin-bottom:6px;}
+.h1 em{color:var(--teal);font-style:normal;}
+.sub{font-size:13px;color:var(--m);line-height:1.65;margin-bottom:24px;}
+.tabs{display:flex;gap:6px;margin-bottom:24px;flex-wrap:wrap;}
+.tab{padding:7px 18px;border-radius:20px;border:1.5px solid var(--b1);background:transparent;color:var(--m);font-size:11px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .15s;}
+.tab.on{background:var(--teal);border-color:var(--teal);color:#fff;}
+.sheet{display:none;} .sheet.on{display:block;}
+.meta{background:#fff;border:1.5px solid var(--b1);border-radius:12px;padding:18px 20px;margin-bottom:18px;box-shadow:0 1px 4px rgba(0,0,0,.04);}
+.meta-grid{display:flex;gap:20px;flex-wrap:wrap;}
+.meta-f{display:flex;flex-direction:column;gap:4px;}
+.meta-lbl{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--m);}
+.meta-inp{background:transparent;border:none;border-bottom:1px solid var(--b1);font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;color:var(--t);padding:4px 0;outline:none;width:180px;transition:border-color .15s;}
+.meta-inp:focus{border-bottom-color:var(--teal);}
+.meta-inp::placeholder{color:var(--b2);font-weight:400;}
+.sec-hdr{display:flex;align-items:center;gap:10px;margin:20px 0 12px;}
+.sec-num{font-size:10px;font-weight:800;color:var(--teal);background:var(--teal-l);border:1px solid rgba(78,154,143,.3);padding:3px 9px;border-radius:4px;}
+.sec-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--m);}
+.card{background:#fff;border:1.5px solid var(--b1);border-radius:12px;padding:18px 20px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.04);}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:580px){.two{grid-template-columns:1fr;}}
+.field{margin-bottom:12px;}
+.fl{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--m);margin-bottom:6px;display:block;}
+textarea.fi,input.fi{width:100%;background:var(--cream);border:1.5px solid var(--b1);border-radius:9px;color:var(--t);font-family:'Nunito',sans-serif;font-size:13px;padding:10px 13px;outline:none;transition:border-color .15s;line-height:1.65;}
+textarea.fi{resize:vertical;min-height:80px;}
+textarea.fi:focus,input.fi:focus{border-color:var(--teal);}
+textarea.fi::placeholder,input.fi::placeholder{color:var(--b2);}
+.score-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px;}
+.sc{background:var(--cream);border:1px solid var(--b1);border-radius:10px;padding:12px 8px;text-align:center;}
+.sc-inp{background:transparent;border:none;font-family:'Nunito',sans-serif;font-size:24px;font-weight:900;color:var(--teal);text-align:center;width:100%;outline:none;}
+.sc-inp::placeholder{color:var(--b2);}
+.sc-lbl{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--m);margin-top:4px;}
+.tl-btn{display:flex;gap:5px;flex-wrap:wrap;}
+.tb{padding:5px 12px;border-radius:6px;border:1.5px solid var(--b1);background:transparent;font-family:'Nunito',sans-serif;font-size:10px;font-weight:800;cursor:pointer;color:var(--m);transition:all .15s;}
+.tb.g.on{background:var(--gd);border-color:var(--gl);color:var(--g);}
+.tb.a.on{background:var(--yd);border-color:var(--yl);color:var(--y);}
+.tb.r.on{background:var(--rd);border-color:var(--rl);color:var(--r);}
+.ask-box{background:var(--teal-ll);border:1.5px solid rgba(78,154,143,.25);border-radius:10px;padding:14px 16px;margin-top:14px;}
+.ask-lbl{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--teal);margin-bottom:6px;}
+textarea.ask-inp{width:100%;background:transparent;border:none;outline:none;font-family:'Nunito',sans-serif;font-size:13px;color:var(--t);resize:vertical;min-height:60px;line-height:1.65;}
+textarea.ask-inp::placeholder{color:var(--b2);}
+.copy-btn{width:100%;padding:11px;background:var(--teal);color:#fff;border:none;border-radius:9px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer;margin-top:14px;transition:background .15s;}
+.copy-btn:hover{background:var(--teal-d);}
+.copy-btn.done{background:var(--g);}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="eyebrow">Too Good To Go · Weekly rhythm</div>
+  <div class="h1">Team Lead <em>1:1.</em></div>
+  <div class="sub">Weekly 1:1 with each of the 3 Team Leads. Team performance, rep health, coaching capacity, blockers, and the one ask. This is a leader conversation — not a pipeline review.</div>
+
+  <div class="tabs">
+    <button class="tab on" onclick="showTab('tl1',this)">Emma Clarke · London N</button>
+    <button class="tab" onclick="showTab('tl2',this)">Marcus Williams · London S</button>
+    <button class="tab" onclick="showTab('tl3',this)">Zoe McDonald · Midlands & IE</button>
+  </div>
+
+  <div class="sheet on" id="tab-tl1">
+    <div class="meta">
+      <div class="meta-grid">
+        <div class="meta-f"><div class="meta-lbl">Team Lead</div><input class="meta-inp" value="Emma Clarke" type="text"></div>
+        <div class="meta-f"><div class="meta-lbl">Territory</div><input class="meta-inp" value="London North" type="text"></div>
+        <div class="meta-f"><div class="meta-lbl">Week commencing</div><input class="meta-inp" type="text" placeholder="Mon DD/MM"></div>
+        <div class="meta-f"><div class="meta-lbl">Team size</div><input class="meta-inp" value="9 reps" type="text"></div>
+      </div>
+    </div>
+
+    <div class="sec-hdr"><span class="sec-num">01</span><span class="sec-title">Team performance this week</span></div>
+    <div class="card">
+      <div class="score-row">
+        <div class="sc"><input class="sc-inp" type="text" placeholder="—" value="624"><div class="sc-lbl">Team dials</div></div>
+        <div class="sc"><input class="sc-inp" type="text" placeholder="—" value="138"><div class="sc-lbl">Connects</div></div>
+        <div class="sc"><input class="sc-inp" type="text" placeholder="—" value="22%"><div class="sc-lbl">Convert rate</div></div>
+        <div class="sc"><input class="sc-inp" type="text" placeholder="—" value="34"><div class="sc-lbl">Partners signed</div></div>
+      </div>
+      <div class="two">
+        <div class="field"><label class="fl">Reps above weekly target</label><input class="fi" type="text" value="6 of 9" placeholder="X of Y"></div>
+        <div class="field"><label class="fl">Reps flagged this week</label><input class="fi" type="text" value="Tom Bradley — dials low, ramp at risk" placeholder="Names and reason"></div>
+      </div>
+    </div>
+
+    <div class="sec-hdr"><span class="sec-num">02</span><span class="sec-title">Emma's coaching this week</span></div>
+    <div class="card">
+      <div class="field"><label class="fl">How many calls did you listen to this week?</label><input class="fi" type="text" value="8 calls across 4 reps" placeholder="Number and which reps"></div>
+      <div class="field"><label class="fl">What was the primary coaching theme?</label><textarea class="fi" placeholder="What pattern kept coming up across the calls you listened to?">Opening hooks — most reps are leading with "I'm calling from TGTG" rather than naming the surplus problem first. We role-played a new opener this week. Seeing improvement in Sarah and James already.</textarea></div>
+      <div class="field"><label class="fl">Tom Bradley — week 6 ramp check. Your read?</label><textarea class="fi" placeholder="Honest assessment — skill gap, will gap, or circumstance?">Skill gap on connect-to-pitch. He's making the dials but losing partners in the first 60 seconds. Not mission-framing at all — pitching features. I have a structured call review with him Friday. May need a joint call session next week with me on the line.</textarea></div>
+    </div>
+
+    <div class="sec-hdr"><span class="sec-num">03</span><span class="sec-title">Emma's development as a leader</span></div>
+    <div class="card">
+      <div class="field"><label class="fl">Biggest leadership decision you made this week</label><textarea class="fi" placeholder="What did you decide? How did you decide it? What would you do differently?">Moved Sarah to mentor Tom for two mornings this week. She agreed — it's good for her development and he gets peer coaching alongside mine. Worked better than I expected.</textarea></div>
+      <div class="two">
+        <div class="field"><label class="fl">Emma's overall trajectory</label>
+          <div class="tl-btn">
+            <button class="tb g" onclick="tl(this)">Improving</button>
+            <button class="tb a on" onclick="tl(this)">Steady</button>
+            <button class="tb r" onclick="tl(this)">Needs support</button>
+          </div>
+        </div>
+        <div class="field"><label class="fl">Next development focus for Emma</label><input class="fi" type="text" value="Structured underperformance conversations — she avoids them" placeholder="One thing"></div>
+      </div>
+    </div>
+
+    <div class="sec-hdr"><span class="sec-num">04</span><span class="sec-title">Blockers and the ask</span></div>
+    <div class="card">
+      <div class="field"><label class="fl">What is getting in the way of the team's performance?</label><textarea class="fi" placeholder="Process, product, territory, people — name it specifically.">Salesforce lead quality in North London postcodes is degrading — too many disconnected numbers. Need a data refresh on the N1, N4, N7 lists urgently.</textarea></div>
+      <div class="ask-box">
+        <div class="ask-lbl">Emma's one ask this week</div>
+        <textarea class="ask-inp" placeholder="What does she need you to decide, unblock, or provide?">Approval to run a team lunch Wednesday — the team has had a strong month and I want to mark it before we go into the next sprint. Estimate £120.</textarea>
+      </div>
+    </div>
+    <button class="copy-btn" onclick="copyNote(this,'tl1')">Copy 1:1 summary →</button>
+  </div>
+
+  <div class="sheet" id="tab-tl2">
+    <div class="meta">
+      <div class="meta-grid">
+        <div class="meta-f"><div class="meta-lbl">Team Lead</div><input class="meta-inp" value="Marcus Williams" type="text"></div>
+        <div class="meta-f"><div class="meta-lbl">Territory</div><input class="meta-inp" value="London South" type="text"></div>
+        <div class="meta-f"><div class="meta-lbl">Week commencing</div><input class="meta-inp" type="text" placeholder="Mon DD/MM"></div>
+        <div class="meta-f"><div class="meta-lbl">Team size</div><input class="meta-inp" value="9 reps" type="text"></div>
+      </div>
+    </div>
+    <div class="sec-hdr"><span class="sec-num">01</span><span class="sec-title">Team performance this week</span></div>
+    <div class="card">
+      <div class="score-row">
+        <div class="sc"><input class="sc-inp" type="text" placeholder="—" value="598"><div class="sc-lbl">Team dials</div></div>
+        <div class="sc"><input class="sc-inp" type="text" placeholder="—" value="125"><div class="sc-lbl">Connects</div></div>
+        <div class="sc"><input class="sc-inp" type="text" placeholder="—" value="21%"><div class="sc-lbl">Convert rate</div></div>
+        <div class="sc"><input class="sc-inp" type="text" placeholder="—" value="29"><div class="sc-lbl">Partners signed</div></div>
+      </div>
+      <div class="two">
+        <div class="field"><label class="fl">Reps above weekly target</label><input class="fi" type="text" value="5 of 9" placeholder="X of Y"></div>
+        <div class="field"><label class="fl">Reps flagged this week</label><input class="fi" type="text" value="Daniel Russo — 2nd consecutive week below floor" placeholder="Names and reason"></div>
+      </div>
+    </div>
+    <div class="sec-hdr"><span class="sec-num">02</span><span class="sec-title">Marcus's coaching this week</span></div>
+    <div class="card">
+      <div class="field"><label class="fl">How many calls did you listen to this week?</label><input class="fi" type="text" value="6 calls across 3 reps" placeholder="Number and which reps"></div>
+      <div class="field"><label class="fl">What was the primary coaching theme?</label><textarea class="fi">Daniel Russo — second week below floor. I've listened to his calls. The technical skill is there but he's rushing the close. Asking for the commitment before the partner has had a chance to feel bought in. Working on pace and silence this week.</textarea></div>
+    </div>
+    <div class="sec-hdr"><span class="sec-num">03</span><span class="sec-title">Marcus's development as a leader</span></div>
+    <div class="card">
+      <div class="two">
+        <div class="field"><label class="fl">Marcus's overall trajectory</label>
+          <div class="tl-btn">
+            <button class="tb g on" onclick="tl(this)">Improving</button>
+            <button class="tb a" onclick="tl(this)">Steady</button>
+            <button class="tb r" onclick="tl(this)">Needs support</button>
+          </div>
+        </div>
+        <div class="field"><label class="fl">Next development focus for Marcus</label><input class="fi" type="text" value="Running PIP conversations — first one coming with Daniel" placeholder="One thing"></div>
+      </div>
+    </div>
+    <div class="sec-hdr"><span class="sec-num">04</span><span class="sec-title">Blockers and the ask</span></div>
+    <div class="card">
+      <div class="field"><label class="fl">What is getting in the way?</label><textarea class="fi">South London indie density is lower than North — the lead pool is smaller and the conversion window is tighter. Need to discuss whether we expand into Surrey and Kent borders for this territory.</textarea></div>
+      <div class="ask-box"><div class="ask-lbl">Marcus's one ask</div><textarea class="ask-inp">Can we discuss the Daniel Russo situation Monday? I want to move to a formal performance conversation but I want your read first before I do.</textarea></div>
+    </div>
+    <button class="copy-btn" onclick="copyNote(this,'tl2')">Copy 1:1 summary →</button>
+  </div>
+
+  <div class="sheet" id="tab-tl3">
+    <div class="meta">
+      <div class="meta-grid">
+        <div class="meta-f"><div class="meta-lbl">Team Lead</div><input class="meta-inp" value="Zoe McDonald" type="text"></div>
+        <div class="meta-f"><div class="meta-lbl">Territory</div><input class="meta-inp" value="Midlands & Ireland" type="text"></div>
+        <div class="meta-f"><div class="meta-lbl">Week commencing</div><input class="meta-inp" type="text" placeholder="Mon DD/MM"></div>
+        <div class="meta-f"><div class="meta-lbl">Team size</div><input class="meta-inp" value="8 reps" type="text"></div>
+      </div>
+    </div>
+    <div class="sec-hdr"><span class="sec-num">01</span><span class="sec-title">Team performance this week</span></div>
+    <div class="card">
+      <div class="score-row">
+        <div class="sc"><input class="sc-inp" type="text" placeholder="—" value="625"><div class="sc-lbl">Team dials</div></div>
+        <div class="sc"><input class="sc-inp" type="text" placeholder="—" value="149"><div class="sc-lbl">Connects</div></div>
+        <div class="sc"><input class="sc-inp" type="text" placeholder="—" value="24%"><div class="sc-lbl">Convert rate</div></div>
+        <div class="sc"><input class="sc-inp" type="text" placeholder="—" value="31"><div class="sc-lbl">Partners signed</div></div>
+      </div>
+      <div class="two">
+        <div class="field"><label class="fl">Reps above weekly target</label><input class="fi" type="text" value="6 of 8" placeholder="X of Y"></div>
+        <div class="field"><label class="fl">Reps flagged this week</label><input class="fi" type="text" value="None — strongest TL team this week" placeholder="Names and reason"></div>
+      </div>
+    </div>
+    <div class="sec-hdr"><span class="sec-num">02</span><span class="sec-title">Zoe's coaching this week</span></div>
+    <div class="card">
+      <div class="field"><label class="fl">How many calls did you listen to this week?</label><input class="fi" type="text" value="10 calls — focused on Ireland team" placeholder="Number and which reps"></div>
+      <div class="field"><label class="fl">What was the primary coaching theme?</label><textarea class="fi">Dublin reps are getting better objection handling on the "we're too busy to deal with this" objection. Emma Walsh has a great reframe — "that's exactly the right time to set this up, so it's ready for when you're quieter." Sharing that across all 3 teams next week.</textarea></div>
+    </div>
+    <div class="sec-hdr"><span class="sec-num">03</span><span class="sec-title">Zoe's development as a leader</span></div>
+    <div class="card">
+      <div class="two">
+        <div class="field"><label class="fl">Zoe's overall trajectory</label>
+          <div class="tl-btn">
+            <button class="tb g on" onclick="tl(this)">Improving</button>
+            <button class="tb a" onclick="tl(this)">Steady</button>
+            <button class="tb r" onclick="tl(this)">Needs support</button>
+          </div>
+        </div>
+        <div class="field"><label class="fl">Next development focus for Zoe</label><input class="fi" type="text" value="Presenting team results to the senior leadership team — next all-hands" placeholder="One thing"></div>
+      </div>
+    </div>
+    <div class="sec-hdr"><span class="sec-num">04</span><span class="sec-title">Blockers and the ask</span></div>
+    <div class="card">
+      <div class="field"><label class="fl">What is getting in the way?</label><textarea class="fi">Nothing blocking performance right now. The Ireland team needs more local Salesforce data — the current leads are too UK-centric and Dublin indie partners have a different profile. Need a dedicated Dublin data pull.</textarea></div>
+      <div class="ask-box"><div class="ask-lbl">Zoe's one ask</div><textarea class="ask-inp">Can Emma Walsh's Dublin objection reframe go into the global best practice bank? I think it should be shared at the European team call next month.</textarea></div>
+    </div>
+    <button class="copy-btn" onclick="copyNote(this,'tl3')">Copy 1:1 summary →</button>
+  </div>
+
+</div>
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.sheet').forEach(function(s){s.classList.remove('on');});
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on');});
+  document.getElementById('tab-'+id).classList.add('on');
+  btn.classList.add('on');
+}
+function tl(btn){
+  btn.closest('.tl-btn').querySelectorAll('.tb').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+}
+function copyNote(btn,id){
+  var sheet = document.getElementById('tab-'+id);
+  var lines = ['TEAM LEAD 1:1 SUMMARY — Too Good To Go UK',''];
+  sheet.querySelectorAll('input,textarea').forEach(function(el){
+    if(el.value.trim()) lines.push(el.value.trim());
+  });
+  navigator.clipboard.writeText(lines.join('\n')).then(function(){
+    btn.textContent='Copied ✓'; btn.classList.add('done');
+    setTimeout(function(){btn.textContent='Copy 1:1 summary →';btn.classList.remove('done');},2000);
+  });
+}
+document.addEventListener('input',function(e){
+  if(e.target.tagName==='TEXTAREA'){e.target.style.height='auto';e.target.style.height=Math.max(80,e.target.scrollHeight)+'px';}
+});
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>

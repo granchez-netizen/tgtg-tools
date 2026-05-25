@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TGTG · Partner Health</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
+<link rel="stylesheet" href="/brand.css">
+<style>
+.page{max-width:1100px;margin:0 auto;padding:28px 24px 80px 72px;}
+.eyebrow{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:3px;color:var(--teal);margin-bottom:8px;}
+.h1{font-size:26px;font-weight:900;letter-spacing:-1px;margin-bottom:6px;}
+.h1 em{color:var(--teal);font-style:normal;}
+.sub{font-size:13px;color:var(--m);line-height:1.65;margin-bottom:20px;}
+.strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px;}
+@media(max-width:640px){.strip{grid-template-columns:repeat(3,1fr);}}
+.sc{background:#fff;border:1.5px solid var(--b1);border-radius:10px;padding:12px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04);}
+.sc-n{font-size:22px;font-weight:900;letter-spacing:-1px;}
+.sc-l{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--m);margin-top:4px;}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+.fb{padding:5px 12px;border-radius:14px;border:1px solid var(--b1);background:transparent;color:var(--m);font-size:10px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .15s;}
+.fb.on{background:var(--teal);border-color:var(--teal);color:#fff;}
+.tbl{background:#fff;border:1.5px solid var(--b1);border-radius:14px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.05);}
+.tbl-head{display:grid;grid-template-columns:1.8fr 80px 80px 70px 80px 90px 80px;padding:10px 16px;background:var(--cream);border-bottom:1px solid var(--b1);font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--m);}
+.tbl-row{border-bottom:1px solid #f0ebe3;}
+.tbl-row:last-child{border-bottom:none;}
+.tbl-row-inner{display:grid;grid-template-columns:1.8fr 80px 80px 70px 80px 90px 80px;padding:11px 16px;align-items:center;cursor:pointer;transition:background .15s;}
+.tbl-row-inner:hover{background:var(--teal-ll);}
+.tbl-row.open .tbl-row-inner{background:var(--teal-ll);}
+.partner-name{font-size:13px;font-weight:800;}
+.partner-sub{font-size:10px;color:var(--m);}
+.cell{font-size:12px;font-weight:700;text-align:center;}
+.cell.ok{color:var(--g);}
+.cell.warn{color:var(--r);}
+.cell.caution{color:var(--y);}
+.pill{display:inline-block;font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.8px;}
+.pill-r{background:var(--rd);border:1px solid var(--rl);color:var(--r);}
+.pill-y{background:var(--yd);border:1px solid var(--yl);color:var(--y);}
+.pill-g{background:var(--gd);border:1px solid var(--gl);color:var(--g);}
+.expand{display:none;padding:14px 16px 16px;background:var(--cream);border-top:1px solid var(--b1);}
+.tbl-row.open .expand{display:block;}
+.exp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px;}
+.eg{display:flex;flex-direction:column;gap:3px;}
+.eg-l{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--m);}
+.eg-v{font-size:13px;font-weight:800;}
+.exp-note{font-size:12px;color:var(--t2);line-height:1.7;margin-bottom:12px;}
+.action-row{display:flex;gap:8px;flex-wrap:wrap;}
+.act-btn{padding:7px 14px;border-radius:7px;border:1.5px solid var(--b1);background:transparent;font-family:'Nunito',sans-serif;font-size:11px;font-weight:800;cursor:pointer;color:var(--m);transition:all .15s;}
+.act-btn.primary{background:var(--teal);color:#fff;border-color:var(--teal);}
+.act-btn:hover:not(.primary){border-color:var(--teal);color:var(--teal);}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="eyebrow">Too Good To Go · Partner retention</div>
+  <div class="h1">Partner <em>Health.</em></div>
+  <div class="sub">Every indie partner ranked by health. Bags sold per week, surplus upload streak, last login, churn risk. Click any partner to expand and take action.</div>
+  <div class="strip" id="strip"></div>
+  <div class="filters">
+    <button class="fb on" onclick="setF('all',this)">All partners</button>
+    <button class="fb" onclick="setF('critical',this)">Critical — churning</button>
+    <button class="fb" onclick="setF('at-risk',this)">At risk</button>
+    <button class="fb" onclick="setF('healthy',this)">Healthy</button>
+  </div>
+  <div class="tbl">
+    <div class="tbl-head"><div>Partner</div><div>Bags/wk</div><div>Streak</div><div>Uploads</div><div>Last login</div><div>Meals saved</div><div>Risk</div></div>
+    <div id="rows"></div>
+  </div>
+</div>
+<script>
+var PARTNERS = [
+  {name:'The Spice Garden',city:'London N1',bags:0,streak:0,uploads:'0 this week',lastLogin:'21d ago',meals:247,risk:'critical',note:'No bags uploaded for 3 weeks. Owner had a staff change. AM check-in call needed today — not email.',am:'Emma Clarke'},
+  {name:'Café Bloom',city:'London SW9',bags:0,streak:0,uploads:'0 this week',lastLogin:'14d ago',meals:89,risk:'critical',note:'New partner — signed 3 weeks ago, never uploaded a bag. Onboarding call may not have landed. Needs a re-onboarding call.',am:'Marcus Williams'},
+  {name:'Bao House',city:'Birmingham B1',bags:2,streak:1,uploads:'Inconsistent',lastLogin:'5d ago',meals:412,risk:'at-risk',note:'Was doing 8 bags/week, now doing 2. Likely changed shift pattern. Worth asking what changed.',am:'Zoe McDonald'},
+  {name:'The Noodle Bar',city:'London SE1',bags:3,streak:2,uploads:'2x this week',lastLogin:'3d ago',meals:1240,risk:'at-risk',note:'Declining trend over 4 weeks. Good partner historically. Check if there\'s a seasonal reason or if it\'s platform fatigue.',am:'Marcus Williams'},
+  {name:'Bakehouse 46',city:'Dublin D2',bags:12,streak:8,uploads:'Daily',lastLogin:'Today',meals:3847,risk:'healthy',note:'Top performing partner in Ireland. Uploads every day, consistent bag quality. Referral conversation — do they know 3 other bakeries?',am:'Zoe McDonald'},
+  {name:'Pho Street',city:'London N1',bags:9,streak:6,uploads:'5x this week',lastLogin:'Yesterday',meals:2104,risk:'healthy',note:'Strong and consistent. Bags sell out within 2 hours of upload. Could increase bag count from 3 to 5.',am:'Emma Clarke'},
+  {name:'Curry Leaf',city:'London SW2',bags:7,streak:5,uploads:'4x this week',lastLogin:'2d ago',meals:1876,risk:'healthy',note:'Reliable partner. Has referred one other Indian restaurant already. Good candidate for a case study.',am:'Marcus Williams'},
+  {name:'Dough & Co',city:'Manchester M1',bags:11,streak:9,uploads:'Daily',lastLogin:'Today',meals:4210,risk:'healthy',note:'Best performer in Manchester. Bags price optimised perfectly. Owner is an advocate — has mentioned TGTG on their Instagram twice.',am:'Zoe McDonald'},
+];
+
+var FILTER='all';
+function setF(f,btn){
+  FILTER=f;
+  document.querySelectorAll('.fb').forEach(function(b){b.className='fb';});
+  btn.className='fb on';
+  render();
+}
+function render(){
+  var c=PARTNERS.filter(function(p){return FILTER==='all'||p.risk===FILTER;});
+  var crit=PARTNERS.filter(function(p){return p.risk==='critical';}).length;
+  var risk=PARTNERS.filter(function(p){return p.risk==='at-risk';}).length;
+  var hlth=PARTNERS.filter(function(p){return p.risk==='healthy';}).length;
+  var total=PARTNERS.reduce(function(s,p){return s+p.meals;},0);
+  document.getElementById('strip').innerHTML=
+    '<div class="sc"><div class="sc-n" style="color:var(--teal);">'+PARTNERS.length+'</div><div class="sc-l">Partners</div></div>'+
+    '<div class="sc"><div class="sc-n" style="color:var(--r);">'+crit+'</div><div class="sc-l">Critical</div></div>'+
+    '<div class="sc"><div class="sc-n" style="color:var(--y);">'+risk+'</div><div class="sc-l">At risk</div></div>'+
+    '<div class="sc"><div class="sc-n" style="color:var(--g);">'+hlth+'</div><div class="sc-l">Healthy</div></div>'+
+    '<div class="sc"><div class="sc-n" style="color:var(--teal);">'+total.toLocaleString()+'</div><div class="sc-l">Meals saved</div></div>';
+  var html='';
+  c.sort(function(a,b){var o={critical:0,'at-risk':1,healthy:2};return o[a.risk]-o[b.risk];}).forEach(function(p,i){
+    var rp={critical:'<span class="pill pill-r">Critical</span>','at-risk':'<span class="pill pill-y">At risk</span>',healthy:'<span class="pill pill-g">Healthy</span>'}[p.risk];
+    var bc=p.bags===0?'warn':p.bags<5?'caution':'ok';
+    var sc=p.streak===0?'warn':p.streak<3?'caution':'ok';
+    html+='<div class="tbl-row" id="pr-'+i+'">';
+    html+='<div class="tbl-row-inner" onclick="toggle(\'pr-'+i+'\')">';
+    html+='<div><div class="partner-name">'+p.name+'</div><div class="partner-sub">'+p.city+' · '+p.am+'</div></div>';
+    html+='<div class="cell '+bc+'">'+p.bags+'</div>';
+    html+='<div class="cell '+sc+'">'+p.streak+'wk</div>';
+    html+='<div class="cell" style="font-size:10px;">'+p.uploads+'</div>';
+    html+='<div class="cell '+(parseInt(p.lastLogin)>=14?'warn':parseInt(p.lastLogin)>=7?'caution':'ok')+'">'+p.lastLogin+'</div>';
+    html+='<div class="cell ok">'+p.meals.toLocaleString()+'</div>';
+    html+='<div>'+rp+'</div>';
+    html+='</div>';
+    html+='<div class="expand"><div class="exp-grid">';
+    html+='<div class="eg"><div class="eg-l">Bags/week</div><div class="eg-v">'+p.bags+'</div></div>';
+    html+='<div class="eg"><div class="eg-l">Upload streak</div><div class="eg-v">'+p.streak+' weeks</div></div>';
+    html+='<div class="eg"><div class="eg-l">Meals saved</div><div class="eg-v">'+p.meals.toLocaleString()+'</div></div>';
+    html+='<div class="eg"><div class="eg-l">AM</div><div class="eg-v">'+p.am+'</div></div>';
+    html+='</div><div class="exp-note">'+p.note+'</div>';
+    html+='<div class="action-row"><button class="act-btn primary" onclick="alert(\'Email '+p.name+'\')">✉ Email partner</button><button class="act-btn" onclick="alert(\'Log call\')">📞 Log call</button></div>';
+    html+='</div></div>';
+  });
+  document.getElementById('rows').innerHTML=html;
+}
+function toggle(id){document.getElementById(id).classList.toggle('open');}
+render();
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>
