@@ -2,137 +2,338 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TGTG · Daily Standup</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
-<link rel="stylesheet" href="/brand.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Too Good To Go · Daily Standup</title>
+<link rel="stylesheet" href="/brand_tgt.css">
 <style>
-.page{max-width:980px;margin:0 auto;padding:32px 24px 80px 72px;}
-.eyebrow{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:3px;color:var(--teal);margin-bottom:8px;}
-.h1{font-size:26px;font-weight:900;letter-spacing:-1px;margin-bottom:6px;}
-.h1 em{color:var(--teal);font-style:normal;}
-.sub{font-size:13px;color:var(--m);line-height:1.65;margin-bottom:24px;}
-
-/* Team summary */
-.team-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:28px;}
-@media(max-width:640px){.team-strip{grid-template-columns:repeat(3,1fr);}}
-.ts{background:#fff;border:1.5px solid var(--b1);border-radius:12px;padding:14px 10px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04);}
-.ts-n{font-size:26px;font-weight:900;letter-spacing:-1px;line-height:1;}
-.ts-l{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--m);margin-top:5px;}
-
-/* TL section */
-.tl-section{background:#fff;border:1.5px solid var(--b1);border-radius:14px;overflow:hidden;margin-bottom:16px;box-shadow:0 1px 6px rgba(0,0,0,.05);}
-.tl-hdr{background:var(--teal);padding:12px 18px;display:flex;align-items:center;gap:12px;}
-.tl-name{font-size:14px;font-weight:800;color:#fff;}
-.tl-meta{font-size:11px;color:rgba(255,255,255,.75);}
-.tl-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-bottom:1px solid var(--b1);}
-.tl-stat{padding:12px 14px;border-right:1px solid var(--b1);text-align:center;}
-.tl-stat:last-child{border-right:none;}
-.tl-stat-n{font-size:22px;font-weight:900;letter-spacing:-1px;line-height:1;}
-.tl-stat-l{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--m);margin-top:3px;}
-
-/* Rep rows */
-.rep-grid{display:grid;grid-template-columns:1.5fr 70px 70px 70px 70px 80px 80px;gap:0;}
-.rep-hdr{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--m);padding:9px 14px;border-bottom:1px solid var(--b1);background:var(--cream);text-align:center;}
-.rep-hdr:first-child{text-align:left;}
-.rep-row{display:contents;}
-.rep-row .cell{padding:10px 14px;border-bottom:1px solid #f0ebe3;font-size:12px;font-weight:700;text-align:center;display:flex;align-items:center;justify-content:center;}
-.rep-row .cell:first-child{text-align:left;justify-content:flex-start;flex-direction:column;gap:1px;}
-.rep-row .cell.warn{color:var(--r);}
-.rep-row .cell.caution{color:var(--y);}
-.rep-row .cell.ok{color:var(--g);}
-.rep-name{font-size:12px;font-weight:800;color:var(--t);}
-.rep-sub{font-size:10px;color:var(--m);font-weight:400;}
-.flag-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.flag-dot.g{background:var(--g);}
-.flag-dot.a{background:var(--y);}
-.flag-dot.r{background:var(--r);}
-
-/* Impact bar */
-.impact-bar{background:linear-gradient(135deg,var(--teal) 0%,var(--teal-d) 100%);border-radius:12px;padding:16px 20px;margin-bottom:24px;color:#fff;display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
-.ib-item{text-align:center;}
-.ib-n{font-size:24px;font-weight:900;letter-spacing:-1px;}
-.ib-l{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;opacity:.75;margin-top:2px;}
-.ib-div{width:1px;height:40px;background:rgba(255,255,255,.2);}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{--tgtg:#6DBE4F;--tgtgd:rgba(109,190,79,.09);--tgtgl:rgba(109,190,79,.22);--green:#22C55E;--red:#EF4444;--warn:#F59E0B;--bg:#0f0f0f;--s:#1a1a1a;--b:#1e1e1e;--b2:#262626;}
+body{-webkit-font-smoothing:antialiased;font-family:'Inter',sans-serif;background:var(--bg);color:#fff;min-height:100vh;padding-bottom:60px;}
+.wrap{max-width:680px;margin:0 auto;padding:0 18px;}
+.hdr{padding:22px 0 18px;border-bottom:1px solid var(--b2);margin-bottom:22px;}
+.brand{font-size:13px;font-weight:800;margin-bottom:4px;}.brand em{color:var(--tgtg);font-style:normal;}
+.hdr-title{font-size:26px;font-weight:900;line-height:1.2;}.hdr-title em{color:var(--tgtg);font-style:normal;}
+.hdr-meta{font-size:10px;color:#2a2a2a;margin-top:4px;}
+.section{background:var(--s);border:1px solid var(--b2);border-radius:13px;padding:18px;margin-bottom:12px;}
+.sec-lbl{font-size:9px;color:var(--tgtg);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;font-weight:700;}
+/* Team selector */
+.team-tabs{display:flex;gap:6px;margin-bottom:14px;}
+.team-tab{padding:7px 14px;border-radius:7px;border:1px solid var(--b2);background:transparent;color:#555;font-size:11px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;}
+.team-tab.on{background:var(--tgtgd);border-color:var(--tgtgl);color:var(--tgtg);}
+/* Rep cards */
+.rep-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+.rep-card{background:#111;border:1.5px solid var(--b2);border-radius:10px;padding:12px;}
+.rep-card.leader{border-color:rgba(109,190,79,.35);background:rgba(109,190,79,.04);}
+.rep-name{font-size:13px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.rep-crown{font-size:12px;}
+.stat-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.stat-lbl{font-size:10px;color:#555;}
+.stat-inp{width:64px;padding:5px 8px;background:#111;border:1.5px solid var(--b2);border-radius:6px;font-size:13px;font-weight:700;color:#fff;text-align:center;font-family:'Inter',sans-serif;}
+.stat-inp:focus{outline:none;border-color:var(--tgtg);}
+.flag{display:flex;align-items:center;gap:6px;margin-top:8px;}
+.flag-lbl{font-size:10px;color:#555;flex:1;}
+.flag-check{width:15px;height:15px;accent-color:var(--tgtg);cursor:pointer;}
+.add-rep-btn{width:100%;padding:10px;background:transparent;border:1.5px dashed var(--b2);border-radius:9px;color:#333;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;cursor:pointer;margin-bottom:8px;transition:all .15s;}
+.add-rep-btn:hover{border-color:var(--tgtg);color:var(--tgtg);}
+/* Totals bar */
+.totals-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:#111;border-radius:10px;padding:12px;margin-bottom:14px;}
+.total-cell{text-align:center;}
+.total-n{font-size:20px;font-weight:900;color:var(--tgtg);line-height:1;}
+.total-l{font-size:9px;color:#444;margin-top:3px;font-weight:600;text-transform:uppercase;}
+/* Leaderboard */
+.lb-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #141414;font-size:12px;}
+.lb-row:last-child{border-bottom:none;}
+.lb-pos{width:22px;font-size:11px;font-weight:800;color:var(--tgtg);text-align:center;flex-shrink:0;}
+.lb-name{flex:1;font-weight:600;}
+.lb-dials{width:40px;text-align:right;font-weight:800;}
+.lb-convs{width:48px;text-align:right;font-size:10px;color:#888;}
+.lb-signed{width:40px;text-align:right;font-weight:800;color:var(--tgtg);}
+.lb-bar-wrap{width:80px;height:4px;background:#1a1a1a;border-radius:2px;flex-shrink:0;}
+.lb-bar{height:100%;border-radius:2px;background:var(--tgtg);transition:width .4s;}
+/* Metric rows */
+.metric-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--b);}
+.metric-row:last-child{border-bottom:none;}
+.metric-lbl{font-size:13px;color:#555;}
+.metric-val{font-size:14px;font-weight:700;color:#fff;}
+.metric-inp{width:80px;padding:6px 10px;background:#111;border:1.5px solid var(--b2);border-radius:7px;font-size:13px;font-weight:700;color:#fff;text-align:right;font-family:'Inter',sans-serif;}
+.metric-inp:focus{outline:none;border-color:var(--tgtg);}
+/* Focus and motivation */
+.ta{width:100%;padding:11px 13px;background:#111;border:1.5px solid var(--b2);border-radius:9px;font-size:13px;color:#fff;font-family:'Inter',sans-serif;line-height:1.7;resize:vertical;transition:border-color .15s;min-height:60px;}
+.ta:focus{outline:none;border-color:var(--tgtg);}
+.ta::placeholder{color:#222;}
+.focus-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--b);}
+.focus-item:last-child{border-bottom:none;}
+.focus-num{font-size:14px;font-weight:800;color:var(--tgtg);width:20px;flex-shrink:0;}
+/* Motivation pill */
+.motivation-strip{background:rgba(109,190,79,.06);border:1px solid rgba(109,190,79,.18);border-radius:10px;padding:12px 14px;margin-bottom:12px;font-size:12px;color:#aaa;line-height:1.7;}
+.motivation-strip strong{color:var(--tgtg);}
+/* Buttons */
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px;}
+.btn{padding:11px;border-radius:9px;border:1.5px solid var(--b2);background:transparent;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:#444;cursor:pointer;transition:all .15s;}
+.btn:hover{border-color:var(--tgtg);color:var(--tgtg);}
+.btn.primary{background:var(--tgtg);color:#000;border-color:var(--tgtg);}
+.btn.primary:hover{opacity:.85;}
+/* Team goal */
+.goal-bar{background:#111;border-radius:10px;padding:12px 14px;margin-bottom:12px;}
+.goal-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.goal-lbl{font-size:10px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;}
+.goal-pct{font-size:14px;font-weight:900;color:var(--tgtg);}
+.goal-track{height:6px;background:#1a1a1a;border-radius:3px;overflow:hidden;}
+.goal-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--tgtg),#a3e635);transition:width .5s;}
 </style>
 </head>
 <body>
-<div class="page">
-  <div class="eyebrow">Too Good To Go UK · Head of Indie Partners</div>
-  <div class="h1">Daily <em>Standup.</em></div>
-  <div class="sub">Phone team · 26 reps · 3 Team Leads. Dials, connects, conversions, partners signed. Updated daily. Any rep below floor is flagged in red before the call ends.</div>
-
-  <div class="impact-bar">
-    <div class="ib-item"><div class="ib-n" id="meals-today">847</div><div class="ib-l">Meals saved today</div></div>
-    <div class="ib-div"></div>
-    <div class="ib-item"><div class="ib-n" id="partners-today">6</div><div class="ib-l">Partners signed today</div></div>
-    <div class="ib-div"></div>
-    <div class="ib-item"><div class="ib-n" id="co2-today">423kg</div><div class="ib-l">CO₂ prevented</div></div>
-    <div class="ib-div"></div>
-    <div class="ib-item"><div class="ib-n" id="week-target">74%</div><div class="ib-l">Week to target</div></div>
+<div class="wrap">
+  <div class="hdr">
+    <div class="brand"><em>Too Good</em> To Go · UK &amp; Ireland</div>
+    <div class="hdr-title">Daily <em>Standup.</em></div>
+    <div class="hdr-meta" id="today-meta">Loading...</div>
   </div>
 
-  <div class="team-strip">
-    <div class="ts"><div class="ts-n" style="color:var(--teal);">26</div><div class="ts-l">Reps active</div></div>
-    <div class="ts"><div class="ts-n">1,847</div><div class="ts-l">Dials today</div></div>
-    <div class="ts"><div class="ts-n" style="color:var(--g);">412</div><div class="ts-l">Connects</div></div>
-    <div class="ts"><div class="ts-n" style="color:var(--g);">22%</div><div class="ts-l">Connect rate</div></div>
-    <div class="ts"><div class="ts-n" style="color:var(--teal);">34</div><div class="ts-l">Partners signed</div></div>
+  <!-- TEAM SELECTOR -->
+  <div class="section">
+    <div class="sec-lbl">Which Standup?</div>
+    <div class="team-tabs">
+      <button class="team-tab on" onclick="setTeam('acq',this)">09:00 · Team Acquisition</button>
+      <button class="team-tab" onclick="setTeam('am',this)">09:30 · Team Account Management</button>
+      <button class="team-tab" onclick="setTeam('growth',this)">10:00 · Team Growth</button>
+    </div>
+    <div class="motivation-strip" id="team-motivation">
+      <strong>Team Acquisition — The Hunters.</strong> Every rep on this team is hunting new partners. The metric that matters today: dials made, meaningful conversations held, and magic bags agreed. Volume drives velocity. Velocity drives revenue. One more meaningful conversation before 5pm beats any excuse for stopping at target.
+    </div>
   </div>
 
-  <!-- Team Lead 1 -->
-  <div class="tl-section">
-    <div class="tl-hdr">
-      <div><div class="tl-name">Team Lead: Emma Clarke</div><div class="tl-meta">London North · 9 reps</div></div>
-      <div style="margin-left:auto;display:flex;gap:20px;">
-        <div style="text-align:right;color:#fff;"><div style="font-size:18px;font-weight:900;">13</div><div style="font-size:9px;opacity:.7;text-transform:uppercase;letter-spacing:1px;">Signed today</div></div>
-        <div style="text-align:right;color:#fff;"><div style="font-size:18px;font-weight:900;">24%</div><div style="font-size:9px;opacity:.7;text-transform:uppercase;letter-spacing:1px;">Convert rate</div></div>
+  <!-- TEAM GOAL PROGRESS -->
+  <div class="section">
+    <div class="sec-lbl">Team Target — This Week</div>
+    <div class="goal-bar">
+      <div class="goal-hdr">
+        <div class="goal-lbl" id="goal-label">Dials · Week target</div>
+        <div class="goal-pct" id="goal-pct">0%</div>
+      </div>
+      <div class="goal-track"><div class="goal-fill" id="goal-fill" style="width:0%"></div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+      <div>
+        <div style="font-size:9px;color:#555;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Team Dials Target</div>
+        <input class="metric-inp" style="width:100%;" type="number" id="team-dials-target" placeholder="350" oninput="updateGoal()">
+      </div>
+      <div>
+        <div style="font-size:9px;color:#555;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Dials So Far</div>
+        <input class="metric-inp" style="width:100%;color:var(--tgtg);" type="number" id="team-dials-actual" placeholder="0" oninput="updateGoal()">
+      </div>
+      <div>
+        <div style="font-size:9px;color:#555;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Bags Agreed Today</div>
+        <input class="metric-inp" style="width:100%;color:var(--tgtg);" type="number" id="team-bags-today" placeholder="0">
       </div>
     </div>
-    <div class="rep-grid">
-      <div class="rep-hdr">Rep</div><div class="rep-hdr">Dials</div><div class="rep-hdr">Connects</div><div class="rep-hdr">Conv%</div><div class="rep-hdr">Signed</div><div class="rep-hdr">MTD</div><div class="rep-hdr">Status</div>
-      <div class="rep-row"><div class="cell"><div class="rep-name">Sarah Osei</div><div class="rep-sub">Wk 18</div></div><div class="cell ok">84</div><div class="cell ok">21</div><div class="cell ok">25%</div><div class="cell ok">5</div><div class="cell ok">28</div><div class="cell"><div class="flag-dot g"></div></div></div>
-      <div class="rep-row"><div class="cell"><div class="rep-name">James Park</div><div class="rep-sub">Wk 12</div></div><div class="cell ok">79</div><div class="cell ok">18</div><div class="cell ok">23%</div><div class="cell ok">3</div><div class="cell ok">22</div><div class="cell"><div class="flag-dot g"></div></div></div>
-      <div class="rep-row"><div class="cell"><div class="rep-name">Fatima Ali</div><div class="rep-sub">Wk 9</div></div><div class="cell">71</div><div class="cell">15</div><div class="cell">21%</div><div class="cell">2</div><div class="cell caution">19</div><div class="cell"><div class="flag-dot a"></div></div></div>
-      <div class="rep-row"><div class="cell"><div class="rep-name">Tom Bradley</div><div class="rep-sub">Wk 6 · Ramp</div></div><div class="cell warn">58</div><div class="cell warn">10</div><div class="cell warn">17%</div><div class="cell warn">1</div><div class="cell warn">9</div><div class="cell"><div class="flag-dot r"></div></div></div>
-    </div>
+    <div style="font-size:10px;color:#333;margin-top:8px;line-height:1.6;"><strong style="color:#555;">No sandbagging.</strong> Every rep contributes to this number. One rep who holds back a deal to carry it to next week hurts the whole team's trajectory. The goal is ours — not mine.</div>
   </div>
 
-  <!-- Team Lead 2 -->
-  <div class="tl-section">
-    <div class="tl-hdr" style="background:var(--teal-d);">
-      <div><div class="tl-name">Team Lead: Marcus Williams</div><div class="tl-meta">London South · 9 reps</div></div>
-      <div style="margin-left:auto;display:flex;gap:20px;">
-        <div style="text-align:right;color:#fff;"><div style="font-size:18px;font-weight:900;">11</div><div style="font-size:9px;opacity:.7;text-transform:uppercase;letter-spacing:1px;">Signed today</div></div>
-        <div style="text-align:right;color:#fff;"><div style="font-size:18px;font-weight:900;">21%</div><div style="font-size:9px;opacity:.7;text-transform:uppercase;letter-spacing:1px;">Convert rate</div></div>
-      </div>
+  <!-- REP ACTIVITY -->
+  <div class="section">
+    <div class="sec-lbl">Rep Activity — Today</div>
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:1px;background:var(--b2);border-radius:8px;overflow:hidden;margin-bottom:10px;">
+      <div style="padding:6px 10px;font-size:9px;font-weight:700;color:#555;text-transform:uppercase;background:var(--s);">Rep</div>
+      <div style="padding:6px 8px;font-size:9px;font-weight:700;color:#555;text-align:center;background:var(--s);">Dials</div>
+      <div style="padding:6px 8px;font-size:9px;font-weight:700;color:#555;text-align:center;background:var(--s);">Convs</div>
+      <div style="padding:6px 8px;font-size:9px;font-weight:700;color:var(--tgtg);text-align:center;background:var(--s);">Bags ✓</div>
     </div>
-    <div class="rep-grid">
-      <div class="rep-hdr">Rep</div><div class="rep-hdr">Dials</div><div class="rep-hdr">Connects</div><div class="rep-hdr">Conv%</div><div class="rep-hdr">Signed</div><div class="rep-hdr">MTD</div><div class="rep-hdr">Status</div>
-      <div class="rep-row"><div class="cell"><div class="rep-name">Priya Sharma</div><div class="rep-sub">Wk 14</div></div><div class="cell ok">82</div><div class="cell ok">19</div><div class="cell ok">23%</div><div class="cell ok">4</div><div class="cell ok">24</div><div class="cell"><div class="flag-dot g"></div></div></div>
-      <div class="rep-row"><div class="cell"><div class="rep-name">Oliver Chen</div><div class="rep-sub">Wk 11</div></div><div class="cell ok">75</div><div class="cell">16</div><div class="cell">21%</div><div class="cell">3</div><div class="cell ok">21</div><div class="cell"><div class="flag-dot g"></div></div></div>
-      <div class="rep-row"><div class="cell"><div class="rep-name">Aisha Mensah</div><div class="rep-sub">Wk 8 · Ramp</div></div><div class="cell">68</div><div class="cell caution">13</div><div class="cell caution">19%</div><div class="cell">2</div><div class="cell caution">17</div><div class="cell"><div class="flag-dot a"></div></div></div>
-      <div class="rep-row"><div class="cell"><div class="rep-name">Daniel Russo</div><div class="rep-sub">Wk 16</div></div><div class="cell warn">61</div><div class="cell warn">11</div><div class="cell warn">18%</div><div class="cell warn">1</div><div class="cell warn">14</div><div class="cell"><div class="flag-dot r"></div></div></div>
-    </div>
+    <div id="rep-rows"></div>
+    <button class="add-rep-btn" onclick="addRep()">+ Add Rep</button>
   </div>
 
-  <!-- Team Lead 3 -->
-  <div class="tl-section">
-    <div class="tl-hdr" style="background:#2d7a70;">
-      <div><div class="tl-name">Team Lead: Zoe McDonald</div><div class="tl-meta">Midlands & Ireland · 8 reps</div></div>
-      <div style="margin-left:auto;display:flex;gap:20px;">
-        <div style="text-align:right;color:#fff;"><div style="font-size:18px;font-weight:900;">10</div><div style="font-size:9px;opacity:.7;text-transform:uppercase;letter-spacing:1px;">Signed today</div></div>
-        <div style="text-align:right;color:#fff;"><div style="font-size:18px;font-weight:900;">23%</div><div style="font-size:9px;opacity:.7;text-transform:uppercase;letter-spacing:1px;">Convert rate</div></div>
-      </div>
-    </div>
-    <div class="rep-grid">
-      <div class="rep-hdr">Rep</div><div class="rep-hdr">Dials</div><div class="rep-hdr">Connects</div><div class="rep-hdr">Conv%</div><div class="rep-hdr">Signed</div><div class="rep-hdr">MTD</div><div class="rep-hdr">Status</div>
-      <div class="rep-row"><div class="cell"><div class="rep-name">Emma Walsh</div><div class="rep-sub">Wk 22 · Dublin</div></div><div class="cell ok">88</div><div class="cell ok">22</div><div class="cell ok">25%</div><div class="cell ok">5</div><div class="cell ok">26</div><div class="cell"><div class="flag-dot g"></div></div></div>
-      <div class="rep-row"><div class="cell"><div class="rep-name">Ryan Murphy</div><div class="rep-sub">Wk 13 · Birmingham</div></div><div class="cell ok">76</div><div class="cell ok">17</div><div class="cell ok">22%</div><div class="cell ok">3</div><div class="cell ok">21</div><div class="cell"><div class="flag-dot g"></div></div></div>
-      <div class="rep-row"><div class="cell"><div class="rep-name">Niamh Kelly</div><div class="rep-sub">Wk 7 · Ramp · Dublin</div></div><div class="cell">65</div><div class="cell">14</div><div class="cell">22%</div><div class="cell">2</div><div class="cell caution">16</div><div class="cell"><div class="flag-dot a"></div></div></div>
-    </div>
+  <!-- LIVE LEADERBOARD -->
+  <div class="section">
+    <div class="sec-lbl">Live Leaderboard — Bags Agreed (Week)</div>
+    <div id="leaderboard"></div>
+  </div>
+
+  <!-- FOCUS & PRIORITIES -->
+  <div class="section">
+    <div class="sec-lbl">Today's Three Priorities</div>
+    <div class="focus-item"><div class="focus-num">1</div><textarea class="ta" id="f1" rows="2" placeholder="The most important call the team makes today — which segment, which rep, what's the specific opportunity."></textarea></div>
+    <div class="focus-item"><div class="focus-num">2</div><textarea class="ta" id="f2" rows="2" placeholder="Coaching focus — one specific skill the team works on in every call today."></textarea></div>
+    <div class="focus-item"><div class="focus-num">3</div><textarea class="ta" id="f3" rows="2" placeholder="Accountability — one rep who commits to a specific number by 3pm standup."></textarea></div>
+  </div>
+
+  <!-- PIPELINE -->
+  <div class="section">
+    <div class="sec-lbl">Pipeline Health</div>
+    <div class="metric-row"><div class="metric-lbl">Active deals in pipeline</div><input class="metric-inp" type="number" id="m-active" placeholder="0"></div>
+    <div class="metric-row"><div class="metric-lbl">Offer windows confirmed this week</div><input class="metric-inp" type="number" id="m-windows" placeholder="0"></div>
+    <div class="metric-row"><div class="metric-lbl">Partners live (running total)</div><input class="metric-inp" type="number" id="m-live" placeholder="0"></div>
+    <div class="metric-row"><div class="metric-lbl">Deals stalled (>5 days no contact)</div><input class="metric-inp" type="number" style="color:var(--red);" id="m-stalled" placeholder="0"></div>
+  </div>
+
+  <!-- WIN OF THE DAY -->
+  <div class="section">
+    <div class="sec-lbl">Win of the Day</div>
+    <textarea class="ta" id="win" placeholder="Name the rep. Name the venue. Name the specific thing they did that won it. The more specific, the more it teaches the whole team."></textarea>
+  </div>
+
+  <!-- BLOCKERS -->
+  <div class="section">
+    <div class="sec-lbl">Blockers &amp; Escalations</div>
+    <textarea class="ta" id="blockers" placeholder="What is stopping a rep from making progress today? What do you need to remove for them before 5pm?"></textarea>
+  </div>
+
+  <!-- COPY BUTTONS -->
+  <div class="btn-row">
+    <button class="btn" onclick="copyStandup()">Copy to Slack</button>
+    <button class="btn primary" onclick="copyBrief()">Copy to Chelsea Brief</button>
   </div>
 </div>
-<script src="/nav.js"></script>
+
+<script>
+var currentTeam = 'acq';
+var reps = [];
+var TEAMS = {
+  acq: {
+    name: 'Team Acquisition',
+    time: '09:00',
+    motivation: '<strong>Team Acquisition — The Hunters.</strong> Phone-first. High dials. Meaningful conversations. Every bag agreed today is a venue that would have wasted food tomorrow without us. Volume drives velocity. One more meaningful conversation before 5pm beats any excuse for stopping at target.',
+    dialTarget: 350,
+    metric1: 'Dials today',
+    metric2: 'Meaningful conversations',
+    metric3: 'Bags agreed'
+  },
+  am: {
+    name: 'Team Account Management',
+    time: '09:30',
+    motivation: '<strong>Team Account Management — The Growers.</strong> Every partner in this book is a relationship, not a record. Proactive contact before a problem develops. Upsell before they think about churning. A partner who gets a check-in call today stays for six more months. A partner who goes dark leaves.',
+    dialTarget: 150,
+    metric1: 'Partners contacted',
+    metric2: 'At-risk accounts called',
+    metric3: 'Upsells closed'
+  },
+  growth: {
+    name: 'Team Growth',
+    time: '10:00',
+    motivation: '<strong>Team Growth — The Frontier.</strong> Multi-site deals. Non-food segments. The accounts nobody else is calling. One Growth team closure is worth three standard acquisition deals. This is the highest-leverage work in the company right now.',
+    dialTarget: 200,
+    metric1: 'Outreach calls',
+    metric2: 'Multi-site conversations',
+    metric3: 'Deals progressed'
+  }
+};
+var DEFAULT_REPS = {
+  acq: ['Marco R','Sarah C','Priya S','James W','Alex T'],
+  am:  ['Jade O','Tom B','Amara S','Will C'],
+  growth: ['Leon P','Nia T','Rafi D','Clem W']
+};
+
+function setTeam(t, btn) {
+  currentTeam = t;
+  document.querySelectorAll('.team-tab').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+  document.getElementById('team-motivation').innerHTML = TEAMS[t].motivation;
+  document.getElementById('goal-label').textContent = TEAMS[t].metric1 + ' · Week target';
+  document.getElementById('team-dials-target').placeholder = TEAMS[t].dialTarget;
+  reps = DEFAULT_REPS[t].map(function(n){ return {name:n,dials:0,convs:0,bags:0,coaching:false}; });
+  renderReps();
+  renderLeaderboard();
+  updateGoal();
+}
+
+function renderReps() {
+  var html = '';
+  reps.forEach(function(r,i) {
+    html += '<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:1px;background:var(--b2);border-radius:6px;overflow:hidden;margin-bottom:6px;">' +
+      '<div style="padding:8px 10px;background:' + (r.bags > 0 ? 'rgba(109,190,79,.06)' : '#111') + ';display:flex;align-items:center;gap:6px;">' +
+        (r.bags > 0 ? '<span style="font-size:10px;">🏆</span>' : '') +
+        '<input style="background:transparent;border:none;color:#fff;font-family:Inter,sans-serif;font-size:13px;font-weight:700;width:100%;outline:none;" placeholder="Rep name" value="' + r.name + '" oninput="reps[' + i + '].name=this.value;renderLeaderboard()">' +
+      '</div>' +
+      '<div style="background:#111;padding:4px;"><input class="stat-inp" style="width:100%;text-align:center;" type="number" value="' + (r.dials||'') + '" placeholder="0" oninput="reps[' + i + '].dials=+this.value;renderLeaderboard();updateGoal();"></div>' +
+      '<div style="background:#111;padding:4px;"><input class="stat-inp" style="width:100%;text-align:center;" type="number" value="' + (r.convs||'') + '" placeholder="0" oninput="reps[' + i + '].convs=+this.value"></div>' +
+      '<div style="background:rgba(109,190,79,.04);padding:4px;"><input class="stat-inp" style="width:100%;text-align:center;color:var(--tgtg);font-size:14px;font-weight:900;" type="number" value="' + (r.bags||'') + '" placeholder="0" oninput="reps[' + i + '].bags=+this.value;renderLeaderboard();"></div>' +
+    '</div>';
+  });
+  document.getElementById('rep-rows').innerHTML = html;
+}
+
+function addRep() {
+  reps.push({name:'',dials:0,convs:0,bags:0,coaching:false});
+  renderReps();
+}
+
+function renderLeaderboard() {
+  var sorted = reps.slice().sort(function(a,b){ return (b.bags - a.bags) || (b.dials - a.dials); });
+  var maxDials = Math.max.apply(null, reps.map(function(r){ return r.dials || 0; })) || 1;
+  var html = '';
+  sorted.forEach(function(r,i) {
+    var barW = Math.round((r.dials / maxDials) * 100);
+    var crown = i === 0 && r.bags > 0 ? '👑 ' : '';
+    html += '<div class="lb-row">' +
+      '<div class="lb-pos">' + (i+1) + '</div>' +
+      '<div class="lb-name">' + crown + (r.name || '—') + '</div>' +
+      '<div class="lb-dials">' + (r.dials || 0) + '</div>' +
+      '<div class="lb-convs">' + (r.convs || 0) + ' conv</div>' +
+      '<div class="lb-signed">' + (r.bags || 0) + ' 🟢</div>' +
+      '<div class="lb-bar-wrap"><div class="lb-bar" style="width:' + barW + '%"></div></div>' +
+    '</div>';
+  });
+  document.getElementById('leaderboard').innerHTML = html || '<div style="color:#333;font-size:12px;padding:10px 0;">Enter dials above to see the leaderboard</div>';
+}
+
+function updateGoal() {
+  var target = +document.getElementById('team-dials-target').value || TEAMS[currentTeam].dialTarget;
+  var actual = +document.getElementById('team-dials-actual').value || reps.reduce(function(s,r){return s+(r.dials||0);},0);
+  var pct = Math.min(Math.round((actual/target)*100),100);
+  document.getElementById('goal-pct').textContent = pct + '%';
+  document.getElementById('goal-fill').style.width = pct + '%';
+}
+
+function getDateStr() {
+  var d = new Date();
+  return d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+}
+
+function copyStandup() {
+  var t = TEAMS[currentTeam];
+  var totalDials = reps.reduce(function(s,r){return s+(r.dials||0);},0);
+  var totalConvs = reps.reduce(function(s,r){return s+(r.convs||0);},0);
+  var totalBags = reps.reduce(function(s,r){return s+(r.bags||0);},0);
+  var target = +document.getElementById('team-dials-target').value || t.dialTarget;
+  var sorted = reps.slice().sort(function(a,b){return b.bags-a.bags||(b.dials-a.dials);});
+  var repLines = sorted.map(function(r,i){
+    return (i===0&&r.bags>0?'👑 ':'') + (r.name||'—') + ': ' + (r.dials||0) + ' dials · ' + (r.convs||0) + ' convs · ' + (r.bags||0) + ' bags 🟢';
+  }).join('\n');
+  var text = '*Too Good To Go · ' + t.name + ' · ' + getDateStr() + '*\n' +
+    '*' + t.time + ' Standup*\n\n' +
+    '*📞 Activity*\n' +
+    'Team dials: ' + totalDials + ' / ' + target + ' target\n' +
+    'Meaningful conversations: ' + totalConvs + '\n' +
+    'Bags agreed today: ' + totalBags + '\n\n' +
+    '*🏆 Leaderboard*\n' + repLines + '\n\n' +
+    '*🎯 Active pipeline:* ' + (document.getElementById('m-active').value||'—') + ' deals\n' +
+    '*✅ Offer windows this week:* ' + (document.getElementById('m-windows').value||'—') + '\n' +
+    '*🔴 Stalled deals (>5d):* ' + (document.getElementById('m-stalled').value||'—') + '\n\n' +
+    '*Today\'s priorities:*\n1. ' + (document.getElementById('f1').value||'—') + '\n' +
+    '2. ' + (document.getElementById('f2').value||'—') + '\n' +
+    '3. ' + (document.getElementById('f3').value||'—') + '\n\n' +
+    '*Win of the day:* ' + (document.getElementById('win').value||'—') + '\n' +
+    '*Blockers:* ' + (document.getElementById('blockers').value||'—');
+  navigator.clipboard.writeText(text).then(function(){alert('Copied to clipboard');});
+}
+
+function copyBrief() {
+  var t = TEAMS[currentTeam];
+  var totalBags = reps.reduce(function(s,r){return s+(r.bags||0);},0);
+  var totalDials = reps.reduce(function(s,r){return s+(r.dials||0);},0);
+  var text = '**' + t.name + ' · ' + getDateStr() + '**\n' +
+    'Dials: ' + totalDials + ' · Bags agreed: ' + totalBags + ' · Active pipeline: ' + (document.getElementById('m-active').value||'—') + ' · Offer windows (week): ' + (document.getElementById('m-windows').value||'—') + '\n' +
+    'Win: ' + (document.getElementById('win').value||'—') + '\n' +
+    'Blocker: ' + (document.getElementById('blockers').value||'—');
+  navigator.clipboard.writeText(text).then(function(){alert('Copied for Chelsea brief');});
+}
+
+// Init
+document.getElementById('today-meta').textContent = getDateStr();
+reps = DEFAULT_REPS.acq.map(function(n){ return {name:n,dials:0,convs:0,bags:0}; });
+renderReps();
+renderLeaderboard();
+</script>
 </body>
 </html>
