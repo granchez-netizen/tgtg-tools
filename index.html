@@ -3,130 +3,456 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Too Good To Go · Head of Indie Partners OS</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
-<link rel="stylesheet" href="/brand.css">
+<title>Too Good To Go · Head of Indies Stack</title>
+<link rel="stylesheet" href="/brand_tgt.css">
 <style>
-.page{max-width:780px;margin:0 auto;padding:40px 24px 80px 72px;}
-.eyebrow{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:3px;color:var(--teal);margin-bottom:10px;}
-.h1{font-size:clamp(28px,5vw,42px);font-weight:900;letter-spacing:-1px;line-height:1.1;margin-bottom:10px;color:var(--t);}
-.h1 em{color:var(--teal);font-style:normal;}
-.sub{font-size:15px;color:var(--t2);line-height:1.75;max-width:580px;margin-bottom:36px;}
-.mission-banner{background:var(--teal);border-radius:16px;padding:20px 24px;margin-bottom:36px;display:flex;align-items:center;gap:16px;}
-.mission-icon{font-size:32px;flex-shrink:0;}
-.mission-text{color:#fff;font-size:14px;line-height:1.65;}
-.mission-text strong{font-weight:800;display:block;margin-bottom:3px;font-size:15px;}
-.section-lbl{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:3px;color:var(--m);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--b1);}
-.tool{display:flex;align-items:flex-start;gap:16px;background:var(--s);border:1.5px solid var(--b1);border-radius:14px;padding:18px 20px;margin-bottom:10px;text-decoration:none;color:var(--t);transition:all .2s;box-shadow:var(--shadow);}
-.tool:hover{border-color:var(--teal);transform:translateY(-1px);box-shadow:var(--shadow-m);}
-.tool-icon{font-size:22px;flex-shrink:0;margin-top:2px;}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:#0f0f0f;color:#f5f5f5;min-height:100vh;padding:44px 20px 80px;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:640px;margin:0 auto;}
+.brand{font-size:13px;font-weight:800;margin-bottom:10px;letter-spacing:-0.3px;}
+.brand em{color:#6DBE4F;font-style:normal;}
+.title{font-size:34px;font-weight:900;line-height:1.1;margin-bottom:10px;letter-spacing:-1px;}
+.title em{color:#6DBE4F;font-style:normal;}
+.sub{font-size:14px;color:#888;line-height:1.8;margin-bottom:40px;}
+.section-lbl{font-size:10px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:2px;margin:32px 0 12px;}
+.tool{display:flex;align-items:flex-start;gap:16px;background:#1a1a1a;border:1.5px solid #2a2a2a;border-radius:14px;padding:18px 20px;margin-bottom:10px;text-decoration:none;color:#f5f5f5;transition:border-color .2s,background .2s;}
+.tool:hover{border-color:rgba(109,190,79,.35);background:#1e1e1e;}
+.tool.new{border-color:rgba(109,190,79,.2);background:rgba(109,190,79,.03);}
+.tool-icon{font-size:20px;flex-shrink:0;margin-top:2px;}
 .tool-body{flex:1;}
-.tool-eye{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--teal);margin-bottom:4px;}
-.tool-name{font-size:15px;font-weight:800;margin-bottom:4px;letter-spacing:-.2px;}
-.tool-desc{font-size:12px;color:var(--m);line-height:1.65;}
-.tool-arr{font-size:16px;color:var(--b2);flex-shrink:0;margin-top:4px;}
-.tool:hover .tool-arr{color:var(--teal);}
-.gap{height:28px;}
-.made-by{margin-top:40px;font-size:11px;color:var(--m);border-top:1px solid var(--b1);padding-top:16px;}
-.made-by strong{color:var(--teal);}
+.tool-eye{font-size:9px;font-weight:700;color:#6DBE4F;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;}
+.tool-name{font-size:16px;font-weight:800;margin-bottom:4px;letter-spacing:-0.3px;}
+.tool-desc{font-size:12px;color:#888;line-height:1.65;}
+.tool-arr{color:#444;font-size:16px;flex-shrink:0;margin-top:3px;transition:color .2s;}
+.tool:hover .tool-arr{color:#6DBE4F;}
+.badge{display:inline-block;font-size:8px;font-weight:700;padding:2px 6px;border-radius:4px;background:rgba(109,190,79,.15);color:#6DBE4F;margin-left:6px;vertical-align:middle;}
+.badge.new{background:rgba(109,190,79,.2);color:#6DBE4F;}
+.badge.warn{background:rgba(255,208,0,.12);color:#FFD000;}
+.badge.danger{background:rgba(239,68,68,.12);color:#EF4444;}
+.divider{height:1px;background:#1a1a1a;margin:8px 0;}
 </style>
 </head>
 <body>
-<div class="page">
-  <div class="eyebrow">Grant Tinney · Interview Preparation</div>
-  <div class="h1">Head of <em>Independent Partners</em><br>Operating System.</div>
-  <div class="sub">Built for the Too Good To Go UK & Ireland role. Every tool matched to the actual job — phone-based SMB acquisition, Team Lead development, partner retention, and impact at scale.</div>
+<div class="wrap">
+  <div class="brand"><em>Too Good</em> To Go · UK &amp; Ireland</div>
+  <div class="title">The Head of Indies <em>operating stack.</em></div>
+  <div class="sub">Every tool for leading, scaling and winning with SMB partners across the UK &amp; Ireland. Phone-first acquisition, account growth, and team excellence.</div>
 
-  <div class="mission-banner">
-    <div class="mission-icon">♻️</div>
-    <div class="mission-text">
-      <strong>103 million meals saved. One third of food produced globally is wasted.</strong>
-      Every partner added to Too Good To Go is a direct reduction in that number. This is the metric that matters above all others.
-    </div>
-  </div>
+  <!-- COMMAND -->
+  <div class="section-lbl">Command &amp; Pipeline</div>
 
-  <div class="section-lbl">Interview Preparation</div>
-  <a class="tool" href="/mgr-review.html">
-    <div class="tool-icon">🎯</div>
+  <a class="tool new" href="/pipeline-command.html">
+    <div class="tool-icon">⚡</div>
     <div class="tool-body">
-      <div class="tool-eye">JD matched · STAR answers · gaps handled · questions to ask</div>
-      <div class="tool-name">Interview Prep & Smart Answers</div>
-      <div class="tool-desc">Every JD requirement mapped to Grant's CV. 12 likely questions with full answers using real stories. The three gaps pre-handled with honest reframes. Five sharp questions to ask the Country Director. Language guide — their words, not generic sales language.</div>
+      <div class="tool-eye">Daily dashboard · Real-time funnel · Risk flags</div>
+      <div class="tool-name">Pipeline Command<span class="badge new">NEW</span></div>
+      <div class="tool-desc">Live funnel health from dial to live. Conversion rates, at-risk deals, rep scorecards, and today's command actions. Your 5-minute morning brief.</div>
     </div>
     <div class="tool-arr">→</div>
   </a>
 
-  <div class="gap"></div>
-  <div class="section-lbl">Team Operations</div>
+  <a class="tool new" href="/deal-intelligence.html">
+    <div class="tool-icon">£</div>
+    <div class="tool-body">
+      <div class="tool-eye">All 47 deals · Revenue economics · Next action</div>
+      <div class="tool-name">Deal Intelligence<span class="badge new">NEW</span></div>
+      <div class="tool-desc">Every deal, every dollar. Commission over 12 months, close probability, risk flags, and the exact next action that closes or kills it.</div>
+    </div>
+    <div class="tool-arr">→</div>
+  </a>
+
+  <a class="tool" href="/forecast.html">
+    <div class="tool-icon">📊</div>
+    <div class="tool-body">
+      <div class="tool-eye">Stage weighting · Stale deal flags · Director-ready</div>
+      <div class="tool-name">Pipeline Forecast</div>
+      <div class="tool-desc">Apply stage weighting and stale-deal penalties. What you forecast to the Country Director — not rep optimism.</div>
+    </div>
+    <div class="tool-arr">→</div>
+  </a>
+
+  <!-- ACQUISITION -->
+  <div class="section-lbl">Acquisition</div>
+
+  <a class="tool" href="https://tgtg-pitch-v2.vercel.app" target="_blank">
+    <div class="tool-icon">📞</div>
+    <div class="tool-body">
+      <div class="tool-eye">Pre-call · AI-powered · Live web search</div>
+      <div class="tool-name">Call Prep Generator</div>
+      <div class="tool-desc">Type any venue name. Get their quiet periods, the opening question, objection counters, and a WhatsApp opener. Any restaurant in 30 seconds.</div>
+    </div>
+    <div class="tool-arr">→</div>
+  </a>
+
+  <a class="tool new" href="/segment-intel.html">
+    <div class="tool-icon">🎯</div>
+    <div class="tool-body">
+      <div class="tool-eye">Ethnic food · QSR · Fine dining · Brunch · Postcode</div>
+      <div class="tool-name">Segment Intelligence<span class="badge new">NEW</span></div>
+      <div class="tool-desc">Which segments have the best win rate, highest deal value, and lowest churn. Ranked by impact. Includes postcode concentration maps and opening angle by segment type.</div>
+    </div>
+    <div class="tool-arr">→</div>
+  </a>
+
+  <a class="tool" href="/deal-calculator.html">
+    <div class="tool-icon">🧮</div>
+    <div class="tool-body">
+      <div class="tool-eye">In-call · Live economics · Pitch text</div>
+      <div class="tool-name">Deal Calculator</div>
+      <div class="tool-desc">AOV × empty covers × sessions. Three-scenario comparison — no bags, standard offer, deep offer. Cost of doing nothing shown in red. Pitch text generated.</div>
+    </div>
+    <div class="tool-arr">→</div>
+  </a>
+
+  <a class="tool" href="/territory.html">
+    <div class="tool-icon">🗺️</div>
+    <div class="tool-body">
+      <div class="tool-eye">HubSpot CSV · Postcode · Venue type · Offer type</div>
+      <div class="tool-name">Territory Planner</div>
+      <div class="tool-desc">Upload your pipeline. Filter by rep, postcode, venue type. Generates a prioritised call list sorted by win probability. The day planned before the first dial.</div>
+    </div>
+    <div class="tool-arr">→</div>
+  </a>
+
+  <!-- RETENTION & GROWTH -->
+  <div class="section-lbl">Retention &amp; Account Growth</div>
+
+  <a class="tool new" href="/partner-revival.html">
+    <div class="tool-icon">🔄</div>
+    <div class="tool-body">
+      <div class="tool-eye">Churning accounts · Dark partners · Offer expiry</div>
+      <div class="tool-name">Partner Revival Engine<span class="badge new">NEW</span></div>
+      <div class="tool-desc">For every at-risk account: bookings trend, economics comparison, root cause diagnosis, 3-option decision tree (extend, renegotiate, exit), and a ready-to-use re-engagement script.</div>
+    </div>
+    <div class="tool-arr">→</div>
+  </a>
+
+  <a class="tool" href="/first-forty.html">
+    <div class="tool-icon">📅</div>
+    <div class="tool-body">
+      <div class="tool-eye">New partner onboarding · AM playbook</div>
+      <div class="tool-name">First Forty Days</div>
+      <div class="tool-desc">Structured 40-day onboarding. What happens on day 1, 7, 14, 21, and 40 to drive first redemption, repeat behaviour, and strong early performance.</div>
+    </div>
+    <div class="tool-arr">→</div>
+  </a>
+
+  <!-- CALL MANAGEMENT -->
+  <div class="section-lbl">Call Quality &amp; Coaching</div>
+
+  <a class="tool" href="/call-analyze.html">
+    <div class="tool-icon">🤖</div>
+    <div class="tool-body">
+      <div class="tool-eye">Paste transcript · AI scoring · Evidence-backed</div>
+      <div class="tool-name">AI Call Analysis</div>
+      <div class="tool-desc">Paste any call transcript. Scores against 7 criteria, pulls direct evidence, writes coaching actions for rep and manager. 20 seconds end to end.</div>
+    </div>
+    <div class="tool-arr">→</div>
+  </a>
+
+  <a class="tool" href="/call-review.html">
+    <div class="tool-icon">📞</div>
+    <div class="tool-body">
+      <div class="tool-eye">Live or recorded · 7 criteria · Weighted score</div>
+      <div class="tool-name">Call Review Scorecard</div>
+      <div class="tool-desc">Score any rep call across 7 weighted criteria — opening, discovery, pitch, brand objection, magic bag demo, offer window, close. Below 50 means a ride-along this week.</div>
+    </div>
+    <div class="tool-arr">→</div>
+  </a>
+
+  <a class="tool" href="/ride-along.html">
+    <div class="tool-icon">🏃</div>
+    <div class="tool-body">
+      <div class="tool-eye">Field coaching · Manager tool</div>
+      <div class="tool-name">Ride-Along Form</div>
+      <div class="tool-desc">Filed on the phone leaving the venue. Challenger scores, discovery quality, the exact exchange to replay, what was coached. Logged and searchable.</div>
+    </div>
+    <div class="tool-arr">→</div>
+  </a>
+
+  <!-- MANAGEMENT CADENCE -->
+  <div class="section-lbl">Management Cadence</div>
 
   <a class="tool" href="/standup.html">
     <div class="tool-icon">☀️</div>
     <div class="tool-body">
-      <div class="tool-eye">Dials · connects · conversions · bags pitched · per rep · per team lead</div>
+      <div class="tool-eye">Daily · Team rhythm · One tap to Slack</div>
       <div class="tool-name">Daily Standup</div>
-      <div class="tool-desc">Phone-first standup built for a 26-person call team. Dials, connects, conversion rate, partners signed. Three Team Lead sections. Flags anyone below daily floor. Exportable summary.</div>
+      <div class="tool-desc">Pipeline numbers, three priorities, rep status, blockers, win of the day. One tap copies the whole standup to Slack.</div>
     </div>
     <div class="tool-arr">→</div>
   </a>
 
-  <a class="tool" href="/team-lead-one-to-one.html">
-    <div class="tool-icon">🤝</div>
+  <a class="tool" href="/one-to-one.html">
+    <div class="tool-icon">💬</div>
     <div class="tool-body">
-      <div class="tool-eye">Team Lead development · team performance · coaching capacity · the ask</div>
-      <div class="tool-name">Team Lead 1:1</div>
-      <div class="tool-desc">Weekly 1:1 template for Grant with each of his 3 Team Leads. Team performance, rep health, coaching capacity, pipeline, blockers, and the one ask. Different from a rep 1:1 — this is a leader conversation.</div>
+      <div class="tool-eye">Weekly · Phone reps and Team Leads</div>
+      <div class="tool-name">1:1 Templates</div>
+      <div class="tool-desc">Structured weekly 1:1s for phone reps and Team Leads. Call quality, pipeline health, development actions, coaching focus, next week setup.</div>
     </div>
     <div class="tool-arr">→</div>
   </a>
 
-  <a class="tool" href="/call-coach.html">
-    <div class="tool-icon">📞</div>
+  <!-- TEAM PERFORMANCE -->
+  <div class="section-lbl">Team Performance</div>
+
+  <a class="tool new" href="/team-command.html">
+    <div class="tool-icon">👥</div>
     <div class="tool-body">
-      <div class="tool-eye">Phone-only · 7 criteria · weighted score · mission frame · Salesforce task</div>
-      <div class="tool-name">Call Coach Scorecard</div>
-      <div class="tool-desc">Score any acquisition or retention call across 7 weighted criteria specific to TGTG's phone motion. Opening hook, mission frame, surplus discovery, Magic Bag explanation, objection handling, commitment, next step. 75+ is coachable standard.</div>
+      <div class="tool-eye">26 FTE · Rep scorecards · Coaching flags</div>
+      <div class="tool-name">Team Command Centre<span class="badge new">NEW</span></div>
+      <div class="tool-desc">Individual rep scorecards. Not just deal count — capability level, coaching need, trajectory, and career path. Star, developing, at-risk, or exit.</div>
     </div>
     <div class="tool-arr">→</div>
   </a>
 
-  <div class="gap"></div>
-  <div class="section-lbl">Partner Intelligence</div>
-
-  <a class="tool" href="/partner-health.html">
-    <div class="tool-icon">🏪</div>
+  <a class="tool" href="/ramp.html">
+    <div class="tool-icon">📈</div>
     <div class="tool-body">
-      <div class="tool-eye">Bags sold · surplus frequency · streak · churn risk · email intervention</div>
-      <div class="tool-name">Partner Health Dashboard</div>
-      <div class="tool-desc">Every indie partner ranked by health. Bags sold per week, surplus upload consistency, streak of active weeks, last login, churn risk score. Click to expand and email the partner directly with a pre-written template.</div>
+      <div class="tool-eye">New hire tracking · Week-by-week gates</div>
+      <div class="tool-name">Rep Ramp Tracker</div>
+      <div class="tool-desc">Week-by-week gate system from hire to fully ramped. Flags ramp problems at week 3, not month 3.</div>
     </div>
     <div class="tool-arr">→</div>
   </a>
 
-  <a class="tool" href="/funnel-tracker.html">
-    <div class="tool-icon">📊</div>
+  <a class="tool" href="/pip.html">
+    <div class="tool-icon">⚠️</div>
     <div class="tool-body">
-      <div class="tool-eye">Dials → connects → pitches → conversions · by rep · by team lead · by week</div>
-      <div class="tool-name">Acquisition Funnel Tracker</div>
-      <div class="tool-desc">Where the funnel is leaking. Conversion rates at every stage. By rep, by Team Lead, by week. Identifies whether the problem is volume, connect rate, pitch quality, or close rate.</div>
+      <div class="tool-eye">Performance management · Coaching resources</div>
+      <div class="tool-name">PIP Dashboard</div>
+      <div class="tool-desc">Active PIPs with goal tracking, weekly check-in log, and Green / Amber / Critical status. Decision deadline built in.</div>
     </div>
     <div class="tool-arr">→</div>
   </a>
 
-  <div class="gap"></div>
-  <div class="section-lbl">Mission & Impact</div>
+  <!-- TRAINING & STANDARDS -->
+  <div class="section-lbl">Training &amp; Standards</div>
 
-  <a class="tool" href="/impact-dashboard.html">
-    <div class="tool-icon">🌍</div>
+  <a class="tool" href="/gold-standard.html">
+    <div class="tool-icon">🏆</div>
     <div class="tool-body">
-      <div class="tool-eye">Meals saved · CO₂ prevented · waste avoided · per rep · per week · all time</div>
-      <div class="tool-name">Impact Dashboard</div>
-      <div class="tool-desc">The metric that makes TGTG different from every other sales job. Every partner signed translates to meals saved and CO₂ prevented. Tracks the team's environmental impact alongside commercial performance.</div>
+      <div class="tool-eye">Full team resource · Searchable</div>
+      <div class="tool-name">Gold Standard Suite</div>
+      <div class="tool-desc">Call scripts, email templates, MEDDIC and Challenger manuals, objection library, pitch cards, WhatsApp openers, CRM guide. Global search across all resources.</div>
     </div>
     <div class="tool-arr">→</div>
   </a>
 
-  <div class="made-by">Built by <strong>Grant Tinney</strong> · Head of Independent Partners preparation · Too Good To Go UK & Ireland</div>
+  <a class="tool" href="/training.html">
+    <div class="tool-icon">🎓</div>
+    <div class="tool-body">
+      <div class="tool-eye">Team Lead sessions · Rep sessions · Certification</div>
+      <div class="tool-name">Training Hub</div>
+      <div class="tool-desc">Two programmes — Head of Indies to Team Leads (coaching, performance management, city launch), and Head of Indies to full team (discovery, objection handling, MEDDIC, CRM discipline).</div>
+    </div>
+    <div class="tool-arr">→</div>
+  </a>
+
+  <!-- PLANNING -->
+  <div class="section-lbl">Planning &amp; Strategy</div>
+
+  <a class="tool new" href="/strategy-command.html">
+    <div class="tool-icon">♟️</div>
+    <div class="tool-body">
+      <div class="tool-eye">Market position · Growth levers · Competitive threats</div>
+      <div class="tool-name">Strategy Command<span class="badge new">NEW</span></div>
+      <div class="tool-desc">Market segmentation, growth levers ranked by impact×effort, competitive positioning, and Q2 targets. Where 80% of the next year's growth lives.</div>
+    </div>
+    <div class="tool-arr">→</div>
+  </a>
+
+  <a class="tool" href="/90day.html">
+    <div class="tool-icon">📋</div>
+    <div class="tool-body">
+      <div class="tool-eye">Phase 1-3 · Week by week · Hard milestones</div>
+      <div class="tool-name">90-Day Execution Roadmap</div>
+      <div class="tool-desc">Week-by-week plan from day 1 to day 90. Diagnosis, intervention, scaling, and the Year 2 handoff. Hard milestones with numbers not adjectives.</div>
+    </div>
+    <div class="tool-arr">→</div>
+  </a>
+
+  <a class="tool" href="/hiring.html">
+    <div class="tool-icon">🎯</div>
+    <div class="tool-body">
+      <div class="tool-eye">Live tracker · All regions · All roles</div>
+      <div class="tool-name">Hiring Tracker</div>
+      <div class="tool-desc">Every rep, Team Lead, and AM hire across UK &amp; Ireland. Status, priority, candidates in pipeline, weeks to start date.</div>
+    </div>
+    <div class="tool-arr">→</div>
+  </a>
+
+  <a class="tool" href="/week.html">
+    <div class="tool-icon">📆</div>
+    <div class="tool-body">
+      <div class="tool-eye">3 phases · Time split · Day-by-day</div>
+      <div class="tool-name">Typical Week — Head of Indies</div>
+      <div class="tool-desc">Where the Head of Indies spends time across three phases: building the system (days 1–30), teams in place (days 31–60), and scaled management layer (days 61–90+).</div>
+    </div>
+    <div class="tool-arr">→</div>
+  </a>
+
+  <a class="tool" href="/city-launch.html">
+    <div class="tool-icon">🏙️</div>
+    <div class="tool-body">
+      <div class="tool-eye">Expansion planning · Trigger metrics · Phase gates</div>
+      <div class="tool-name">City Launch Tracker</div>
+      <div class="tool-desc">Trigger metrics, phase gates, postcode focus, and management milestones for every planned UK city. Know what day 14 looks like before you land.</div>
+    </div>
+    <div class="tool-arr">→</div>
+  </a>
+
+  <!-- ASSESSMENT -->
+  <div class="section-lbl">Interview &amp; Assessment</div>
+
+  <a class="tool" href="/mgr-ref.html">
+    <div class="tool-icon">🏅</div>
+    <div class="tool-body">
+      <div class="tool-eye">Interview prep · Q&amp;A · STAR answers</div>
+      <div class="tool-name">Interview Reference Guide</div>
+      <div class="tool-desc">Every probable question from Samuel, the leadership panel, and the Board. Full STAR answers with evidence. Opening statement and closing ask.</div>
+    </div>
+    <div class="tool-arr">→</div>
+  </a>
+
+  <a class="tool" href="/first-monday.html">
+    <div class="tool-icon">☀️</div>
+    <div class="tool-body">
+      <div class="tool-eye">Day 1 · 20 items · Meetings, data, people, truths</div>
+      <div class="tool-name">First Monday</div>
+      <div class="tool-desc">Five meetings, five data points, five people, five truths. Everything you need in front of you before the day ends. End-of-day summary to copy to the Country Director.</div>
+    </div>
+    <div class="tool-arr">→</div>
+  </a>
+
+  <a class="tool" href="/diagnostic.html">
+    <div class="tool-icon">🔬</div>
+    <div class="tool-body">
+      <div class="tool-eye">Market health · Acquisition diagnosis</div>
+      <div class="tool-name">Marketplace Diagnostic</div>
+      <div class="tool-desc">Paste any region's metrics. Get the three biggest problems ranked with root cause, what the sales team is doing wrong, and the one metric to move in 30 days.</div>
+    </div>
+    <div class="tool-arr">→</div>
+  </a>
+
+  <a class="tool" href="/pitch-deck.html">
+    <div class="tool-icon">🎯</div>
+    <div class="tool-body">
+      <div class="tool-eye">Multi-site group · Interactive economics</div>
+      <div class="tool-name">Group Pitch Deck</div>
+      <div class="tool-desc">The full pitch for a 5-venue independent group. Live economics calculator, brand objection handled directly, specific deal structure, and the close. Keyboard navigable.</div>
+    </div>
+    <div class="tool-arr">→</div>
+  </a>
+
 </div>
-<script src="/nav.js"></script>
+<script>
+// Minimal nav injection for TGTG branding
+(function(){
+  var css = `
+    #tgtg-nav-toggle{position:fixed;top:12px;left:16px;z-index:1001;width:36px;height:36px;border-radius:8px;background:#1a1a1a;border:1px solid #2a2a2a;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-direction:column;gap:4px;padding:0;}
+    #tgtg-nav-toggle:hover{border-color:#6DBE4F;}
+    #tgtg-nav-toggle span{display:block;width:14px;height:1.5px;background:#888;border-radius:2px;transition:all .25s;}
+    #tgtg-nav-toggle.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg);background:#6DBE4F;}
+    #tgtg-nav-toggle.open span:nth-child(2){opacity:0;}
+    #tgtg-nav-toggle.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg);background:#6DBE4F;}
+    #tgtg-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;}
+    #tgtg-overlay.on{display:block;}
+    #tgtg-drawer{position:fixed;top:0;left:-260px;bottom:0;width:240px;background:#111;border-right:1px solid #2a2a2a;z-index:1000;overflow-y:auto;transition:left .25s cubic-bezier(.4,0,.2,1);padding:16px 0 40px;}
+    #tgtg-drawer.open{left:0;}
+    .tg-brand{padding:14px 18px 18px;border-bottom:1px solid #1e1e1e;margin-bottom:10px;}
+    .tg-brand-txt{font-size:13px;font-weight:800;color:#f5f5f5;}
+    .tg-brand-txt em{color:#6DBE4F;font-style:normal;}
+    .tg-brand-sub{font-size:10px;color:#555;margin-top:2px;}
+    .tg-group{padding:10px 12px 2px;font-size:9px;font-weight:700;color:#444;text-transform:uppercase;letter-spacing:2px;}
+    .tg-item{display:flex;align-items:center;gap:9px;padding:8px 14px;margin:1px 8px;border-radius:8px;text-decoration:none;font-size:12px;font-weight:600;color:#777;transition:all .15s;}
+    .tg-item:hover{background:#1a1a1a;color:#ccc;}
+    .tg-item.active{background:rgba(109,190,79,.1);color:#6DBE4F;border:1px solid rgba(109,190,79,.18);}
+    .tg-icon{font-size:14px;width:20px;text-align:center;flex-shrink:0;}
+  `;
+  var style = document.createElement('style');
+  style.textContent = css;
+  document.head.appendChild(style);
+
+  var toggle = document.createElement('button');
+  toggle.id = 'tgtg-nav-toggle';
+  toggle.setAttribute('aria-label','Navigation');
+  toggle.innerHTML = '<span></span><span></span><span></span>';
+
+  var overlay = document.createElement('div');
+  overlay.id = 'tgtg-overlay';
+
+  var drawer = document.createElement('nav');
+  drawer.id = 'tgtg-drawer';
+
+  var PAGES = [
+    {group:'Command',items:[
+      {href:'/index.html',label:'All Tools',icon:'⚡'},
+      {href:'/pipeline-command.html',label:'Pipeline Command',icon:'📊'},
+      {href:'/deal-intelligence.html',label:'Deal Intelligence',icon:'£'},
+      {href:'/forecast.html',label:'Pipeline Forecast',icon:'📈'},
+    ]},
+    {group:'Acquisition',items:[
+      {href:'/deal-calculator.html',label:'Deal Calculator',icon:'🧮'},
+      {href:'/segment-intel.html',label:'Segment Intelligence',icon:'🎯'},
+      {href:'/territory.html',label:'Territory Planner',icon:'🗺️'},
+    ]},
+    {group:'Retention',items:[
+      {href:'/partner-revival.html',label:'Partner Revival',icon:'🔄'},
+      {href:'/first-forty.html',label:'First Forty Days',icon:'📅'},
+    ]},
+    {group:'Coaching',items:[
+      {href:'/call-analyze.html',label:'AI Call Analysis',icon:'🤖'},
+      {href:'/call-review.html',label:'Call Review',icon:'📞'},
+      {href:'/ride-along.html',label:'Ride-Along',icon:'🏃'},
+    ]},
+    {group:'Team',items:[
+      {href:'/team-command.html',label:'Team Command',icon:'👥'},
+      {href:'/standup.html',label:'Daily Standup',icon:'☀️'},
+      {href:'/one-to-one.html',label:'Weekly 1:1',icon:'💬'},
+      {href:'/ramp.html',label:'Rep Ramp Tracker',icon:'📈'},
+      {href:'/pip.html',label:'PIP Dashboard',icon:'⚠️'},
+    ]},
+    {group:'Strategy',items:[
+      {href:'/strategy-command.html',label:'Strategy Command',icon:'♟️'},
+      {href:'/90day.html',label:'90-Day Roadmap',icon:'📋'},
+      {href:'/hiring.html',label:'Hiring Tracker',icon:'🎯'},
+      {href:'/week.html',label:'Typical Week',icon:'📆'},
+      {href:'/city-launch.html',label:'City Launch',icon:'🏙️'},
+    ]},
+    {group:'Standards',items:[
+      {href:'/gold-standard.html',label:'Gold Standard',icon:'🏆'},
+      {href:'/training.html',label:'Training Hub',icon:'🎓'},
+    ]},
+    {group:'Interview',items:[
+      {href:'/mgr-ref.html',label:'Interview Guide',icon:'🏅'},
+      {href:'/first-monday.html',label:'First Monday',icon:'☀️'},
+      {href:'/diagnostic.html',label:'Marketplace Diagnostic',icon:'🔬'},
+    ]},
+  ];
+
+  var current = window.location.pathname.split('/').pop() || 'index.html';
+  var html = '<div class="tg-brand"><div class="tg-brand-txt"><em>Too Good</em> To Go</div><div class="tg-brand-sub">Head of Indies · UK &amp; Ireland</div></div>';
+  PAGES.forEach(function(g){
+    html += '<div class="tg-group">'+g.group+'</div>';
+    g.items.forEach(function(it){
+      var active = it.href.replace('/','') === current ? ' active' : '';
+      html += '<a class="tg-item'+active+'" href="'+it.href+'"><span class="tg-icon">'+it.icon+'</span>'+it.label+'</a>';
+    });
+  });
+  drawer.innerHTML = html;
+
+  function open(){drawer.classList.add('open');overlay.classList.add('on');toggle.classList.add('open');}
+  function close(){drawer.classList.remove('open');overlay.classList.remove('on');toggle.classList.remove('open');}
+  toggle.addEventListener('click',function(e){e.stopPropagation();drawer.classList.contains('open')?close():open();});
+  overlay.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+
+  document.body.appendChild(toggle);
+  document.body.appendChild(overlay);
+  document.body.appendChild(drawer);
+})();
+</script>
 </body>
 </html>
