@@ -1,0 +1,2773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Too Good To Go · Gold Standard Suite</title>
+<link rel="stylesheet" href="/brand.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  -webkit-font-smoothing: antialiased;font-family:'Inter',sans-serif;background:#111;color:#fff;min-height:100vh;padding-bottom:60px;}
+.shell{max-width:1000px;margin:0 auto;padding:20px 16px;}
+.hdr{padding-bottom:16px;border-bottom:1px solid #2a2a2a;margin-bottom:0;}
+.brand{font-size:12px;font-weight:800;}.brand em{color:#FFD000;font-style:normal;}
+.hdr-title{font-size:22px;font-weight:800;margin-top:5px;}.hdr-title em{color:#FFD000;font-style:normal;}
+.hdr-sub{font-size:12px;color:#444;margin-top:3px;}
+
+.nav{display:flex;gap:0;border-bottom:1px solid #222;margin-bottom:24px;overflow-x:auto;}
+.nav-tab{padding:12px 18px;font-size:12px;font-weight:700;color:#444;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;}
+.nav-tab.active{color:#FFD000;border-bottom-color:#FFD000;}
+.search-wrap{padding:16px 0 4px;margin-bottom:2px;}
+.search-box{width:100%;padding:11px 16px 11px 40px;background:#1a1a1a;border:1.5px solid #2a2a2a;border-radius:10px;font-size:14px;color:#fff;font-family:inherit;transition:border-color .15s;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23444' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:12px center;}
+.search-box:focus{outline:none;border-color:#FFD000;}
+.search-box::placeholder{color:#333;}
+.no-results{padding:40px 20px;text-align:center;color:#333;font-size:14px;display:none;}
+
+.section{display:none;}.section.active{display:block;}
+
+.sec-hdr{margin-bottom:18px;}
+.sec-title{font-size:16px;font-weight:800;margin-bottom:4px;}
+.sec-sub{font-size:12px;color:#444;line-height:1.5;}
+
+.email-card{background:#1a1a1a;border:1px solid #222;border-radius:12px;overflow:hidden;margin-bottom:14px;}
+.ec-head{padding:13px 16px;border-bottom:1px solid #2a2a2a;display:flex;justify-content:space-between;align-items:center;}
+.ec-title{font-size:13px;font-weight:700;}
+.ec-type{font-size:9px;font-weight:700;padding:3px 9px;border-radius:8px;font-family:'Inter',sans-serif;text-transform:uppercase;letter-spacing:1px;}
+.type-email{background:rgba(184,132,30,.1);color:#FFD000;border:1px solid rgba(184,132,30,.2);}
+.type-slack{background:rgba(122,179,224,.1);color:#7AB3E0;border:1px solid rgba(122,179,224,.2);}
+.type-training{background:rgba(76,175,130,.1);color:#22C55E;border:1px solid rgba(76,175,130,.2);}
+.type-manager{background:rgba(229,115,115,.1);color:#E57373;border:1px solid rgba(229,115,115,.15);}
+
+.ec-meta{padding:8px 16px;background:#1a1a1a;border-bottom:1px solid #1a1a1a;display:flex;gap:16px;flex-wrap:wrap;}
+.ec-field{font-size:10px;color:#444;font-family:'Inter',sans-serif;}
+.ec-field strong{color:#666;}
+
+.ec-body{
+  -webkit-font-smoothing: antialiased;padding:16px;font-size:13px;color:#888;line-height:1.8;white-space:pre-wrap;font-family:'Courier New',monospace;max-height:320px;overflow-y:auto;cursor:text;}
+.ec-body .placeholder{color:#FFD000;font-weight:700;}
+
+.ec-footer{padding:10px 16px;border-top:1px solid #1a1a1a;display:flex;gap:8px;justify-content:flex-end;}
+.copy-btn{padding:7px 14px;background:#FFD000;color:#000;border:none;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;transition:background .15s;}
+.copy-btn:hover{background:rgba(255,208,0,.80);}
+.copy-btn.copied{background:#22C55E;}
+.expand-btn{padding:7px 14px;background:transparent;border:1px solid #2a2a2a;border-radius:8px;font-size:11px;font-weight:700;color:#555;cursor:pointer;}
+
+.quotes-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(max-width:580px){.quotes-grid{grid-template-columns:1fr;}}
+.quote-card{background:#1a1a1a;border:1px solid #222;border-radius:10px;padding:14px;}
+.qc-text{font-size:13px;color:#aaa;line-height:1.6;margin-bottom:8px;font-style:italic;}
+.qc-author{font-size:11px;color:#444;font-weight:700;margin-bottom:10px;}
+.qc-copy{width:100%;padding:7px;background:transparent;border:1.5px solid #2a2a2a;border-radius:7px;color:#555;font-size:11px;font-weight:700;cursor:pointer;transition:all .15s;}
+.qc-copy:hover{border-color:#FFD000;color:#FFD000;}
+
+.manual-card{background:#1a1a1a;border:1px solid #222;border-radius:12px;overflow:hidden;margin-bottom:14px;}
+.mc-head{padding:14px 16px;border-bottom:1px solid #2a2a2a;display:flex;justify-content:space-between;align-items:center;}
+.mc-title{font-size:15px;font-weight:800;}
+.mc-download{padding:7px 14px;background:#22C55E;color:#000;border:none;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;}
+
+.obj-card{background:#1a1a1a;border:1px solid #222;border-radius:12px;overflow:hidden;margin-bottom:10px;}
+.oc-obj{padding:12px 16px;background:#0f0f0f;border-bottom:1px solid #2a1010;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+.oc-obj-text{font-size:13px;font-weight:700;color:#E57373;flex:1;line-height:1.4;}
+.oc-q{font-size:9px;font-weight:700;color:#5a2a2a;text-transform:uppercase;letter-spacing:1px;font-family:'Inter',sans-serif;margin-bottom:4px;}
+.oc-counter{padding:12px 16px;}
+.oc-a{font-size:9px;font-weight:700;color:#22C55E;text-transform:uppercase;letter-spacing:1px;font-family:'Inter',sans-serif;margin-bottom:6px;}
+.oc-text{font-size:13px;color:#aaa;line-height:1.7;}
+.oc-tip{font-size:11px;color:#444;font-style:italic;margin-top:6px;}
+.oc-copy{padding:6px 14px;background:transparent;border:1px solid #2a2a2a;border-radius:7px;color:#555;font-size:11px;font-weight:700;cursor:pointer;float:right;margin-top:4px;}
+.oc-copy:hover{border-color:#FFD000;color:#FFD000;}
+
+.bc-card{background:#1a1a1a;border:1px solid #222;border-radius:12px;overflow:hidden;margin-bottom:12px;}
+.bc-head{padding:14px 16px;border-bottom:1px solid #2a2a2a;display:flex;justify-content:space-between;align-items:center;}
+.bc-name{font-size:16px;font-weight:800;}
+.bc-verdict{font-size:10px;font-weight:700;padding:3px 10px;border-radius:8px;}
+.bv-red{background:rgba(229,115,115,.1);color:#E57373;border:1px solid rgba(229,115,115,.2);}
+.bv-amber{background:rgba(217,119,6,.08);color:#FFD000;border:1px solid rgba(217,119,6,.15);}
+.bv-neutral{background:#222;color:#555;border:1px solid #2a2a2a;}
+.bc-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+@media(max-width:580px){.bc-grid{grid-template-columns:1fr;}}
+.bc-cell{padding:12px 16px;border-right:1px solid #2a2a2a;border-bottom:1px solid #2a2a2a;}
+.bc-cell:nth-child(even){border-right:none;}
+.bc-cell:nth-last-child(-n+2){border-bottom:none;}
+.bc-cell-label{font-size:9px;font-weight:700;color:#FFD000;text-transform:uppercase;letter-spacing:1.5px;font-family:'Inter',sans-serif;margin-bottom:5px;}
+.bc-cell-text{font-size:12px;color:#888;line-height:1.6;}
+.bc-say{padding:12px 16px;background:#0f0f0f;border-top:1px solid rgba(76,175,130,.15);}
+.bc-say-label{font-size:9px;font-weight:700;color:#22C55E;text-transform:uppercase;letter-spacing:1.5px;font-family:'Inter',sans-serif;margin-bottom:6px;}
+.bc-say-text{font-size:13px;color:#aaa;line-height:1.7;font-style:italic;}
+.bc-copy{display:block;margin-top:8px;padding:7px 12px;background:transparent;border:1px solid rgba(76,175,130,.25);border-radius:7px;color:#22C55E;font-size:11px;font-weight:700;cursor:pointer;text-align:center;}
+
+.pitch-card{background:#1a1a1a;border:2px solid #2a2a2a;border-radius:14px;padding:20px;margin-bottom:14px;position:relative;}
+.pitch-card.featured{border-color:#FFD000;background:#1a1a1a;}
+.pc-label{font-size:9px;font-weight:700;color:#FFD000;text-transform:uppercase;letter-spacing:2px;font-family:'Inter',sans-serif;margin-bottom:8px;}
+.pc-title{font-size:17px;font-weight:800;margin-bottom:12px;line-height:1.3;}
+.pc-title em{color:#FFD000;font-style:normal;}
+.pc-content{font-size:14px;color:#aaa;line-height:1.8;}
+.pc-content strong{color:#fff;}
+.pc-copy-full{margin-top:14px;width:100%;padding:9px;background:rgba(184,132,30,.1);border:1.5px solid rgba(184,132,30,.25);border-radius:9px;color:#FFD000;font-size:12px;font-weight:700;cursor:pointer;}
+
+.ival-group{background:#1a1a1a;border:1px solid #222;border-radius:12px;overflow:hidden;margin-bottom:12px;}
+.ig-head{padding:12px 16px;border-bottom:1px solid #2a2a2a;display:flex;justify-content:space-between;align-items:center;}
+.ig-value{font-size:13px;font-weight:800;}
+.ig-tag{font-size:10px;font-weight:700;padding:3px 9px;border-radius:8px;background:rgba(184,132,30,.1);color:#FFD000;border:1px solid rgba(184,132,30,.2);}
+.iq-item{padding:12px 16px;border-bottom:1px solid #1a1a1a;}
+.iq-item:last-child{border-bottom:none;}
+.iq-q{font-size:13px;font-weight:700;color:#fff;margin-bottom:5px;}
+.iq-look{font-size:11px;color:#444;line-height:1.6;}
+.iq-look strong{color:#666;}
+
+.wa-card{background:#1a1a1a;border:1px solid #222;border-radius:12px;overflow:hidden;margin-bottom:10px;}
+.wa-head{padding:10px 14px;border-bottom:1px solid #2a2a2a;display:flex;justify-content:space-between;align-items:center;}
+.wa-title{font-size:12px;font-weight:700;color:#aaa;}
+.wa-badge{font-size:9px;font-weight:700;padding:2px 8px;border-radius:8px;background:rgba(76,175,130,.1);color:#22C55E;border:1px solid rgba(76,175,130,.2);}
+.wa-body{
+  -webkit-font-smoothing: antialiased;padding:12px 14px;font-size:13px;color:#888;line-height:1.7;font-family:'Courier New',monospace;white-space:pre-wrap;}
+.wa-footer{padding:8px 14px;border-top:1px solid #2a2a2a;display:flex;justify-content:space-between;align-items:center;}
+.wa-note{font-size:10px;color:#333;font-style:italic;}
+.wa-copy{padding:6px 12px;background:#22C55E;color:#000;border:none;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;}
+
+.crm-section{background:#1a1a1a;border:1px solid #222;border-radius:12px;overflow:hidden;margin-bottom:12px;}
+.crm-head{padding:12px 16px;border-bottom:1px solid #2a2a2a;}
+.crm-head-title{font-size:14px;font-weight:800;}
+.crm-head-sub{font-size:11px;color:#444;margin-top:3px;}
+.crm-row{padding:12px 16px;border-bottom:1px solid #1a1a1a;display:flex;gap:12px;align-items:flex-start;}
+.crm-row:last-child{border-bottom:none;}
+.crm-stage{font-size:11px;font-weight:800;color:#FFD000;width:120px;flex-shrink:0;padding-top:1px;font-family:'Inter',sans-serif;}
+.crm-detail{font-size:12px;color:#777;line-height:1.6;flex:1;}
+.crm-example-wrap{padding:12px 16px;}
+.crm-ex{background:#111;border-radius:8px;padding:10px 12px;margin-bottom:8px;}
+.crm-ex:last-child{margin-bottom:0;}
+.crm-ex-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;font-family:'Inter',sans-serif;margin-bottom:5px;}
+.good-label{color:#22C55E;} .bad-label{color:#E57373;}
+.crm-ex-text{font-size:12px;color:#888;line-height:1.6;font-family:'Courier New',monospace;}
+.mc-body{
+  -webkit-font-smoothing: antialiased;padding:16px;}
+.mc-section{margin-bottom:16px;}
+.mc-sec-title{font-size:11px;font-weight:700;color:#FFD000;text-transform:uppercase;letter-spacing:1.5px;font-family:'Inter',sans-serif;margin-bottom:8px;}
+.mc-text{font-size:12px;color:#777;line-height:1.8;}
+.mc-example{background:#111;border-left:2px solid #FFD000;border-radius:0 8px 8px 0;padding:10px 12px;margin:8px 0;font-size:12px;color:#aaa;line-height:1.7;}
+.mc-example strong{color:#FFD000;}
+</style>
+</head>
+<body>
+<div class="shell">
+<div class="hdr">
+  <div class="brand"><em>Too Good</em> To Go · Head of Independent Partners</div>
+  <div class="hdr-title">Gold Standard <em>Communications Suite</em></div>
+  <div class="hdr-sub">Templates, training manuals, and Slack content. Copy, personalise, send.</div>
+</div>
+
+<div class="nav">
+  <div class="nav-tab active" onclick="switchNav('emails',this)">Team Emails</div>
+  <div class="nav-tab" onclick="switchNav('manager',this)">Manager Emails</div>
+  <div class="nav-tab" onclick="switchNav('slack',this)">Slack &amp; Culture</div>
+  <div class="nav-tab" onclick="switchNav('training',this)">Training Manuals</div>
+  <div class="nav-tab" onclick="switchNav('objections',this)">Objection Library</div>
+  <div class="nav-tab" onclick="switchNav('battlecards',this)">Battlecards</div>
+  <div class="nav-tab" onclick="switchNav('pitch',this)">Pitch Cards</div>
+  <div class="nav-tab" onclick="switchNav('interview',this)">Interview Bank</div>
+  <div class="nav-tab" onclick="switchNav('whatsapp',this)">WhatsApp Scripts</div>
+  <div class="nav-tab" onclick="switchNav('crm',this)">CRM Guide</div>
+</div>
+
+<div class="search-wrap">
+  <input class="search-box" id="global-search" type="text" placeholder="Search emails, topics, or keywords..." oninput="searchAll(this.value)">
+</div>
+<div class="no-results" id="no-results">No emails found for that search. Try a different keyword.</div>
+
+<div class="section active" id="sec-emails">
+<div class="sec-hdr"><div class="sec-title">Team Communications</div><div class="sec-sub">Click any email to expand. Copy and personalise the highlighted fields.</div></div>
+
+<div id="email-list"></div>
+</div>
+
+<div class="section" id="sec-manager">
+<div class="sec-hdr"><div class="sec-title">Manager Communications</div><div class="sec-sub">For Head of Independent Partners use — sent to Team Leads, not phone reps.</div></div>
+<div id="manager-list"></div>
+</div>
+
+<div class="section" id="sec-slack">
+<div class="sec-hdr"><div class="sec-title">Slack &amp; Culture Content</div><div class="sec-sub">Sales quotes for Monday morning, win announcements, and culture drops. Click any card to copy.</div></div>
+<div id="slack-content"></div>
+</div>
+
+<div class="section" id="sec-training">
+<div class="sec-hdr"><div class="sec-title">Sales Training Manuals</div><div class="sec-sub">Field-ready guides written for hospitality sales. MEDDIC, SPIN, and Challenger with TGTG examples throughout. Download and share with your TL team.</div></div>
+<div id="training-content"></div>
+</div>
+
+</div>
+
+<div class="section" id="sec-objections">
+<div class="sec-hdr"><div class="sec-title">Objection Handling Library</div><div class="sec-sub">The 12 most common objections in hospitality sales. Copy the counter and adapt for the specific operator.</div></div>
+<div id="obj-list"></div>
+</div>
+
+<div class="section" id="sec-battlecards">
+<div class="sec-hdr"><div class="sec-title">Competitor Battlecards</div><div class="sec-sub">What each platform does, what operators think of it, and what to say when they are already on it.</div></div>
+<div id="bc-list"></div>
+</div>
+
+<div class="section" id="sec-pitch">
+<div class="sec-hdr"><div class="sec-title">Pitch Reference Cards</div><div class="sec-sub">Memorise these. They are the foundation of every TGTG conversation.</div></div>
+<div id="pitch-list"></div>
+</div>
+
+<div class="section" id="sec-interview">
+<div class="sec-hdr"><div class="sec-title">Interview Question Bank</div><div class="sec-sub">Mapped to TGTG values. Three to four questions per value. What a strong answer looks like.</div></div>
+<div id="interview-list"></div>
+</div>
+
+<div class="section" id="sec-whatsapp">
+<div class="sec-hdr"><div class="sec-title">WhatsApp Outreach Scripts</div><div class="sec-sub">38% reply rate on WhatsApp vs 4% on email in UK hospitality. Use these — then make them your own.</div></div>
+<div id="wa-list"></div>
+</div>
+
+<div class="section" id="sec-crm">
+<div class="sec-hdr"><div class="sec-title">CRM Hygiene Guide</div><div class="sec-sub">What to log, when, how, and why. The standard that drives 100% CRM compliance.</div></div>
+<div id="crm-content"></div>
+</div>
+
+<script>
+
+var EMAILS = [
+  {
+    title:'Welcome to the team — new rep announcement',
+    type:'email',
+    to:'Full UK team (Slack + email)',
+    from:'Head of Independent Partners — Head of Independent Partners',
+    subject:'Welcome to TGTG — [FIRST NAME] joins us in [CITY]',
+    body:`Team,
+
+I am delighted to introduce [FIRST NAME] [LAST NAME], who joins us this week as a Business Development Manager covering [CITY / TERRITORY].
+
+[FIRST NAME] brings [X years] of experience in [BACKGROUND — e.g. field sales in hospitality / B2B / restaurant tech]. Most recently [he/she/they] was at [PREVIOUS COMPANY], where [brief achievement — e.g. built the northern England territory from zero to 200 clients in 18 months]. [FIRST NAME] knows [CITY]'s hospitality scene well and has already hit the ground running.
+
+A few words from [FIRST NAME]:
+"[SPACE FOR PERSONAL NOTE — ask them to write 3–4 sentences: where they're from, what drew them to TGTG, something personal e.g. favourite restaurant in the city]"
+
+[FIRST NAME] is based in [CITY] and will be on the phones from [START DATE]. You will see [him/her/them] in the daily standup and — if you are in [CITY] — on the ground in the best territorys in town.
+
+Please give [FIRST NAME] the warmest TGTG welcome. The kind that makes people glad they said yes.
+
+Grant`
+  },
+  {
+    title:'Nice to meet you today — post-visit follow-up',
+    type:'email',
+    to:'[CONTACT NAME], [VENUE NAME]',
+    from:'[rep NAME]',
+    subject:'Great to meet you today — [VENUE NAME]',
+    body:`Hi [CONTACT NAME],
+
+Really enjoyed meeting you today — thank you for taking the time.
+
+It was great to learn more about [VENUE NAME] and what you are building. [PERSONALISED LINE — e.g. "The Tuesday evening quiet period you mentioned is exactly the kind of thing TGTG was built for" or "I thought what you said about protecting the brand was spot on — it is exactly how we think about this too."]
+
+As promised, here is [WHAT YOU SAID YOU WOULD SEND — e.g. "the contribution margin calculation we walked through" / "a quick overview of how the offer works" / "two or three venues nearby who are already using TGTG on Tuesday evenings"].
+
+[ATTACH OR PASTE THE RELEVANT MATERIAL]
+
+Next step from our conversation: [SPECIFIC NEXT STEP — e.g. "I will follow up on Friday with a suggested offer structure for Tuesday evenings" / "You mentioned speaking to your business partner — I will call you on Thursday to see how that conversation went."]
+
+Looking forward to working together.
+
+[rep NAME]
+Too Good To Go UK — [CITY]
+[PHONE]`
+  },
+  {
+    title:'rep 1:1 — weekly recurring invite',
+    type:'email',
+    to:'[rep NAME]',
+    from:'[SALES MANAGER NAME]',
+    subject:'Weekly 1:1 — [rep NAME] / [TL NAME] — every [DAY] at [TIME]',
+    body:`Hi [FIRST NAME],
+
+Setting up our weekly 1:1 — [DAY] at [TIME], every week without exception.
+
+These are 45 minutes. Not 15. The agenda is fixed so you know what to prepare each week:
+
+1. Pipeline quality — walk me through your open deals. Not just the count. The quality.
+2. Deal score trend — are we signing venues that will transact?
+3. Activation rate — of your closes in the last 30 days, how many are live and transacting?
+4. Coaching agreed last week — did you work on it? What happened?
+5. Coaching for this week — one specific thing to change.
+
+TO PREPARE BEFORE EVERY 1:1:
+— Review your HubSpot pipeline. Know your open deal count, the stage of each, and the last activity date.
+— Flag any deal that has not moved in 7 days. We will talk about it.
+— Come with one question you want coaching on.
+
+YOUR QUESTION FOR THIS WEEK:
+[PERSONALISE THIS — e.g. "Bring a specific objection you heard this week and how you handled it. We will work through what you might have done differently." OR "Think about your lowest deal score close from the last month. What would you do differently?"]
+
+If something urgent comes up and you need to reschedule, message me before the day — not on the day.
+
+See you [DAY].
+
+[TL NAME]`
+  },
+  {
+    title:'Team Lead 1:1 — weekly recurring invite',
+    type:'email',
+    to:'[SALES MANAGER NAME]',
+    from:'Head of Independent Partners — Head of Independent Partners',
+    subject:'Weekly 1:1 — [TL NAME] / Grant — every [DAY] at [TIME]',
+    body:`Hi [FIRST NAME],
+
+Locking in our weekly 1:1 — [DAY] at [TIME], every week.
+
+45 minutes. Agenda is consistent so you can prepare properly.
+
+WHAT I WANT FROM YOU EACH WEEK:
+
+1. Team performance analysis
+Not just numbers — your read on what is driving them. Which phone reps are performing and why. Which are struggling and what is actually going on underneath.
+
+2. The week's biggest challenge
+One specific problem from this week. Not a category of problems — a named situation. What happened, what you tried, what you need from me.
+
+3. A win worth sharing
+Something from your team this week that the whole organisation should hear about. I will put it on Win Wire.
+
+4. Pipeline and forecasting
+Your honest view of this week's likely closes. And anything in the pipeline you are concerned about — deals that are stalling, venues that signed but have not activated.
+
+5. Other business
+Anything you need from me — support, escalation, decisions I need to make.
+
+TO PREPARE:
+Pull your team's HubSpot data before we speak. Know the numbers. Come with your analysis, not just a report.
+
+One question I will always ask: "What would you do differently this week if you were doing it again?"
+
+Looking forward to it.
+
+Grant`
+  },
+  {
+    title:'Performance review invite — low activity (rep)',
+    type:'email',
+    to:'[rep NAME]',
+    from:'[SALES MANAGER NAME]',
+    subject:'Let\'s talk this week — [rep NAME]',
+    body:`Hi [FIRST NAME],
+
+I want to move our conversation forward and meet outside our regular 1:1 this week.
+
+I have been looking at your activity data and I want to discuss it with you directly. Over the last [X] weeks, the visit count has been below what the role requires — [X visits] against a target of 10+ per week. I want to understand what is getting in the way before we are too far into the quarter.
+
+This is not a formal process. It is a conversation — and I want to have it now, not later.
+
+Can you come prepared to walk me through:
+— What your week has looked like, specifically
+— What has been getting in the way of visits
+— What you think needs to change
+
+I am setting this with the right intention. I want to support you to hit the standard, and I cannot do that if I do not understand what is actually happening.
+
+[MEETING DETAILS — DAY, TIME, LOCATION/LINK]
+
+Please confirm you can make this.
+
+[TL NAME]`
+  },
+  {
+    title:'Performance review invite — behavioural standards (rep)',
+    type:'email',
+    to:'[rep NAME]',
+    from:'[SALES MANAGER NAME]',
+    subject:'Important — meeting this week, [rep NAME]',
+    body:`Hi [FIRST NAME],
+
+I need to meet with you this week to discuss something I cannot address in a standard 1:1.
+
+There has been [DESCRIBE THE SITUATION SPECIFICALLY — e.g. "an incident in the team standup on Tuesday that I need to address directly" / "feedback from a prospect call that concerns me" / "a pattern of behaviour I have noticed that I need to talk through with you"].
+
+I want to be straightforward with you: this is a serious conversation about the standards we hold ourselves and each other to at TGTG. I am not ambushing you — which is why I am flagging it before we meet rather than walking you into something unexpected.
+
+Come prepared to talk openly. I will come with the same intention.
+
+[MEETING DETAILS — DAY, TIME, LOCATION/LINK]
+
+If you would like HR to be present, that is entirely your right and I will arrange it. Please let me know.
+
+[TL NAME]`
+  },
+  {
+    title:'Weekly team round-up email',
+    type:'email',
+    to:'Too Good To Go UK Sales Team',
+    from:'[HEAD OF SALES / TL NAME]',
+    subject:'Week [NUMBER] — [QUICK SUMMARY IN ONE LINE]',
+    body:`Team,
+
+This week's quote:
+
+"[FUNNY / SHARP SALES QUOTE — see the Slack tab for options]"
+
+THE WEEK WE HAD
+
+[2–3 sentences on the week. Be honest. If it was a strong week, say why. If it was a tough week, say that too. Do not pad. Do not be relentlessly positive. The team sees through it.]
+
+WINS WORTH NAMING
+[FIRST NAME] closed [VENUE] in [POSTCODE] — [brief reason it matters, e.g. "a venue three of us had been trying to crack for two months"].
+[FIRST NAME] hit [METRIC] for the second week running.
+[ANYTHING ELSE]
+
+WHAT WE LEARNED
+[ONE THING THE TEAM LEARNED THIS WEEK — from a call, a visit, an objection handled well or badly. Make it specific.]
+
+WHAT WE ARE CARRYING INTO NEXT WEEK
+
+Each of us is committing to one thing:
+[FIRST NAME] — [COMMITMENT]
+[FIRST NAME] — [COMMITMENT]
+[FIRST NAME] — [COMMITMENT]
+[Add all names]
+
+[YOUR NAME]
+
+P.S. [OPTIONAL — a personal note, something you are looking forward to, something the team should know. The human bit.]`
+  },
+  ,
+  {
+    title:'Team lunch invite',
+    type:'email',
+    to:'[CITY] Sales Team',
+    from:'[YOUR NAME]',
+    subject:'Lunch on me — [DAY], [VENUE NAME]',
+    body:`Team,
+
+We are going for lunch.
+
+[DAY] at [TIME]. [VENUE NAME], [ADDRESS]. I am buying.
+
+No agenda. No laptops. No pipeline review. Just the team, a table, and a proper meal somewhere good.
+
+[OPTIONAL REASON — e.g. "We have had a strong run and I want to mark it." OR "It has been a tough few weeks and we need a reset." OR "We have a new face joining us and this is how we welcome people at TGTG."]
+
+If you cannot make it, let me know by [DATE] so I can get the booking right. Dietary requirements — same.
+
+See you there.
+
+[YOUR NAME]
+
+P.S. We are going to [VENUE NAME] and not somewhere on the TGTG platform, which is either a conflict of interest or a missed opportunity, depending on how you look at it.`
+  },
+  {
+    title:'Weekly performance update — to Chelsea',
+    type:'email',
+    to:'Chelsea Kerr — Global Head of Independent Partners',
+    from:'Head of Independent Partners — Head of Independent Partners',
+    subject:'UK Week [NUMBER] — [ONE LINE SUMMARY]',
+    body:`Chelsea,
+
+Week [NUMBER]. Here is the picture.
+
+THE NUMBERS
+Signed this week: [X] (target: [Y])
+Live this week: [X] (target: [Y])
+Total UK live: [X]
+Deal score average: [X]% (vs [Y]% last week)
+CRM compliance: [X]%
+
+BY CITY
+London: [X signed, X live]
+Manchester: [X signed, X live]
+Bristol: [X signed, X live]
+Leeds: [X signed, X live]
+
+THE ONE THING THAT WENT WELL
+[Specific. A named venue, a named rep, a specific moment. Not "the team performed strongly."]
+
+THE ONE THING I AM WATCHING
+[Honest. One concern heading into next week.]
+
+GLASGOW UPDATE
+[Day X of launch. Signed: X. Live: X. Recruiting: X. What is next.]
+
+HIRING
+[Open roles, interview stage, offers pending.]
+
+WHAT I NEED FROM YOU
+[A decision, a resource, a connection — or leave blank.]
+
+Next week: [ONE LINE FOCUS]
+
+Grant`
+  },
+  {
+    title:'HOD debrief — weekly cross-functional',
+    type:'email',
+    to:'Marketing · Account Management · Product · Operations',
+    from:'Head of Independent Partners — Head of Independent Partners',
+    subject:'UK Sales — Week [NUMBER] cross-functional debrief',
+    body:`All,
+
+Cross-functional debrief from the UK sales week. Flagging what is relevant to each of you.
+
+WHAT THE FIELD HEARD THIS WEEK
+[2–3 things operators said that other departments should know. Real intel from visits, not summaries.]
+
+FOR MARKETING
+[What messaging is landing. What is not. Any geographic signals — territorys where demand is real but supply is thin.]
+e.g. "Three venues in SE15 asked why there is no TGTG presence on their street. Consumer demand is real there — we are not showing up."
+
+FOR ACCOUNT MANAGEMENT
+[Venues that need early AM contact. Recently signed venues that need activation support. Handoff quality observations.]
+e.g. "[VENUE NAME] signed this week. Their portal is live but they are confused about offer windows. A quick call in the next 48 hours would help them activate."
+
+FOR PRODUCT
+[Recurring operator objections that are really product gaps. Portal friction. Feature requests that came up more than twice this week.]
+e.g. "Three operators asked if they can adjust offers from their phone in real time. This comes up every week now."
+
+FOR OPERATIONS
+[Onboarding timing, tech issues, city infrastructure observations.]
+
+WHAT WE NEED FROM OTHER DEPARTMENTS
+[Specific asks. Named. Not "would be great to align."]
+
+Grant`
+  },
+  {
+    title:'Flagship win — company-wide',
+    type:'email',
+    to:'TGTG — All teams',
+    from:'Head of Independent Partners — Head of Independent Partners',
+    subject:'[VENUE NAME] is live — and this one matters',
+    body:`Team,
+
+[VENUE NAME] went live on TGTG this week. I want to tell you why this one is different.
+
+[VENUE NAME] is [describe — Michelin-listed, 30-year institution, most loved restaurant in the city, the venue every operator in [CITY] pays attention to]. It took [X months / multiple conversations / a specific moment] to close.
+
+[WHY IT MATTERS — e.g. "When a venue like this is on TGTG, it changes every conversation we have in this city. It is social proof that money cannot buy. The next call [rep NAME] makes in [CITY] will be easier because [VENUE NAME] said yes."]
+
+[rep NAME] closed this. [One honest sentence on how — e.g. "Three visits, one difficult brand conversation, and a Tuesday evening maths calculation on a napkin."]
+
+This is the kind of venue that makes a marketplace.
+
+If you are ever in [CITY] on a [DAY], you now know where to go.
+
+Grant
+
+P.S. [VENUE NAME] is offering [X]% off on [DAYS]. The [DISH] is worth the trip.`
+  },
+  {
+    title:'New city launch — Day 7 countdown',
+    type:'email',
+    to:'Too Good To Go UK team',
+    from:'Head of Independent Partners — Head of Independent Partners',
+    subject:'7 days — [CITY] is coming',
+    body:`Team,
+
+Seven days from today, TGTG launches in [CITY].
+
+[ONE LINE ON WHY THIS ACCOUNT — e.g. "Meze & More has a clear weekday quiet period. Owner confirmed Monday-Wednesday lunch is consistently below 30% capacity. This is exactly the TGTG use case."]
+
+This week I am personally in [CITY] meeting the operators who will anchor the launch. [2–3 sentences on what is already in motion — venues in conversation, first meetings confirmed.]
+
+Seven days.
+
+Grant`
+  },
+  {
+    title:'New city launch — Day 3 countdown',
+    type:'email',
+    to:'Too Good To Go UK team',
+    from:'Head of Independent Partners — Head of Independent Partners',
+    subject:'3 days — [CITY] update',
+    body:`Team,
+
+Three days out. Here is where we are.
+
+Signed so far: [X] venues
+In conversation: [X] operators with confirmed follow-ups
+[NAME 1–2 FLAGSHIP VENUES IF ALREADY SIGNED]
+Scotland TL: [Hiring status]
+
+[ONE HONEST LINE ON HOW IT IS GOING.]
+
+The first diner to book through TGTG [CITY] will not know they are the first. But we will.
+
+Three days.
+
+Grant`
+  },
+  {
+    title:'New city launch — Day 1',
+    type:'email',
+    to:'Too Good To Go UK team',
+    from:'Head of Independent Partners — Head of Independent Partners',
+    subject:'Tomorrow — [CITY] launches',
+    body:`Team,
+
+Tomorrow, TGTG is live in [CITY].
+
+Signed: [X] venues. Live from tomorrow: [X] venues.
+
+Going live tomorrow:
+[VENUE 1] — [AREA]
+[VENUE 2] — [AREA]
+[VENUE 3] — [AREA]
+
+[rep NAME] is in the city from [TIME]. [TL NAME] is [status].
+
+The first week matters more than the first day. The first 20 venues matter more than the next 200. Tomorrow is the start of something that compounds.
+
+See you on the other side.
+
+Grant`
+  },
+  {
+    title:'New city launch — We are live',
+    type:'email',
+    to:'TGTG — All teams',
+    from:'Head of Independent Partners — Head of Independent Partners',
+    subject:'TGTG [CITY] — we are live',
+    body:`Team,
+
+TGTG [CITY] is live.
+
+As of today, [X] venues are on the platform across [AREAS]. The first offers are active. The first diners can discover [CITY]'s best restaurants through TGTG.
+
+[NAME 1–2 FLAGSHIP VENUES] — when operators of this calibre say yes in week one, the rest of the city pays attention.
+
+The [CITY] team:
+[rep NAME] — [TERRITORY]
+[TL NAME] — Scotland / Northern TL
+
+Chelsea's target is 20 UK cities by year end. [CITY] is city number [X]. [Y] to go.
+
+This is a good day.
+
+Grant`
+  }
+  ,
+  {
+    title:'Great field visit — coaching debrief',
+    type:'email',
+    to:'[rep NAME]',
+    from:'[TL NAME / GRANT]',
+    subject:'Today\'s visit — [VENUE NAME]',
+    body:`[FIRST NAME],
+
+I wanted to get this to you while it is fresh.
+
+Today was a strong visit. Here is specifically what worked.
+
+THE TEACH MOMENT
+When you pulled up their Popular Times before you said a word about TGTG — that was the right move. The owner leaned in. You had created a problem before you introduced a solution. That is exactly the Challenger sequence working as it should.
+
+THE OFFER STRUCTURE
+You did not ask what they wanted. You proposed: 25% Early Bird, Tuesday and Wednesday, 5:30 to 7:30pm, cap of 8 covers. Specific, confident, framed against their quiet period data. When they pushed back on the discount, you held the reframe: "You are not discounting your restaurant — you are pricing a table that currently earns you zero." Do not soften that line. It is the right one.
+
+[ADD A THIRD SPECIFIC OBSERVATION — e.g. "You also handled the 'we tried something like this before' objection cleanly. You asked what they tried rather than defending TGTG. That is the right instinct — understand the failure before you address it."]
+
+THE ONE THING TO CARRY FORWARD
+[SPECIFIC — e.g. "You got to the Economic Buyer question late. Next time, surface it in the first three minutes: 'Is this a decision you can make, or does someone else need to be part of it?' Know before you invest the visit."]
+
+This was a good day. I want the rest of the team to hear how you handled [SPECIFIC MOMENT]. I am going to use it in the Friday coaching reel.
+
+Well done.
+
+[YOUR NAME]`
+  },
+  {
+    title:'Field visit — coaching debrief (development)',
+    type:'email',
+    to:'[rep NAME]',
+    from:'[TL NAME / GRANT]',
+    subject:'Today\'s visit — a few things to work through',
+    body:`[FIRST NAME],
+
+I appreciated you having me along today. I want to give you honest feedback while it is fresh — the kind that is actually useful, not the kind that makes you feel good for five minutes.
+
+WHAT HAPPENED
+The visit had energy and you clearly know the venue. But there are three specific things I want us to work on before the next one.
+
+1. You pitched before you created a problem
+You walked in and were talking about TGTG within two minutes. [VENUE OWNER/MANAGER NAME] had not yet told you anything was wrong. We have a product. We do not have a problem for this operator yet. Next time: open with a question, not a feature. "What does your quietest session of the week look like?" Get them talking first.
+
+2. The discount conversation went the wrong way
+When [they] said "we do not do discounts," you softened. You said "it is not really discounting, it is more like a promotion." That is not the reframe. The reframe is: "You are not discounting your brand. You are pricing an empty table that right now earns you zero. There is no Friday customer who sees this." Hold that line. Do not walk it back.
+
+3. You left without a committed next step
+"I will follow up next week" is not a next step. A next step has a date, an action, and an owner. "Can I call you on Thursday at 2pm to walk you through what the offer would look like in your portal?" is a next step. Always leave with something specific.
+
+WHAT TO DO BEFORE THE NEXT VISIT
+Practice the objection reframe. Out loud. I want you to say it three times before your next cold dial so it comes out clean under pressure.
+
+We will work through this in our 1:1 on [DAY]. Come prepared to role-play the first three minutes of a cold dial.
+
+You have the instincts. This is about sharpening them.
+
+[YOUR NAME]`
+  },
+  {
+    title:'Great call — recorded call feedback',
+    type:'email',
+    to:'[rep NAME]',
+    from:'[TL NAME / GRANT]',
+    subject:'Call review — [VENUE NAME], [DATE]',
+    body:`[FIRST NAME],
+
+I listened to your [VENUE NAME] call this morning. I want you to know what I heard because it is worth naming specifically.
+
+WHAT WORKED
+
+At around the [3-minute] mark you said: "[DIRECT QUOTE OR CLOSE PARAPHRASE OF WHAT THEY SAID]." That stopped the conversation and the operator's tone changed. That is the Implication question working — you helped them say the problem out loud rather than telling them what it was.
+
+When they raised [THE OBJECTION], you paused before answering. That pause matters. It signals confidence, not uncertainty. Then you came back with [WHAT THEY SAID]. That is the version we teach.
+
+You also got a committed next step: [SPECIFIC — e.g. "a call on Thursday at 2pm with the business partner involved"]. That is not luck. You asked for it directly.
+
+THE ONE THING TO BUILD ON
+[SPECIFIC — e.g. "The metrics conversation was good but you stayed at the headline number. Next time go deeper: 'Over six months, that is £X,000 in revenue from sessions that right now earn you nothing.' Make them feel the number over time, not just per week."]
+
+I am going to put a clip of [THE SPECIFIC MOMENT] into this week's coaching reel with your name on it. This is the version of that conversation the whole team should hear.
+
+Good call.
+
+[YOUR NAME]`
+  },
+  {
+    title:'Call review — coaching and development',
+    type:'email',
+    to:'[rep NAME]',
+    from:'[TL NAME / GRANT]',
+    subject:'Call review — [VENUE NAME], [DATE] — a few things',
+    body:`[FIRST NAME],
+
+I listened back to your [VENUE NAME] call. I want to be straight with you about what I heard, because the only useful feedback is specific feedback.
+
+THREE THINGS TO WORK ON
+
+1. The opening — you explained TGTG before you asked a question
+In the first [90 seconds] you described what TGTG does, how the platform works, and what venues get out of it. The operator had not told you anything about their situation yet. By the time you asked your first question, they had already made a judgement. Open with curiosity, not with a pitch.
+
+Try this instead: "Before I tell you anything about TGTG — what does your quietest session of the week look like for you?" One question. Then listen.
+
+2. The objection at the [7-minute] mark
+When they said "[THEIR OBJECTION]," you said "[WHAT THE rep SAID — e.g. 'I totally understand that concern']" and then moved on. That is not handling an objection. That is acknowledging it and hoping they forget it.
+
+The response to that objection is: [WRITE THE CORRECT RESPONSE HERE]. Practice it. It needs to come out clean and confident, not apologetic.
+
+3. The close — you did not ask for anything
+The call ended with "I will send you some information." That is not a next step. That is a way of ending a conversation without committing to one. What information? When? What do you want them to do with it? Always close with a specific ask.
+
+WHAT TO DO
+Listen back to the [4-minute] mark yourself. Notice the moment the operator's energy shifted. That is the moment to study.
+
+We will role-play the objection response in our 1:1 on [DAY]. Bring the [VENUE NAME] call notes.
+
+This is fixable. The instinct is there. The execution needs work.
+
+[YOUR NAME]`
+  },
+  {
+    title:'Time off approved',
+    type:'email',
+    to:'[rep / TL NAME]',
+    from:'[TL / GRANT NAME]',
+    subject:'Leave approved — [DATES]',
+    body:`[FIRST NAME],
+
+Approved. [DATES] are yours.
+
+[OPTIONAL LINE — e.g. "You have earned it." OR "Have a proper break." OR "I hope it is a good one."]
+
+A couple of things before you go:
+— Make sure your pipeline is up to date in HubSpot before you leave
+— Let me know if there are any deals that need covering while you are out
+— [Any handover notes if relevant]
+
+Enjoy it.
+
+[YOUR NAME]`
+  },
+  {
+    title:'Expenses approved',
+    type:'email',
+    to:'[rep / TL NAME]',
+    from:'[TL / GRANT NAME]',
+    subject:'Expenses approved — [PERIOD]',
+    body:`[FIRST NAME],
+
+Expenses for [PERIOD / REFERENCE] approved and submitted to finance.
+
+[AMOUNT] — you should see it in [TIMEFRAME — e.g. "your next pay run" / "3–5 working days"].
+
+[OPTIONAL NOTE — e.g. "The client lunch on [DATE] — good call taking [VENUE]. A great way to build the relationship." OR if anything needs flagging: "One thing for future reference — [POLICY NOTE — e.g. 'anything over £50 needs a receipt attached, not just the card statement']. Nothing wrong with this one — just worth knowing going forward."]
+
+[YOUR NAME]`
+  },
+  {
+    title:'Time off — not approved',
+    type:'email',
+    to:'[rep / TL NAME]',
+    from:'[TL / GRANT NAME]',
+    subject:'Leave request — [DATES]',
+    body:`[FIRST NAME],
+
+I have looked at this and I cannot approve [DATES] as requested.
+
+[REASON — be specific and honest, e.g.:
+"We have the [CITY] launch happening that week and I need you on the ground." OR
+"[OTHER TEAM MEMBER] is already off those dates and we cannot have two people out simultaneously in [TERRITORY]." OR
+"We are at a critical point in [SPECIFIC SITUATION] and I need you available."]
+
+I want to make this work. Can you look at [ALTERNATIVE DATES — e.g. the week before / the week after / a different period] and let me know if that works for what you had planned?
+
+If there is something urgent or personal driving the specific dates that you have not shared with me, please let me know. I want to find a solution if I can.
+
+[YOUR NAME]`
+  },
+  {
+    title:'Running 15 minutes late',
+    type:'email',
+    to:'[MEETING ATTENDEES]',
+    from:'[YOUR NAME]',
+    subject:'Running 15 late — [MEETING NAME]',
+    body:`All,
+
+Running 15 minutes late — [BRIEF REASON, e.g. "call ran over" / "on the way now" / "held up in the venue"].
+
+Start without me if there is anything you can cover. I will be there at [NEW TIME].
+
+Apologies for the short notice.
+
+[YOUR NAME]`
+  },
+  {
+    title:'Reschedule internal meeting — rep needs field support',
+    type:'email',
+    to:'[MEETING ATTENDEES]',
+    from:'[YOUR NAME]',
+    subject:'Rescheduling — [MEETING NAME] — [ORIGINAL TIME]',
+    body:`All,
+
+I need to move [MEETING NAME] — I am going to be on the phones with [rep NAME] this [DAY/TIME].
+
+[rep NAME] has a [high-value prospect / difficult close / objection handling visit] with [VENUE NAME] in [CITY/AREA] and I want to be there. The field takes priority over the internal calendar when it matters.
+
+Can we move to [PROPOSED NEW DATE/TIME]? I am happy to find a slot that works for everyone — send me your availability if [NEW TIME] does not work.
+
+The visit is important. I want to be there. Thank you for the flexibility.
+
+[YOUR NAME]`
+  },
+  {
+    title:'Request a catch-up — new to the business',
+    type:'email',
+    to:'[NAME], [DEPARTMENT]',
+    from:'[YOUR NAME]',
+    subject:'Catching up — [YOUR NAME], Head of Independent Partners',
+    body:`Hi [FIRST NAME],
+
+I am Grant — I joined TGTG as Head of Independent Partners [X weeks ago / last month / recently]. I have been getting into the business and I want to make sure I am connecting with the right people across the organisation early.
+
+I would love 30 minutes with you — not a formal meeting, just a conversation. I want to understand:
+— What you are working on right now
+— Where the Sales team and your team connect (and where we could connect better)
+— Anything from your perspective that you think I should know about the UK market, the business, or the team
+
+I am in [LOCATION] on [DAYS] and happy to find a time that suits you. Or a call works just as well.
+
+Looking forward to it.
+
+Head of Independent Partners
+Head of Independent Partners — TGTG
+[PHONE]`
+  },
+  {
+    title:'I will be in your territory — have meetings booked',
+    type:'email',
+    to:'[rep NAME]',
+    from:'[TL / GRANT NAME]',
+    subject:'In your territory [DAY] — have meetings ready',
+    body:`[FIRST NAME],
+
+I will be in [AREA / TERRITORY] on [DAY — e.g. Thursday].
+
+I want to spend the day with you on the phones. To make the most of it, I need you to have confirmed meetings booked — not tentative, confirmed — before I arrive.
+
+What I am looking for:
+— [3–4] prospect calls that are either warm follow-ups, objection handling, or close attempts
+— At least one venue you have been working for a while that you want a second voice on
+— Your route planned so we are not crossing the city between visits
+
+Send me your confirmed schedule by [DEADLINE — e.g. "end of day Wednesday"]. If the diary is light, let me know now so we can build it together. I would rather know early than arrive to an empty calendar.
+
+This is your territory. I am there to support, not to take over. But I want the day to count.
+
+[YOUR NAME]`
+  },
+  {
+    title:'Blitz day — setup email (night before)',
+    type:'email',
+    to:'[SALES TEAM]',
+    from:'[TL / GRANT NAME]',
+    subject:'Tomorrow — Blitz Day. Read this tonight.',
+    body:`Team,
+
+Tomorrow is a blitz day. Here is exactly what that means and what you need to do tonight.
+
+TONIGHT — BEFORE YOU GO TO SLEEP
+
+Every one of you sends me a list of 20 brand new prospects by [TIME — e.g. 9pm].
+
+Not venues you have spoken to before. Not venues on your existing pipeline. New ones. Venues you have never contacted.
+
+How to find them:
+1. Open Google Maps. Search "[VENUE TYPE — e.g. restaurant / bar / gastropub]" in [YOUR POSTCODE ZONE].
+2. Filter: 4.0+ stars. At least 50 reviews. Independent (not a chain).
+3. Check they are not already on TGTG.
+4. Add them to the list: venue name, territory, Google rating, phone number.
+
+Use Claude / ChatGPT to help you build the list faster. Prompt: "Give me 20 independent restaurants in [POSTCODE] with Google ratings above 4.0 that are likely to have quiet Tuesday and Wednesday evenings based on their cuisine type and location." Then verify each one yourself.
+
+Send the list to me as a Google Sheet or in Slack by [TIME]. No list by [TIME] = we talk about it first thing tomorrow.
+
+TOMORROW — WHAT HAPPENS
+
+[OPTION A — OFFICE COLD CALL BLITZ]
+9am sharp, everyone in the office. Phones out. We are cold calling from our prospect lists for [2 hours]. I will be on the floor the whole time. If you get stuck on an objection, put your hand up. Real-time coaching.
+
+[OPTION B — DOOR KNOCKING WITH AI ROUTE]
+9am we meet at [LOCATION]. Your 20 prospects have been grouped by territory using the AI route planner — [TOOL — e.g. RouteXL / Google Maps optimised / AI prompt]. We are splitting into pairs and hitting every territory on the list. Cover more ground together. Compare notes at lunch.
+
+THE POINT
+A blitz day does two things: it fills the top of your funnel with fresh prospects, and it reminds you that cold outreach is a skill, not a personality trait. The best reps on this team are the ones who are comfortable walking into a room cold. Tomorrow is practice.
+
+Target: every rep has at least [3] new conversations by end of day. Conversations, not calls. If you speak to a decision maker, that counts.
+
+Energy tomorrow starts tonight. Build a good list.
+
+[YOUR NAME]
+
+P.S. The rep with the best prospect list tonight gets to pick where we go for lunch on Friday. I am serious.`
+  }
+  ,
+  {
+    title:'Follow-up — owner not present during dial',
+    type:'email',
+    to:'[OWNER NAME], [VENUE NAME]',
+    from:'[rep NAME]',
+    subject:'I stopped by [VENUE NAME] today — [rep NAME], TGTG',
+    body:`Hi [OWNER NAME],
+
+I stopped by [VENUE NAME] this [MORNING / AFTERNOON] and had a great chat with [STAFF MEMBER NAME / "your team"] — unfortunately you were not around.
+
+I am [rep NAME] from TGTG. We work with a number of restaurants in [AREA] — [NAME 1 OR 2 NEARBY VENUES IF APPLICABLE] — helping them fill their quieter sessions with new covers.
+
+The reason I wanted to speak with you specifically: [PERSONALISED OBSERVATION — e.g. "I noticed your Popular Times data shows Tuesday and Wednesday evenings at around 30% of your Friday capacity. I think there is a straightforward conversation worth having about those nights." OR "I walked past on [DAY] around 7pm and the dining room was quieter than I would have expected for a venue of this quality."]
+
+I will be brief when we do speak — 10 to 15 minutes is all it takes to show you whether this makes sense for [VENUE NAME] or not.
+
+Are you around [VENUE NAME] later this week? Or I am happy to call if that is easier — whatever works best for you.
+
+[rep NAME]
+Too Good To Go UK — [CITY]
+[PHONE]
+[EMAIL]`
+  },
+  {
+    title:'Follow-up — after a successful dial with the owner',
+    type:'email',
+    to:'[OWNER NAME], [VENUE NAME]',
+    from:'[rep NAME]',
+    subject:'Great to meet you today — [VENUE NAME]',
+    body:`Hi [OWNER NAME],
+
+Really good to meet you today — thank you for taking the time.
+
+As promised, here is [WHAT YOU SAID YOU WOULD SEND]:
+
+[INCLUDE ONE OF THE FOLLOWING AS RELEVANT:]
+
+THE NUMBERS WE WALKED THROUGH
+Based on what you told me:
+— Your quiet session: [DAY] at [TIME]
+— Estimated covers available: [X]
+— Your average spend per head: approximately £[AOV]
+— What TGTG generates per cover after commission: £[NET AMOUNT]
+— What those [X] covers earn you over 6 months: approximately £[TOTAL]
+— What those covers earn you without TGTG: £0
+
+THE OFFER STRUCTURE I WOULD RECOMMEND
+[OFFER TYPE — e.g. Early Bird] · [X]% off · [DAYS] · [TIME WINDOW] · capped at [X] covers
+
+This is based on your actual quiet period and keeps your pricing completely intact on your busier sessions. [OWNER NAME], your [FRIDAY / SATURDAY] regulars will never see this offer.
+
+WHAT HAPPENS NEXT
+Getting you set up takes around [20–30 minutes] — we configure the offer, set up your portal, and you are live. The first covers can start coming in within days.
+
+You mentioned [SPECIFIC THING THEY SAID — e.g. "speaking to your business partner" / "thinking it over for a few days" / "wanting to see the contract first"]. [RESPOND TO THAT DIRECTLY — e.g. "I have attached the standard agreement so you have it to hand." OR "I am happy to join a call with you both — just say the word."]
+
+I will follow up on [SPECIFIC DAY] — or if you have questions before then, call me directly on [PHONE].
+
+Looking forward to getting [VENUE NAME] live.
+
+[rep NAME]
+Too Good To Go UK — [CITY]
+[PHONE]`
+  },
+  {
+    title:'Deal confirmation — to the operator',
+    type:'email',
+    to:'[OWNER NAME], [VENUE NAME]',
+    from:'[rep NAME]',
+    subject:'Welcome to TGTG — [VENUE NAME]',
+    body:`Hi [OWNER NAME],
+
+Welcome to TGTG. Really pleased to have [VENUE NAME] on board.
+
+Here is a summary of what we agreed and what happens next.
+
+YOUR OFFER
+[OFFER TYPE — e.g. Early Bird] · [X]% off · [DAYS] · [TIME WINDOW] · [X] cover cap
+Goes live: [DATE]
+
+WHAT HAPPENS NEXT — IN ORDER
+1. You will receive a portal login from our team within [24–48 hours]. This is where you manage your offer, view bookings, and track your performance.
+2. Your Account Manager [AM NAME] will be in touch within [X days] to walk you through the portal and make sure everything is set up correctly.
+3. Your offer goes live on [DATE]. From that point, TGTG users can discover and book [VENUE NAME] for [DAYS/TIMES].
+
+A SMALL FAVOUR
+Once your offer is live, would you be happy to put a small tent card on your tables? We find it significantly increases activation — diners who have a great experience at [VENUE NAME] through TGTG often become your highest-value returning customers.
+
+My number is [PHONE] — call or WhatsApp any time if you have questions. And if there is anyone else in [AREA] you think would benefit from this conversation, I would love an introduction.
+
+Thank you for saying yes. We are going to make [THOSE QUIET TUESDAYS / WEDNESDAY EVENINGS / SPECIFIC SESSION] work properly.
+
+[rep NAME]
+Too Good To Go UK — [CITY]
+[PHONE]`
+  },
+  {
+    title:'Handover to Account Management — internal email',
+    type:'email',
+    to:'[AM NAME], Account Management',
+    from:'[rep NAME]',
+    subject:'New venue handover — [VENUE NAME], [CITY]',
+    body:`Hi [AM NAME],
+
+Handing over [VENUE NAME] to you — signed [DATE]. Here is everything you need.
+
+THE VENUE
+Name: [VENUE NAME]
+Address: [FULL ADDRESS / POSTCODE]
+Cuisine: [TYPE]
+Google rating: [X] stars / [X] reviews
+Owner / decision maker: [NAME] — [PHONE] — [EMAIL]
+Best time to reach them: [e.g. before 11am or after 4pm — avoid lunch service]
+Communication preference: [WhatsApp / email / call]
+
+THE DEAL
+Offer: [OFFER TYPE] · [X]% off · [DAYS] · [TIME WINDOW] · [X] cover cap
+Confirmed against: [GENUINE QUIET PERIOD — e.g. Popular Times data and owner confirmed Tuesday 5:30–7:30pm is genuinely their quietest session]
+Goes live: [DATE]
+Portal login sent: [YES / NO — if no, needs sending]
+
+WHAT THE OWNER CARES ABOUT
+[KEY CONTEXT FROM THE SALE — e.g. "Very brand-protective. Address this carefully — the quality marketplace framing landed well, not the discount framing." OR "Keen to hit a £X monthly revenue target from TGTG. Has been tracking this carefully." OR "Two-site group — the Brixton site is the one we signed. He is open to the [SECOND SITE] once this one proves the model."]
+
+KNOWN CONCERNS OR OBJECTIONS TO MONITOR
+[ANYTHING THAT DID NOT FULLY RESOLVE IN THE SALE — e.g. "Still slightly nervous about the brand association — the first few weeks of activation are important to get right." OR "Had a bad experience with TheFork previously — mentioned it twice. Worth acknowledging this early."]
+
+FIRST FORTY NOTES
+[ANYTHING SPECIFIC FOR ONBOARDING — e.g. "Busy on weekends — avoid calling Friday through Sunday" / "Staff turnover is high, best to confirm the portal is set up with the owner directly, not a manager."]
+
+Call me if you have questions before you reach out.
+
+[rep NAME]
+[PHONE]`
+  },
+  {
+    title:'Request a meeting — I will be in your area',
+    type:'email',
+    to:'[OWNER / CONTACT NAME], [VENUE NAME]',
+    from:'[rep NAME]',
+    subject:'In [AREA] this [DAY] — worth 15 minutes?',
+    body:`Hi [NAME],
+
+I will be in [AREA / STREET / POSTCODE] this [DAY — e.g. Thursday] visiting a few of the restaurants and bars on [STREET / IN THE AREA].
+
+I have heard great things about [VENUE NAME] — [SPECIFIC REASON YOU CHOSE THEM, e.g. "I saw your Google rating and wanted to understand more about what you are doing" / "A colleague recommended I stop by" / "I noticed you are not yet on TGTG and I think there is a straightforward conversation worth having"].
+
+I will keep it short — 15 minutes, no presentation, just a conversation. If what I have to say is not relevant to you, I will be the first to tell you.
+
+Are you around [VENUE NAME] on [DAY]? [TWO TIME OPTIONS — e.g. "I could come by at 10am or again at 2:30pm — whichever suits."]
+
+[rep NAME]
+Too Good To Go UK — [CITY]
+[PHONE]`
+  }
+];
+
+var MANAGER_EMAILS = [
+  {
+    title:'Manager performance review — invite',
+    type:'manager',
+    to:'[SALES MANAGER NAME]',
+    from:'Head of Independent Partners — Head of Independent Partners',
+    subject:'Meeting this week — [TL NAME]',
+    body:`Hi [FIRST NAME],
+
+I need to set time with you outside our regular 1:1 this week.
+
+I want to talk through something that has been on my mind and it warrants more than 45 minutes of a standing agenda. Specifically: [NAME THE ISSUE DIRECTLY — e.g. "the way the performance conversation with [rep NAME] was handled last week" / "the gap between what we discussed in our 1:1 and what I saw on the phones on Thursday" / "the activity numbers across your team over the last three weeks"].
+
+I am not coming to this conversation with a fixed view. I want to hear your read first. But I want to have this conversation properly — not squeezed into the last 10 minutes of something else.
+
+Come prepared to walk me through your perspective. I will do the same.
+
+[MEETING DETAILS — DAY, TIME]
+
+This is a management-to-management conversation. It stays between us unless we agree otherwise.
+
+Grant`
+  },
+  {
+    title:'Manager instruction — drive low activity on team',
+    type:'manager',
+    to:'[SALES MANAGER NAME]',
+    from:'Head of Independent Partners — Head of Independent Partners',
+    subject:'Team activity last week — what is the plan?',
+    body:`[FIRST NAME],
+
+I have been looking at last week's activity data for your team and I want your plan before the week starts, not at the end of it.
+
+The numbers:
+[PASTE THE SPECIFIC NUMBERS — e.g.
+— [rep NAME]: 3 visits vs 10 target
+— [rep NAME]: 4 visits vs 10 target
+— [rep NAME]: CRM compliance 67%]
+
+These are not acceptable numbers. I am not asking for an explanation of why — I am asking for your plan to move them this week.
+
+I want to know:
+1. What specific action you are taking with each rep below threshold — call-along, blitz day, structured conversation, whatever it is. Named. Not "I will have a chat."
+2. What you have already said to them, if anything.
+3. What you need from me, if anything.
+
+Send me this before end of day [TODAY / TOMORROW MORNING]. Then I want a daily update from you on activity numbers for the rest of this week. Not a report — three lines in Slack. I need to see the number moving.
+
+If there is something going on that I am not aware of — a personal situation, a territory problem, something structural — tell me now. I would rather know early.
+
+Grant`
+  },
+  ,
+  {
+    title:'Formal performance review — Team Lead',
+    type:'manager',
+    to:'[SALES MANAGER NAME]',
+    from:'Head of Independent Partners — Head of Independent Partners',
+    subject:'Formal performance review — [TL NAME] — [DATE]',
+    body:`[FIRST NAME],
+
+NOTE: Review with HR before sending. Follow ACAS Code of Practice throughout.
+
+I am writing to confirm the outcomes of your formal performance review meeting held on [DATE].
+
+PERFORMANCE CONCERNS
+
+Over [DATE] to [DATE], the following gaps were identified:
+
+1. Team activity: your team averaged [X] prospect calls per rep per week — target is 10+. Below standard for [X] consecutive weeks.
+2. Deal quality: average deal score of [X]% across your team — target is 50%+. [X]% of closes scored below 40.
+3. CRM compliance: team-wide at [X]% — target is 100%.
+4. Coaching cadence: weekly 1:1s with phone reps were not consistently held. Coaching notes were not filed as required.
+
+IMPROVEMENT TARGETS — TRACKED AGAINST HUBSPOT
+
+By [REVIEW DATE — 4 weeks]:
+— Team prospect calls: 10+ per rep per week, every week, evidenced in HubSpot
+— Team deal score: above 45% on all closes
+— CRM compliance: 100% team-wide, maintained from week 1
+— Weekly 1:1s: all phone reps with a logged coaching note by Friday each week
+
+Weekly check-ins will be held on [DAY] at [TIME].
+
+RIGHT TO BE ACCOMPANIED
+You have the right to be accompanied at any formal meeting by a trade union representative or a work colleague. Notify HR if you wish to exercise this right.
+
+RIGHT OF APPEAL
+You may appeal in writing to [HR CONTACT] within [5] working days.
+
+This is a formal document and will be placed on your HR file.
+
+Head of Independent Partners
+Head of Independent Partners`
+  },
+  {
+    title:'Formal performance review — rep',
+    type:'manager',
+    to:'[rep NAME]',
+    from:'[TL NAME] / Head of Independent Partners',
+    subject:'Formal performance review — [rep NAME] — [DATE]',
+    body:`[FIRST NAME],
+
+NOTE: Review with HR before sending. Follow ACAS Code of Practice throughout.
+
+I am writing to confirm the outcomes of your formal performance review meeting held on [DATE], attended by [NAMES PRESENT].
+
+PERFORMANCE CONCERNS
+
+Over the period [DATE] to [DATE]:
+
+1. Deals signed: [X] against a target of [Y]
+2. Deal score: [X]% average — target is 40%+
+3. CRM compliance: [X]% — target is 100%
+4. Venue visits: [X] per week — target is 10+
+5. Activation rate: [X]% of 30-day closes live — target is 70%+
+6. Stale deals: [X] deals with no activity for 14+ days
+
+IMPROVEMENT TARGETS — TRACKED AGAINST HUBSPOT
+
+By [REVIEW DATE]:
+— 6 quality-gated deals signed (venue ≥4.0 stars, offer against confirmed quiet period)
+— CRM compliance at 100% every week — no retrospective logging
+— 10+ prospect calls logged per week in HubSpot
+— Deal score of 40%+ on all new closes
+— Zero stale deals — every open deal with activity within 7 days
+
+All metrics will be pulled directly from HubSpot.
+
+SUPPORT PROVIDED
+— Weekly 1:1 with your Team Lead: [DAY] at [TIME]
+— Minimum one joint visit or call-along per week
+
+RIGHT TO BE ACCOMPANIED
+You have the right to be accompanied at any formal meetings by a trade union representative or a work colleague.
+
+RIGHT OF APPEAL
+You may appeal in writing to [HR CONTACT] within [5] working days.
+
+This letter will be placed on your HR file.
+
+[TL NAME] / Head of Independent Partners — Head of Independent Partners`
+  },
+  {
+    title:'PIP follow-up — Week 1 (Manager)',
+    type:'manager',
+    to:'[TL NAME]',
+    from:'Head of Independent Partners',
+    subject:'PIP Week 1 check-in — [TL NAME]',
+    body:`[FIRST NAME],
+
+Week 1 of your performance improvement plan complete. Written record of our check-in, [DATE].
+
+HUBSPOT DATA — WEEK 1
+Team visits per rep: [DATA BY rep] (target: 10+)
+CRM compliance: [X]% (target: 100%)
+1:1s held with coaching notes: [X] of [Y] (target: all)
+Deal score on closes: [X]% (target: 45%+)
+
+WHAT IMPROVED: [Specific]
+WHAT STILL NEEDS TO CHANGE: [Specific]
+AGREED FOR NEXT WEEK: [One specific TL commitment]
+
+Overall: [ON TRACK / CONCERN / NOT IMPROVING]
+Next check-in: [DATE]
+
+Grant`
+  },
+  {
+    title:'PIP follow-up — Week 2 (Manager)',
+    type:'manager',
+    to:'[TL NAME]',
+    from:'Head of Independent Partners',
+    subject:'PIP Week 2 check-in — [TL NAME]',
+    body:`[FIRST NAME],
+
+Week 2. Two weeks in, two to go. Written record of today's check-in.
+
+HUBSPOT — WEEK 2 VS WEEK 1
+Team visits: [X] this week / [Y] last week (target: 10+)
+CRM compliance: [X]% / [Y]% (target: 100%)
+1:1s with notes: [X] / [Y] of [Z] phone reps
+Deal score: [X]% / [Y]% (target: 45%+)
+
+MID-POINT ASSESSMENT
+[Honest. If the trend is flat or declining: "Two weeks in and the numbers have not moved materially. I need to see clear progress in weeks 3 and 4 to recommend a positive outcome." If improving: "The trend is positive. Sustain this through week 4."]
+
+WEEK 3 COMMITMENT: [TL specific commitment]
+Overall: [ON TRACK / CONCERN / NOT IMPROVING]
+Next check-in: [DATE]
+
+Grant`
+  },
+  {
+    title:'PIP follow-up — Week 3 (Manager)',
+    type:'manager',
+    to:'[TL NAME]',
+    from:'Head of Independent Partners',
+    subject:'PIP Week 3 check-in — [TL NAME] — one week to go',
+    body:`[FIRST NAME],
+
+Final week before formal review. Written record, [DATE].
+
+THREE-WEEK TREND
+Team visits: Wk1 [X] / Wk2 [X] / Wk3 [X] (target: 10+/rep)
+CRM compliance: Wk1 [X]% / Wk2 [X]% / Wk3 [X]%
+1:1s: Wk1 [X] / Wk2 [X] / Wk3 [X] of [Y]
+
+WHERE YOU STAND
+[State it plainly — see week 3 assessment guidance. Do not leave them uncertain about where the review is heading.]
+
+FINAL WEEK: [What must happen for a positive outcome]
+Overall: [ON TRACK / CONCERN / NOT IMPROVING]
+
+Grant`
+  },
+  {
+    title:'PIP follow-up — Week 1 (rep)',
+    type:'manager',
+    to:'[rep NAME]',
+    from:'[TL / GRANT]',
+    subject:'PIP Week 1 check-in — [rep NAME]',
+    body:`[FIRST NAME],
+
+Week 1 complete. Written record of today's check-in, [DATE].
+
+HUBSPOT DATA — WEEK 1
+Venue visits: [X] (target: 10+)
+Deals signed to date: [X] of [Y] target
+CRM compliance: [X]% (target: 100%)
+Open deals with no activity 7+ days: [X] (target: 0)
+Deal score: [X]% on closes (target: 40%+)
+
+WHAT IMPROVED: [Specific and honest]
+WHAT STILL NEEDS TO CHANGE: [Specific]
+YOUR COMMITMENT FOR NEXT WEEK: [Direct quote of rep commitment]
+
+Overall: [ON TRACK / CONCERN / NOT IMPROVING]
+Next check-in: [DATE]
+
+[YOUR NAME]`
+  },
+  {
+    title:'PIP follow-up — Week 2 (rep)',
+    type:'manager',
+    to:'[rep NAME]',
+    from:'[TL / GRANT]',
+    subject:'PIP Week 2 check-in — [rep NAME]',
+    body:`[FIRST NAME],
+
+Week 2. Written record, [DATE].
+
+HUBSPOT — WEEK 2 VS WEEK 1
+Venue visits: [X] / [Y] (target: 10+)
+Deals signed: [X] total / [Y] last week
+CRM compliance: [X]% / [Y]%
+Stale deals: [X] / [Y] (target: 0)
+Deal score: [X]% / [Y]%
+
+MID-POINT ASSESSMENT
+[Option A — on track]: "Numbers are moving. Keep this going."
+[Option B — concern]: "Some improvement but the pace is not enough. You need [SPECIFIC] in the next two weeks to pass the review."
+[Option C — not improving]: "I need to be direct with you. The numbers have not changed. I want to be honest about what this means at the week 4 review if it continues."
+
+COMMITMENT FOR WEEK 3: [rep specific]
+Overall: [ON TRACK / CONCERN / NOT IMPROVING]
+
+[YOUR NAME]`
+  },
+  {
+    title:'PIP follow-up — Week 3 (rep)',
+    type:'manager',
+    to:'[rep NAME]',
+    from:'[TL / GRANT]',
+    subject:'PIP Week 3 — one week to go — [rep NAME]',
+    body:`[FIRST NAME],
+
+One week left before the formal review. Written record, [DATE].
+
+THREE-WEEK PICTURE
+Venue visits: Wk1 [X] / Wk2 [X] / Wk3 [X] (target: 10+)
+Deals signed: Wk1 [X] / Wk2 [X] / Wk3 [X] (cumulative target: 6)
+CRM: Wk1 [X]% / Wk2 [X]% / Wk3 [X]%
+Deal score: Wk1 [X]% / Wk2 [X]% / Wk3 [X]%
+
+WHERE YOU STAND
+[Be direct. Tell them plainly what the week 4 review will find if the current trajectory holds. Do not leave them uncertain.]
+
+TO PASS THE REVIEW NEXT WEEK YOU NEED: [Specific targets for week 4]
+
+I am here to support you this week. Come to me if you need anything.
+Next check-in: [DATE — formal review]
+
+[YOUR NAME]`
+  },
+  {
+    title:'Invite to formal meeting — UK employment law',
+    type:'manager',
+    to:'[EMPLOYEE NAME]',
+    from:'[YOUR NAME]',
+    subject:'Invitation to formal meeting — [DATE]',
+    body:`NOTE: This template is guidance only — not legal advice. Involve HR before sending. Follow your company disciplinary procedure and the ACAS Code of Practice on Disciplinary and Grievance Procedures.
+
+[FIRST NAME],
+
+I am writing to invite you to a formal meeting to discuss concerns about your [performance / conduct — select one] at TGTG.
+
+MEETING DETAILS
+Date: [DATE]
+Time: [TIME]
+Location: [LOCATION / video call link]
+Expected duration: approximately [X hour(s)]
+
+PURPOSE
+The meeting will address [SPECIFIC CONCERNS — e.g. "your performance against the targets agreed in your performance improvement plan, which began on [DATE]" OR "concerns relating to your conduct on [DATE/S] involving [BRIEF FACTUAL DESCRIPTION]"].
+
+This is a formal meeting and may result in a formal outcome, which could include [a written warning / a final written warning / dismissal — include only the outcome applicable to this situation].
+
+YOUR RIGHT TO BE ACCOMPANIED
+Under the Employment Relations Act 1999, you have the legal right to be accompanied at this meeting by either:
+— A trade union representative (an official employed by a trade union), or
+— A work colleague of your choice.
+
+Please notify [HR CONTACT] by [DATE] if you wish to bring someone and confirm their name.
+
+WHAT TO BRING
+You may bring any documents or evidence you wish to refer to. You will have a full opportunity to respond to the concerns raised.
+
+RESCHEDULING
+If you are unable to attend on [DATE], contact [HR CONTACT] immediately so we can rearrange. The meeting may proceed in your absence if you unreasonably refuse to attend.
+
+Questions? Contact [HR CONTACT] at [EMAIL].
+
+[YOUR NAME]
+[JOB TITLE]`
+  },
+  {
+    title:'Dismissal letter — after failing PIP',
+    type:'manager',
+    to:'[EMPLOYEE NAME]',
+    from:'[AUTHORISED SIGNATORY]',
+    subject:'Outcome of formal review — [DATE]',
+    body:`CRITICAL: This template is guidance only and is NOT legal advice. It must not be sent without review by a qualified HR professional or employment solicitor. Unfair dismissal claims can result from procedural failures. Ensure you have followed your company disciplinary procedure and the ACAS Code of Practice throughout.
+
+[FIRST NAME],
+
+I am writing to confirm the outcome of the formal review meeting held on [DATE], attended by [NAMES].
+
+OUTCOME: DISMISSAL
+
+Having considered all information presented at the formal review meeting, and having taken into account your performance during the four-week performance improvement plan which commenced on [DATE], I have concluded that your employment with TGTG should end.
+
+THE BASIS FOR THIS DECISION
+Despite the support provided during the performance improvement plan, the required standard of performance was not achieved. The specific targets and outcomes are as follows:
+
+[LIST EACH TARGET WITH THE ACTUAL RESULT PULLED FROM HUBSPOT — e.g.:
+— Venue visits: averaged [X] per week (target: 10+) — NOT MET
+— Deals signed: [X] quality-gated deals (target: 6) — NOT MET
+— CRM compliance: [X]% (target: 100%) — NOT MET]
+
+We have considered whether there are alternatives to dismissal, including a further extension of the improvement plan. We do not consider this to be appropriate because [REASON — e.g. there has been insufficient improvement over the review period to suggest that further time would result in the required standard being reached].
+
+YOUR NOTICE PERIOD
+Your employment will end on [DATE — statutory minimum or contractual notice, whichever is greater].
+
+[Select applicable:]
+You will work your notice period until [DATE].
+You will receive payment in lieu of notice in accordance with your contract.
+
+FINAL MATTERS
+— [Holiday entitlement outstanding: [X] days to be [paid out / taken during notice]]
+— [Return of company property: [ITEMS] must be returned by [DATE]]
+— [Final payslip will be processed on [DATE]]
+— [Any references: state company policy]
+
+YOUR RIGHT TO APPEAL
+You have the right to appeal this decision in writing to [HR DIRECTOR / NAMED SENIOR PERSON, NOT YOUR LINE MANAGER] within [5] working days of receiving this letter. Your appeal should set out the grounds on which you are appealing.
+
+We recognise this is difficult news. We wish you well.
+
+[AUTHORISED NAME]
+[JOB TITLE]`
+  },
+  {
+    title:'PIP successfully passed',
+    type:'manager',
+    to:'[EMPLOYEE NAME]',
+    from:'[TL / GRANT]',
+    subject:'Performance improvement plan — successfully completed',
+    body:`[FIRST NAME],
+
+I am writing to confirm that your performance improvement plan, which commenced on [DATE], has been successfully completed.
+
+Over the four-week review period, you met the targets we agreed:
+
+[LIST EACH TARGET AND RESULT — e.g.:
+Venue visits: [X] per week average (target: 10+) ✓
+Deals signed: [X] quality-gated (target: 6) ✓
+CRM compliance: [X]% (target: 100%) ✓
+Deal score: [X]% (target: 40%+) ✓]
+
+I want to acknowledge that this was not an easy period and that the improvement you have shown required real effort. That matters and I want to say it clearly.
+
+GOING FORWARD
+The performance improvement plan is now formally closed. The standards you met during this period are the standards the role requires. They do not change because the formal process has ended.
+
+[CHOOSE ONE:]
+"I am pleased we got through this together. Let us build on it."
+"The work you have put in is clear. I am looking forward to working with you from here."
+
+A copy of this letter will be placed on your HR file alongside the documentation from the review period.
+
+Come and speak with me if you have any questions.
+
+[YOUR NAME]`
+  }
+];
+
+var QUOTES = [
+  
+  {text:"Sales is the art of getting people to want things they already need.", author:"Someone who closed the deal", type:"funny"},
+  {text:"Every morning I get up and look through the Forbes list of the richest people in America. If I'm not there, I go to work.", author:"Robert Orben", type:"funny"},
+  {text:"The secret of getting ahead is getting started. The secret of getting started is breaking your complex overwhelming tasks into small manageable tasks, and then starting on the first one.", author:"Mark Twain (who clearly never worked in sales)", type:"funny"},
+  {text:"I have never worked a day in my life without selling. If I believe in something, I sell it, and I sell it hard.", author:"Estée Lauder", type:"inspirational"},
+  {text:"You don't close a sale, you open a relationship if you want to build a long-term successful enterprise.", author:"Patricia Fripp", type:"inspirational"},
+  {text:"The difference between a successful person and others is not a lack of strength, not a lack of knowledge, but rather a lack of will.", author:"Vince Lombardi", type:"inspirational"},
+  {text:"Coffee is for closers. But water is free, so maybe just start with the conversation.", author:"Unknown rep, 2023", type:"funny"},
+  {text:"Our greatest weakness lies in giving up. The most certain way to succeed is always to try just one more time.", author:"Thomas Edison", type:"inspirational"},
+  {text:"Sales is not about selling anymore. It's about building trust and educating.", author:"Siva Devaki", type:"inspirational"},
+  {text:"Nobody counts the number of ads you run; they just remember the impression you make.", author:"Bill Bernbach", type:"funny"},
+  {text:"The best salespeople are the ones who genuinely believe in what they're selling. If you don't believe in it, the customer can smell it.", author:"Grant Cardone", type:"inspirational"},
+  {text:"I never dreamed about success. I worked for it.", author:"Estée Lauder (again, because she earned it)", type:"funny"},
+  {text:"If you're not taking care of your customer, your competitor will.", author:"Bob Hooey", type:"inspirational"},
+  {text:"Statistics suggest that when customers complain, business owners and managers ought to get on their knees and thank them.", author:"Marilyn Suttle", type:"funny"},
+  {text:"Make a customer, not a sale.", author:"Katherine Barchetti", type:"inspirational"},
+  {text:"Every sale has five basic obstacles: no need, no money, no hurry, no desire, no trust.", author:"Zig Ziglar", type:"inspirational"},
+  {text:"The more you know about the customer, the better you can serve them. The better you serve them, the more they buy. The more they buy, the more you earn. It's called doing your job.", author:"Anonymous Team Lead who has definitely been on a few call-alongs", type:"funny"},
+  {text:"A goal without a plan is just a wish.", author:"Antoine de Saint-Exupéry (who was a pilot, not a rep, but still)", type:"funny"},
+];
+
+var FOOD_QUOTES = [
+  "🍕 Our job is to make sure restaurants are full. Not on Friday. On Tuesday. The chef's already there, the lights are on, and the bolognese doesn't care what day it is.",
+  "🥩 A Michelin star restaurant on a Tuesday evening with empty tables is still just an empty room. We fix that.",
+  "🍣 You cannot eat ambience. Our venues need covers, not compliments.",
+  "🍷 The best meal you ever had was probably on a quiet Tuesday when you almost stayed home. TGTG makes that happen.",
+  "🧑‍🍳 Every chef on a slow Tuesday is doing prep for imaginary customers. We make those customers real.",
+  "🍝 Some people fill tables with reservations. We fill them with diners who had no plans until TGTG changed their mind.",
+  "☕ Great restaurants deserve full rooms, not half-empty Wednesdays. That is what we do.",
+  "🥂 The restaurant you love most in your city has a Tuesday problem. We are the solution.",
+  "🍔 An empty table earns the venue exactly £0. A rep who walks in today changes that number.",
+  "🎂 We are not in the discount business. We are in the 'Tuesday at 7pm was dead and now it is not' business.",
+];
+
+var SLACK_OPENERS = [
+  "🌅 Good morning. The venues aren't going to sign themselves. Let's go.",
+  "☕ Coffee. Calendar. Close. In that order. Good morning team.",
+  "📊 New week. Clean slate. Same targets. Different results. Let's go.",
+  "🔥 Monday. The operators who find us today will still be on the platform in two years. That's why this week matters.",
+  "⚡ Quick reminder: every empty table earns a venue £0. Your visit today is the most valuable call they'll take all week.",
+  "🎯 One visit at a time. One conversation at a time. One close at a time. Have a strong week.",
+  "💪 The difference between last week and this week is what you do in the next five minutes.",
+];
+
+var MANUALS = [
+  {
+    title:'MEDDIC / MEDDICC — Field Sales Guide',
+    desc:'A practical MEDDIC guide written for hospitality field sales. Every element with TGTG examples.',
+    content:`EATCLUB UK — MEDDIC FIELD GUIDE
+For Reps and Team Leads
+
+WHAT IS MEDDIC?
+MEDDIC is a qualification framework. It tells you whether a deal is real. Not whether the operator was friendly. Not whether they said "sounds interesting." Whether the deal will actually close.
+
+Most phone reps skip MEDDIC and rely on how the conversation felt. MEDDIC replaces feeling with evidence.
+
+━━━━━━━━━━━━━━━━━━━━━
+M — METRICS
+━━━━━━━━━━━━━━━━━━━━━
+What it means: Have you quantified the value to this operator in specific numbers?
+
+The question to answer: What does a quiet Tuesday evening cost this venue, and what does it earn them with TGTG?
+
+How to do it on the phones:
+1. Ask for their average spend per table.
+2. Count the covers they typically have on a Tuesday at 6pm (or show them their Popular Times).
+3. Do the maths with them: "If those 8 covers are empty at £55 each, that's £440 in revenue you are not earning. Over six months, that's £10,000+."
+4. Then show what TGTG generates: "If we fill those 8 covers through TGTG, you keep £38 per cover after our commission. That's £1,200 a month on nights you currently earn nothing."
+
+Example in use:
+"Your Popular Times shows Tuesday at 7pm at roughly 30% capacity. At your average spend of £60 per head and 40 covers, that's around £720 you could be generating on a night that currently earns almost nothing. Over six months, that's £18,000+ in found revenue."
+
+Red flag: If you cannot do the maths for this specific venue, you have not earned the right to pitch.
+
+━━━━━━━━━━━━━━━━━━━━━
+E — ECONOMIC BUYER
+━━━━━━━━━━━━━━━━━━━━━
+What it means: Have you confirmed who can actually sign, not just who you are talking to?
+
+The question to answer: Is the person in front of me the decision maker?
+
+How to do it on the phones:
+Ask directly: "Is this a decision you can make, or does someone else need to be involved?"
+
+If they are not the DM:
+— "Who would need to be involved before we can move forward?"
+— "What would you need to see before you could take this to them?"
+— "When would be the right time for me to meet them?"
+
+If they are the DM:
+— Great. But confirm it. "So you are the person who would sign off on this?" Let them say yes.
+
+Red flag: A deal where you have never spoken to the economic buyer is not a deal. It is a conversation.
+
+━━━━━━━━━━━━━━━━━━━━━
+D — DECISION CRITERIA
+━━━━━━━━━━━━━━━━━━━━━
+What it means: Do you understand what matters most to this operator when making this decision?
+
+Common decision criteria in hospitality:
+— Brand protection: "Will this attract the right customers or the wrong ones?"
+— Simplicity: "How much work is this for my team?"
+— Control: "Can I turn it on and off?"
+— Revenue: "Will this actually generate money?"
+— Trust: "Do I believe you will deliver what you say?"
+
+How to find it: Ask. "What would need to be true for you to say yes to this?"
+
+Then frame TGTG against their criteria, not against a generic pitch.
+
+━━━━━━━━━━━━━━━━━━━━━
+D — DECISION PROCESS
+━━━━━━━━━━━━━━━━━━━━━
+What it means: Do you know how this operator will make the decision and what the next concrete step is?
+
+Not "I'll think about it." A specific commitment:
+— "Can we get on a call Thursday with your business partner?"
+— "I'll send the proposal by end of day. When can you get back to me with a decision?"
+— "Let's set a time to walk through the portal set-up. When works this week?"
+
+Red flag: Leaving without a specific next step with a date attached means you have not closed the meeting.
+
+━━━━━━━━━━━━━━━━━━━━━
+I — IMPLICATE PAIN
+━━━━━━━━━━━━━━━━━━━━━
+What it means: Has the operator articulated their own problem — in their own words?
+
+This is the most powerful element. If the operator says "Tuesday is genuinely dead for us" before you say it, the conversation has fundamentally changed. They are selling themselves.
+
+How to create the conditions:
+— "What does a typical Tuesday evening look like for you?"
+— "When you look at your quietest sessions, what does that feel like?"
+— "Have you tried anything to drive midweek covers before?"
+
+When they name it: stop. Let it land. Then say: "That is exactly what TGTG was built to solve."
+
+Do not tell them what their problem is. Help them say it themselves.
+
+━━━━━━━━━━━━━━━━━━━━━
+C — CHAMPION
+━━━━━━━━━━━━━━━━━━━━━
+(The extra C in MEDDICC)
+What it means: Is there someone inside the business who wants TGTG to happen and will advocate for it internally?
+
+Most relevant in: multi-site operators, group accounts, venues where you meet a manager but the owner signs off.
+
+How to identify: "If this is a decision that needs to go above you, who would be the right person to introduce me to? And what would you need to say to them to set up that conversation?"
+
+The champion is not a neutral party. They have a reason to want this to work. Find that reason and use it.`,
+    sections:['Metrics','Economic Buyer','Decision Criteria','Decision Process','Implicate Pain','Champion']
+  },
+  {
+    title:'SPIN Selling — Field Sales Guide',
+    desc:'SPIN written for hospitality cold dials and follow-up visits. The four question types with restaurant examples.',
+    content:`EATCLUB UK — SPIN SELLING FIELD GUIDE
+For Reps and Team Leads
+
+WHAT IS SPIN?
+SPIN is a questioning framework developed by Neil Rackham. It moves a prospect from awareness to action through four types of questions. The key insight: in complex sales, the best salespeople ask more questions than they make statements.
+
+For TGTG, SPIN works because operators make better decisions when they reach the conclusion themselves.
+
+━━━━━━━━━━━━━━━━━━━━━
+S — SITUATION QUESTIONS
+━━━━━━━━━━━━━━━━━━━━━
+What they do: Establish the facts about the operator's current situation.
+When to use: At the start of the conversation.
+Risk: Asking too many. One or two, then move on.
+
+Examples for TGTG:
+— "How long have you been operating here?"
+— "How busy are you typically on a Tuesday evening?"
+— "What does your quietest session of the week look like?"
+— "Are you on any delivery or booking platforms at the moment?"
+— "How do you typically drive customers in on quieter nights?"
+
+What you are listening for: The gap between their busy nights and their quiet nights.
+
+━━━━━━━━━━━━━━━━━━━━━
+P — PROBLEM QUESTIONS
+━━━━━━━━━━━━━━━━━━━━━
+What they do: Surface the difficulties and dissatisfaction in the current situation.
+When to use: After situation questions. Help them name the problem.
+
+Examples for TGTG:
+— "Is that typical — quiet on Tuesdays?"
+— "How does it feel when you have got the team in and the covers are not there?"
+— "What have you tried to do about it?"
+— "Has anything worked?"
+— "If you are on [competitor platform], are you happy with what it generates for you on quiet nights?"
+
+What you are listening for: Frustration. Resignation. Anything that signals they know it is a problem but have not solved it.
+
+━━━━━━━━━━━━━━━━━━━━━
+I — IMPLICATION QUESTIONS
+━━━━━━━━━━━━━━━━━━━━━
+What they do: Help the operator feel the size of the problem. Not you telling them — them realising it.
+When to use: After the problem is established. The most important and most underused question type.
+
+Examples for TGTG:
+— "If those tables stay empty on Tuesday evenings, what does that cost you over the course of a year?"
+— "If you could fill just half of those covers on your three quietest nights, what would that change?"
+— "Does it affect the team — having quiet shifts where they are not earning tips?"
+— "When you think about your long-term business, what is the risk of not solving this?"
+
+What you are listening for: The operator calculating the cost themselves. Once they say a number out loud, the conversation has changed.
+
+━━━━━━━━━━━━━━━━━━━━━
+N — NEED-PAYOFF QUESTIONS
+━━━━━━━━━━━━━━━━━━━━━
+What they do: Get the operator to articulate what solving the problem would mean for them — in their words.
+When to use: After implication. Just before you introduce the solution.
+
+Examples for TGTG:
+— "If we could reliably fill those Tuesday covers with paying customers, what would that mean for the business?"
+— "Would it help if you could control exactly when and how many of these offers go out?"
+— "If there was a way to bring in new customers on quiet nights without touching your brand or your pricing on busy nights — would that be worth exploring?"
+
+What you are listening for: "Yes." Or anything close to it. They have now articulated the value of the solution in their own words. You have not told them what they need. They told you.
+
+THEN YOU PRESENT.
+Not before. The sequence matters. Most phone reps present too early. Earn the right to pitch by going through SPIN first.`,
+    sections:['Situation','Problem','Implication','Need-Payoff']
+  },
+  {
+    title:'The Challenger Sale — Field Sales Guide',
+    desc:'Teach, Tailor, Take Control. The framework that consistently outperforms relationship selling in complex B2B environments.',
+    content:`EATCLUB UK — CHALLENGER SALE FIELD GUIDE
+For Reps and Team Leads
+
+WHAT IS THE CHALLENGER SALE?
+Research by CEB (now Gartner) found that the best B2B salespeople are not relationship builders. They are Challengers — they teach the customer something new, tailor their message to what that specific customer cares about, and take control of the sale.
+
+In hospitality, where operators are busy, sceptical, and pitched to constantly, the Challenger approach works because it creates value before asking for anything.
+
+━━━━━━━━━━━━━━━━━━━━━
+TEACH — Reframe how they see their business
+━━━━━━━━━━━━━━━━━━━━━
+The Teach moment changes how the operator thinks about their situation.
+
+NOT: "TGTG is a marketplace that helps you fill quiet tables."
+YES: "Most operators I speak to focus on getting more customers on Friday. The ones who significantly increase their revenue year-on-year focus on Tuesday."
+
+The TGTG Teach moments:
+
+1. The empty cover cost
+"A full Friday earns you £X per cover. An empty Tuesday earns you £0. Your kitchen is on, your team is there, your fixed costs are running — but that cover earns nothing. TGTG's sole purpose is to make that cover earn something."
+
+2. The Popular Times insight
+[Pull up their Google listing on your phone]
+"I looked you up before I came. This is your Popular Times. See Tuesday at 7pm? That is 30% of your Friday capacity. On a Friday you are turning people away. On Tuesday you are paying your team to stand around."
+
+3. The platform misconception
+"Most operators think TGTG is like TheFork — a discount platform that damages the brand. The operators who succeed with us understand it differently. You are not discounting your brand. You are pricing an empty table."
+
+━━━━━━━━━━━━━━━━━━━━━
+TAILOR — Connect to what this operator cares about
+━━━━━━━━━━━━━━━━━━━━━
+The same Teach will not land for every operator. A Michelin-listed operator cares about brand. A new independent cares about survival. A group CEO cares about margin across the portfolio.
+
+Before you dial, know:
+— What type of operator are they? (Quality-led, volume-led, brand-protective?)
+— What is their most obvious problem? (Quiet midweek? New to the area? On a platform that is not working?)
+— What will they object to? (Brand? Discounting? Complexity? Loss of control?)
+
+Then lead with the Teach that hits their specific pain, not a generic one.
+
+For a brand-protective operator:
+"You control the window, the depth, and the cover cap. Friday regulars never see this offer. It exists only on Tuesday from 5:30 to 7pm. The customers it attracts are new to your restaurant — not your existing ones."
+
+For a cost-conscious operator:
+"You are already paying for the kitchen, the team, and the utilities on Tuesday. Every cover you add on that night is almost pure margin. We are not asking you to invest — we are showing you how to monetise what you already have."
+
+━━━━━━━━━━━━━━━━━━━━━
+TAKE CONTROL — Lead the sale, do not follow it
+━━━━━━━━━━━━━━━━━━━━━
+The Challenger does not ask "what would you want the offer to look like?" The Challenger proposes.
+
+NOT: "What discount were you thinking of?"
+YES: "Based on your quiet periods and your average spend, I would recommend a 25% Early Bird offer on Tuesday and Wednesday from 5:30 to 7pm, capped at 8 covers. That is enough to test the model without any risk to your full-price inventory."
+
+Handling resistance without backing down:
+
+When they say "I need to think about it":
+"Of course. What specifically would you want to be clearer on before you decide? I would rather answer that now than leave you with an open question."
+
+When they say "it's not the right time":
+"I hear that. Can I ask — what would make it the right time? I want to make sure I understand what would need to be true for this to make sense."
+
+When they say "we tried something like this before":
+"Tell me more about that. What did you try, and what went wrong? I want to understand whether TGTG would have the same issue."
+
+When they push back on the discount:
+"You are not discounting the restaurant. You are pricing an empty table that currently earns you zero. There is no Friday customer who knows this exists. This is a new customer, in a window you were going to write off anyway."
+
+━━━━━━━━━━━━━━━━━━━━━
+PUTTING IT TOGETHER
+━━━━━━━━━━━━━━━━━━━━━
+A Challenger visit in TGTG:
+
+1. Open with insight (Teach): Pull up Popular Times. Name the Tuesday problem. Let them react.
+2. Connect to their business (Tailor): "This is particularly relevant for you because [specific observation]."
+3. Create tension: "The operators who solve this problem significantly outperform those who do not — and the window to be first in this territory is closing."
+4. Propose specifically (Take Control): "Here is what I would recommend for you — [specific offer structure]."
+5. Handle resistance: Do not back down immediately. Acknowledge, probe, reframe.
+6. Close the meeting: Get a committed next step. Not "I'll think about it." A date.`,
+    sections:['Teach','Tailor','Take Control','Putting it together']
+  },
+];
+
+function renderEmails() {
+  var html = '';
+  EMAILS.forEach(function(e,i){
+    html += buildEmailCard(e, i, 'email');
+  });
+  document.getElementById('email-list').innerHTML = html;
+}
+
+function renderManagerEmails() {
+  var html = '';
+  MANAGER_EMAILS.forEach(function(e,i){
+    html += buildEmailCard(e, i+100, 'manager');
+  });
+  document.getElementById('manager-list').innerHTML = html;
+}
+
+function buildEmailCard(e, id, type) {
+  var typeCls = type==='manager' ? 'type-manager' : 'type-email';
+  var typeLabel = type==='manager' ? 'Manager' : 'Email';
+  var bodyHighlighted = e.body.replace(/\[([^\]]+)\]/g, '<span class="placeholder">[$1]</span>');
+  return '<div class="email-card" id="ecard-'+id+'">' +
+    '<div class="ec-head">' +
+    '<span class="ec-title">'+e.title+'</span>' +
+    '<span class="ec-type '+typeCls+'">'+typeLabel+'</span>' +
+    '</div>' +
+    '<div class="ec-meta">' +
+    '<span class="ec-field"><strong>To:</strong> '+e.to+'</span>' +
+    '<span class="ec-field"><strong>From:</strong> '+e.from+'</span>' +
+    '<span class="ec-field"><strong>Subject:</strong> '+e.subject+'</span>' +
+    '</div>' +
+    '<div class="ec-body" id="ebody-'+id+'">'+bodyHighlighted+'</div>' +
+    '<div class="ec-footer">' +
+    '<button class="copy-btn" id="copybtn-'+id+'" onclick="copyEmail('+id+')">Copy email</button>' +
+    '</div>' +
+    '</div>';
+}
+
+function copyEmail(id) {
+  var allItems = EMAILS.concat(MANAGER_EMAILS);
+  var item;
+  if(id >= 100) item = MANAGER_EMAILS[id-100];
+  else item = EMAILS[id];
+  var text = 'To: '+item.to+'\nFrom: '+item.from+'\nSubject: '+item.subject+'\n\n'+item.body;
+  navigator.clipboard.writeText(text).then(function(){
+    var btn = document.getElementById('copybtn-'+id);
+    btn.textContent = 'Copied ✓';
+    btn.className = 'copy-btn copied';
+    setTimeout(function(){ btn.textContent='Copy email'; btn.className='copy-btn'; }, 2000);
+  });
+}
+
+function renderSlack() {
+  var html = '';
+
+  
+  html += '<div style="margin-bottom:18px;"><div class="sec-title" style="font-size:13px;margin-bottom:10px;">Monday Morning Openers</div><div class="quotes-grid">';
+  SLACK_OPENERS.forEach(function(q,i){
+    html += '<div class="quote-card">';
+    html += '<div class="qc-text">'+q+'</div>';
+    html += '<button class="qc-copy" onclick="copyText(\''+q.replace(/'/g,"\\'")+'\',' + (i+200) + ')">Copy</button>';
+    html += '</div>';
+  });
+  html += '</div></div>';
+
+  
+  var funny = QUOTES.filter(function(q){return q.type==='funny';});
+  var inspo = QUOTES.filter(function(q){return q.type==='inspirational';});
+
+  html += '<div style="margin-bottom:14px;"><div class="sec-title" style="font-size:13px;margin-bottom:10px;">Funny Sales Quotes</div><div class="quotes-grid">';
+  funny.forEach(function(q,i){
+    var full = '"'+q.text+'" — '+q.author;
+    html += '<div class="quote-card">';
+    html += '<div class="qc-text">"'+q.text+'"</div>';
+    html += '<div class="qc-author">— '+q.author+'</div>';
+    html += '<button class="qc-copy" onclick="copyText(\''+full.replace(/'/g,"\\'")+'\',' + (i+300) + ')">Copy</button>';
+    html += '</div>';
+  });
+  html += '</div></div>';
+
+  html += '<div><div class="sec-title" style="font-size:13px;margin-bottom:10px;">Inspirational Quotes</div><div class="quotes-grid">';
+  inspo.forEach(function(q,i){
+    var full = '"'+q.text+'" — '+q.author;
+    html += '<div class="quote-card">';
+    html += '<div class="qc-text">"'+q.text+'"</div>';
+    html += '<div class="qc-author">— '+q.author+'</div>';
+    html += '<button class="qc-copy" onclick="copyText(\''+full.replace(/'/g,"\\'")+'\',' + (i+400) + ')">Copy</button>';
+    html += '</div>';
+  });
+  html += '</div></div>';
+
+  
+  html += '<div style="margin-top:20px;"><div class="sec-title" style="font-size:13px;margin-bottom:10px;">Food &amp; Restaurant Culture Drops</div><div class="quotes-grid">';
+  FOOD_QUOTES.forEach(function(q,i){
+    html += '<div class="quote-card"><div class="qc-text">'+q+'</div><button class="qc-copy" onclick="copyText(\''+q.replace(/'/g,"\\'")+'\','+( i+600)+')">Copy</button></div>';
+  });
+  html += '</div></div>';
+
+  document.getElementById('slack-content').innerHTML = html;
+}
+
+var copiedIds = {};
+function copyText(text, id) {
+  navigator.clipboard.writeText(text).then(function(){
+    var btn = document.querySelectorAll('.qc-copy')[id] || document.querySelector('[onclick*="'+id+'"]');
+    if(btn){ btn.textContent='Copied ✓'; setTimeout(function(){ btn.textContent='Copy'; },2000); }
+  });
+}
+
+function renderTraining() {
+  var html = '';
+  MANUALS.forEach(function(m,i){
+    html += '<div class="manual-card">';
+    html += '<div class="mc-head"><div><div class="mc-title">'+m.title+'</div><div style="font-size:12px;color:#444;margin-top:3px;">'+m.desc+'</div></div>';
+    html += '<button class="mc-download" onclick="downloadManual('+i+')">↓ Download</button></div>';
+    
+    html += '<div class="mc-body">';
+    var lines = m.content.split('\n').slice(0,30);
+    html += '<div style="font-size:12px;color:#555;line-height:1.8;font-family:Inter,sans-serif;padding:14px;">'+lines.join('\n')+'<br><br><em style="color:#333">... download for full guide</em></div>';
+    html += '</div></div>';
+  });
+  document.getElementById('training-content').innerHTML = html;
+}
+
+function downloadManual(i){
+  var m = MANUALS[i  ,
+  {
+    title:'Formal performance review — Team Lead',
+    type:'manager',
+    to:'[SALES MANAGER NAME]',
+    from:'Head of Independent Partners — Head of Independent Partners',
+    subject:'Formal performance review — [TL NAME] — [DATE]',
+    body:`[FIRST NAME],
+
+⚠ NOTE TO USER: This template must be reviewed by your HR team before sending. Follow the ACAS Code of Practice and your company disciplinary procedure throughout.
+
+I am writing to confirm the outcomes of your formal performance review meeting held on [DATE].
+
+This letter constitutes a formal record of that meeting and the performance improvement plan agreed between us.
+
+PERFORMANCE CONCERNS IDENTIFIED
+
+Over the review period [DATE] to [DATE], the following performance gaps have been identified against the standards expected of a Team Lead at TGTG:
+
+1. Team activity — your team's prospect call count averaged [X] per rep per week against a target of 10+. This has been below standard for [X] consecutive weeks.
+2. Deal quality — the average deal score across your team was [X]%, against a target of 50%+. [X]% of closes in this period scored below 40.
+3. CRM compliance — team-wide CRM compliance averaged [X]%, against a required standard of 100%.
+4. Coaching cadence — weekly 1:1s with phone reps were not consistently held during [PERIOD]. Documented coaching notes were not filed as required.
+5. [ADD ANY ADDITIONAL SPECIFIC CONCERNS]
+
+IMPROVEMENT PLAN
+
+The following measurable targets must be met by [REVIEW DATE — typically 4 weeks]:
+
+— Team prospect calls: 10+ per rep per week, every week, evidenced in HubSpot
+— Team deal score average: above 45% on all closes during the review period
+— CRM compliance: 100% team-wide by end of week 1 and maintained
+— Weekly 1:1s: all phone reps to have a logged 1:1 with coaching notes by Friday each week
+— [ADDITIONAL SPECIFIC TARGET]
+
+Progress will be reviewed weekly. I will meet with you every [DAY] at [TIME] during the review period.
+
+RIGHT TO BE ACCOMPANIED
+You have the right to be accompanied to any formal meetings during this process by a trade union representative or a colleague. Please let HR know if you wish to exercise this right.
+
+RIGHT OF APPEAL
+You have the right to appeal this decision within [5] working days of receiving this letter. Appeals should be submitted in writing to [HR CONTACT / SENIOR LEADER].
+
+This is a formal document. A copy will be placed on your HR file.
+
+Head of Independent Partners
+Head of Independent Partners`
+  },
+  {
+    title:'Formal performance review — rep',
+    type:'manager',
+    to:'[rep NAME]',
+    from:'[TL NAME] / Head of Independent Partners',
+    subject:'Formal performance review — [rep NAME] — [DATE]',
+    body:`[FIRST NAME],
+
+⚠ NOTE TO USER: Review with HR before sending. Follow ACAS Code of Practice throughout.
+
+I am writing to confirm the outcomes of your formal performance review meeting held on [DATE], attended by [NAMES PRESENT].
+
+PERFORMANCE CONCERNS
+
+Over the period [DATE] to [DATE], the following performance gaps have been identified:
+
+1. Deals signed: [X] deals signed against a target of [Y] over this period
+2. Deal score: average of [X]% against a required standard of 40%+
+3. CRM compliance: [X]% against a required standard of 100%
+4. Venue visits: [X] visits logged per week against a target of 10+
+5. Activation rate: [X]% of your 30-day closes are live and transacting, against a target of 70%+
+6. Stale deals: [X] deals with no activity for 14+ days at the time of this review
+
+IMPROVEMENT TARGETS — TRACKED AGAINST HUBSPOT
+
+The following targets must be met by [REVIEW DATE]:
+
+— 6 quality-gated deals signed (≥4.0 stars, offer confirmed against genuine quiet period)
+— CRM compliance at 100% every week — no visits to be logged retrospectively
+— 10+ prospect calls logged per week in HubSpot
+— Deal score of 40%+ on all new closes
+— Zero stale deals — every open deal with an activity within 7 days
+— [ADDITIONAL SPECIFIC TARGET]
+
+All metrics will be pulled directly from HubSpot. No manual reporting will substitute for HubSpot data.
+
+SUPPORT DURING THIS PERIOD
+— Weekly 1:1 with your Team Lead every [DAY] at [TIME]
+— Minimum [1] joint visit or call-along per week
+— Access to all coaching resources and training materials
+
+RIGHT TO BE ACCOMPANIED
+You are entitled to be accompanied by a trade union representative or a work colleague at any formal meetings during this process.
+
+RIGHT OF APPEAL
+You may appeal this decision in writing to [HR CONTACT] within [5] working days.
+
+This letter is a formal document. A copy will be placed on your HR file.
+
+[TL NAME]
+[Head of Independent Partners — Head of Independent Partners]`
+  },
+  {
+    title:'PIP Week 1 check-in — Manager',
+    type:'manager',
+    to:'[TL NAME]',
+    from:'Head of Independent Partners',
+    subject:'PIP Week 1 check-in — [TL NAME]',
+    body:`[FIRST NAME],
+
+Week 1 of your performance improvement plan is complete. This is the written record of our check-in meeting today.
+
+METRICS FROM HUBSPOT — WEEK 1
+Team prospect calls (target: 10+ per rep): [PASTE DATA PER rep]
+CRM compliance (target: 100%): [X]%
+1:1s held with coaching notes filed: [X] of [Y] phone reps
+Deal score on closes this week: [X]%
+
+WHAT IMPROVED
+[Specific — what changed this week vs before the review. Name it."]
+
+WHAT STILL NEEDS TO CHANGE
+[Specific — which targets are not yet being met. Which phone reps did not have their 1:1. What was filed late.]
+
+AGREED FOR NEXT WEEK
+[SPECIFIC COMMITMENT FROM TL — e.g. "All outstanding 1:1 coaching notes filed by Tuesday" / "Ride-along with [rep NAME] on Thursday"]
+
+Overall assessment: [ON TRACK / SOME PROGRESS — CONCERNS REMAIN / NOT IMPROVING]
+
+Next check-in: [DATE/TIME]
+
+Grant`
+  },
+  {
+    title:'PIP Week 1 check-in — rep',
+    type:'manager',
+    to:'[rep NAME]',
+    from:'[TL / GRANT]',
+    subject:'PIP Week 1 check-in — [rep NAME]',
+    body:`[FIRST NAME],
+
+This is the written record of our Week 1 performance review check-in, held [DATE].
+
+YOUR HUBSPOT DATA — WEEK 1
+Venue visits logged: [X] (target: 10+)
+Deals signed: [X] (target: [Y] by week 4)
+CRM compliance: [X]% (target: 100%)
+Open deals with no activity 7+ days: [X] (target: 0)
+Deal score on this week's closes: [X]% (target: 40%+)
+
+WHAT IMPROVED THIS WEEK
+[Specific and honest — if nothing improved, say that clearly.]
+
+WHAT STILL NEEDS TO CHANGE
+[Specific. Which target is furthest from where it needs to be. What behaviour needs to change, not just what number needs to move.]
+
+WHAT YOU COMMITTED TO FOR NEXT WEEK
+[DIRECT QUOTE OR CLOSE PARAPHRASE OF WHAT THE rep SAID THEY WOULD DO]
+
+Overall trajectory: [ON TRACK / SOME PROGRESS / NOT IMPROVING]
+
+If you want to discuss anything about this process or this assessment, please come to me directly.
+
+Next check-in: [DATE/TIME]
+
+[YOUR NAME]`
+  },
+  {
+    title:'PIP Week 2 check-in — Manager',
+    type:'manager',
+    to:'[TL NAME]',
+    from:'Head of Independent Partners',
+    subject:'PIP Week 2 check-in — [TL NAME]',
+    body:`[FIRST NAME],
+
+Week 2 check-in. Two weeks in, two to go.
+
+HUBSPOT DATA — WEEK 2
+Team prospect calls: [DATA BY rep]
+CRM compliance: [X]% (was [Y]% last week)
+1:1s held with notes: [X] of [Y]
+Deal score: [X]%
+
+MOVEMENT SINCE WEEK 1
+[What has changed. Be specific — which metric moved, by how much, and why you believe it has or has not changed.]
+
+MID-POINT HONEST ASSESSMENT
+[At week 2 you should be seeing genuine movement if improvement is happening. If the numbers are the same or worse, name it directly: "Two weeks in, the metrics have not moved materially. I need to see clear progress in weeks 3 and 4."]
+
+AGREED FOR WEEK 3
+[ONE SPECIFIC COMMITMENT]
+
+Overall: [ON TRACK / CONCERN / NOT IMPROVING]
+
+Grant`
+  },
+  {
+    title:'PIP Week 2 check-in — rep',
+    type:'manager',
+    to:'[rep NAME]',
+    from:'[TL / GRANT]',
+    subject:'PIP Week 2 check-in — [rep NAME]',
+    body:`[FIRST NAME],
+
+Week 2 check-in. Written record of our meeting today, [DATE].
+
+HUBSPOT DATA — WEEK 2
+Venue visits: [X] (target: 10+, last week: [Y])
+Deals signed to date: [X] of [Y] target
+CRM compliance: [X]% (last week: [Y]%)
+Stale deals: [X] (last week: [Y])
+Deal score: [X]% (last week: [Y]%)
+
+PROGRESS SINCE WEEK 1
+[Honest assessment of trajectory. Is the number moving in the right direction? Is the pace of improvement enough to hit the target by week 4?]
+
+THE MID-POINT CONVERSATION
+[At week 2 you should be direct: "You are on track and I can see genuine change" OR "The numbers are improving but not fast enough — here is what needs to happen in the next two weeks" OR "I am not seeing the change I need to see. I want to be honest with you about where this is heading if nothing changes."]
+
+COMMITTED ACTION FOR WEEK 3
+[rep COMMITMENT — specific and behavioural]
+
+Overall trajectory: [ON TRACK / CONCERN / NOT IMPROVING]
+
+Next check-in: [DATE]
+
+[YOUR NAME]`
+  },
+  {
+    title:'PIP Week 3 check-in — Manager',
+    type:'manager',
+    to:'[TL NAME]',
+    from:'Head of Independent Partners',
+    subject:'PIP Week 3 check-in — [TL NAME] — final week before review',
+    body:`[FIRST NAME],
+
+One week to go before the formal review. This check-in matters.
+
+HUBSPOT DATA — WEEK 3
+Team prospect calls: [DATA]
+CRM compliance: [X]%
+1:1s held with notes: [X] of [Y]
+Deal score: [X]%
+
+THREE-WEEK TRAJECTORY
+[Show the trend — Week 1, Week 2, Week 3 numbers side by side. Is the trajectory pointing toward the target or away from it?]
+
+HONEST ASSESSMENT
+[By week 3 you have enough data to have a clear view. Share it plainly: "Based on the last three weeks, I believe you are on track to pass this review" OR "Based on the last three weeks, I am concerned that the required standard will not be met at the week 4 review. I am telling you now so there are no surprises."]
+
+FINAL WEEK PRIORITIES
+[What must happen in week 4 for this to be a positive outcome.]
+
+Grant`
+  },
+  {
+    title:'PIP Week 3 check-in — rep',
+    type:'manager',
+    to:'[rep NAME]',
+    from:'[TL / GRANT]',
+    subject:'PIP Week 3 check-in — [rep NAME] — one week to go',
+    body:`[FIRST NAME],
+
+One week left before the formal review. I want to be straight with you about where you stand.
+
+HUBSPOT DATA — WEEK 3
+Venue visits: [X] (target: 10+)
+Deals signed to date: [X] of [Y] target
+CRM compliance: [X]%
+Stale deals: [X]
+Deal score: [X]%
+
+THE THREE-WEEK PICTURE
+Week 1: [KEY METRIC]
+Week 2: [KEY METRIC]
+Week 3: [KEY METRIC]
+
+[IS THE TREND GOOD OR BAD — say it plainly]
+
+WHERE YOU STAND
+[Option A — on track]: "You have made genuine progress. If you keep this up through week 4, I will be recommending we close this review positively. Keep going."
+[Option B — concern]: "You have shown some improvement but the trajectory is not fast enough. To pass the week 4 review, you need to [SPECIFIC TARGET]. That is achievable in one week if you focus."
+[Option C — not improving]: "I need to be honest with you. The numbers have not moved in the way required. I want you to have every opportunity in this final week, but I also want you to understand what the week 4 review will mean if this continues."
+
+FINAL WEEK COMMITMENT
+[rep SPECIFIC COMMITMENT]
+
+I am here to support you through this week. Come to me if you need anything.
+
+[YOUR NAME]`
+  },
+  {
+    title:'PIP Week 4 — final review — Manager',
+    type:'manager',
+    to:'[TL NAME]',
+    from:'Head of Independent Partners',
+    subject:'PIP final review outcome — [TL NAME]',
+    body:`[FIRST NAME],
+
+⚠ NOTE TO USER: This is a formal document. Involve HR before sending, regardless of outcome.
+
+I am writing to confirm the outcome of your four-week performance improvement plan, which concluded on [DATE].
+
+FINAL HUBSPOT METRICS — FOUR-WEEK AVERAGE
+Team prospect calls: [X] per rep per week (target: 10+) — [MET / NOT MET]
+CRM compliance: [X]% (target: 100%) — [MET / NOT MET]
+1:1s with coaching notes: [X] of [Y] per week (target: all) — [MET / NOT MET]
+Deal score: [X]% (target: 45%+) — [MET / NOT MET]
+[ADDITIONAL METRICS]
+
+OUTCOME
+[USE APPROPRIATE CLOSING — See separate templates for dismissal, extension, or successful close]
+
+Right of appeal: [X] working days in writing to [HR CONTACT].
+
+Grant`
+  },
+  {
+    title:'PIP Week 4 — final review — rep',
+    type:'manager',
+    to:'[rep NAME]',
+    from:'[TL / GRANT]',
+    subject:'PIP final review outcome — [rep NAME]',
+    body:`[FIRST NAME],
+
+⚠ NOTE TO USER: Formal document. Involve HR before sending regardless of outcome.
+
+This letter confirms the outcome of your four-week performance improvement plan, which concluded on [DATE].
+
+FINAL HUBSPOT METRICS — FOUR-WEEK PERIOD
+Venue visits: [X] per week average (target: 10+) — [MET / NOT MET]
+Deals signed: [X] total (target: 6 quality-gated) — [MET / NOT MET]
+CRM compliance: [X]% average (target: 100%) — [MET / NOT MET]
+Deal score: [X]% average (target: 40%+) — [MET / NOT MET]
+Activation rate: [X]% (target: 70%+) — [MET / NOT MET]
+Stale deals at close: [X] (target: 0) — [MET / NOT MET]
+
+OUTCOME
+[USE APPROPRIATE CLOSING — see separate templates]
+
+Right of appeal: [X] working days in writing to [HR CONTACT].
+
+[YOUR NAME]`
+  },
+  {
+    title:'Invite to formal meeting — UK employment law',
+    type:'manager',
+    to:'[EMPLOYEE NAME]',
+    from:'[TL / GRANT]',
+    subject:'Invitation to formal meeting — [DATE]',
+    body:`⚠ IMPORTANT: This template is provided for guidance only. It is not legal advice. Before sending any formal meeting invitation, speak with your HR team. TGTG should follow its own disciplinary procedure and the ACAS Code of Practice on Disciplinary and Grievance Procedures.
+
+[FIRST NAME],
+
+I am writing to invite you to a formal meeting to discuss concerns regarding your [performance / conduct — choose one] at TGTG.
+
+The meeting will take place on [DATE] at [TIME], at [LOCATION / via video call]. The meeting will last approximately [X] hours.
+
+PURPOSE OF THE MEETING
+The purpose of this meeting is to discuss [SPECIFIC CONCERNS — e.g. "your performance against the targets set in your performance improvement plan, which commenced on [DATE]" OR "concerns regarding your conduct on [DATE/S] relating to [BRIEF FACTUAL DESCRIPTION]"].
+
+This is a formal meeting and may result in a formal outcome, including [a written warning / a final written warning / dismissal — include appropriate outcome for the situation].
+
+YOUR RIGHT TO BE ACCOMPANIED
+You have the legal right under the Employment Relations Act 1999 to be accompanied at this meeting by either:
+— A trade union representative (who may be an official employed by a trade union), or
+— A work colleague of your choice.
+
+Please let [HR CONTACT NAME] know by [DATE] if you would like to exercise this right and who will be accompanying you.
+
+PREPARATION
+You are welcome to bring any documents or evidence you wish to refer to during the meeting. You will have the opportunity to respond to the concerns raised and to ask questions.
+
+If you are unable to attend on [DATE], please contact [HR CONTACT] as soon as possible so that we can rearrange. Unreasonable refusal to attend may mean that the meeting proceeds in your absence.
+
+If you have any questions about this letter, please contact [HR CONTACT].
+
+[YOUR NAME]
+[JOB TITLE]`
+  },
+  {
+    title:'Dismissal letter — after failing PIP',
+    type:'manager',
+    to:'[EMPLOYEE NAME]',
+    from:'[AUTHORISED PERSON / HR]',
+    subject:'Outcome of formal review meeting — [DATE]',
+    body:`⚠ CRITICAL: This template is provided for guidance ONLY. It is not legal advice and must not be sent without review by a qualified HR professional or employment lawyer. Dismissal without following a fair process can result in claims of unfair dismissal. TGTG must follow its disciplinary procedure and the ACAS Code of Practice.
+
+[FIRST NAME],
+
+I am writing to confirm the outcome of the formal review meeting held on [DATE], which was attended by [NAMES].
+
+OUTCOME: DISMISSAL
+
+Following the conclusion of your performance improvement plan on [DATE], and having considered all the information presented in the review meeting, I have decided that your employment with TGTG will end.
+
+THE REASON FOR THIS DECISION
+Despite the support provided during your four-week performance improvement plan, which commenced on [DATE], and the targets agreed at that time, the required standard of performance has not been met. Specifically:
+
+[LIST THE SPECIFIC TARGETS THAT WERE NOT MET WITH DATA FROM HUBSPOT — e.g.:
+— Venue visits: averaged [X] per week against a target of 10+
+— Deals signed: [X] against a target of 6 quality-gated deals
+— CRM compliance: [X]% against a required standard of 100%]
+
+We have considered whether there are alternatives to dismissal, including further extension of the improvement plan. We do not consider this to be appropriate given [REASON — e.g. the lack of improvement over the review period / the fundamental nature of the performance gap].
+
+YOUR NOTICE PERIOD
+Your employment will end on [DATE]. [You will work your notice period of [X] weeks / You will receive payment in lieu of notice in accordance with your contract of employment.] [Your final date of employment is [DATE].]
+
+[OUTSTANDING MATTERS — e.g. holiday accrued, company property to return, final payslip timing]
+
+YOUR RIGHT TO APPEAL
+You have the right to appeal against this decision. If you wish to appeal, you must do so in writing to [HR DIRECTOR / AUTHORISED SENIOR PERSON] within [5] working days of receiving this letter. Your appeal letter should set out the grounds on which you are appealing.
+
+We recognise this is difficult news and we wish you well for the future.
+
+[AUTHORISED NAME]
+[JOB TITLE]`
+  },
+  {
+    title:'PIP passed — successful completion',
+    type:'manager',
+    to:'[EMPLOYEE NAME]',
+    from:'[TL / GRANT]',
+    subject:'Performance improvement plan — successfully completed',
+    body:`[FIRST NAME],
+
+I am writing to confirm that your performance improvement plan, which commenced on [DATE], has been successfully completed.
+
+Over the four-week review period, you have met the targets we agreed:
+
+[LIST EACH TARGET AND THE RESULT — e.g.:
+— Venue visits: averaged [X] per week ✓ (target: 10+)
+— Deals signed: [X] quality-gated deals ✓ (target: 6)
+— CRM compliance: [X]% ✓ (target: 100%)
+— Deal score: [X]% ✓ (target: 40%+)]
+
+I want to acknowledge that this was not an easy period and that the improvement you demonstrated required real effort. That matters.
+
+GOING FORWARD
+The performance improvement plan is now formally closed. The standards you have met during this period are the standards the role requires — they do not change because the formal review has ended. I expect you to maintain this level going forward.
+
+[OPTIONAL LINE — e.g. "I am pleased we got through this process and I look forward to working with you from this point." OR "The work you have put in over the last four weeks has been clear. Let's build on it."]
+
+If you have any questions about this letter or about next steps, please come and speak with me.
+
+A copy of this letter will be placed on your HR file, alongside the documentation from the review period.
+
+[YOUR NAME]`
+  }
+];
+  var blob = new Blob([m.content],{type:'text/plain'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'Too Good To Go_'+m.title.replace(/[^a-zA-Z0-9]/g,'_')+'.txt';
+  a.click();
+}
+
+
+
+function switchNav(sec, el){
+  document.querySelectorAll('.nav-tab').forEach(function(t){t.classList.remove('active');});
+  el.classList.add('active');
+  document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active');});
+  document.getElementById('sec-'+sec).classList.add('active');
+  document.getElementById('global-search').value='';
+  document.getElementById('no-results').style.display='none';
+}
+
+var OBJECTIONS = [
+  {obj:"We don't do discounts / we're not a discount brand",
+   counter:"You're not discounting your brand. You're pricing an empty table — a table that currently earns you nothing. Your Friday regulars never see this offer. It exists only on Tuesday from 5:30 to 7pm, capped at 8 covers. The customers it attracts are new to your restaurant, not your existing ones.",
+   tip:"Do not walk this back when they push. Hold the reframe. The moment you soften is the moment they stop believing it."},
+  {obj:"We're already on TheFork",
+   counter:"TheFork captures people who have already decided to go to a restaurant and are choosing where. TGTG captures people who hadn't decided to go out yet. Completely different demand pool. One replaces your existing marketing — the other generates covers that wouldn't have happened.",
+   tip:"Ask: 'Is TheFork performing well for you on Tuesday evenings?' The answer is almost always no. That gap is your opening."},
+  {obj:"We're already on Deliveroo / Just Eat",
+   counter:"Deliveroo generates delivery revenue. TGTG generates dine-in covers — your highest-margin business. We're not competing. A customer using Deliveroo is eating at home. A customer using TGTG is in your restaurant, ordering drinks, staying longer, and coming back.",
+   tip:"Frame it as complementary, not competitive. They're different occasions."},
+  {obj:"We're already on OpenTable / Resy",
+   counter:"OpenTable is a reservation tool — it captures demand that's already heading your way. TGTG is a demand generation tool — it creates demand that didn't exist yet. Your Wednesday evening isn't quiet because people can't book. It's quiet because they hadn't thought to go out.",
+   tip:"This is genuinely complementary. Don't be defensive about OpenTable. Acknowledge it and move to the demand generation point."},
+  {obj:"We tried something like this before and it didn't work",
+   counter:"Tell me more about that. What did you try and what went wrong? I want to make sure TGTG doesn't have the same problem.",
+   tip:"Do not defend TGTG before you understand what failed. Most of the time the failure was either wrong offer structure, wrong timing, or a platform that was fundamentally different. Ask first."},
+  {obj:"I need to speak to my business partner / owner / head office",
+   counter:"Of course. What would you need to feel confident recommending this to them? I'd rather give you what you need to have that conversation well than leave you with an open question.",
+   tip:"Identify the Champion. Ask: 'Is there anything that would make it easier to put this in front of them? Could we get 20 minutes with you both together?' Get the meeting in the diary before you leave."},
+  {obj:"We're too busy — we don't need more customers",
+   counter:"On Friday and Saturday, absolutely. TGTG only operates in your confirmed quiet periods. We're not here to fill your Friday — we're here to make Tuesday look more like Friday.",
+   tip:"Pull up their Popular Times before you say this. Show them Tuesday at 7pm on their own Google listing."},
+  {obj:"Won't customers expect the discount every time?",
+   counter:"No — and this is the important distinction. TGTG users discover you in a quiet moment. If they love the food, they come back for a birthday, an anniversary, Friday night with friends — at full price. That's how the best operators on our platform think about it: we're not a discount channel, we're a first visit channel.",
+   tip:"Reference a specific nearby venue if you can. 'The restaurant down the road has been on TGTG for six months. Their repeat visits are their highest-spend tables now.'"},
+  {obj:"The commission seems high",
+   counter:"Let's run the maths. A cover on a Tuesday that you wouldn't have had earns you around £[X] net after commission. That same cover earns you £0 if it stays empty. The commission only applies to incremental revenue — revenue that didn't exist before TGTG.",
+   tip:"Have the deal calculator ready. Do this on the spot with their specific numbers."},
+  {obj:"We're worried about the type of customer this attracts",
+   counter:"That's exactly why we quality-gate every venue on the platform. We turn venues away — anything below 4.0 stars on Google doesn't qualify. The diners on TGTG are looking for quality at a better moment. They're not looking for cheap.",
+   tip:"Name two or three nearby quality venues already on the platform. Social proof from operators they respect is more powerful than anything you can say."},
+  {obj:"Not right now — come back in a few months",
+   counter:"Of course. Can I ask — what would need to be different in a few months for this to make more sense? I'd rather understand that now than come back and find the same conversation.",
+   tip:"This is often a soft no. Probe gently. If it's genuine timing, get a specific date in the diary before you leave. 'I'll call you on the first Monday of [month].' If they won't commit to a date, the timing objection is probably something else."},
+  {obj:"Can I think about it? / Can you send me some information?",
+   counter:"Of course. What specifically would you want to be clearer on before you decide? I'd rather answer that now than send you something generic that doesn't address your actual question.",
+   tip:"'Can I think about it' usually means there's an unspoken objection. Ask: 'Is there anything holding you back that we haven't talked through?' Then stop talking and listen."},
+];
+
+function renderObjList(){
+  var html='';
+  OBJECTIONS.forEach(function(o,i){
+    var safe = o.counter.replace(/'/g,"&#39;");
+    html+='<div class="obj-card">';
+    html+='<div class="oc-obj"><div><div class="oc-q">Objection</div><div class="oc-obj-text">"'+o.obj+'"</div></div></div>';
+    html+='<div class="oc-counter"><div class="oc-a">Counter</div><div class="oc-text">'+o.counter+'</div>';
+    if(o.tip) html+='<div class="oc-tip">💡 '+o.tip+'</div>';
+    html+='<button class="oc-copy" onclick="copyText(\''+safe+'\','+(i+700)+')">Copy</button>';
+    html+='</div></div>';
+  });
+  document.getElementById('obj-list').innerHTML=html;
+}
+
+var BATTLECARDS = [
+  {name:'TheFork',verdict:'Listed — watch carefully',vClass:'bv-amber',
+   what:'Reservation and discovery platform owned by TripAdvisor. Discount-driven. Venues offer 10–50% off to appear prominently in search results.',
+   think:'Mixed. Drives some covers but operators often report that customers expect discounts every visit. Brand-protective operators dislike the association.',
+   diff:'TGTG is demand generation — we create covers that would not have happened. TheFork is demand capture — it intercepts customers who were already going out. Different mechanism, different value.',
+   say:'"TheFork captures customers who had already decided to go to a restaurant. TGTG captures customers who had not decided to go out yet. One replaces your existing marketing. The other creates new revenue."'},
+  {name:'OpenTable',verdict:'Complementary — no threat',vClass:'bv-neutral',
+   what:'Reservation management software and booking discovery platform. Used by higher-end operators. Strong in the US, growing in UK.',
+   think:'Generally positive. Operators see it as professional infrastructure. Main complaint: expensive for what it delivers in terms of new customer acquisition.',
+   diff:'OpenTable is a booking tool — it manages reservations for customers who are already coming to you. TGTG is a demand tool — it generates customers who were not coming. Genuinely complementary.',
+   say:'"OpenTable is a reservation system. TGTG is a demand engine. Your Wednesday night is not empty because people cannot book — it is empty because they have not decided to go out. We solve the second problem."'},
+  {name:'Deliveroo',verdict:'Different product — not competitive',vClass:'bv-neutral',
+   what:'Food delivery platform. High commission (25–35%). Focused on delivery and collection only. No dine-in component.',
+   think:'Complicated. Drives revenue but margins are thin after commission. Operators worried about brand associations with packaging and delivery experience.',
+   diff:'Deliveroo generates delivery revenue. TGTG generates dine-in covers — your highest margin business. Delivery and dine-in are entirely different occasions. Not competitive.',
+   say:'"Deliveroo puts your food in someone\'s home. TGTG puts customers in your restaurant. Different occasion, different margin, different customer experience. They are not competing — they are different products."'},
+  {name:'Resy',verdict:'Complementary — premium segment',vClass:'bv-neutral',
+   what:'Reservation and table management platform. Strong in premium and fine dining. Better UX than OpenTable for upscale operators.',
+   think:'Positive among quality operators. Seen as a better-designed alternative to OpenTable. High cost.',
+   diff:'Same as OpenTable — reservation tool vs demand generation tool. If they are on Resy, they are quality operators who care about their brand. Lead with the quality marketplace argument.',
+   say:'"Resy manages your existing reservations. TGTG creates new demand on your quiet nights. You control the window, the depth, and the cover cap — Friday regulars never see it."'},
+  {name:'Just Eat',verdict:'Different product — no conflict',vClass:'bv-neutral',
+   what:'Delivery and takeaway aggregator. Very high commission. Mass-market positioning. No dine-in.',
+   think:'Varies. High volume operators use it as a revenue channel. Quality-focused operators avoid it due to brand associations.',
+   diff:'Delivery-only. TGTG is dine-in only. No competition whatsoever.',
+   say:'"Just Eat is a delivery platform. We are a dine-in marketplace. Not the same product, not the same customer, not the same occasion."'},
+];
+
+function renderBattlecards(){
+  var html='';
+  BATTLECARDS.forEach(function(b,i){
+    var safe = b.say.replace(/'/g,"&#39;");
+    html+='<div class="bc-card">';
+    html+='<div class="bc-head"><span class="bc-name">'+b.name+'</span><span class="bc-verdict '+b.vClass+'">'+b.verdict+'</span></div>';
+    html+='<div class="bc-grid">';
+    html+='<div class="bc-cell"><div class="bc-cell-label">What it is</div><div class="bc-cell-text">'+b.what+'</div></div>';
+    html+='<div class="bc-cell"><div class="bc-cell-label">What operators think</div><div class="bc-cell-text">'+b.think+'</div></div>';
+    html+='<div class="bc-cell" style="grid-column:1/-1;border-right:none;"><div class="bc-cell-label">TGTG difference</div><div class="bc-cell-text">'+b.diff+'</div></div>';
+    html+='</div>';
+    html+='<div class="bc-say"><div class="bc-say-label">What to say</div><div class="bc-say-text">'+b.say+'</div>';
+    html+='<button class="bc-copy" onclick="copyText(\''+safe+'\','+(i+800)+')">Copy this line</button></div>';
+    html+='</div>';
+  });
+  document.getElementById('bc-list').innerHTML=html;
+}
+
+var PITCH_CARDS = [
+  {featured:true, label:'The 30-second pitch',
+   title:'What TGTG does — <em>in one breath</em>',
+   body:`<strong>TGTG is a two-sided marketplace that fills empty tables on quiet nights.</strong>
+
+Venues set real-time offers for their quietest sessions — Tuesday at 7pm, Wednesday lunchtime. Diners discover those offers through our app and book through us.
+
+We charge commission on the pre-discount bill. The venue keeps the cover they would not have had otherwise. We earn when they earn.
+
+<strong>2M+ diners. 4,000+ venues. Live across the UK and dominant in Australia.</strong>`,
+   copy:`TGTG is a two-sided marketplace that fills empty tables on quiet nights. Venues set real-time offers for their quietest sessions. Diners discover those offers through our app. We charge commission on the pre-discount bill. The venue keeps a cover they would not have had otherwise. 2M+ diners. 4,000+ venues. Live across the UK.`},
+  {featured:false, label:'How we make money',
+   title:'The <em>commission model</em> — explained simply',
+   body:`On a £62 average order, the diner pays 25% less: <strong>£46.50</strong>.
+
+TGTG takes 15% of the pre-discount bill: <strong>£9.30</strong>.
+
+The venue receives: <strong>£52.70</strong> — every penny of which is found money.
+
+<strong>An empty table earns the venue £0. This table earns £52.70.</strong>
+
+The question is never whether the commission is worth it. The question is whether £52.70 is better than £0 on a Tuesday at 7pm. It always is.`,
+   copy:`On a £62 average order, the diner pays 25% less: £46.50. TGTG takes 15% of the pre-discount bill: £9.30. The venue receives £52.70 — on a table that would have earned them nothing. An empty table earns £0. This table earns £52.70.`},
+  {featured:false, label:'The empty table argument',
+   title:'The only argument that <em>always works</em>',
+   body:`<strong>"An empty table earns you exactly £0."</strong>
+
+Your kitchen is on. Your team is there. Your fixed costs are running.
+
+Every cover TGTG generates on a quiet Tuesday is <strong>almost pure contribution margin</strong> — you have already paid for everything except the food cost.
+
+The only question is: would this cover have happened without TGTG?
+
+If the answer is no — every pound the cover generates is found money. No cannibalisation. No brand risk. No downside.
+
+<strong>The comparison is never TGTG vs full price. It is TGTG vs empty.</strong>`,
+   copy:`An empty table earns you exactly £0. Your kitchen is on, your team is there, your fixed costs are running. Every cover TGTG generates on a quiet Tuesday is almost pure contribution margin. The comparison is never TGTG vs full price. It is TGTG vs empty.`},
+  {featured:false, label:'Why we are not TheFork',
+   title:'The difference that <em>matters most</em>',
+   body:`TheFork captures demand that is <strong>already heading to a restaurant</strong>. The customer has decided to go out — TheFork helps them choose where.
+
+TGTG creates demand that <strong>would not have happened otherwise</strong>. The customer had not decided to go out. Our offer changes that decision.
+
+TheFork competes with your existing marketing. TGTG generates covers your marketing would never have reached.
+
+<strong>One is demand capture. The other is demand creation. They are not the same product.</strong>`,
+   copy:`TheFork captures demand already heading to a restaurant. TGTG creates demand that would not have happened otherwise. One is demand capture. The other is demand creation. They are not the same product.`},
+];
+
+function renderPitchCards(){
+  var html='';
+  PITCH_CARDS.forEach(function(p,i){
+    var safe = p.copy.replace(/'/g,"&#39;");
+    html+='<div class="pitch-card'+(p.featured?' featured':'')+'"><div class="pc-label">'+p.label+'</div>';
+    html+='<div class="pc-title">'+p.title+'</div>';
+    html+='<div class="pc-content">'+p.body+'</div>';
+    html+='<button class="pc-copy-full" onclick="copyText(\''+safe+'\','+(i+900)+')">Copy this card →</button></div>';
+  });
+  document.getElementById('pitch-list').innerHTML=html;
+}
+
+var INTERVIEW_GROUPS = [
+  {value:'#ownit', tag:'Accountability', qs:[
+    {q:'Tell me about a time you owned a project or target end-to-end. What went wrong and what did you do?',look:'Strong candidates name a specific failure, take ownership without excuses, and explain what changed as a result. Weak candidates either have no failure story or blame external factors.'},
+    {q:'Give me an example of when you flagged a risk early — before it became a problem.',look:'Shows commercial judgment and proactive communication. Red flag: candidates who only notice problems in hindsight.'},
+    {q:'Tell me about a target you missed. What happened and what would you do differently?',look:'Self-awareness and intellectual honesty. Anyone who has never missed a target is either lying or has never been challenged.'},
+  ]},
+  {value:'#goodhuman', tag:'Culture & communication', qs:[
+    {q:'How do you give hard feedback to someone you manage or work alongside?',look:'A real answer includes specific language and a specific situation. "I am very direct" is not an answer. "I use the SBI model and I name the exact behaviour" is.'},
+    {q:'Tell me about a time you disagreed with your manager. How did you handle it?',look:'Looking for: they raised it professionally, they were direct, they accepted the outcome. Red flag: never disagreed, or disagreed and was passive-aggressive.'},
+    {q:'What is the most difficult conversation you have had at work? What made it difficult?',look:'Emotional intelligence and maturity. Strong candidates pick something genuinely hard — a PIP, a redundancy, a team conflict. Not something minor.'},
+  ]},
+  {value:'#shipit', tag:'Pace & execution', qs:[
+    {q:'Tell me about something you shipped or closed that was not perfect. What did you do next?',look:'Bias for action, comfort with imperfection, learning mindset. Red flag: candidates who would not ship without perfection — wrong culture for TGTG.'},
+    {q:'How many cold calls or cold dials did you do last week? What was your conversion rate?',look:'This question cannot be faked. A field sales candidate should know their numbers. If they do not know their activity numbers, they are not tracking them.'},
+    {q:'How do you decide what to work on when everything feels urgent?',look:'Prioritisation frameworks matter less than the instinct. Look for: customer impact first, team commitments second, admin last.'},
+  ]},
+  {value:'#customerfirst', tag:'Customer understanding', qs:[
+    {q:'How do you stay close to the customers or clients you are selling to?',look:'Genuine field-first candidates visit, they call, they ask questions in the venue. They do not rely on CRM data alone.'},
+    {q:'Tell me about a time a customer or client changed your mind about something.',look:'Intellectual humility and genuine listening. A candidate who has never been changed by customer feedback is not customer-first.'},
+    {q:'Walk me through how you would approach selling TGTG to a brand-protective Michelin-listed restaurant in London.',look:'Tests hospitality knowledge, commercial instinct, and whether they listen before they pitch. A great answer starts with questions, not features.'},
+  ]},
+  {value:'#hungry', tag:'Learning & curiosity', qs:[
+    {q:'What is the last thing you learned that changed how you work? How did you apply it?',look:'Specific and recent. Not a course they did three years ago. Something they are actively using.'},
+    {q:'How are you using AI in your work right now?',look:'We care about this. A candidate not using AI daily in 2026 in a sales role is behind the curve. They do not need to be technical — they need to be curious and practical.'},
+    {q:'What are you currently bad at that you are working on?',look:'Self-awareness without self-deprecation. A strong candidate has a real answer and is actively working on it. "I am a perfectionist" is not an answer.'},
+  ]},
+  {value:'rep-specific', tag:'Field sales', qs:[
+    {q:'Walk me through your last complex deal. What made it hard? How did you close it?',look:'Specificity wins. Rep name, venue name, what the objection was, what they said, what the outcome was. Vague answers are a red flag.'},
+    {q:'What is your cold dial technique? Walk me through the first 60 seconds.',look:'Challenger phone reps open with insight or a question, not a pitch. Red flag: leads with product features.'},
+    {q:'What is the objection you find hardest to handle? Why?',look:'Honesty and self-awareness. Follow up: "What have you done to get better at it?" Shows growth mindset.'},
+  ]},
+  {value:'TL-specific', tag:'Sales management', qs:[
+    {q:'Tell me about a rep you coached from underperforming to strong. What did you do?',look:'Specificity. What was the root cause? What was the coaching intervention? What changed? Vague answers — "I supported them" — are a red flag.'},
+    {q:'How do you identify whether underperformance is a skill gap or a will gap? Does it change your approach?',look:'One of the most important management questions. Skill gap = coaching and tools. Will gap = expectations and consequences. Conflating them is a common management failure.'},
+    {q:'Walk me through how you run a weekly 1:1 with a rep.',look:'Looking for: data first, coaching second, agreed action third. 45 minutes not 15. Structured agenda. Not a pipeline review dressed up as a 1:1.'},
+  ]},
+];
+
+function renderInterviewBank(){
+  var html='';
+  INTERVIEW_GROUPS.forEach(function(g){
+    html+='<div class="ival-group"><div class="ig-head"><span class="ig-value">'+g.value+'</span><span class="ig-tag">'+g.tag+'</span></div>';
+    g.qs.forEach(function(q){
+      html+='<div class="iq-item"><div class="iq-q">'+q.q+'</div><div class="iq-look"><strong>What to look for:</strong> '+q.look+'</div></div>';
+    });
+    html+='</div>';
+  });
+  document.getElementById('interview-list').innerHTML=html;
+}
+
+var WA_SCRIPTS = [
+  {title:'Cold opener — first contact',badge:'38% reply rate',note:'Keep it short. One sentence on why them specifically.',
+   body:`Hi [NAME], [YOUR NAME] here from TGTG. We work with [NEARBY VENUE] and [NEARBY VENUE] on their Tuesday and Wednesday evenings. Wanted to see if it's worth a quick chat about [VENUE NAME]. Worth 10 minutes this week?`},
+  {title:'Follow-up — no reply after 3 days',badge:'Send once only',note:'Do not send a third message. Move on.',
+   body:`Hi [NAME] — following up from my message earlier this week. Happy to keep it short — 10 minutes is all we need. If the timing is wrong, just let me know.`},
+  {title:'Post-visit warm follow-up',badge:'Send same day',note:'Reference something specific from the conversation.',
+   body:`Hi [NAME], great meeting you today at [VENUE]. As promised I've [sent you the calculator / put together the offer structure / attached the overview]. Quick question — is [DAY] at [TIME] a good time to walk you through how it would look in practice?`},
+  {title:'Re-engagement — cold for 3+ months',badge:'One shot',note:'Give them a reason to re-open the conversation.',
+   body:`Hi [NAME], [YOUR NAME] from TGTG — we spoke a few months back about [VENUE]. I've been thinking about it because [SPECIFIC REASON — e.g. we just launched in the area / a venue down the road just joined and is having a strong Tuesday]. Worth picking up where we left off?`},
+  {title:'Referral request — after a positive visit',badge:'Best time to ask',note:'Ask within 24 hours of a strong visit.',
+   body:`Hi [NAME], really enjoyed our conversation today. One quick ask — is there anyone else in [AREA] you respect whose restaurant might benefit from the same conversation? Happy to reach out in your name.`},
+  {title:'Group account opener',badge:'C-suite friendly',note:'For COOs and group operators — shorter, more direct.',
+   body:`Hi [NAME], [YOUR NAME] from TGTG. We work with [GROUP/CHAIN] on their midweek capacity across [X] sites. Thought it might be worth a conversation about [THEIR GROUP]. 15 minutes this week?`},
+  {title:'Day before visit confirmation',badge:'Reduces no-shows',note:'Send the evening before.',
+   body:`Hi [NAME], looking forward to seeing you tomorrow at [TIME] at [VENUE]. I'll have the numbers ready for [THEIR SPECIFIC SITUATION — e.g. Tuesday evenings / your Brixton site]. See you then.`},
+];
+
+function renderWA(){
+  var html='';
+  WA_SCRIPTS.forEach(function(w,i){
+    var safe = w.body.replace(/'/g,"&#39;");
+    html+='<div class="wa-card"><div class="wa-head"><span class="wa-title">'+w.title+'</span><span class="wa-badge">'+w.badge+'</span></div>';
+    html+='<div class="wa-body">'+w.body+'</div>';
+    html+='<div class="wa-footer"><span class="wa-note">'+w.note+'</span><button class="wa-copy" onclick="copyText(\''+safe+'\','+(i+1000)+')">Copy</button></div></div>';
+  });
+  document.getElementById('wa-list').innerHTML=html;
+}
+
+function renderCRM(){
+  var html='';
+
+  
+  html+='<div class="crm-section"><div class="crm-head"><div class="crm-head-title">Deal Stages — what each one means</div><div class="crm-head-sub">Every rep uses the same stages. Every stage has a clear definition. No judgement calls.</div></div>';
+  var stages=[
+    {stage:'Prospecting',detail:'Added to pipeline. No contact made yet. Venue identified as a quality prospect — ≥4.0 stars, independent, quiet midweek period confirmed via Popular Times.'},
+    {stage:'First Contact',detail:'Called, emailed, or visited. May have spoken to a staff member but not the decision maker. Or left a message. Something has happened.'},
+    {stage:'Meeting Booked',detail:'Visit or call confirmed in the calendar. Decision maker has agreed to speak. This is a real meeting, not a hope.'},
+    {stage:'Visit Completed',detail:'First substantive conversation with the decision maker. They understand what TGTG is. An objection or interest has been expressed.'},
+    {stage:'Proposal Sent',detail:'A specific offer structure has been proposed and either left with the operator, sent by email, or discussed in detail. Not vague interest — a specific proposal.'},
+    {stage:'Negotiating',detail:'Active objection handling. Decision maker is engaged. A close is being worked toward.'},
+    {stage:'Closed Won',detail:'Signed. Portal set up. Offer confirmed against genuine quiet period. Leave-behind installed.'},
+    {stage:'Closed Lost',detail:'Decision made not to proceed. Log the reason: which objection, why it was not overcome, whether to return in future.'},
+  ];
+  stages.forEach(function(s){
+    html+='<div class="crm-row"><div class="crm-stage">'+s.stage+'</div><div class="crm-detail">'+s.detail+'</div></div>';
+  });
+  html+='</div>';
+
+  
+  html+='<div class="crm-section"><div class="crm-head"><div class="crm-head-title">When to log</div><div class="crm-head-sub">The rule is simple and there are no exceptions.</div></div>';
+  html+='<div class="crm-row"><div class="crm-stage">Always</div><div class="crm-detail">Log the same day as the activity. Not the next morning. Not in a batch on Friday. The same day — before you leave the car park if you have to. A visit not logged on the day it happened is a visit that did not happen as far as management is concerned.</div></div>';
+  html+='<div class="crm-row"><div class="crm-stage">Every visit</div><div class="crm-detail">Even if the owner was not there. Even if you only spoke to a manager for two minutes. Log what happened, who you spoke to, and what the next action is.</div></div>';
+  html+='<div class="crm-row"><div class="crm-stage">Every call</div><div class="crm-detail">Inbound and outbound. If a decision maker called you back and you spoke for four minutes, that is an activity in HubSpot within the hour.</div></div>';
+  html+='</div>';
+
+  
+  html+='<div class="crm-section"><div class="crm-head"><div class="crm-head-title">What a good activity note looks like — vs a bad one</div></div>';
+  html+='<div class="crm-example-wrap">';
+  html+='<div class="crm-ex"><div class="crm-ex-label bad-label">✗ Bad note</div><div class="crm-ex-text">Spoke to owner. Interested. Will follow up.</div></div>';
+  html+='<div class="crm-ex"><div class="crm-ex-label good-label">✓ Good note</div><div class="crm-ex-text">Visit — spoke to Derek Marshall (owner). Showed Popular Times data for Tuesday at 7pm (30% capacity vs Friday). He confirmed Tuesday is genuinely their quietest session. Raised brand concern: "We are a Michelin Guide venue, we do not want to be associated with discounting." Addressed with quality marketplace argument and cover cap explanation. He asked about the commission model — walked through the maths on £62 AOV. He wants to speak to his business partner before deciding. Agreed: I will call him Thursday at 2pm. Next action: Thursday call, bring written proposal for Tuesday Early Bird 25%, cap 8 covers.</div></div>';
+  html+='</div></div>';
+
+  
+  html+='<div class="crm-section"><div class="crm-head"><div class="crm-head-title">What 100% CRM compliance looks like in practice</div></div>';
+  var checks=[
+    {stage:'Every visit',detail:'Logged same day with: who you spoke to, what they said, what you said, what objections were raised, what was agreed, next action with a specific date.'},
+    {stage:'Every call',detail:'Logged same day. Even if it was a voicemail. "Left VM, will try again Thursday" is a valid note.'},
+    {stage:'Stage changes',detail:'Deal stage updated immediately when something changes. A signed venue moves to Closed Won on the day of signing — not at the end of the week.'},
+    {stage:'Zero stale deals',detail:'Every open deal has an activity within the last 7 days. If you have not spoken to them in 7 days, either move them to the correct stage or log a note explaining why.'},
+    {stage:'Contact records',detail:'Every person you speak to has a contact record in HubSpot. Name, role, phone, email if you have it.'},
+  ];
+  checks.forEach(function(c){
+    html+='<div class="crm-row"><div class="crm-stage">'+c.stage+'</div><div class="crm-detail">'+c.detail+'</div></div>';
+  });
+  html+='</div>';
+
+  document.getElementById('crm-content').innerHTML=html;
+}
+
+function searchAll(query) {
+  var q = query.toLowerCase().trim();
+  var allCards = document.querySelectorAll('.email-card, .obj-card, .bc-card, .pitch-card, .ival-group, .wa-card, .crm-section');
+  var visible = 0;
+
+  if(!q) {
+    allCards.forEach(function(card){ card.style.display=''; });
+    document.getElementById('no-results').style.display='none';
+    
+    document.querySelectorAll('.section').forEach(function(s){ s.style.display=''; });
+    document.querySelectorAll('.nav-tab').forEach(function(t,i){
+      t.classList.toggle('active', i===0);
+    });
+    document.getElementById('sec-emails').classList.add('active');
+    return;
+  }
+
+  
+  document.querySelectorAll('.section').forEach(function(s){ s.style.display='block'; });
+  document.querySelectorAll('.nav-tab').forEach(function(t){ t.classList.remove('active'); });
+
+  
+  allCards.forEach(function(card){
+    var text = card.textContent.toLowerCase();
+    var match = text.includes(q);
+    card.style.display = match ? '' : 'none';
+    if(match) visible++;
+  });
+
+  document.getElementById('no-results').style.display = visible===0 ? 'block' : 'none';
+
+  
+  ['sec-emails','sec-manager','sec-objections','sec-battlecards','sec-pitch','sec-interview','sec-whatsapp','sec-crm'].forEach(function(secId){
+    var sec = document.getElementById(secId);
+    if(sec){
+      var anyVisible = Array.from(sec.querySelectorAll('.email-card')).some(function(c){ return c.style.display!=='none'; });
+      sec.style.display = anyVisible ? 'block' : 'none';
+    }
+  });
+}
+
+renderEmails();
+renderManagerEmails();
+renderSlack();
+renderTraining();
+renderObjList();
+renderBattlecards();
+renderPitchCards();
+renderInterviewBank();
+renderWA();
+renderCRM();
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>
