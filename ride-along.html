@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Too Good To Go · Call-Along Coaching</title>
+<link rel="stylesheet" href="/brand.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{
+  -webkit-font-smoothing: antialiased;height:100%;font-family:'Inter',sans-serif;background:#111;color:#fff;}
+
+.app{max-width:480px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;}
+
+.hdr{background:#1a1a1a;border-bottom:1px solid #2a2a2a;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;}
+.brand{font-size:12px;font-weight:800;}.brand em{color:#FFD000;font-style:normal;}
+.progress{display:flex;gap:4px;align-items:center;}
+.prog-dot{width:7px;height:7px;border-radius:50%;background:#2a2a2a;transition:background .2s;}
+.prog-dot.done{background:#22C55E;}
+.prog-dot.active{background:#FFD000;}
+
+.screens{flex:1;overflow:hidden;position:relative;}
+.screen{position:absolute;top:0;left:0;right:0;bottom:0;overflow-y:auto;padding:20px 18px;opacity:0;pointer-events:none;transform:translateX(30px);transition:all .25s;}
+.screen.active{opacity:1;pointer-events:all;transform:translateX(0);}
+.screen.exit{opacity:0;transform:translateX(-30px);}
+
+.screen-num{font-size:9px;font-weight:700;color:#FFD000;text-transform:uppercase;letter-spacing:2px;font-family:'Inter',sans-serif;margin-bottom:6px;}
+.screen-title{font-size:22px;font-weight:800;line-height:1.2;margin-bottom:4px;}
+.screen-title em{color:#FFD000;font-style:normal;}
+.screen-sub{font-size:12px;color:#444;line-height:1.5;margin-bottom:22px;}
+
+.fl{font-size:11px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.9px;display:block;margin-bottom:7px;}
+.fi{width:100%;padding:13px 14px;background:#1a1a1a;border:2px solid #2a2a2a;border-radius:10px;font-size:15px;color:#fff;font-family:inherit;margin-bottom:14px;transition:border-color .15s;}
+.fi:focus{outline:none;border-color:#FFD000;}
+.fi::placeholder{color:#333;}
+.fi-sm{font-size:13px;padding:10px 12px;margin-bottom:10px;}
+select.fi{cursor:pointer;}
+textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
+
+.rating-group{margin-bottom:18px;}
+.rg-label{font-size:12px;font-weight:700;color:#aaa;margin-bottom:4px;}
+.rg-sub{font-size:11px;color:#333;margin-bottom:8px;line-height:1.5;}
+.rating-btns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.rb{padding:8px 4px;background:#1a1a1a;border:1.5px solid #2a2a2a;border-radius:8px;text-align:center;cursor:pointer;transition:all .15s;}
+.rb:hover{border-color:#444;}
+.rb.active-1{border-color:#E57373;background:rgba(229,115,115,.1);}
+.rb.active-2{border-color:#FFD000;background:rgba(217,119,6,.08);}
+.rb.active-3{border-color:#FFD000;background:rgba(184,132,30,.1);}
+.rb.active-4{border-color:#22C55E;background:rgba(76,175,130,.1);}
+.rb-score{font-size:16px;font-weight:800;display:block;margin-bottom:2px;}
+.active-1 .rb-score{color:#E57373;}
+.active-2 .rb-score{color:#FFD000;}
+.active-3 .rb-score{color:#FFD000;}
+.active-4 .rb-score{color:#22C55E;}
+.rb-label{font-size:9px;color:#333;font-weight:700;line-height:1.3;}
+.rb.active-1 .rb-label,.rb.active-2 .rb-label,.rb.active-3 .rb-label,.rb.active-4 .rb-label{color:inherit;opacity:.8;}
+
+.meddic-group{margin-bottom:14px;}
+.mg-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:4px;}
+.mg-title{font-size:13px;font-weight:700;color:#aaa;}
+.mg-detail{font-size:11px;color:#333;line-height:1.5;flex:1;}
+.mg-toggles{display:flex;gap:5px;flex-shrink:0;}
+.mgt{padding:5px 10px;border-radius:8px;font-size:10px;font-weight:800;cursor:pointer;border:1.5px solid #2a2a2a;background:transparent;color:#333;transition:all .15s;white-space:nowrap;}
+.mgt.hit{border-color:#22C55E;background:rgba(76,175,130,.12);color:#22C55E;}
+.mgt.partial{border-color:#FFD000;background:rgba(217,119,6,.08);color:#FFD000;}
+.mgt.missed{border-color:#E57373;background:rgba(229,115,115,.08);color:#E57373;}
+
+.moment-card{background:#1a1a1a;border:1px solid #222;border-radius:10px;padding:14px;margin-bottom:10px;}
+.mc-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;font-family:'Inter',sans-serif;margin-bottom:8px;}
+.mc-good{color:#22C55E;}
+.mc-bad{color:#E57373;}
+.mc-neutral{color:#FFD000;}
+
+.score-bar{background:#1a1a1a;border:1px solid #222;border-radius:10px;padding:14px;margin-bottom:16px;}
+.sb-title{font-size:11px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
+.sb-row{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.sb-lbl{font-size:12px;color:#888;width:120px;flex-shrink:0;}
+.sb-track{flex:1;height:6px;background:#222;border-radius:3px;overflow:hidden;}
+.sb-fill{height:100%;border-radius:3px;transition:width .4s;}
+.sb-score{font-size:12px;font-weight:800;width:28px;text-align:right;}
+
+.footer{background:#1a1a1a;border-top:1px solid #2a2a2a;padding:14px 18px;display:grid;grid-template-columns:1fr 2fr;gap:10px;flex-shrink:0;}
+.btn-back{padding:13px;background:transparent;border:1.5px solid #2a2a2a;border-radius:10px;color:#555;font-size:14px;font-weight:700;cursor:pointer;text-align:center;}
+.btn-next{padding:13px;background:#FFD000;color:#000;border:none;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;text-align:center;transition:background .15s;}
+.btn-next:hover{background:rgba(255,208,0,.80);}
+.btn-submit{background:#22C55E;grid-column:1/-1;}
+.btn-submit:hover{background:#22C55E;}
+
+.divider{height:1px;background:#2a2a2a;margin:16px 0;}
+</style>
+</head>
+<body>
+<div class="app">
+
+<div class="hdr">
+  <div class="brand"><em>Too Good</em> To Go · Call-Along</div>
+  <div class="progress">
+    <div class="prog-dot active" id="pd1"></div>
+    <div class="prog-dot" id="pd2"></div>
+    <div class="prog-dot" id="pd3"></div>
+    <div class="prog-dot" id="pd4"></div>
+    <div class="prog-dot" id="pd5"></div>
+  </div>
+</div>
+
+<div class="screens">
+
+  
+  <div class="screen active" id="s1">
+    <div class="screen-num">01 of 05</div>
+    <div class="screen-title">The <em>visit.</em></div>
+    <div class="screen-sub">Fill this in leaving the venue — while it is fresh.</div>
+
+    <label class="fl">rep</label>
+    <select class="fi" id="s1-bdm" onchange="if(this.value==='__custom'){this.style.display='none';document.getElementById('s1-bdm-custom').style.display='block';document.getElementById('s1-bdm-custom').focus();}">
+      <option value="" disabled selected>Select rep...</option>
+    </select>
+    <input class="fi" id="s1-bdm-custom" type="text" placeholder="Type Rep name..." style="display:none;" autocomplete="off">
+
+    <label class="fl">Venue visited</label>
+    <input class="fi" id="s1-venue" type="text" placeholder="e.g. Meze & More, Bethnal Green E2" autocomplete="off">
+
+    <label class="fl">Visit type</label>
+    <select class="fi" id="s1-type">
+      <option value="" disabled selected>Select type...</option>
+      <option>Cold dial</option>
+      <option>Warm intro</option>
+      <option>Follow-up — second visit</option>
+      <option>Objection handling</option>
+      <option>Close attempt</option>
+    </select>
+
+    <label class="fl">Outcome</label>
+    <select class="fi" id="s1-outcome">
+      <option value="" disabled selected>Select outcome...</option>
+      <option>Signed — deal closed</option>
+      <option>Strong interest — follow-up booked</option>
+      <option>Interested — needs time</option>
+      <option>Objection not overcome — needs work</option>
+      <option>Not interested</option>
+      <option>DM not available — return visit needed</option>
+    </select>
+
+    <label class="fl">Overall visit rating</label>
+    <div class="rating-btns" id="overall-rating">
+      <div class="rb" onclick="rate('overall',1,this)"><span class="rb-score">1</span><span class="rb-label">Needs significant work</span></div>
+      <div class="rb" onclick="rate('overall',2,this)"><span class="rb-score">2</span><span class="rb-label">Some good moments</span></div>
+      <div class="rb" onclick="rate('overall',3,this)"><span class="rb-score">3</span><span class="rb-label">Solid — coachable gaps</span></div>
+      <div class="rb" onclick="rate('overall',4,this)"><span class="rb-score">4</span><span class="rb-label">Strong execution</span></div>
+    </div>
+  </div>
+
+  
+  <div class="screen" id="s2">
+    <div class="screen-num">02 of 05</div>
+    <div class="screen-title"><em>Challenger</em> framework.</div>
+    <div class="screen-sub">Score each element 1–4. Be specific — you saw this visit, not a hypothetical.</div>
+
+    <div class="rating-group">
+      <div class="rg-label">Teach — did they lead with a commercial insight?</div>
+      <div class="rg-sub">Did they show the operator something they did not already know? Popular Times data, contribution margin maths, competitor platform analysis. Or did they walk straight into a pitch?</div>
+      <div class="rating-btns" id="teach-rating">
+        <div class="rb" onclick="rate('teach',1,this)"><span class="rb-score">1</span><span class="rb-label">Pitched immediately</span></div>
+        <div class="rb" onclick="rate('teach',2,this)"><span class="rb-score">2</span><span class="rb-label">Weak insight</span></div>
+        <div class="rb" onclick="rate('teach',3,this)"><span class="rb-score">3</span><span class="rb-label">Good Teach moment</span></div>
+        <div class="rb" onclick="rate('teach',4,this)"><span class="rb-score">4</span><span class="rb-label">Reframed their world</span></div>
+      </div>
+    </div>
+
+    <div class="rating-group">
+      <div class="rg-label">Tailor — did they adapt to this specific operator?</div>
+      <div class="rg-sub">Did they reference this venue's situation — their cuisine, their quiet periods, their competitor presence? Or was it a generic pitch that could have been delivered anywhere?</div>
+      <div class="rating-btns" id="tailor-rating">
+        <div class="rb" onclick="rate('tailor',1,this)"><span class="rb-score">1</span><span class="rb-label">Generic pitch</span></div>
+        <div class="rb" onclick="rate('tailor',2,this)"><span class="rb-score">2</span><span class="rb-label">Partially tailored</span></div>
+        <div class="rb" onclick="rate('tailor',3,this)"><span class="rb-score">3</span><span class="rb-label">Clearly tailored</span></div>
+        <div class="rb" onclick="rate('tailor',4,this)"><span class="rb-score">4</span><span class="rb-label">Felt bespoke</span></div>
+      </div>
+    </div>
+
+    <div class="rating-group">
+      <div class="rg-label">Take Control — did they lead the conversation?</div>
+      <div class="rg-sub">Did they confidently propose a specific offer structure rather than asking what the operator wanted? Did they handle resistance without conceding? Did they get a commitment or a clear next step?</div>
+      <div class="rating-btns" id="control-rating">
+        <div class="rb" onclick="rate('control',1,this)"><span class="rb-score">1</span><span class="rb-label">Let operator lead</span></div>
+        <div class="rb" onclick="rate('control',2,this)"><span class="rb-score">2</span><span class="rb-label">Some confidence</span></div>
+        <div class="rb" onclick="rate('control',3,this)"><span class="rb-score">3</span><span class="rb-label">Led well</span></div>
+        <div class="rb" onclick="rate('control',4,this)"><span class="rb-score">4</span><span class="rb-label">Full command</span></div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="screen" id="s3">
+    <div class="screen-num">03 of 05</div>
+    <div class="screen-title"><em>MEDDIC</em> check.</div>
+    <div class="screen-sub">Mark each element hit, partial, or missed. If they did not attempt it, mark missed.</div>
+
+    <div class="meddic-group">
+      <div class="mg-head">
+        <div>
+          <div class="mg-title">Metrics — did they quantify the value?</div>
+          <div class="mg-detail">Contribution margin maths on an empty cover. What Tuesday at 7pm is worth over six months. A specific number, not a vague claim about revenue.</div>
+        </div>
+      </div>
+      <div class="mg-toggles">
+        <div class="mgt" onclick="meddic('metrics','hit',this)">Hit</div>
+        <div class="mgt" onclick="meddic('metrics','partial',this)">Partial</div>
+        <div class="mgt" onclick="meddic('metrics','missed',this)">Missed</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="meddic-group">
+      <div class="mg-head">
+        <div>
+          <div class="mg-title">Economic Buyer — did they confirm who can sign?</div>
+          <div class="mg-detail">Is the person in the room the decision maker? If not, who is, when do we meet them, and what does this person need to say to get the conversation in front of them?</div>
+        </div>
+      </div>
+      <div class="mg-toggles">
+        <div class="mgt" onclick="meddic('econ_buyer','hit',this)">Hit</div>
+        <div class="mgt" onclick="meddic('econ_buyer','partial',this)">Partial</div>
+        <div class="mgt" onclick="meddic('econ_buyer','missed',this)">Missed</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="meddic-group">
+      <div class="mg-head">
+        <div>
+          <div class="mg-title">Decision Criteria — did they understand what matters?</div>
+          <div class="mg-detail">What does this operator care most about — brand, simplicity, revenue, control? Did the rep find out and frame TGTG against it?</div>
+        </div>
+      </div>
+      <div class="mg-toggles">
+        <div class="mgt" onclick="meddic('dec_criteria','hit',this)">Hit</div>
+        <div class="mgt" onclick="meddic('dec_criteria','partial',this)">Partial</div>
+        <div class="mgt" onclick="meddic('dec_criteria','missed',this)">Missed</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="meddic-group">
+      <div class="mg-head">
+        <div>
+          <div class="mg-title">Decision Process — did they get a next step?</div>
+          <div class="mg-detail">Specific date, specific action, specific owner. Not "I'll think about it." Not "follow up next week." A committed next step with a time attached.</div>
+        </div>
+      </div>
+      <div class="mg-toggles">
+        <div class="mgt" onclick="meddic('dec_process','hit',this)">Hit</div>
+        <div class="mgt" onclick="meddic('dec_process','partial',this)">Partial</div>
+        <div class="mgt" onclick="meddic('dec_process','missed',this)">Missed</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="meddic-group">
+      <div class="mg-head">
+        <div>
+          <div class="mg-title">Implicate Pain — did the operator name the problem?</div>
+          <div class="mg-detail">The best sign: the operator said the quiet Tuesday problem out loud, unprompted. Did the rep create the conditions for that? Or did they tell the operator what their problem was?</div>
+        </div>
+      </div>
+      <div class="mg-toggles">
+        <div class="mgt" onclick="meddic('pain','hit',this)">Hit</div>
+        <div class="mgt" onclick="meddic('pain','partial',this)">Partial</div>
+        <div class="mgt" onclick="meddic('pain','missed',this)">Missed</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="meddic-group">
+      <div class="mg-head">
+        <div>
+          <div class="mg-title">Champion — did they identify an internal advocate?</div>
+          <div class="mg-detail">In multi-site or group accounts — is there someone inside the business who wants TGTG to happen? Did the rep identify and activate them?</div>
+        </div>
+      </div>
+      <div class="mg-toggles">
+        <div class="mgt" onclick="meddic('champion','hit',this)">Hit</div>
+        <div class="mgt" onclick="meddic('champion','partial',this)">Partial</div>
+        <div class="mgt" onclick="meddic('champion','missed',this)">Missed</div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="screen" id="s4">
+    <div class="screen-num">04 of 05</div>
+    <div class="screen-title">Key <em>moments.</em></div>
+    <div class="screen-sub">The specifics. Vague feedback is worthless. Name the exchange.</div>
+
+    <div class="moment-card">
+      <div class="mc-label mc-good">What landed well</div>
+      <textarea class="fi fi-sm" id="s4-good" placeholder="Specific moment — what they said, how the operator responded. The version of this the rest of the team should hear."></textarea>
+    </div>
+
+    <div class="moment-card">
+      <div class="mc-label mc-bad">Where it broke down</div>
+      <textarea class="fi fi-sm" id="s4-bad" placeholder="The exact moment the operator's energy shifted. What the rep said. What they should have said instead."></textarea>
+    </div>
+
+    <div class="moment-card">
+      <div class="mc-label mc-neutral">The exchange to replay in coaching</div>
+      <textarea class="fi fi-sm" id="s4-replay" placeholder="Write it verbatim if possible. Operator said: '...' rep said: '...' What should have followed: '...'"></textarea>
+    </div>
+
+    <label class="fl">What you coached on the phone floor outside</label>
+    <textarea class="fi" id="s4-coached" placeholder="What you said to the rep immediately after leaving. The one thing you told them to change on the next visit."></textarea>
+  </div>
+
+  
+  <div class="screen" id="s5">
+    <div class="screen-num">05 of 05</div>
+    <div class="screen-title">Agreed <em>next steps.</em></div>
+    <div class="screen-sub">What the rep commits to. This feeds the coaching notes in the performance dashboard.</div>
+
+    <div class="score-bar" id="score-summary"></div>
+
+    <label class="fl">One thing to work on before the next visit</label>
+    <textarea class="fi" id="s5-priority" placeholder="Specific and behavioural. Not 'improve closing.' Rather: 'Propose the offer structure before asking for objections — do not wait for the operator to push back first.'"></textarea>
+
+    <label class="fl">Coaching agreed in the 1:1</label>
+    <textarea class="fi" id="s5-1on1" placeholder="What you will work through together in the next 1:1. Role-play? Call review? Specific objection handling script?"></textarea>
+
+    <label class="fl">Follow-up date</label>
+    <input class="fi fi-sm" type="date" id="s5-followup">
+
+    <label class="fl">Additional notes</label>
+    <textarea class="fi fi-sm" id="s5-notes" placeholder="Anything else worth capturing for the record."></textarea>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div class="btn-back" id="back-btn" onclick="prev()" style="display:none;">← Back</div>
+  <div class="btn-next" id="next-btn" onclick="next()">Next →</div>
+</div>
+
+</div>
+<script>
+
+var WEBHOOK_URL = '';
+var SHEET_CSV_URL = '';
+
+var FALLBACK_TEAM = [
+  'Aisha Okonkwo','Sarah Chen','Priya Patel','Daniel Park','Ollie Brennan',
+  'Marcus Johnson','Fatima Al-Hassan','James Murphy','Tom Richards','Emma Williams',
+];
+
+var TOTAL = 5;
+var current = 1;
+var scores = {};
+var meddic = {};
+var meddicEls = {};
+
+async function loadTeam() {
+  var sel = document.getElementById('s1-bdm');
+  if(!SHEET_CSV_URL){ populateDropdown(FALLBACK_TEAM); return; }
+  try {
+    var res = await fetch(SHEET_CSV_URL);
+    var csv = await res.text();
+    var names = csv.split('\n').slice(1).map(function(r){ return r.split(',')[0].replace(/"/g,'').trim(); }).filter(Boolean);
+    populateDropdown(names.length ? names : FALLBACK_TEAM);
+  } catch(e){ populateDropdown(FALLBACK_TEAM); }
+}
+
+function populateDropdown(names) {
+  var sel = document.getElementById('s1-bdm');
+  names.forEach(function(n){
+    var o = document.createElement('option');
+    o.value = n; o.textContent = n;
+    sel.appendChild(o);
+  });
+  var o = document.createElement('option');
+  o.value = '__custom'; o.textContent = '+ Add new rep...';
+  o.style.color = '#FFD000';
+  sel.appendChild(o);
+}
+
+function getBDMName(){
+  var sel = document.getElementById('s1-bdm');
+  var custom = document.getElementById('s1-bdm-custom');
+  if(sel.value === '__custom' || sel.style.display === 'none'){
+    return custom.value.trim() || 'Unknown rep';
+  }
+  return sel.value;
+}
+
+function rate(key, val, el) {
+  scores[key] = val;
+  var parent = el.parentElement;
+  parent.querySelectorAll('.rb').forEach(function(b){ b.className = 'rb'; });
+  el.className = 'rb active-' + val;
+}
+
+function meddic(key, val, el) {
+  meddicEls[key] = val;
+  var group = el.closest('.meddic-group');
+  group.querySelectorAll('.mgt').forEach(function(b){ b.className = 'mgt'; });
+  el.className = 'mgt ' + val;
+}
+
+function g(id){ return document.getElementById(id); }
+
+function showScreen(n) {
+  for(var i=1;i<=TOTAL;i++){
+    var s = g('s'+i);
+    var pd = g('pd'+i);
+    if(i===n){ s.className='screen active'; pd.className='prog-dot active'; }
+    else if(i<n){ s.className='screen'; pd.className='prog-dot done'; }
+    else{ s.className='screen'; pd.className='prog-dot'; }
+  }
+  g('back-btn').style.display = n===1 ? 'none' : '';
+  g('next-btn').textContent = n===TOTAL ? 'Submit →' : 'Next →';
+  g('next-btn').className = n===TOTAL ? 'btn-next btn-submit' : 'btn-next';
+  if(n===TOTAL) buildScoreSummary();
+  window.scrollTo(0,0);
+}
+
+function next() {
+  if(current < TOTAL){ current++; showScreen(current); }
+  else { submit(); }
+}
+
+function prev() {
+  if(current > 1){ current--; showScreen(current); }
+}
+
+function buildScoreSummary() {
+  var items = [
+    {l:'Challenger — Teach',   v: scores['teach']   || 0, max:4},
+    {l:'Challenger — Tailor',  v: scores['tailor']  || 0, max:4},
+    {l:'Challenger — Control', v: scores['control'] || 0, max:4},
+    {l:'Overall visit',        v: scores['overall'] || 0, max:4},
+  ];
+
+  var meddicHits = Object.values(meddicEls).filter(function(v){ return v==='hit'; }).length;
+  var meddicTotal = Object.keys(meddicEls).length || 6;
+
+  var avgChallenger = items.slice(0,3).reduce(function(a,b){ return a+b.v; },0) / 3;
+  var colourFor = function(v,max){ var p=v/max; return p>=.75?'#22C55E':p>=.5?'#FFD000':'#E57373'; };
+
+  var html = '<div class="sb-title">Coaching Score Summary</div>';
+  items.forEach(function(item){
+    var pct = item.v===0 ? 0 : Math.round(item.v/item.max*100);
+    var col = colourFor(item.v, item.max);
+    html += '<div class="sb-row">';
+    html += '<div class="sb-lbl">'+item.l+'</div>';
+    html += '<div class="sb-track"><div class="sb-fill" style="width:'+pct+'%;background:'+col+'"></div></div>';
+    html += '<div class="sb-score" style="color:'+col+'">'+(item.v||'—')+'</div>';
+    html += '</div>';
+  });
+  html += '<div class="sb-row">';
+  html += '<div class="sb-lbl">MEDDIC coverage</div>';
+  var mpct = meddicTotal>0 ? Math.round(meddicHits/meddicTotal*100) : 0;
+  var mcol = mpct>=80?'#22C55E':mpct>=50?'#FFD000':'#E57373';
+  html += '<div class="sb-track"><div class="sb-fill" style="width:'+mpct+'%;background:'+mcol+'"></div></div>';
+  html += '<div class="sb-score" style="color:'+mcol+'">'+meddicHits+'/'+meddicTotal+'</div>';
+  html += '</div>';
+  document.getElementById('score-summary').innerHTML = html;
+}
+
+function submit() {
+  var payload = {
+    bdm:         getBDMName(),
+    venue:       g('s1-venue').value,
+    visitType:   g('s1-type').value,
+    outcome:     g('s1-outcome').value,
+    overallScore: scores['overall'],
+    challenger: {
+      teach:   scores['teach'],
+      tailor:  scores['tailor'],
+      control: scores['control'],
+    },
+    meddic: meddicEls,
+    moments: {
+      landed:    g('s4-good').value,
+      breakdown: g('s4-bad').value,
+      replay:    g('s4-replay').value,
+      coached:   g('s4-coached').value,
+    },
+    nextSteps: {
+      priority:    g('s5-priority').value,
+      oneOnOne:    g('s5-1on1').value,
+      followupDate:g('s5-followup').value,
+      notes:       g('s5-notes').value,
+    },
+    submittedAt: new Date().toISOString(),
+  };
+
+  if(WEBHOOK_URL) {
+    fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(function(){});
+  }
+
+  
+  document.querySelector('.screens').innerHTML = '<div style="padding:40px 20px;text-align:center;"><div style="font-size:40px;margin-bottom:16px;">✓</div><div style="font-size:18px;font-weight:800;margin-bottom:8px;">Coaching note filed.</div><div style="font-size:13px;color:#444;line-height:1.7;">Added to '+payload.bdm+'\'s coaching log.<br>Will appear in the performance dashboard<br>before the next 1:1.</div></div>';
+  document.querySelector('.footer').innerHTML = '<div class="btn-next" style="grid-column:1/-1;" onclick="location.reload()">New call-along →</div>';
+}
+
+document.getElementById('s5-followup').valueAsDate = (function(){ var d=new Date(); d.setDate(d.getDate()+7); return d; })();
+loadTeam();
+showScreen(1);
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>
