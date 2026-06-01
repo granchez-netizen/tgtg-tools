@@ -8,9 +8,9 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600;700;800;900&display=swap');
 :root{
   --tgtg:#6DBE4F;--tgtgd:rgba(109,190,79,.08);--tgtgl:rgba(109,190,79,.2);
-  --bg:#080808;--s1:#111;--s2:#181818;--s3:#1e1e1e;
-  --border:#222;--border2:#2a2a2a;
-  --text:#f0f0f0;--muted:#666;--muted2:#444;
+  --bg:#ffffff;--s1:#ffffff;--s2:#f7f8f5;--s3:#f0f2ed;
+  --border:#e4e8de;--border2:#dde3d8;
+  --text:#1a1a1a;--muted:#5a6454;--muted2:#8a9484;
   --danger:#EF4444;--warn:#F59E0B;--good:#22C55E;--info:#60A5FA;--purple:#A78BFA;
   --q1:#22C55E;--q2:#6DBE4F;--q3:#F59E0B;--q4:#EF4444;
 }
@@ -18,7 +18,7 @@
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;min-height:100vh;}
 
 /* NAV */
-.topbar{background:var(--s1);border-bottom:1px solid var(--border);padding:12px 24px 12px 60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar{background:#6DBE4F;border-bottom:1px solid var(--border);padding:12px 24px 12px 60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
 .brand{font-size:13px;font-weight:800;letter-spacing:-.3px;}.brand em{color:var(--tgtg);font-style:normal;}
 .topbar-r{display:flex;align-items:center;gap:12px;}
 .topbar-pill{font-size:10px;font-weight:700;padding:4px 10px;border-radius:6px;background:var(--tgtgd);border:1px solid var(--tgtgl);color:var(--tgtg);}
@@ -29,10 +29,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 @media(max-width:900px){.layout{grid-template-columns:1fr;}}
 
 /* SIDEBAR */
-.sidebar{background:var(--s1);border-right:1px solid var(--border);padding:20px 0;position:sticky;top:46px;height:calc(100vh - 46px);overflow-y:auto;}
+.sidebar{background:#ffffff;border-right:1px solid var(--border);padding:20px 0;position:sticky;top:46px;height:calc(100vh - 46px);overflow-y:auto;}
 .sidebar-section{padding:8px 12px 4px;font-size:9px;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:2px;font-family:'DM Mono',monospace;}
 .nav-item{display:flex;align-items:center;gap:8px;padding:8px 16px;margin:1px 8px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;color:var(--muted);transition:all .15s;}
-.nav-item:hover{background:var(--s2);color:#aaa;}
+.nav-item:hover{background:#f7f8f5;color:#aaa;}
 .nav-item.active{background:var(--tgtgd);color:var(--tgtg);border:1px solid var(--tgtgl);}
 .nav-item .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 .nav-item .count{margin-left:auto;font-size:9px;font-weight:800;padding:1px 5px;border-radius:3px;background:var(--border2);}
@@ -51,7 +51,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 
 /* COMMAND STRIP */
 .cmd-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:24px;}
-.cmd-cell{background:var(--s2);border:1px solid var(--border2);border-radius:10px;padding:14px;}
+.cmd-cell{background:#f7f8f5;border:1px solid #dde3d8;border-radius:10px;padding:14px;}
 .cmd-n{font-size:24px;font-weight:900;letter-spacing:-1px;line-height:1;}
 .cmd-l{font-size:9px;color:var(--muted);margin-top:5px;font-weight:600;text-transform:uppercase;letter-spacing:1px;}
 .cmd-d{font-size:10px;margin-top:2px;font-weight:600;}
@@ -61,7 +61,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 
 /* TEAM TABS */
 .team-tabs{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap;}
-.team-tab{padding:8px 16px;border-radius:8px;border:1px solid var(--border2);background:transparent;color:var(--muted);font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;}
+.team-tab{padding:8px 16px;border-radius:8px;border:1px solid #dde3d8;background:transparent;color:var(--muted);font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;}
 .team-tab:hover{border-color:#444;color:#aaa;}
 .team-tab.on{background:var(--tgtgd);border-color:var(--tgtgl);color:var(--tgtg);}
 .team-tab .badge{display:inline-block;width:16px;height:16px;border-radius:50%;text-align:center;line-height:16px;font-size:9px;font-weight:900;margin-right:5px;background:var(--tgtg);color:#000;}
@@ -82,7 +82,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 
 /* REP CARDS */
 .rep-grid{display:grid;gap:10px;margin-bottom:24px;}
-.rep-card{background:var(--s1);border:1px solid var(--border2);border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color .2s;}
+.rep-card{background:#ffffff;border:1px solid #dde3d8;border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color .2s;}
 .rep-card:hover{border-color:var(--tgtg);}
 .rep-card.q1{border-left:3px solid var(--q1);}
 .rep-card.q2{border-left:3px solid var(--q2);}
@@ -106,7 +106,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 .tag-risk{background:rgba(239,68,68,.1);color:var(--danger);}
 .tag-pip{background:rgba(239,68,68,.15);color:var(--danger);border:1px solid rgba(239,68,68,.3);}
 .rc-scores{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border2);margin-top:-1px;}
-.rc-score-cell{background:var(--s1);padding:10px 12px;text-align:center;}
+.rc-score-cell{background:#ffffff;padding:10px 12px;text-align:center;}
 .rsc-n{font-size:16px;font-weight:900;letter-spacing:-.5px;}
 .rsc-l{font-size:8px;color:var(--muted);margin-top:2px;font-weight:600;text-transform:uppercase;}
 .rc-detail{display:none;border-top:1px solid var(--border2);padding:16px;}
@@ -118,7 +118,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 .ds-item{font-size:11px;color:#bbb;padding:5px 0;border-bottom:1px solid var(--border);line-height:1.6;}
 .ds-item:last-child{border-bottom:none;}
 .ds-item strong{color:var(--text);}
-.coaching-plan{background:var(--s2);border-radius:8px;padding:12px;}
+.coaching-plan{background:#f7f8f5;border-radius:8px;padding:12px;}
 .cp-week{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--border);font-size:11px;}
 .cp-week:last-child{border-bottom:none;}
 .cp-wlabel{font-size:9px;font-weight:700;color:var(--tgtg);width:44px;flex-shrink:0;font-family:'DM Mono',monospace;}
@@ -135,7 +135,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 
 /* TRAINING PATHWAYS */
 .pathway-grid{display:grid;gap:12px;margin-bottom:20px;}
-.pathway{background:var(--s1);border:1px solid var(--border2);border-radius:12px;overflow:hidden;}
+.pathway{background:#ffffff;border:1px solid #dde3d8;border-radius:12px;overflow:hidden;}
 .pw-head{display:flex;align-items:center;gap:12px;padding:14px 16px;}
 .pw-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
 .pw-mid{flex:1;}
@@ -153,9 +153,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 /* RESILIENCE */
 .resilience-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
 @media(max-width:700px){.resilience-grid{grid-template-columns:1fr;}}
-.res-card{background:var(--s1);border:1px solid var(--border2);border-radius:12px;padding:16px;}
+.res-card{background:#ffffff;border:1px solid #dde3d8;border-radius:12px;padding:16px;}
 .res-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--tgtg);margin-bottom:10px;font-family:'DM Mono',monospace;}
-.res-scenario{margin-bottom:10px;padding:10px;background:var(--s2);border-radius:8px;}
+.res-scenario{margin-bottom:10px;padding:10px;background:#f7f8f5;border-radius:8px;}
 .res-trigger{font-size:11px;font-weight:700;color:var(--warn);margin-bottom:6px;}
 .res-response{font-size:11px;color:#bbb;line-height:1.7;}
 .res-response strong{color:var(--text);}
@@ -163,7 +163,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 /* DAY/WEEK VIEW */
 .week-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px;}
 @media(max-width:800px){.week-grid{grid-template-columns:1fr 1fr;}}
-.day-col{background:var(--s1);border:1px solid var(--border2);border-radius:12px;overflow:hidden;}
+.day-col{background:#ffffff;border:1px solid #dde3d8;border-radius:12px;overflow:hidden;}
 .day-header{padding:10px 12px;border-bottom:1px solid var(--border2);}
 .day-name{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--tgtg);}
 .day-focus{font-size:9px;color:var(--muted);margin-top:2px;}
@@ -172,7 +172,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 .event:last-child{margin-bottom:0;}
 .event.standup{background:rgba(109,190,79,.08);border:1px solid rgba(109,190,79,.2);}
 .event.coaching{background:rgba(96,165,250,.07);border:1px solid rgba(96,165,250,.15);}
-.event.admin{background:rgba(100,100,100,.1);border:1px solid var(--border2);}
+.event.admin{background:rgba(100,100,100,.1);border:1px solid #dde3d8;}
 .event.pipeline{background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.15);}
 .event.director{background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);}
 .event.listening{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.15);}
@@ -187,7 +187,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 /* MARKETPLACE LIQUIDITY */
 .liquidity-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px;}
 @media(max-width:800px){.liquidity-grid{grid-template-columns:1fr;}}
-.liq-card{background:var(--s1);border:1px solid var(--border2);border-radius:12px;padding:16px;}
+.liq-card{background:#ffffff;border:1px solid #dde3d8;border-radius:12px;padding:16px;}
 .liq-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--tgtg);margin-bottom:10px;font-family:'DM Mono',monospace;}
 .liq-metric{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border);font-size:11px;}
 .liq-metric:last-child{border-bottom:none;}
@@ -199,7 +199,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 
 /* AI SECTION */
 .ai-grid{display:grid;gap:10px;margin-bottom:20px;}
-.ai-card{background:var(--s1);border:1px solid var(--border2);border-radius:12px;padding:16px;display:flex;gap:14px;}
+.ai-card{background:#ffffff;border:1px solid #dde3d8;border-radius:12px;padding:16px;display:flex;gap:14px;}
 .ai-icon{font-size:22px;flex-shrink:0;margin-top:2px;}
 .ai-title{font-size:13px;font-weight:700;margin-bottom:4px;}
 .ai-desc{font-size:11px;color:#bbb;line-height:1.7;}
@@ -213,7 +213,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 .rb-body{font-size:12px;color:#ccc;line-height:1.85;}
 .rb-body strong{color:var(--text);}
 .rb-signals{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;}
-.rb-signal{background:var(--s2);border-radius:8px;padding:10px;}
+.rb-signal{background:#f7f8f5;border-radius:8px;padding:10px;}
 .rbs-label{font-size:9px;font-weight:700;color:var(--tgtg);text-transform:uppercase;margin-bottom:4px;font-family:'DM Mono',monospace;}
 .rbs-text{font-size:11px;color:#bbb;line-height:1.6;}
 
@@ -224,7 +224,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 /* HERO DEPENDENCY */
 .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
 @media(max-width:700px){.hero-grid{grid-template-columns:1fr;}}
-.hero-card{background:var(--s1);border:1px solid var(--border2);border-radius:12px;padding:16px;}
+.hero-card{background:#ffffff;border:1px solid #dde3d8;border-radius:12px;padding:16px;}
 .hero-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--warn);margin-bottom:8px;font-family:'DM Mono',monospace;}
 .hero-item{font-size:11px;color:#bbb;padding:5px 0;border-bottom:1px solid var(--border);line-height:1.6;}
 .hero-item:last-child{border-bottom:none;}
@@ -356,7 +356,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 
       <div class="section-title">All 3 Teams · Snapshot</div>
 
-      <div style="background:var(--s1);border:1px solid var(--border2);border-radius:12px;overflow:hidden;margin-bottom:12px;">
+      <div style="background:#ffffff;border:1px solid #dde3d8;border-radius:12px;overflow:hidden;margin-bottom:12px;">
         <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr 1fr;padding:10px 14px;border-bottom:1px solid var(--border2);font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">
           <div>Rep</div><div style="text-align:right;">Dial/wk</div><div style="text-align:right;">Win%</div><div style="text-align:right;">Avg Score</div><div style="text-align:right;">Pipeline</div><div style="text-align:right;">Quartile</div>
         </div>
@@ -448,25 +448,25 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
       <div class="section-title">Your Answers to Her Likely Questions</div>
 
       <div style="display:flex;flex-direction:column;gap:10px;">
-        <div style="background:var(--s1);border:1px solid var(--border2);border-radius:10px;overflow:hidden;">
+        <div style="background:#ffffff;border:1px solid #dde3d8;border-radius:10px;overflow:hidden;">
           <div style="padding:12px 16px;cursor:pointer;font-size:13px;font-weight:700;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'">"How do you build a coaching culture with early-stage reps?" ▾</div>
           <div style="display:none;padding:12px 16px;border-top:1px solid var(--border2);font-size:12px;color:#bbb;line-height:1.85;">
             "Early-stage salespeople don't fail because they lack ability — they fail because they lack a structure that gives them feedback fast enough. What I build is a daily feedback loop: staggered standups so I can observe each team, call listening as a daily habit not an event, and AI call analysis that means every rep gets scored on every call — not just the ones I hear. The rep who struggles on Monday gets specific coaching by Tuesday standup and a chance to apply it before Thursday. The rep who's having three bad days doesn't spiral — because we catch it at day one and diagnose whether it's skill, confidence, or something personal. I've trained people who didn't know what a sales call was into consistent performers. It takes structure and patience and it takes you believing the person can do it before they believe it themselves."
           </div>
         </div>
-        <div style="background:var(--s1);border:1px solid var(--border2);border-radius:10px;overflow:hidden;">
+        <div style="background:#ffffff;border:1px solid #dde3d8;border-radius:10px;overflow:hidden;">
           <div style="padding:12px 16px;cursor:pointer;font-size:13px;font-weight:700;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'">"How do you prevent hero-rep dependency?" ▾</div>
           <div style="display:none;padding:12px 16px;border-top:1px solid var(--border2);font-size:12px;color:#bbb;line-height:1.85;">
             "The danger isn't the star rep — it's the system that only works when they're there. What I do from week one is make the top performers' methods explicit and transferable. When Marco has a great call, I play 90 seconds of it at Friday standup with the specific technique named. I ask Marco to co-coach Priya on Thursdays. I document the 'why it works' — not just what they said, but the underlying principle. Now the playbook isn't Marco's instinct — it's everyone's framework. And when Marco gets promoted, which he will, the team doesn't drop — because they've been absorbing his method for six months."
           </div>
         </div>
-        <div style="background:var(--s1);border:1px solid var(--border2);border-radius:10px;overflow:hidden;">
+        <div style="background:#ffffff;border:1px solid #dde3d8;border-radius:10px;overflow:hidden;">
           <div style="padding:12px 16px;cursor:pointer;font-size:13px;font-weight:700;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'">"How do you manage Team Leads who aren't ready to lead?" ▾</div>
           <div style="display:none;padding:12px 16px;border-top:1px solid var(--border2);font-size:12px;color:#bbb;line-height:1.85;">
             "Team Leads who've been promoted from the rep floor often manage the way they were managed — which might mean they're too soft, or too focused on their own deals, or they don't know what a 1:1 is supposed to do. I solve this with a structured TL development programme: weekly 1:1 with me specifically on their coaching quality, a shared call review process so they're listening to their reps' calls every day, and a monthly 'manager coaching session' where we role-play difficult conversations before they have them. I also track their team's score improvement — because a good Team Lead's impact shows up in their team's trajectory, not their own numbers."
           </div>
         </div>
-        <div style="background:var(--s1);border:1px solid var(--border2);border-radius:10px;overflow:hidden;">
+        <div style="background:#ffffff;border:1px solid #dde3d8;border-radius:10px;overflow:hidden;">
           <div style="padding:12px 16px;cursor:pointer;font-size:13px;font-weight:700;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'">"How will you keep me informed without me having to ask?" ▾</div>
           <div style="display:none;padding:12px 16px;border-top:1px solid var(--border2);font-size:12px;color:#bbb;line-height:1.85;">
             "You'll have a Friday brief from me every week — pipeline health, team performance, any at-risk accounts or at-risk people, and the 1–2 decisions that need you. It takes you 5 minutes to read. I flag things early — not when they're already a crisis. If I have a difficult people situation, you hear about it from me before you hear about it from anyone else. The commitment I make is: you are never surprised by something I knew about."
@@ -510,35 +510,35 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 
       <div class="section-title">What the Data Cannot See — And You Can</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
-        <div style="background:var(--s1);border:1px solid var(--border2);border-radius:10px;padding:14px;">
+        <div style="background:#ffffff;border:1px solid #dde3d8;border-radius:10px;padding:14px;">
           <div style="font-size:10px;font-weight:700;color:var(--warn);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">The Data Says</div>
           <div style="font-size:11px;color:#888;line-height:1.7;">Partner X has 2 bags/week. Below target. Flag for churn risk.</div>
         </div>
-        <div style="background:var(--s1);border:1px solid rgba(109,190,79,.2);border-radius:10px;padding:14px;">
+        <div style="background:#ffffff;border:1px solid rgba(109,190,79,.2);border-radius:10px;padding:14px;">
           <div style="font-size:10px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">What You See On A Call</div>
           <div style="font-size:11px;color:#bbb;line-height:1.7;">The owner's daughter just had surgery. They've been closed 3 days. They're not churning — they're temporarily offline. A check-in call, not a churn protocol.</div>
         </div>
-        <div style="background:var(--s1);border:1px solid var(--border2);border-radius:10px;padding:14px;">
+        <div style="background:#ffffff;border:1px solid #dde3d8;border-radius:10px;padding:14px;">
           <div style="font-size:10px;font-weight:700;color:var(--warn);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">The Data Says</div>
           <div style="font-size:11px;color:#888;line-height:1.7;">Rep has 47 conversations this week. Volume is healthy.</div>
         </div>
-        <div style="background:var(--s1);border:1px solid rgba(109,190,79,.2);border-radius:10px;padding:14px;">
+        <div style="background:#ffffff;border:1px solid rgba(109,190,79,.2);border-radius:10px;padding:14px;">
           <div style="font-size:10px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">What You See Listening Live</div>
           <div style="font-size:11px;color:#bbb;line-height:1.7;">They're calling the same 47 venues they called last week because they're too anxious to expand their territory. Volume is healthy. Output is hollow.</div>
         </div>
-        <div style="background:var(--s1);border:1px solid var(--border2);border-radius:10px;padding:14px;">
+        <div style="background:#ffffff;border:1px solid #dde3d8;border-radius:10px;padding:14px;">
           <div style="font-size:10px;font-weight:700;color:var(--warn);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">The Data Says</div>
           <div style="font-size:11px;color:#888;line-height:1.7;">Sector: Ethnic restaurants, 71% win rate. Keep targeting.</div>
         </div>
-        <div style="background:var(--s1);border:1px solid rgba(109,190,79,.2);border-radius:10px;padding:14px;">
+        <div style="background:#ffffff;border:1px solid rgba(109,190,79,.2);border-radius:10px;padding:14px;">
           <div style="font-size:10px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">What You See In The Postcode</div>
           <div style="font-size:11px;color:#bbb;line-height:1.7;">The Whitechapel cluster is owned by one family across 6 venues. One great relationship unlocks all six. The data sees 6 individual accounts. You see a group deal.</div>
         </div>
-        <div style="background:var(--s1);border:1px solid var(--border2);border-radius:10px;padding:14px;">
+        <div style="background:#ffffff;border:1px solid #dde3d8;border-radius:10px;padding:14px;">
           <div style="font-size:10px;font-weight:700;color:var(--warn);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">The Data Says</div>
           <div style="font-size:11px;color:#888;line-height:1.7;">New rep Clem Walsh: 44% win rate, Q3. Watch.</div>
         </div>
-        <div style="background:var(--s1);border:1px solid rgba(109,190,79,.2);border-radius:10px;padding:14px;">
+        <div style="background:#ffffff;border:1px solid rgba(109,190,79,.2);border-radius:10px;padding:14px;">
           <div style="font-size:10px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">What You See In The Standup</div>
           <div style="font-size:11px;color:#bbb;line-height:1.7;">Clem is making 12 calls but putting in 40 minutes of prep per call. She's learning, not underperforming. She needs pace training, not a performance conversation.</div>
         </div>
@@ -1347,10 +1347,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 
       <div class="section-title">Director Communication Principles</div>
       <div style="display:grid;gap:10px;">
-        <div style="background:var(--s1);border:1px solid var(--border2);border-radius:10px;padding:14px;font-size:12px;color:#bbb;line-height:1.8;"><strong style="color:var(--text);">Flag early, not when it's already a crisis.</strong> If Will Carter's churn rate concerned you this week, Ruby hears about it this week — not when three more accounts have left. Early flagging is a sign of control, not weakness.</div>
-        <div style="background:var(--s1);border:1px solid var(--border2);border-radius:10px;padding:14px;font-size:12px;color:#bbb;line-height:1.8;"><strong style="color:var(--text);">Tell her what you don't know.</strong> "I don't have enough data on the non-food segment yet — I'll have a recommendation in 3 weeks" builds more trust than a premature recommendation that later has to be walked back.</div>
-        <div style="background:var(--s1);border:1px solid var(--border2);border-radius:10px;padding:14px;font-size:12px;color:#bbb;line-height:1.8;"><strong style="color:var(--text);">Bring decisions, not situations.</strong> "Here's a problem" puts the cognitive load on Ruby. "Here's a problem, here are 3 options, here's my recommendation, here's what I need from you" respects her time and demonstrates your authority.</div>
-        <div style="background:var(--s1);border:1px solid var(--border2);border-radius:10px;padding:14px;font-size:12px;color:#bbb;line-height:1.8;"><strong style="color:var(--text);">The Friday brief is non-negotiable.</strong> It happens even in the weeks where everything is fine — especially then. The pattern of reliable communication is what builds the trust that gives you autonomy. Miss it twice and she starts asking for updates herself. That is the beginning of micromanagement.</div>
+        <div style="background:#ffffff;border:1px solid #dde3d8;border-radius:10px;padding:14px;font-size:12px;color:#bbb;line-height:1.8;"><strong style="color:var(--text);">Flag early, not when it's already a crisis.</strong> If Will Carter's churn rate concerned you this week, Ruby hears about it this week — not when three more accounts have left. Early flagging is a sign of control, not weakness.</div>
+        <div style="background:#ffffff;border:1px solid #dde3d8;border-radius:10px;padding:14px;font-size:12px;color:#bbb;line-height:1.8;"><strong style="color:var(--text);">Tell her what you don't know.</strong> "I don't have enough data on the non-food segment yet — I'll have a recommendation in 3 weeks" builds more trust than a premature recommendation that later has to be walked back.</div>
+        <div style="background:#ffffff;border:1px solid #dde3d8;border-radius:10px;padding:14px;font-size:12px;color:#bbb;line-height:1.8;"><strong style="color:var(--text);">Bring decisions, not situations.</strong> "Here's a problem" puts the cognitive load on Ruby. "Here's a problem, here are 3 options, here's my recommendation, here's what I need from you" respects her time and demonstrates your authority.</div>
+        <div style="background:#ffffff;border:1px solid #dde3d8;border-radius:10px;padding:14px;font-size:12px;color:#bbb;line-height:1.8;"><strong style="color:var(--text);">The Friday brief is non-negotiable.</strong> It happens even in the weeks where everything is fine — especially then. The pattern of reliable communication is what builds the trust that gives you autonomy. Miss it twice and she starts asking for updates herself. That is the beginning of micromanagement.</div>
       </div>
     </div>
 
