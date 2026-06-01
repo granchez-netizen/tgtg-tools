@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Too Good To Go · PIP Management</title>
+<link rel="stylesheet" href="/brand.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  -webkit-font-smoothing: antialiased;font-family:'Inter',sans-serif;background:#111;color:#fff;min-height:100vh;padding-bottom:60px;}
+.shell{max-width:960px;margin:0 auto;padding:20px 16px;}
+
+.hdr{display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:16px;border-bottom:1px solid #2a2a2a;margin-bottom:20px;}
+.brand{font-size:12px;font-weight:800;}.brand em{color:#FFD000;font-style:normal;}
+.hdr-title{font-size:22px;font-weight:800;margin-top:5px;}.hdr-title em{color:#FFD000;font-style:normal;}
+.hdr-sub{font-size:12px;color:#444;margin-top:3px;line-height:1.5;}
+.hdr-tag{font-size:10px;font-family:'Inter',sans-serif;font-weight:700;color:#FFD000;padding:4px 10px;border:1px solid #2a2a2a;border-radius:4px;}
+
+.tabs{display:flex;gap:0;border-bottom:1px solid #222;margin-bottom:22px;}
+.tab{padding:10px 20px;font-size:13px;font-weight:700;color:#444;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;}
+.tab.active{color:#FFD000;border-bottom-color:#FFD000;}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;}
+.stat{background:#1a1a1a;border:1px solid #222;border-radius:10px;padding:13px;text-align:center;}
+.stat-n{font-size:26px;font-weight:800;line-height:1;}
+.stat-l{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#444;margin-top:3px;}
+@media(max-width:500px){.stats{grid-template-columns:1fr 1fr;}}
+
+.add-btn{display:flex;align-items:center;gap:8px;padding:10px 16px;background:#FFD000;color:#000;border:none;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;margin-bottom:18px;}
+.add-btn:hover{background:rgba(255,208,0,.80);}
+
+.pip-card{background:#1a1a1a;border:1px solid #222222;border-radius:12px;overflow:hidden;margin-bottom:12px;}
+.pip-card.status-improving{border-left:3px solid #22C55E;}
+.pip-card.status-concern{border-left:3px solid #FFD000;}
+.pip-card.status-critical{border-left:3px solid #E57373;}
+
+.pc-head{padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid #2a2a2a;}
+.pc-name{font-size:15px;font-weight:800;}
+.pc-meta{font-size:11px;color:#444;margin-top:2px;}
+.pc-right{text-align:right;}
+.pc-days{font-size:22px;font-weight:800;line-height:1;color:#FFD000;}
+.pc-days-l{font-size:10px;color:#444;}
+.status-pill{font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;margin-top:5px;display:inline-block;}
+.sp-improving{background:rgba(76,175,130,.1);color:#22C55E;border:1px solid rgba(76,175,130,.2);}
+.sp-concern{background:rgba(217,119,6,.08);color:#FFD000;border:1px solid rgba(217,119,6,.15);}
+.sp-critical{background:rgba(229,115,115,.08);color:#E57373;border:1px solid rgba(229,115,115,.15);}
+
+.pc-goals{padding:12px 16px;border-bottom:1px solid #2a2a2a;}
+.pc-goals-label{font-size:9px;font-weight:700;color:#444;text-transform:uppercase;letter-spacing:1.5px;font-family:'Inter',sans-serif;margin-bottom:8px;}
+.goal-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.goal-row:last-child{margin-bottom:0;}
+.goal-check{width:18px;height:18px;border-radius:4px;border:1.5px solid #2a2a2a;display:flex;align-items:center;justify-content:center;font-size:10px;cursor:pointer;flex-shrink:0;transition:all .15s;}
+.goal-check.hit{background:rgba(76,175,130,.15);border-color:#22C55E;color:#22C55E;}
+.goal-check.partial{background:rgba(217,119,6,.1);border-color:#FFD000;color:#FFD000;}
+.goal-check.missed{background:rgba(229,115,115,.1);border-color:#E57373;color:#E57373;}
+.goal-text{font-size:12px;color:#888;flex:1;line-height:1.4;}
+.goal-target{font-size:10px;font-weight:700;color:#444;flex-shrink:0;}
+
+.pc-actions{padding:10px 16px;display:flex;gap:8px;}
+.pc-btn{padding:8px 14px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid #2a2a2a;background:transparent;color:#555;transition:all .15s;}
+.pc-btn:hover{border-color:#FFD000;color:#FFD000;}
+.pc-btn-log{border-color:#FFD000;color:#FFD000;}
+.pc-btn-expand{flex:1;text-align:center;}
+
+.checkin-log{display:none;padding:0 16px 14px;}
+.cl-head{font-size:9px;font-weight:700;color:#444;text-transform:uppercase;letter-spacing:1.5px;font-family:'Inter',sans-serif;margin-bottom:10px;}
+.cl-entry{background:#111;border-radius:8px;padding:10px 12px;margin-bottom:6px;}
+.cle-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+.cle-week{font-size:11px;font-weight:700;color:#FFD000;}
+.cle-status{font-size:10px;font-weight:700;padding:2px 7px;border-radius:6px;}
+.cle-note{font-size:12px;color:#666;line-height:1.6;}
+.add-checkin{width:100%;padding:10px;background:transparent;border:1.5px dashed #2a2a2a;border-radius:8px;color:#444;font-size:12px;cursor:pointer;margin-top:6px;transition:all .15s;}
+.add-checkin:hover{border-color:#FFD000;color:#FFD000;}
+
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.8);z-index:100;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.open{display:flex;}
+.modal{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:14px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;padding:22px;}
+.modal-title{font-size:17px;font-weight:800;margin-bottom:18px;}
+.modal-title em{color:#FFD000;font-style:normal;}
+.fl{font-size:11px;font-weight:700;color:#444;text-transform:uppercase;letter-spacing:.9px;display:block;margin-bottom:6px;}
+.fi{width:100%;padding:11px 12px;background:#111;border:1.5px solid #2a2a2a;border-radius:9px;font-size:14px;color:#fff;font-family:inherit;margin-bottom:13px;transition:border-color .15s;}
+.fi:focus{outline:none;border-color:#FFD000;}
+.fi::placeholder{color:#333;}
+select.fi{cursor:pointer;}
+textarea.fi{resize:vertical;min-height:65px;line-height:1.6;}
+.modal-goals{margin-bottom:13px;}
+.goal-inp-row{display:flex;gap:7px;margin-bottom:7px;}
+.goal-inp{flex:1;padding:9px 11px;background:#111;border:1.5px solid #2a2a2a;border-radius:8px;font-size:13px;color:#fff;font-family:inherit;}
+.goal-inp:focus{outline:none;border-color:#FFD000;}
+.add-goal-btn{padding:9px 12px;background:#2a2a2a;color:#888;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;}
+.modal-footer{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px;}
+.btn-cancel{padding:12px;background:transparent;border:1.5px solid #2a2a2a;border-radius:9px;color:#555;font-size:13px;font-weight:700;cursor:pointer;}
+.btn-save{padding:12px;background:#FFD000;color:#000;border:none;border-radius:9px;font-size:13px;font-weight:800;cursor:pointer;}
+
+#tab-resources{display:none;}
+.res-intro{background:#0f0f0f;border:1px solid #1a1400;border-radius:10px;padding:14px 16px;margin-bottom:18px;}
+.ri-title{font-size:13px;font-weight:700;color:#FFD000;margin-bottom:4px;}
+.ri-text{font-size:12px;color:#7a5a1a;line-height:1.6;}
+
+.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:580px){.res-grid{grid-template-columns:1fr;}}
+
+.res-card{background:#1a1a1a;border:1px solid #222;border-radius:12px;padding:16px;}
+.rc-icon{font-size:24px;margin-bottom:10px;}
+.rc-title{font-size:14px;font-weight:700;margin-bottom:4px;}
+.rc-desc{font-size:12px;color:#555;line-height:1.6;margin-bottom:12px;}
+.rc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;}
+.rc-tag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;background:#222;color:#555;border:1px solid #2a2a2a;}
+.rc-download{width:100%;padding:10px;background:#2a2a2a;border:1.5px solid #2a2a2a;border-radius:8px;color:#aaa;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;text-align:center;}
+.rc-download:hover{border-color:#FFD000;color:#FFD000;background:#1a1a1a;}
+
+.ci-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.8);z-index:100;align-items:center;justify-content:center;padding:20px;}
+.ci-modal.open{display:flex;}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<div class="hdr">
+  <div>
+    <div class="brand"><em>Too Good</em> To Go · Sales Management</div>
+    <div class="hdr-title">PIP <em>Management</em></div>
+    <div class="hdr-sub">Performance improvement plans, weekly check-in logs, and coaching resources for Team Leads.</div>
+  </div>
+  <div class="hdr-tag">Confidential · HoI + TL only</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('pips',this)">Active PIPs</div>
+  <div class="tab" onclick="switchTab('resources',this)">Coaching Resources</div>
+</div>
+
+<div id="tab-pips">
+  <div class="stats" id="pip-stats"></div>
+  <button class="add-btn" onclick="openModal()">+ Add Rep to PIP</button>
+  <div id="pip-list"></div>
+</div>
+
+<div id="tab-resources">
+  <div class="res-intro">
+    <div class="ri-title">For Team Leads new to performance management</div>
+    <div class="ri-text">PIPs exist to give someone a clear, fair chance to meet the standard — not to build a case for dismissal. These resources cover how to initiate the conversation, run the weekly check-ins, document properly, and make the call when improvement is or is not happening. Download any resource and share with your TL team.</div>
+  </div>
+  <div class="res-grid" id="res-grid"></div>
+</div>
+
+</div>
+
+<div class="modal-overlay" id="pip-modal">
+  <div class="modal">
+    <div class="modal-title">Add Rep to <em>PIP</em></div>
+    <label class="fl">Rep name</label>
+    <input class="fi" id="new-bdm" type="text" placeholder="Full name">
+    <label class="fl">City / territory</label>
+    <input class="fi" id="new-city" type="text" placeholder="e.g. London N1">
+    <label class="fl">Team Lead</label>
+    <input class="fi" id="new-sm" type="text" placeholder="Team Lead name">
+    <label class="fl">PIP start date</label>
+    <input class="fi" id="new-start" type="date">
+    <label class="fl">Review date</label>
+    <input class="fi" id="new-review" type="date">
+    <label class="fl">Root cause (internal — not shared with rep)</label>
+    <textarea class="fi" id="new-root" placeholder="What is actually driving the underperformance? Skill gap, will gap, wrong territory, personal circumstances?"></textarea>
+    <label class="fl">Improvement goals (3–5 specific, measurable targets)</label>
+    <div class="modal-goals" id="modal-goals">
+      <div class="goal-inp-row"><input class="goal-inp" type="text" placeholder="e.g. 6 quality-gated deals signed in 4 weeks (≥4.0 stars)"></div>
+      <div class="goal-inp-row"><input class="goal-inp" type="text" placeholder="e.g. CRM compliance at 100% every week"></div>
+      <div class="goal-inp-row"><input class="goal-inp" type="text" placeholder="e.g. 10+ prospect calls logged per week"></div>
+    </div>
+    <button class="add-goal-btn" onclick="addGoalRow()" style="margin-bottom:13px;width:100%;">+ Add another goal</button>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-save" onclick="savePIP()">Save PIP</button>
+    </div>
+  </div>
+</div>
+
+<div class="ci-modal" id="ci-modal">
+  <div class="modal">
+    <div class="modal-title">Log <em>check-in</em></div>
+    <input type="hidden" id="ci-pip-id">
+    <label class="fl">Check-in date</label>
+    <input class="fi" id="ci-date" type="date">
+    <label class="fl">Status this week</label>
+    <select class="fi" id="ci-status">
+      <option value="improving">Improving — on track</option>
+      <option value="concern">Some progress — concerns remain</option>
+      <option value="critical">Not improving — decision approaching</option>
+    </select>
+    <label class="fl">What improved this week</label>
+    <textarea class="fi" id="ci-good" placeholder="Specific behaviour change observed. Not 'better attitude.' Name the moment."></textarea>
+    <label class="fl">What still needs to change</label>
+    <textarea class="fi" id="ci-bad" placeholder="Specific gap. What you agreed to work on, and whether it changed."></textarea>
+    <label class="fl">Agreed action for next week</label>
+    <textarea class="fi" id="ci-action" placeholder="One specific behavioural commitment from the rep for next week."></textarea>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeCIModal()">Cancel</button>
+      <button class="btn-save" onclick="saveCheckin()">Log check-in</button>
+    </div>
+  </div>
+</div>
+
+<script>
+
+function daysAgo(n){var d=new Date();d.setDate(d.getDate()-n);return d.toISOString().slice(0,10);}
+function daysAhead(n){var d=new Date();d.setDate(d.getDate()+n);return d.toISOString().slice(0,10);}
+
+var PIPS = [
+  {
+    id:1, bdm:'Tom Richards', city:'London · N1', sm:'HoI',
+    startDate:daysAgo(14), reviewDate:daysAhead(14),
+    status:'concern',
+    rootCause:'Will gap not skill gap. Consistent high-quality phone reps in the same territory close 3× more. Activity level is the problem — CRM shows 3 prospect calls last week against a target of 10.',
+    goals:[
+      {text:'6 quality-gated deals signed (≥4.0 stars) in 4 weeks',target:'6 deals',progress:'missed'},
+      {text:'CRM compliance at 100% — every visit logged same day',target:'100%',progress:'missed'},
+      {text:'10+ prospect calls per week logged in HubSpot',target:'10/week',progress:'missed'},
+      {text:'Deal score ≥40% on all new closes',target:'≥40%',progress:'partial'},
+      {text:'No stale deals — every open deal with activity within 7 days',target:'0 stale',progress:'missed'},
+    ],
+    checkins:[
+      {week:'Week 1',date:daysAgo(7),status:'concern',good:'Attended coaching session on Challenger. Engaged in the conversation.',bad:'3 prospect calls vs 10 target. Two stale deals still in same stage. CRM compliance 67%.',action:'10 visits this week. Log every visit same day. Move or close the two Islington deals.'},
+    ]
+  },
+];
+
+var nextId = 2;
+
+function renderStats() {
+  var active = PIPS.length;
+  var improving = PIPS.filter(function(p){ return p.status==='improving'; }).length;
+  var concern = PIPS.filter(function(p){ return p.status==='concern'; }).length;
+  var critical = PIPS.filter(function(p){ return p.status==='critical'; }).length;
+  var items = [
+    {n:active,  l:'Active PIPs',   col:'#FFD000'},
+    {n:improving,l:'Improving',    col:'#22C55E'},
+    {n:concern, l:'Concern',       col:'#FFD000'},
+    {n:critical,l:'Critical',      col:'#E57373'},
+  ];
+  var html='';
+  items.forEach(function(s){
+    html+='<div class="stat"><div class="stat-n" style="color:'+s.col+'">'+s.n+'</div><div class="stat-l">'+s.l+'</div></div>';
+  });
+  document.getElementById('pip-stats').innerHTML=html;
+}
+
+function daysSince(d){return Math.floor((new Date()-new Date(d))/86400000);}
+function daysUntil(d){return Math.max(0,Math.ceil((new Date(d)-new Date())/86400000));}
+function statusClass(s){return{improving:'improving',concern:'concern',critical:'critical'}[s]||'concern';}
+function pillClass(s){return{improving:'sp-improving',concern:'sp-concern',critical:'sp-critical'}[s]||'sp-concern';}
+function pillLabel(s){return{improving:'Improving',concern:'Concern',critical:'Critical — decision approaching'}[s]||s;}
+function progressIcon(p){return{hit:'✓',partial:'~',missed:'✗','':' '}[p]||' ';}
+
+function renderPIPs() {
+  var html='';
+  if(!PIPS.length){
+    html='<div style="text-align:center;padding:40px 20px;color:#333;font-size:14px;">No active PIPs. Use the button above to add one.</div>';
+  }
+  PIPS.forEach(function(p){
+    var daysIn=daysSince(p.startDate);
+    var daysLeft=daysUntil(p.reviewDate);
+    var sc=statusClass(p.status);
+    var pc=pillClass(p.status);
+    var pl=pillLabel(p.status);
+    var goalsHtml='';
+    p.goals.forEach(function(g){
+      var ic=progressIcon(g.progress);
+      var gc=g.progress==='hit'?'hit':g.progress==='partial'?'partial':g.progress==='missed'?'missed':'';
+      goalsHtml+='<div class="goal-row">';
+      goalsHtml+='<div class="goal-check '+gc+'" onclick="cycleGoal('+p.id+','+p.goals.indexOf(g)+')">'+ic+'</div>';
+      goalsHtml+='<div class="goal-text">'+g.text+'</div>';
+      goalsHtml+='<div class="goal-target">'+g.target+'</div>';
+      goalsHtml+='</div>';
+    });
+    var checkinsHtml='';
+    p.checkins.forEach(function(ci){
+      var cc=ci.status==='improving'?'sp-improving':ci.status==='critical'?'sp-critical':'sp-concern';
+      checkinsHtml+='<div class="cl-entry">';
+      checkinsHtml+='<div class="cle-head"><span class="cle-week">'+ci.week+' · '+ci.date+'</span><span class="cle-status '+cc+'">'+pillLabel(ci.status)+'</span></div>';
+      if(ci.good) checkinsHtml+='<div class="cle-note" style="color:#22C55E;margin-bottom:4px;">✓ '+ci.good+'</div>';
+      if(ci.bad) checkinsHtml+='<div class="cle-note" style="color:#E57373;margin-bottom:4px;">✗ '+ci.bad+'</div>';
+      if(ci.action) checkinsHtml+='<div class="cle-note">→ '+ci.action+'</div>';
+      checkinsHtml+='</div>';
+    });
+
+    html+='<div class="pip-card status-'+sc+'" id="pip-'+p.id+'">';
+    html+='<div class="pc-head">';
+    html+='<div><div class="pc-name">'+p.bdm+'</div><div class="pc-meta">'+p.city+' · TL: '+p.sm+'</div></div>';
+    html+='<div class="pc-right"><div class="pc-days">Day '+daysIn+'</div><div class="pc-days-l">'+daysLeft+'d to review</div><span class="status-pill '+pc+'">'+pl+'</span></div>';
+    html+='</div>';
+    html+='<div class="pc-goals"><div class="pc-goals-label">Improvement Goals</div>'+goalsHtml+'</div>';
+    html+='<div class="checkin-log" id="log-'+p.id+'"><div class="cl-head">Weekly Check-In Log</div>'+checkinsHtml;
+    html+='<button class="add-checkin" onclick="openCIModal('+p.id+')">+ Log this week\'s check-in</button></div>';
+    html+='<div class="pc-actions">';
+    html+='<button class="pc-btn pc-btn-log" onclick="toggleLog('+p.id+')">View check-in log</button>';
+    html+='<button class="pc-btn" onclick="changePIPStatus('+p.id+')">Update status</button>';
+    html+='<button class="pc-btn" onclick="removePIP('+p.id+')" style="color:#555;">Close PIP</button>';
+    html+='</div></div>';
+  });
+  document.getElementById('pip-list').innerHTML=html;
+  renderStats();
+}
+
+function toggleLog(id){
+  var el=document.getElementById('log-'+id);
+  el.style.display=el.style.display==='block'?'none':'block';
+}
+
+function cycleGoal(pipId, goalIdx){
+  var pip=PIPS.find(function(p){return p.id===pipId;});
+  var order=['','hit','partial','missed'];
+  var cur=pip.goals[goalIdx].progress||'';
+  var next=order[(order.indexOf(cur)+1)%order.length];
+  pip.goals[goalIdx].progress=next;
+  renderPIPs();
+}
+
+function changePIPStatus(pipId){
+  var pip=PIPS.find(function(p){return p.id===pipId;});
+  var order=['improving','concern','critical'];
+  var cur=order.indexOf(pip.status);
+  pip.status=order[(cur+1)%order.length];
+  renderPIPs();
+}
+
+function removePIP(pipId){
+  if(!confirm('Close this PIP? This removes it from the active list.')) return;
+  PIPS=PIPS.filter(function(p){return p.id!==pipId;});
+  renderPIPs();
+}
+
+function openModal(){
+  document.getElementById('new-start').valueAsDate=new Date();
+  var rd=new Date(); rd.setDate(rd.getDate()+28);
+  document.getElementById('new-review').value=rd.toISOString().slice(0,10);
+  document.getElementById('pip-modal').classList.add('open');
+}
+function closeModal(){document.getElementById('pip-modal').classList.remove('open');}
+
+function addGoalRow(){
+  var div=document.createElement('div');
+  div.className='goal-inp-row';
+  div.innerHTML='<input class="goal-inp" type="text" placeholder="Additional goal...">';
+  document.getElementById('modal-goals').appendChild(div);
+}
+
+function savePIP(){
+  var bdm=document.getElementById('new-bdm').value.trim();
+  if(!bdm){alert('Rep name required.');return;}
+  var goals=[];
+  document.querySelectorAll('.goal-inp').forEach(function(inp){
+    if(inp.value.trim()) goals.push({text:inp.value.trim(),target:'',progress:''});
+  });
+  PIPS.push({
+    id:nextId++,
+    bdm:bdm,
+    city:document.getElementById('new-city').value||'—',
+    sm:document.getElementById('new-sm').value||'—',
+    startDate:document.getElementById('new-start').value||new Date().toISOString().slice(0,10),
+    reviewDate:document.getElementById('new-review').value||daysAhead(28),
+    status:'concern',
+    rootCause:document.getElementById('new-root').value,
+    goals:goals.length?goals:[{text:'Goals to be confirmed in first 1:1',target:'',progress:''}],
+    checkins:[],
+  });
+  closeModal();
+  renderPIPs();
+}
+
+function openCIModal(pipId){
+  document.getElementById('ci-pip-id').value=pipId;
+  document.getElementById('ci-date').valueAsDate=new Date();
+  document.getElementById('ci-modal').classList.add('open');
+}
+function closeCIModal(){document.getElementById('ci-modal').classList.remove('open');}
+
+function saveCheckin(){
+  var pipId=parseInt(document.getElementById('ci-pip-id').value);
+  var pip=PIPS.find(function(p){return p.id===pipId;});
+  var weekNum=pip.checkins.length+1;
+  pip.checkins.push({
+    week:'Week '+weekNum,
+    date:document.getElementById('ci-date').value,
+    status:document.getElementById('ci-status').value,
+    good:document.getElementById('ci-good').value,
+    bad:document.getElementById('ci-bad').value,
+    action:document.getElementById('ci-action').value,
+  });
+  pip.status=document.getElementById('ci-status').value;
+  document.getElementById('ci-good').value='';
+  document.getElementById('ci-bad').value='';
+  document.getElementById('ci-action').value='';
+  closeCIModal();
+  renderPIPs();
+  setTimeout(function(){ toggleLog(pipId); },100);
+}
+
+function switchTab(tab,el){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  el.classList.add('active');
+  document.getElementById('tab-pips').style.display=tab==='pips'?'block':'none';
+  document.getElementById('tab-resources').style.display=tab==='resources'?'block':'none';
+}
+
+var RESOURCES = [
+  {
+    icon:'📋', title:'PIP Initiation Guide',
+    desc:'When to start a PIP, how to prepare, and what to say in the opening conversation. Includes the three things you must communicate clearly and how to frame it as support, not process.',
+    tags:['Conversation guide','TL new to PIP','First steps'],
+    content: `EATCLUB UK — PIP INITIATION GUIDE
+For Team Leads
+
+WHEN TO START A PIP
+A PIP is appropriate when: the rep has been clearly underperforming against measurable targets for 4+ weeks, you have had informal coaching conversations that have not changed the behaviour, and the underperformance is visible in data, not just your perception.
+
+A PIP is NOT appropriate as a surprise. If the rep does not know they are struggling, that is a management gap, not grounds for a PIP. The informal conversation must come first.
+
+PREPARING FOR THE CONVERSATION
+Before the meeting:
+— Pull 4 weeks of data: deals signed, CRM compliance, visit activity, deal score
+— Identify whether this is a skill gap or a will gap. The support plan differs.
+— Confirm with HR that a PIP is the right step and that documentation is in order
+— Prepare 3-5 specific, measurable improvement goals — not vague improvement language
+— Set a realistic review date: 4 weeks is standard for field sales roles
+
+THE OPENING CONVERSATION
+Three things you must communicate:
+
+1. The standard — exactly what the role requires, in numbers
+"The expectation for this role is 6+ quality-gated deals per month, CRM compliance at 100%, and 10+ prospect calls logged per week. Over the last four weeks you have been at [X deals], [Y% CRM], and [Z visits]. That gap is what we need to close."
+
+2. The support — what you will do to help
+"I am not here to manage you out. I am here to make sure you have everything you need to hit this standard. That means weekly 1:1s, call-alongs, specific coaching on [named area]. I am invested in this working."
+
+3. The consequence — honest and clear
+"If the standard is not met by [review date], we will need to make a decision about whether this role is the right fit. I want to be honest about that so there are no surprises."
+
+AFTER THE CONVERSATION
+— Send a written summary to the rep and HR within 24 hours
+— Document the goals, the start date, and the review date formally
+— Begin weekly check-ins from the following week
+— Do not soften the goals after the conversation. Clarity is kindness.`
+  },
+  {
+    icon:'🗓️', title:'Weekly Check-In Template',
+    desc:'A structured 30-minute agenda for the weekly PIP 1:1. Covers what to review, how to give the feedback, and how to agree next steps without the conversation drifting.',
+    tags:['Weekly cadence','Check-in structure','Documentation'],
+    content: `EATCLUB UK — WEEKLY PIP CHECK-IN TEMPLATE
+30 minutes. Same time every week. Non-negotiable.
+
+BEFORE THE MEETING (5 minutes)
+Pull this week's data from HubSpot:
+— Deals signed this week
+— CRM compliance this week (% of visits logged same day)
+— Venue visits logged
+— Open deals and last activity date on each
+— Any stale deals (no movement in 7+ days)
+
+THE MEETING AGENDA
+
+Opening (2 minutes)
+Start with the data, not your interpretation of it.
+"Here is what I can see from this week — let me share it and then I want to hear your read."
+Hand them the numbers. Let them respond first.
+
+Review vs goals (10 minutes)
+Go through each goal one by one.
+— What the target was
+— What the data shows
+— Ask: "What happened here?" before you diagnose
+— Listen for the real reason, not the surface reason
+
+What changed this week (8 minutes)
+"What specifically did you do differently this week compared to last week?"
+If nothing changed: "What got in the way of the thing we agreed?"
+This is the most important question. The answer tells you whether this is a will gap or a skill gap.
+
+Coaching moment (5 minutes)
+One specific piece of coaching per week. Not a list. One thing.
+Be specific and behavioural:
+NOT: "You need to be more confident."
+YES: "When the operator raised the brand objection, you backed down immediately. Next time, hold the reframe: 'You control the window, the depth, and the cover cap. Friday regulars never see it.' Say that before you soften."
+
+Agreed action for next week (5 minutes)
+One specific commitment from the rep — not from you.
+"What is the one thing you are going to do differently next week?"
+Write it down. Read it back. Confirm.
+
+DOCUMENTATION AFTER THE MEETING
+Within 24 hours, send a written summary to the rep:
+— What the data showed this week
+— What you coached on
+— What they committed to for next week
+— Where they stand overall (improving / concern / decision approaching)
+This protects both parties and creates a clear record.`
+  },
+  {
+    icon:'💬', title:'Difficult Conversation Framework',
+    desc:'The SBI model for giving hard feedback. How to be specific without being personal, and how to handle the emotional response without losing the message.',
+    tags:['SBI model','Hard feedback','Emotional response'],
+    content: `EATCLUB UK — DIFFICULT CONVERSATION FRAMEWORK
+SBI Model: Situation · Behaviour · Impact
+
+WHY VAGUE FEEDBACK FAILS
+"You need to step up" means nothing. "Your CRM compliance was 67% this week — three days had no visits logged at all" means something specific that can be changed. Vague feedback protects the giver, not the receiver.
+
+THE SBI MODEL
+
+Situation — describe when and where
+"In last Tuesday's call-along at the Islington venue..."
+"Looking at your HubSpot data from this week..."
+Specific, observable, unchallengeable.
+
+Behaviour — describe what happened, not what you think it means
+NOT: "You were unprepared."
+YES: "You walked in without having checked their Google rating or whether they were on any competitor platform."
+Describe the action. Not the character trait you have inferred from it.
+
+Impact — describe the effect
+"The operator spotted that you did not know they were on OpenTable. That eroded trust in the first two minutes."
+"The offer you proposed was for Friday evenings — their busiest night. They felt unheard and the conversation ended."
+
+HANDLING THE EMOTIONAL RESPONSE
+Some phone reps will become defensive. Some will become emotional. Some will shut down.
+
+If they get defensive:
+"I understand this is hard to hear. I am not questioning your work ethic — I am describing what I observed and what the data shows. I need you to help me understand what is getting in the way."
+
+If they become emotional:
+Stop. Let them process. Do not rush past it.
+"Take a moment. This conversation matters and I want you to be in a place where you can hear it properly."
+
+If they shut down:
+"I can see you have gone quiet. That is okay. I want to make sure this lands — can you tell me what you are taking away from this?"
+
+WHAT TO AVOID
+— Apologising for the feedback ("I am sorry to have to say this...")
+— Softening the goal after they push back
+— Ending without a specific agreed action
+— Waiting another week before having the conversation`
+  },
+  {
+    icon:'📊', title:'Performance Standards Reference',
+    desc:'What "meeting standard" looks like in numbers. Use this to set PIP goals and to have an objective conversation about what the role actually requires.',
+    tags:['Metrics','What good looks like','Goal setting'],
+    content: `EATCLUB UK — PERFORMANCE STANDARDS REFERENCE
+What meeting the standard looks like, in numbers.
+
+CORE METRICS — HEAD OF SALES EXPECTATIONS
+
+Deals signed per month (fully ramped rep)
+— Meeting standard: 8–12 quality-gated deals per month
+— Quality gate: venue ≥4.0 Google stars, offer confirmed against genuine quiet period
+— Below threshold: <5 deals per month for two consecutive months = coaching required
+
+CRM compliance
+— Meeting standard: 100% — every visit logged on the day it happened
+— No exceptions. A visit not logged is a visit that did not happen as far as management is concerned
+— Below threshold: <90% for two consecutive weeks = immediate coaching conversation
+
+Venue visits per week
+— Meeting standard: 10+ visits per week logged in HubSpot
+— Includes cold dials, warm intros, follow-ups, and objection handling visits
+— Below threshold: <6 visits per week for two consecutive weeks = performance concern
+
+Deal score
+— Meeting standard: ≥50% of closed deals scoring above 50 on the deal score
+— Deal score below 40 on a close is a coaching conversation, not a celebration
+— Below threshold: average deal score below 38 for a month = coaching required
+
+Activation rate (for phone reps 60+ days in role)
+— Meeting standard: ≥70% of venues signed in the last 30 days have had at least one redemption
+— Below threshold: <50% activation rate = handoff process and offer quality review
+
+Stale deals
+— Meeting standard: zero deals with no activity in 7+ days
+— A stale deal is a deal that is being carried, not worked
+— AI pipeline review flags these weekly — Team Lead must address in the next 1:1
+
+RAMP CONTEXT
+In the first 12 weeks, targets are lower. See the Rep Ramp Tracker for gate-by-gate expectations. PIP standards apply to fully-ramped phone reps. A rep on a PIP in weeks 1–8 requires a different conversation — ramp failure is usually an onboarding or fit issue, not a performance issue.`
+  },
+  {
+    icon:'📁', title:'Documentation Guide',
+    desc:'What to document, when to document it, and how. Protects both the rep and the business. Includes what HR needs at each stage.',
+    tags:['HR process','Documentation','Legal'],
+    content: `EATCLUB UK — PIP DOCUMENTATION GUIDE
+What to record, when, and how.
+
+WHY DOCUMENTATION MATTERS
+Good documentation protects the rep (they know exactly where they stand) and the business (every decision is evidence-based). The worst outcome is a dismissal that feels like a surprise to the rep or lacks a paper trail for HR.
+
+WHAT TO DOCUMENT — AND WHEN
+
+Before the PIP starts
+— Informal coaching conversations and their dates (even a quick note in HubSpot or Notion)
+— The data that prompted the PIP decision
+— HR confirmation that a PIP is the right step
+
+PIP initiation
+— Written PIP document signed by rep and TL (use the PIP template in this dashboard)
+— The specific goals, start date, and review date
+— The rep's response to the initiation conversation (agreed, disputed, emotional?)
+
+Weekly check-ins
+— A written summary after every weekly 1:1 (email to rep and HR)
+— What the data showed, what you coached, what was agreed
+— The rep's engagement level — were they present and working on it?
+
+Decision point
+— If exiting: a written record of each week's performance vs goal
+— If extending: the reason for extension and new timeline
+— If closing the PIP positively: a written confirmation of improvement
+
+WHAT NOT TO DO
+— Do not rely on memory. Document at the time, not after.
+— Do not send informal Slack messages about PIP status — use email for the record
+— Do not skip a week of check-ins and document it as if it happened
+— Do not make verbal promises about outcomes that are not in writing
+
+A NOTE ON CONFIDENTIALITY
+PIP information is confidential between the rep, TL, Head of Independent Partners, and HR. Do not share PIP status with other phone reps. It is not relevant to the rest of the team and creates a culture of fear.`
+  },
+  {
+    icon:'⚖️', title:'Improvement vs Exit Decision Guide',
+    desc:'How to assess whether genuine improvement is happening. What "meeting standard" looks like at week 4. When to extend, when to close positively, and when to make the exit call.',
+    tags:['Decision framework','Week 4 review','Honest assessment'],
+    content: `EATCLUB UK — IMPROVEMENT VS EXIT DECISION GUIDE
+
+THE WEEK 4 REVIEW
+At the end of the PIP period, you are making one of three decisions:
+1. Improvement confirmed — close the PIP, document the recovery
+2. Partial improvement — extend the PIP with revised expectations
+3. Exit — the standard is not being met and is not on a trajectory to be met
+
+HOW TO ASSESS GENUINE IMPROVEMENT
+
+Look at behaviour, not just numbers
+Numbers can recover in week 4 because the rep knows they are being watched. The question is whether the underlying behaviour has changed.
+— Are they logging visits before they get home, or in a batch at the end of the week?
+— Are the deals they are signing quality-gated, or are they rushing to hit a number?
+— In the call-along, are they using the Challenger framework, or just pitching faster?
+
+Look at the trajectory, not just the week 4 snapshot
+A rep who goes from 2 deals in week 1 to 4 in week 2 to 6 in week 3 to 8 in week 4 is on a genuine trajectory. A rep who hits 8 deals in week 4 after 2, 2, and 2 in weeks 1–3 is a concern.
+
+Ask one direct question
+"Honestly — how do you think you have done against what we agreed?" 
+A rep with genuine self-awareness knows where they have and have not hit the standard. A rep who overestimates their improvement is usually not going to sustain it.
+
+CLOSING THE PIP POSITIVELY
+"You have hit the standard we agreed. The PIP is closed. I want to acknowledge that you did the hard work required and I am glad we went through this process rather than around it. The expectation going forward is the same — these are the standards of the role."
+
+EXTENDING THE PIP
+Only extend if there is genuine partial improvement and a specific, addressable gap remaining. Do not extend to avoid making the exit decision. That is unfair to the rep.
+"You have improved in [specific area] and that is real. The gap that remains is [specific area]. I am going to extend the review by two weeks with a specific focus on that gap. If we close that gap, we close the PIP. If we do not, we will make the exit decision at that point."
+
+MAKING THE EXIT DECISION
+This is the hardest conversation in management. The key principles:
+— Be direct. Euphemisms make it worse. "We are letting you go" is clearer than "we are parting ways."
+— Be specific. "The standard was X. You reached Y. That gap was not closed over the review period."
+— Be kind. The person's employment is ending. That is serious and deserves respect.
+— Follow the HR process exactly. This is not the time to improvise.
+
+A NOTE ON SELF-AWARENESS
+If you are dreading making the exit decision, ask yourself whether you are doing it for the rep or for yourself. The kindest thing for a rep who is not going to make it in this role is a clear decision and a clean exit — not another month of uncertainty.`
+  },
+];
+
+function renderResources(){
+  var html='';
+  RESOURCES.forEach(function(r,i){
+    var tags=r.tags.map(function(t){return'<span class="rc-tag">'+t+'</span>';}).join('');
+    html+='<div class="res-card">';
+    html+='<div class="rc-icon">'+r.icon+'</div>';
+    html+='<div class="rc-title">'+r.title+'</div>';
+    html+='<div class="rc-desc">'+r.desc+'</div>';
+    html+='<div class="rc-tags">'+tags+'</div>';
+    html+='<button class="rc-download" onclick="downloadResource('+i+')">↓ Download as text file</button>';
+    html+='</div>';
+  });
+  document.getElementById('res-grid').innerHTML=html;
+}
+
+function downloadResource(i){
+  var r=RESOURCES[i];
+  var blob=new Blob([r.content],{type:'text/plain'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='Too Good To Go_'+r.title.replace(/\s+/g,'_')+'.txt';
+  a.click();
+}
+
+renderPIPs();
+renderResources();
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>
