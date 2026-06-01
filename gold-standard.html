@@ -19,57 +19,64 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;min-height:100vh;padding-bottom:60px;}
 .shell{max-width:1000px;margin:0 auto;padding:0 16px 40px;}
-
-/* HEADER */
 .hdr{background:var(--tgtg);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;margin-bottom:0;}
 .brand{font-size:13px;font-weight:800;color:#fff;}
 .hdr-sub{font-size:11px;color:rgba(255,255,255,.75);}
-
-/* NAV TABS */
-.nav{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:24px;overflow-x:auto;background:var(--bg2);padding:0 16px;}
-.nav-tab{padding:13px 20px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .15s;font-family:'DM Sans',sans-serif;}
+.nav{display:flex;gap:0;border-bottom:2px solid var(--border);overflow-x:auto;background:var(--bg2);padding:0 16px;}
+.nav-tab{padding:13px 18px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .15s;font-family:'DM Sans',sans-serif;}
 .nav-tab:hover{color:var(--tgtg);}
 .nav-tab.active{color:var(--tgtg);border-bottom-color:var(--tgtg);}
-
-.search-wrap{padding:16px 0 8px;}
-.search-box{width:100%;padding:11px 16px 11px 40px;background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;font-size:14px;color:var(--text);font-family:inherit;transition:border-color .15s;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236DBE4F' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:12px center;}
-.search-box:focus{outline:none;border-color:var(--tgtg);}
-.search-box::placeholder{color:var(--muted2);}
-
-.section{display:none;}.section.active{display:block;}
-.sec-hdr{margin-bottom:18px;padding-top:8px;}
+.section{display:none;padding-top:24px;}.section.active{display:block;}
+.sec-hdr{margin-bottom:20px;}
 .sec-title{font-size:18px;font-weight:800;margin-bottom:4px;letter-spacing:-.3px;}
-.sec-sub{font-size:13px;color:var(--muted);line-height:1.6;}
+.sec-sub{font-size:13px;color:var(--muted);line-height:1.65;}
 
-/* EMAIL / SCRIPT CARDS */
+/* MISSION STRIP */
+.mission{background:var(--tgtgd);border:1px solid var(--tgtgl);border-radius:10px;padding:14px 16px;margin-bottom:24px;font-size:13px;color:#2a5a1a;line-height:1.75;}
+.mission strong{color:var(--tgtg);}
+
+/* CATEGORY PILLS */
+.cats{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;}
+.cat{padding:4px 10px;border-radius:20px;font-size:10px;font-weight:700;background:var(--tgtgd);color:var(--tgtg);border:1px solid var(--tgtgl);font-family:'DM Mono',monospace;}
+
+/* EMAIL CARDS */
 .email-card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.04);}
 .ec-head{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--bg2);}
 .ec-title{font-size:13px;font-weight:700;color:var(--text);}
 .ec-type{font-size:9px;font-weight:700;padding:3px 9px;border-radius:8px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;}
 .type-email{background:var(--tgtgd);color:var(--tgtg);border:1px solid var(--tgtgl);}
-.type-whatsapp{background:rgba(37,211,102,.1);color:#25D366;border:1px solid rgba(37,211,102,.25);}
-.type-call{background:rgba(96,165,250,.1);color:var(--info);border:1px solid rgba(96,165,250,.25);}
-.type-slack{background:rgba(122,179,224,.1);color:#7AB3E0;border:1px solid rgba(122,179,224,.2);}
+.type-whatsapp{background:rgba(37,211,102,.1);color:#1a9e40;border:1px solid rgba(37,211,102,.3);}
+.type-call{background:rgba(96,165,250,.1);color:#2563eb;border:1px solid rgba(96,165,250,.3);}
+.type-slack{background:rgba(99,91,255,.1);color:#4f46e5;border:1px solid rgba(99,91,255,.2);}
 .type-manager{background:var(--dangerd);color:var(--danger);border:1px solid var(--dangerl);}
 .ec-meta{padding:8px 16px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;gap:16px;flex-wrap:wrap;}
 .ec-field{font-size:10px;color:var(--muted2);font-family:'DM Mono',monospace;}
 .ec-field strong{color:var(--muted);}
-.ec-body{padding:16px;font-size:13px;color:#444;line-height:1.85;white-space:pre-wrap;font-family:'DM Mono',monospace;max-height:340px;overflow-y:auto;cursor:text;background:#fff;}
-.ec-body .placeholder{color:var(--tgtg);font-weight:700;}
+.ec-body{padding:16px;font-size:13px;color:#333;line-height:1.85;white-space:pre-wrap;font-family:'DM Mono',monospace;max-height:340px;overflow-y:auto;}
 .ec-footer{padding:10px 16px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;background:var(--bg2);}
-.copy-btn{padding:7px 14px;background:var(--tgtg);color:#fff;border:none;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;transition:opacity .15s;font-family:'DM Sans',sans-serif;}
+.copy-btn{padding:7px 16px;background:var(--tgtg);color:#fff;border:none;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .15s;}
 .copy-btn:hover{opacity:.85;}
 .copy-btn.copied{background:var(--good);}
 
+/* PITCH / CALL CARDS */
+.pitch-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.04);}
+.pitch-card.featured{border:2px solid var(--tgtg);}
+.pc-label{font-size:9px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:2px;font-family:'DM Mono',monospace;margin-bottom:8px;}
+.pc-title{font-size:15px;font-weight:800;margin-bottom:4px;letter-spacing:-.2px;}
+.pc-sub{font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.6;}
+.pc-script{font-size:13px;color:#222;line-height:1.9;white-space:pre-wrap;font-family:'DM Mono',monospace;background:var(--bg2);border-radius:8px;padding:14px;border-left:3px solid var(--tgtg);}
+.pc-tip{font-size:11px;color:var(--muted);margin-top:10px;padding:9px 12px;background:var(--tgtgd);border-radius:6px;line-height:1.6;}
+.pc-copy{margin-top:12px;padding:8px 16px;background:var(--tgtg);color:#fff;border:none;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;}
+
 /* OBJECTION CARDS */
 .obj-card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,.04);}
-.oc-obj{padding:13px 16px;background:#fff5f5;border-bottom:1px solid rgba(239,68,68,.15);display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
-.oc-obj-text{font-size:13px;font-weight:700;color:var(--danger);flex:1;line-height:1.4;}
+.oc-obj{padding:13px 16px;background:#fff5f5;border-bottom:1px solid rgba(239,68,68,.12);}
 .oc-q{font-size:9px;font-weight:700;color:#c04040;text-transform:uppercase;letter-spacing:1px;font-family:'DM Mono',monospace;margin-bottom:4px;}
+.oc-obj-text{font-size:13px;font-weight:700;color:var(--danger);line-height:1.4;}
 .oc-counter{padding:14px 16px;}
 .oc-a{font-size:9px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;font-family:'DM Mono',monospace;margin-bottom:6px;}
-.oc-text{font-size:13px;color:#333;line-height:1.75;}
-.oc-tip{font-size:11px;color:var(--muted);font-style:italic;margin-top:8px;padding:8px 10px;background:var(--tgtgd);border-radius:6px;border-left:2px solid var(--tgtg);}
+.oc-text{font-size:13px;color:#333;line-height:1.8;}
+.oc-tip{font-size:11px;color:var(--muted);font-style:italic;margin-top:8px;padding:8px 10px;background:var(--tgtgd);border-radius:6px;border-left:2px solid var(--tgtg);line-height:1.6;}
 .oc-copy{padding:6px 14px;background:transparent;border:1px solid var(--border);border-radius:7px;color:var(--muted);font-size:11px;font-weight:700;cursor:pointer;float:right;margin-top:8px;font-family:'DM Sans',sans-serif;transition:all .15s;}
 .oc-copy:hover{border-color:var(--tgtg);color:var(--tgtg);}
 
@@ -81,30 +88,29 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 .bv-red{background:var(--dangerd);color:var(--danger);border:1px solid var(--dangerl);}
 .bv-amber{background:var(--warnd);color:var(--warn);border:1px solid rgba(245,158,11,.2);}
 .bv-neutral{background:var(--bg2);color:var(--muted);border:1px solid var(--border);}
-.bc-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.bc-grid{display:grid;grid-template-columns:1fr 1fr;}
 @media(max-width:580px){.bc-grid{grid-template-columns:1fr;}}
 .bc-cell{padding:12px 16px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);}
 .bc-cell:nth-child(even){border-right:none;}
-.bc-cell:nth-last-child(-n+2){border-bottom:none;}
+.bc-cell:last-child,.bc-cell:nth-last-child(2){border-bottom:none;}
 .bc-cell-label{font-size:9px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1.5px;font-family:'DM Mono',monospace;margin-bottom:5px;}
 .bc-cell-text{font-size:12px;color:#444;line-height:1.6;}
 .bc-say{padding:13px 16px;background:var(--tgtgd);border-top:1px solid var(--tgtgl);}
 .bc-say-label{font-size:9px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1.5px;font-family:'DM Mono',monospace;margin-bottom:6px;}
-.bc-say-text{font-size:13px;color:#333;line-height:1.75;font-style:italic;}
+.bc-say-text{font-size:13px;color:#333;line-height:1.8;font-style:italic;}
 .bc-copy{display:inline-block;margin-top:8px;padding:6px 12px;background:transparent;border:1px solid var(--tgtgl);border-radius:7px;color:var(--tgtg);font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;}
 
-/* PITCH CARDS */
-.pitch-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.04);}
-.pitch-card.featured{border:2px solid var(--tgtg);}
-.pc-label{font-size:9px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:2px;font-family:'DM Mono',monospace;margin-bottom:8px;}
-.pc-title{font-size:16px;font-weight:800;margin-bottom:6px;letter-spacing:-.2px;}
-.pc-sub{font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.6;}
-.pc-script{font-size:13px;color:#333;line-height:1.9;white-space:pre-wrap;font-family:'DM Mono',monospace;background:var(--bg2);border-radius:8px;padding:14px;border-left:3px solid var(--tgtg);}
-.pc-tip{font-size:11px;color:var(--muted);margin-top:10px;padding:8px 12px;background:var(--tgtgd);border-radius:6px;}
-.pc-copy{margin-top:12px;padding:8px 16px;background:var(--tgtg);color:#fff;border:none;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;}
+/* SEGMENT OPENERS */
+.seg-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+@media(max-width:600px){.seg-grid{grid-template-columns:1fr;}}
+.seg-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+.seg-name{font-size:11px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;font-family:'DM Mono',monospace;margin-bottom:6px;}
+.seg-opener{font-size:12px;color:#333;line-height:1.7;font-family:'DM Mono',monospace;}
+.seg-why{font-size:11px;color:var(--muted);margin-top:6px;font-style:italic;}
 </style>
 </head>
 <body>
+
 <div class="hdr">
   <div class="brand">Too Good To Go · UK &amp; Ireland</div>
   <div class="hdr-sub">Gold Standard Suite · Phone Sales Playbook</div>
@@ -112,37 +118,120 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 
 <div class="shell">
   <div class="nav">
-    <div class="nav-tab active" onclick="showTab('emails',this)">📧 Emails &amp; Scripts</div>
+    <div class="nav-tab active" onclick="showTab('mission',this)">🌍 The Mission</div>
     <div class="nav-tab" onclick="showTab('calls',this)">📞 Call Openers</div>
+    <div class="nav-tab" onclick="showTab('segments',this)">🏪 By Category</div>
+    <div class="nav-tab" onclick="showTab('emails',this)">📧 Emails</div>
     <div class="nav-tab" onclick="showTab('whatsapp',this)">💬 WhatsApp</div>
-    <div class="nav-tab" onclick="showTab('objections',this)">🛡️ Objection Library</div>
+    <div class="nav-tab" onclick="showTab('objections',this)">🛡️ Objections</div>
     <div class="nav-tab" onclick="showTab('battlecards',this)">⚔️ Battlecards</div>
-    <div class="nav-tab" onclick="showTab('manager',this)">👔 Manager Templates</div>
+    <div class="nav-tab" onclick="showTab('manager',this)">👔 Manager</div>
   </div>
 
-  <!-- ═══ EMAILS ═══ -->
-  <div class="section active" id="tab-emails">
+  <!-- ═══ MISSION ═══ -->
+  <div class="section active" id="tab-mission">
     <div class="sec-hdr">
-      <div class="sec-title">Emails &amp; Follow-up Scripts</div>
-      <div class="sec-sub">Every email template for the full partner acquisition and management cycle. Personalise the placeholders before sending.</div>
+      <div class="sec-title">The Mission — know this before every call</div>
+      <div class="sec-sub">The pitch is not about the platform. It is about turning a zero into revenue. Every rep needs to believe this before they dial.</div>
     </div>
-    <div id="email-list"></div>
+
+    <div class="mission">
+      <strong>The core truth:</strong> Every unsold Surprise Bag is food that already exists, already cost money to make or buy, and is heading for the bin. Without Too Good To Go, that food is worth £0 — or worse, a disposal cost. With Too Good To Go, it becomes revenue. We are not asking a business to discount their product. We are asking them to recover value from inventory they were going to lose.<br><br>
+      <strong>One in three meals produced globally goes to waste.</strong> Too Good To Go has saved over 350 million meals worldwide. Every partner a rep adds to this platform is a direct, permanent reduction in that number.
+    </div>
+
+    <div class="sec-hdr" style="margin-top:24px;">
+      <div class="sec-title">How it works — say this on every call</div>
+      <div class="sec-sub">Simple enough to explain in 30 seconds. Powerful enough to close on the same call.</div>
+    </div>
+
+    <div style="background:#fff;border:2px solid var(--tgtg);border-radius:12px;padding:20px;margin-bottom:20px;">
+      <div style="font-size:13px;color:#333;line-height:2;font-family:'DM Mono',monospace;">
+"You create a Surprise Bag of whatever you have left at the end of the day — food that would otherwise go to waste. You set the price, the collection window, and the number of bags. Customers on our app see it, reserve it, pay for it in advance, and collect directly from you. You get the money. They get a great deal on quality food. The food doesn't go to waste.<br><br>
+It costs nothing to join. No contract. No minimum. You can pause any time. The only cost is the percentage we take from each bag sold — and that bag was going in the bin anyway, so every penny is revenue you didn't have."
+      </div>
+    </div>
+
+    <div class="sec-hdr">
+      <div class="sec-title">Active categories on Too Good To Go</div>
+      <div class="sec-sub">Any business in these categories with surplus stock is a potential partner. The surplus might be end-of-day food, unsold pastries, surplus veg, cut flowers, or prepared meals — anything that would otherwise go to waste.</div>
+    </div>
+    <div class="cats">
+      <span class="cat">Restaurant</span>
+      <span class="cat">Café</span>
+      <span class="cat">Buffet Restaurant</span>
+      <span class="cat">Takeaway Restaurant</span>
+      <span class="cat">Sushi Restaurant</span>
+      <span class="cat">Hotel</span>
+      <span class="cat">Bakery</span>
+      <span class="cat">Pastry Shop</span>
+      <span class="cat">Supermarket</span>
+      <span class="cat">Beverage Shop</span>
+      <span class="cat">Butcher Shop</span>
+      <span class="cat">Fruit &amp; Veg Store</span>
+      <span class="cat">Pet Store</span>
+      <span class="cat">Flower &amp; Plant Store</span>
+      <span class="cat">Flower &amp; Plant Stall</span>
+      <span class="cat">Other</span>
+    </div>
+
+    <div class="sec-hdr" style="margin-top:24px;">
+      <div class="sec-title">The financial frame — use this always</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px;">
+      <div style="background:#fff5f5;border:1px solid var(--dangerl);border-radius:10px;padding:14px;text-align:center;">
+        <div style="font-size:28px;font-weight:900;color:var(--danger);margin-bottom:4px;">£0</div>
+        <div style="font-size:11px;color:var(--danger);font-weight:700;">Without TGTG</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:4px;">Food goes to waste. Zero revenue. Possible disposal cost.</div>
+      </div>
+      <div style="background:var(--tgtgd);border:1px solid var(--tgtgl);border-radius:10px;padding:14px;text-align:center;">
+        <div style="font-size:28px;font-weight:900;color:var(--tgtg);margin-bottom:4px;">£X</div>
+        <div style="font-size:11px;color:var(--tgtg);font-weight:700;">With TGTG</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:4px;">Revenue recovered. Food costs already paid. Pure incremental.</div>
+      </div>
+      <div style="background:var(--goodd);border:1px solid var(--goodl);border-radius:10px;padding:14px;text-align:center;">
+        <div style="font-size:28px;font-weight:900;color:var(--good);margin-bottom:4px;">♻️</div>
+        <div style="font-size:11px;color:var(--good);font-weight:700;">Mission</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:4px;">Food waste reduced. Customer acquired. Brand enhanced.</div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--muted);padding:10px 14px;background:var(--bg2);border-radius:8px;line-height:1.7;margin-bottom:20px;">
+      <strong style="color:var(--text);">The framing that closes:</strong> "The food cost is already sunk. The prep time is already spent. The only question is whether that inventory earns you something or earns you nothing. A Surprise Bag turns a guaranteed loss into found revenue."
+    </div>
   </div>
 
   <!-- ═══ CALL OPENERS ═══ -->
   <div class="section" id="tab-calls">
     <div class="sec-hdr">
       <div class="sec-title">Call Opening Scripts</div>
-      <div class="sec-sub">The first 30 seconds decides everything. Lead with their problem — surplus food going to waste every day — not with Too Good To Go. Every opener below has been tested on real calls.</div>
+      <div class="sec-sub">Lead with their surplus problem — not with Too Good To Go. The first 30 seconds decides everything. The platform is the solution; the unsold inventory is the problem you lead with.</div>
     </div>
     <div id="call-list"></div>
+  </div>
+
+  <!-- ═══ BY CATEGORY ═══ -->
+  <div class="section" id="tab-segments">
+    <div class="sec-hdr">
+      <div class="sec-title">Opening Angle by Category</div>
+      <div class="sec-sub">Every category has a different surplus pattern and a different way to open. Know your category before you dial. The surplus is always the hook — the type of surplus changes.</div>
+    </div>
+    <div class="seg-grid" id="seg-list"></div>
+  </div>
+
+  <!-- ═══ EMAILS ═══ -->
+  <div class="section" id="tab-emails">
+    <div class="sec-hdr">
+      <div class="sec-title">Email Templates</div>
+      <div class="sec-sub">Always reference the specific call you had. A generic follow-up email converts at a fraction of a personalised one.</div>
+    </div>
+    <div id="email-list"></div>
   </div>
 
   <!-- ═══ WHATSAPP ═══ -->
   <div class="section" id="tab-whatsapp">
     <div class="sec-hdr">
       <div class="sec-title">WhatsApp Scripts</div>
-      <div class="sec-sub">WhatsApp converts 3× better than email for SMB food operators. Keep it short. Always reference the call you just had or the specific surplus problem. Never send a generic intro.</div>
+      <div class="sec-sub">WhatsApp converts 3× better than email for SMB operators. Short, direct, specific. Reference the call or the surplus type. Never send a generic intro.</div>
     </div>
     <div id="whatsapp-list"></div>
   </div>
@@ -151,7 +240,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
   <div class="section" id="tab-objections">
     <div class="sec-hdr">
       <div class="sec-title">Objection Library</div>
-      <div class="sec-sub">Every objection a partner will raise on a phone call — and the response that holds the frame. Know all of these before your first solo call.</div>
+      <div class="sec-sub">Every objection on a Too Good To Go call — and the response that holds the frame. The answer to almost every objection is a version of: "That food is going to waste anyway. What you're deciding is whether it earns you something."</div>
     </div>
     <div id="obj-list"></div>
   </div>
@@ -160,7 +249,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
   <div class="section" id="tab-battlecards">
     <div class="sec-hdr">
       <div class="sec-title">Competitor Battlecards</div>
-      <div class="sec-sub">When a partner mentions another platform on the call. Know the difference, hold the frame, and explain why TGTG creates revenue that no other platform touches.</div>
+      <div class="sec-sub">When a partner names another platform on the call. Know the difference, hold the frame. No other platform turns waste into revenue the way TGTG does.</div>
     </div>
     <div id="bc-list"></div>
   </div>
@@ -169,80 +258,169 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
   <div class="section" id="tab-manager">
     <div class="sec-hdr">
       <div class="sec-title">Manager Templates</div>
-      <div class="sec-sub">For Team Leads and the Head of Indies — 1:1 invites, performance conversations, recognition messages, and team communications.</div>
+      <div class="sec-sub">For Team Leads and Head of Indies — team communications, recognition, performance conversations, weekly cadence.</div>
     </div>
     <div id="mgr-list"></div>
   </div>
 </div>
 
 <script>
+var CALLS = [
+  {
+    label:'The Surplus Opener — highest close rate across all categories',
+    title:'"Do you throw food away at the end of the day?"',
+    sub:'Works for every category. Direct. Creates immediate resonance. Almost nobody says no — and the ones who do tell you exactly what their surplus looks like.',
+    script:`"Hi, is that [NAME]? 
+
+Great — I'm [NAME] from Too Good To Go. Quick question before anything else — do you throw food away at the end of the day?
+
+[PAUSE. Let them answer. Do not fill the silence.]
+
+[IF YES:]
+That's exactly why I'm calling. We turn that surplus into revenue. You create a Surprise Bag — whatever you've got left — customers on our app reserve it, pay for it in advance, and collect directly from you. You set the price, the time, the number of bags. The food that was going in the bin earns you money instead.
+
+What does your surplus typically look like?"`,
+    tip:'The pause after the opening question is everything. Let them answer. Their answer tells you the surplus type, the volume, and the best collection window — all before you have to ask.'
+  },
+  {
+    label:'The Zero Revenue Frame — for analytically-minded owners',
+    title:'"That food costs you money whether it sells or not"',
+    sub:'Use when the owner seems commercially focused. Appeals to the balance sheet argument directly.',
+    script:`"Hi [NAME], it's [NAME] from Too Good To Go.
+
+I want to ask you something about your end-of-day inventory. Whatever food you don't sell today — what happens to it?
+
+[Let them answer]
+
+Here's the thing: the cost of making or buying that food is already on your books. If it goes to waste, it's a guaranteed loss. If you sell it as a Surprise Bag through our app, it becomes revenue. Not discounted revenue — found revenue. Money that literally did not exist before.
+
+That's what we do. You put together a Surprise Bag of whatever you have left, our customers reserve it and collect it from you, and you get paid. What does your end-of-day look like on a typical [DAY]?"`,
+    tip:'This opener works especially well for bakeries, supermarkets, fruit and veg stores, and butchers — anywhere with predictable daily surplus.'
+  },
+  {
+    label:'The Neighbour Opener — social proof first',
+    title:'"[Nearby partner] just went live near you"',
+    sub:'Use when you have a live partner nearby. Name them specifically. Never make one up.',
+    script:`"Hi [NAME], I'm [NAME] from Too Good To Go. 
+
+I was calling because [NEARBY BUSINESS NAME] just started selling their surplus through us — they're doing [X] Surprise Bags a [day/week] and it's going really well for them.
+
+I wanted to reach out to you because [VENUE NAME] is exactly the kind of place our customers are looking for in [AREA].
+
+Quick question — do you have surplus stock at the end of the day that currently goes to waste?"`,
+    tip:'Check your live partner map before calling any territory. A real named neighbour converts far better than any statistic.'
+  },
+  {
+    label:'The Mission Opener — sustainability-conscious owners',
+    title:'"103 million meals saved — you could be part of it"',
+    sub:'Use when the owner has visible sustainability credentials — eco packaging, plant-based focus, mentions food waste publicly.',
+    script:`"Hi [NAME], I'm [NAME] from Too Good To Go.
+
+We've helped businesses across the UK save over 103 million meals from going to waste — and I was looking at [BUSINESS NAME] and thought you'd be a natural fit.
+
+The way it works: you create a Surprise Bag of whatever surplus you have, customers on our app reserve and collect it directly from you. You choose the price, the window, the quantity. The food that would have been wasted earns you money instead.
+
+Do you currently have stock that goes to waste at the end of the day?"`,
+    tip:'The mission angle lands best when the owner already cares. Check their website and social before calling. If they talk about sustainability, lead with it.'
+  },
+  {
+    label:'The Callback Opener — following up a previous call',
+    title:'"You asked me to call back — picking up where we left off"',
+    sub:'Always reference the specific thing they said. Never re-pitch from scratch.',
+    script:`"Hi [NAME], it's [NAME] from Too Good To Go — you asked me to call back today.
+
+When we spoke on [DAY], you mentioned [SPECIFIC THING — e.g. 'you usually have leftover pastries on Tuesday mornings' / 'you wanted to check with your manager first'].
+
+Did you get a chance to [think about it / have that conversation]?
+
+[Listen — then move naturally back to the surplus conversation]"`,
+    tip:'A callback is a continuation, not a cold call. If you restart the pitch from scratch you signal you were not listening the first time. Reference what they told you.'
+  },
+];
+
+var SEGMENTS = [
+  {name:'Restaurant & Café', opener:'"Do you throw food away at the end of service?" — Quieter periods, end-of-evening prep, daily specials that didn\'t sell. The Surprise Bag is a selection of whatever they have.', why:'Highest volume category. Clear end-of-day surplus pattern. Strong TGTG consumer demand.'},
+  {name:'Bakery & Pastry Shop', opener:'"Do you have bread and pastries left at the end of the day?" — Almost every bakery does. End-of-day is the natural collection window. Surprise Bag = mixed selection of the day\'s bakes.', why:'Easiest close on the platform. The surplus is obvious, daily, and predictable. Start conservative — 3 to 5 bags.'},
+  {name:'Sushi Restaurant', opener:'"What happens to your unsold sushi at the end of lunch service?" — Freshness sensitivity means they throw away more than most. Lunchtime collection window is key.', why:'Higher bag value. Strong TGTG consumer crossover. Emphasise lunchtime window — not end of evening.'},
+  {name:'Supermarket', opener:'"What happens to your short-date fresh food at the end of the day?" — Prepared meals, bakery items, fruit and veg close to date. Multiple Surprise Bag types possible.', why:'High volume potential. Multiple surplus streams. May need approval above store level — identify the decision maker first.'},
+  {name:'Hotel', opener:'"What happens to your buffet surplus at the end of breakfast?" — Hotel breakfast buffets generate consistent daily surplus. Strong fit for morning collection window.', why:'Consistent daily surplus. High bag value possible. Decision often sits with F&B manager — ask for them specifically.'},
+  {name:'Takeaway Restaurant', opener:'"Do you prep more than you sell on slower days?" — End-of-evening surplus. Surprise Bag of whatever they have left. Late collection window.', why:'Clear surplus pattern. Late collection window works well. May be owner-operated — decision is fast.'},
+  {name:'Fruit & Veg Store', opener:'"Do you throw away produce at the end of the day?" — Short shelf-life produce, cosmetically imperfect stock, end-of-week clearance.', why:'Very high waste volume. Strong sustainability narrative. Bag pricing can be very attractive for customers.'},
+  {name:'Butcher Shop', opener:'"What happens to your prepared items and cuts at the end of the day?" — Prepared meals, marinated cuts, cooked items that don\'t last overnight.', why:'Less common category — strong differentiation for the customer. Decision maker is almost always the owner.'},
+  {name:'Beverage Shop', opener:'"Do you make fresh juices or smoothies that don\'t keep overnight?" — Fresh-pressed juices, smoothies, kombuchas. End-of-day surplus.', why:'Niche but growing category. High bag value relative to production cost. Strong sustainability story.'},
+  {name:'Flower & Plant Store / Stall', opener:'"Do you have flowers at the end of the week that won\'t last another week?" — Cut flowers, perishable arrangements, Friday/Saturday surplus.', why:'Non-food category — pioneering segment. Strong emotional connection for customers. Weekend collection window.'},
+  {name:'Pet Store', opener:'"Do you have perishable food items or short-date stock?" — Raw pet food, short-date treats, fresh items.', why:'Emerging category. Smaller volume. Very loyal customer base. Good for building segment diversity.'},
+  {name:'Buffet Restaurant', opener:'"What happens to your buffet surplus at the end of service?" — Consistent, large-volume surplus. Strong case for multiple daily Surprise Bags.', why:'Highest single-location surplus volume. Multiple bags per session. Decision maker is often on-site manager.'},
+];
+
 var EMAILS = [
   {
     title:'Post-call follow-up — interested partner',
     type:'email',
-    to:'[OWNER NAME], [VENUE NAME]',
+    to:'[OWNER NAME], [BUSINESS NAME]',
     from:'[REP NAME] · Too Good To Go',
-    subject:'Great speaking today — [VENUE NAME] + Too Good To Go',
+    subject:'Great speaking today — [BUSINESS NAME] + Too Good To Go',
     body:`Hi [NAME],
 
 Really enjoyed speaking with you today — thank you for taking the time.
 
-As we discussed, Too Good To Go lets you create a Magic Bag of surplus food that customers reserve and collect directly from your store. You set the price, the collection window, and the quantity. We handle the app, the payment, and the customer discovery.
+As we discussed, Too Good To Go lets you create a Surprise Bag of surplus stock that customers reserve and collect directly from you. You set the price, the collection window, and the quantity. We handle the app, the payment, and the customer discovery.
 
-The two things we agreed on the call:
-— Your [DAY] [TIME] window is where you have the most consistent surplus
-— A bag priced at £[X] would cover your food cost and generate [£X] of revenue you don't currently capture
+The things we agreed on the call:
+— Your [SURPLUS TYPE] at [TIME/DAY] is where you have the most consistent surplus
+— A bag priced at £[X] would turn that waste into [£X] of revenue you don't currently capture
 
-Here is what happens next:
-1. You create your partner account (takes 10 minutes — I can walk you through it now if you'd like)
-2. You set your first Magic Bag for [DAY] [TIME], [X] bags
-3. Your first customers can reserve from the moment it's live
+To recap the financial picture:
+— That food costs you money whether it sells or not
+— Without Too Good To Go: £0 revenue, potential disposal cost
+— With Too Good To Go: £[X] per bag, pure incremental revenue
 
-I'll follow up [DAY] to see how you're getting on. If you want to get set up before then, reply here or call me on [NUMBER].
+Getting live takes about 10 minutes. I can walk you through it now if you'd like — reply here or call me on [NUMBER].
 
 [REP NAME]
 Too Good To Go UK
 [PHONE]`
   },
   {
-    title:'Partner not answering — follow-up sequence (email)',
+    title:'No answer — follow-up email',
     type:'email',
-    to:'[OWNER NAME], [VENUE NAME]',
+    to:'[OWNER NAME], [BUSINESS NAME]',
     from:'[REP NAME] · Too Good To Go',
-    subject:'[VENUE NAME] — quick question',
+    subject:'[BUSINESS NAME] — quick question',
     body:`Hi [NAME],
 
-I called earlier but missed you — no worries at all.
+I called earlier but missed you.
 
-One quick question: do you throw away food at the end of the day?
+One question: do you throw away [food / flowers / produce] at the end of the day?
 
-If yes — we should talk. Too Good To Go turns that surplus into revenue. Restaurants and cafés near you are already doing it. Takes about 10 minutes to set up a Magic Bag and go live.
+If yes — we should talk. Too Good To Go turns that surplus into revenue. You create a Surprise Bag of whatever you have left, customers reserve it through our app, and collect directly from you. You get paid. The waste goes away.
 
-Happy to call at a time that suits you. What does [DAY] afternoon look like?
+No contract. No setup fee. Takes 10 minutes to go live.
+
+When suits you for a quick call? [DAY] afternoon works well for me.
 
 [REP NAME]
 Too Good To Go UK
 [PHONE]`
   },
   {
-    title:'Onboarding confirmation — partner just signed up',
+    title:'Partner onboarding confirmed — now live',
     type:'email',
-    to:'[OWNER NAME], [VENUE NAME]',
+    to:'[OWNER NAME], [BUSINESS NAME]',
     from:'[REP NAME] · Too Good To Go',
     subject:'You\'re live on Too Good To Go 🟢',
     body:`Hi [NAME],
 
-You're live. 
+You're live.
 
-Your first Magic Bag goes live [DAY] at [TIME] — [X] bags at £[PRICE]. Customers in your area can already see and reserve it.
+Your first Surprise Bag goes live [DAY] at [TIME] — [X] bags at £[PRICE]. Customers in your area can already see and reserve it.
 
-A few things to know this week:
+How it works from here:
+— You'll get a notification for each reservation
+— Customers pay in the app before they collect — nothing to handle at the counter
+— At collection, hand over the bag — no voucher, no scanning needed
 
-1. You'll get a notification when each bag is reserved — you'll see the customer's name and reservation time
-2. The customer pays in the app before they collect — nothing to handle at the counter
-3. At collection, just hand over the bag — no voucher, no QR code, nothing to scan
-
-Your account manager [AM NAME] will check in with you on [DATE] to see how the first bags went. If anything comes up before then, reply to this email or call [NUMBER].
+Your account manager [AM NAME] will check in on [DATE] to see how the first bags went.
 
 Thank you for joining us in the fight against food waste.
 
@@ -250,313 +428,235 @@ Thank you for joining us in the fight against food waste.
 Too Good To Go UK`
   },
   {
-    title:'Partner gone quiet — re-engagement email',
+    title:'Partner gone quiet — re-engagement',
     type:'email',
-    to:'[OWNER NAME], [VENUE NAME]',
+    to:'[OWNER NAME], [BUSINESS NAME]',
     from:'[REP NAME] · Too Good To Go',
-    subject:'Checking in — [VENUE NAME]',
+    subject:'Checking in — [BUSINESS NAME]',
     body:`Hi [NAME],
 
-I noticed your Magic Bag hasn't been active for [X] days — I wanted to check in and make sure everything's okay.
+I noticed your Surprise Bags haven't been active recently — I wanted to check in.
 
-A lot of partners pause for practical reasons — maybe the surplus pattern changed, maybe the collection window needs adjusting, or maybe there's been something going on in the business.
+A lot of partners pause for practical reasons — surplus pattern changed, collection window needs adjusting, or just been busy. Whatever it is, I'd like to help fix it.
 
-Whatever it is, I'd like to help fix it. Can we get 10 minutes this week?
+The reason I ask: your first bags sold within [X] minutes of going live. The demand is there. That surplus is still going to waste without us.
 
-The reason I ask: your first [X] bags sold within [X] minutes of going live. The demand is clearly there. I'd hate for that to go to waste (literally).
-
-Call me on [NUMBER] or reply here with a time.
+Can we get 10 minutes this week? Call me on [NUMBER] or reply here.
 
 [REP NAME]
 Too Good To Go UK`
   },
 ];
 
-var CALLS = [
-  {
-    label:'The Surplus Opener — highest close rate',
-    title:'Do you throw food away at the end of the day?',
-    sub:'Use for all food operators. Direct. Creates immediate resonance. Almost nobody says no.',
-    script:`"Hi, is that [NAME]? 
-
-Great — I'm [NAME] from Too Good To Go. I've got a quick question for you — do you throw food away at the end of the day?
-
-[PAUSE — let them answer]
-
-[IF YES:]
-That's exactly why I'm calling. We help restaurants and cafés like yours turn that surplus into revenue. You create a Magic Bag — a bag of whatever you've got left — customers reserve it through our app and collect it directly from you. You set the price, the time, the quantity. We bring the customers.
-
-What does your surplus typically look like at the end of the day?"`,
-    tip:'The pause after the opening question is critical. Do not fill it. Let them answer. Their answer tells you exactly what to say next.'
-  },
-  {
-    label:'The Neighbour Opener — social proof first',
-    title:'[Restaurant nearby] just went live near you',
-    sub:'Use when you know a specific nearby partner. Name-dropping a local venue triggers instant curiosity.',
-    script:`"Hi, is that [NAME]?
-
-I'm [NAME] from Too Good To Go. I was calling because [NEARBY VENUE] just went live with us down the road from you — they're creating Magic Bags of their end-of-day food and customers are reserving them through our app.
-
-I wanted to reach out to you specifically because [VENUE NAME] looks like exactly the kind of place our customers are looking for.
-
-Quick question — do you have surplus food at the end of the day that currently goes to waste?"`,
-    tip:'Always use a real nearby venue. Check your live partner map before calling the territory. A made-up name kills credibility instantly.'
-  },
-  {
-    label:'The Mission Opener — for sustainability-conscious owners',
-    title:'103 million meals saved — you could be part of it',
-    sub:'Use when the owner has visible sustainability credentials — eco packaging, plant-based menu, mentions food waste on their website.',
-    script:`"Hi [NAME], I'm [NAME] from Too Good To Go.
-
-We've helped restaurants across the UK save over 103 million meals from going to waste — and I was looking at [VENUE NAME] and thought you'd be a really natural fit.
-
-We let food businesses create a Magic Bag of their surplus — customers reserve and collect it through our app. You choose the price, the time, the quantity.
-
-Do you currently throw food away at the end of service?"`,
-    tip:'The mission angle lands best with owners who already care. Do your research before the call — their website and Instagram will tell you.'
-  },
-  {
-    label:'The Callback Opener — they asked you to call back',
-    title:'Following up from [DAY] — you asked me to call',
-    sub:'Always reference the previous conversation specifically. Do not treat it as a cold call.',
-    script:`"Hi [NAME], it's [NAME] from Too Good To Go — you asked me to call back today.
-
-When we spoke on [DAY], you mentioned [SPECIFIC THING THEY SAID — e.g. 'you have a lot of surplus on Tuesday evenings' / 'you wanted to speak to your business partner first'].
-
-Did you get a chance to [follow up on that / have that conversation]?
-
-[LISTEN — then move to the question about surplus and the offer structure]"`,
-    tip:'Never start a callback by re-explaining Too Good To Go from scratch. Treat it as a continuation. They already know who you are.'
-  },
-];
-
 var WHATSAPP = [
   {
-    title:'Post-call — interested but not committed',
+    title:'Post-call — interested, not committed',
     type:'whatsapp',
     body:`Hi [NAME] — [YOUR NAME] from Too Good To Go here.
 
-Really enjoyed our call today. As promised, here's how it works in one line:
+Great speaking today. As promised, here's the one-line version:
 
-You create a Magic Bag of surplus food → customers reserve it on our app → they collect from you → you get paid. You set the price, time, and quantity.
+You create a Surprise Bag of your surplus → customers reserve it on our app → they collect from you → you get paid. That food was going in the bin. Now it earns you money.
 
-Takes about 10 minutes to get live. Happy to walk you through it now or [DAY] — what works better for you?`
+10 minutes to go live. Happy to walk you through it now or [DAY] — what works?`
   },
   {
-    title:'Partner just went live — first bag confirmation',
+    title:'First Surprise Bag live — confirmation',
     type:'whatsapp',
-    body:`Hi [NAME] — your first Magic Bag is live on Too Good To Go 🟢
+    body:`Hi [NAME] — your first Surprise Bag is live on Too Good To Go 🟢
 
-[X] bags available, [TIME] collection window. Customers in your area can already see and reserve them.
+[X] bags, [TIME] collection window. Customers near you can already reserve.
 
-You'll get a notification for each reservation. Let me know how it goes — I'll check in with you [DAY].`
+You'll get a notification for each reservation — customer pays in the app before they collect. Nothing to do until they arrive.
+
+Let me know how it goes. I'll check in [DAY].`
   },
   {
-    title:'No reply to email — WhatsApp follow-up',
+    title:'No email reply — WhatsApp follow-up',
     type:'whatsapp',
-    body:`Hi [NAME] — [YOUR NAME] from Too Good To Go. I sent you an email earlier but wanted to reach out here too.
+    body:`Hi [NAME] — [YOUR NAME] from Too Good To Go. Sent you an email but wanted to reach out here too.
 
-Quick question: do you throw food away at the end of the day?
+Quick question: do you throw away [food/produce/flowers] at the end of the day?
 
-If yes — we should talk. Takes 10 minutes to go live. [NEARBY VENUE] near you is already doing it.
+If yes — 10 minutes is all it takes to turn that into revenue. [NEARBY BUSINESS] near you is already doing it.
 
-Happy to call whenever suits. What does [DAY] look like?`
+When suits you for a quick call?`
   },
   {
-    title:'Warm referral — existing partner recommended you',
+    title:'Referral from existing partner',
     type:'whatsapp',
-    body:`Hi [NAME] — I'm [YOUR NAME] from Too Good To Go. [PARTNER NAME] at [PARTNER VENUE] suggested I reach out to you.
+    body:`Hi [NAME] — I'm [YOUR NAME] from Too Good To Go. [PARTNER NAME] at [PARTNER BUSINESS] suggested I reach out.
 
-They've been creating Magic Bags of their surplus food and selling them through our app — customers reserve and collect directly. They're doing really well with it.
+They've been selling Surprise Bags of their surplus through our app — stock that would have gone to waste is now earning them money every [day/week].
 
-[PARTNER NAME] thought [VENUE NAME] would be a great fit. Do you have surplus food at the end of service?`
+[PARTNER NAME] thought [BUSINESS NAME] would be a great fit. Do you have surplus that goes to waste at the end of the day?`
   },
 ];
 
 var OBJECTIONS = [
   {
     obj:"We don't do discounts — it doesn't fit our brand",
-    counter:"You're not discounting your brand. You're pricing food that would otherwise go in the bin. Your regular customers never see this — it's a separate product, a Magic Bag of whatever surplus you have that day, available only during your collection window. The operators who worry most about this are often our strongest performers, because they think carefully about every customer touchpoint. On Too Good To Go, that care shows — the app positions them as a business that fights food waste, not one that discounts.",
-    tip:"Don't walk this back if they push. Hold the reframe. The Magic Bag is a different product — not the same menu at a lower price."
+    counter:"You're not discounting your brand. You're pricing inventory that already exists and would otherwise go to waste. Your regular customers never see the Surprise Bag — it's a separate product, available only during your collection window, to customers who specifically want to reduce food waste. The operators who care most about their brand are often our strongest performers, because they put real quality into every bag. On Too Good To Go, that shows.",
+    tip:"Hold this frame. The Surprise Bag is not a discounted version of the menu. It is a different product entirely — surplus inventory that was heading for the bin."
   },
   {
-    obj:"We're too busy — we don't have surplus",
-    counter:"That's a good problem to have. A lot of our best partners said exactly that before joining — and then found they consistently had more prep at end of day than they realised. But if you genuinely run out of everything every day, TGTG might not be right for you right now. Can I ask — what happens to your prep on a slow Monday? Or after a cancellation?",
-    tip:"Don't argue. Ask a diagnostic question. Most food businesses have at least some surplus on slower days. Find the window, not the argument."
+    obj:"We don't really have much waste",
+    counter:"That's worth exploring. What happens to your prep at the end of a slow day? Or when you have a cancellation? Most businesses have more surplus than they realise on specific days or at specific times. We don't need it every day — even two or three days a week with a handful of bags is revenue that didn't exist before. What does your quietest day look like?",
+    tip:"Don't argue. Ask a diagnostic question. Find the window where surplus does exist, even if it's not every day."
   },
   {
     obj:"How does the customer know what's in the bag?",
-    counter:"They don't — and that's part of the appeal. The Magic Bag is a surprise. Customers on Too Good To Go know they're getting a selection of whatever you have that's great quality and would otherwise go to waste. You put in what makes sense — whatever you've got at the end of service. You describe it broadly in your listing: 'a selection of our pastries', 'a mix of our hot and cold dishes'. The customer expects a surprise and that's what makes it fun.",
-    tip:"This is often curiosity, not resistance. Lean into the surprise element — it's a genuine differentiator and customers love it."
+    counter:"They don't — and that's the model. A Surprise Bag is exactly what it sounds like: a surprise. Customers on Too Good To Go know they're getting a selection of quality surplus — they describe it broadly in the listing, things like 'a selection of today's bakes' or 'a mix of our prepared dishes'. The surprise element is actually a selling point. Customers love it — it's part of why they open the app.",
+    tip:"This is usually curiosity, not resistance. The surprise model is a genuine differentiator. Lean into it rather than explaining around it."
   },
   {
-    obj:"What if we don't have anything left to put in the bag?",
-    counter:"That's fine — you can adjust or cancel a bag right up until the collection window opens. If you sell out before service ends, you just update the bag count to zero and no customers are disappointed. Most partners start with a conservative number — 3 or 4 bags — and increase once they have a feel for their surplus pattern.",
-    tip:"Reassure on flexibility. The fear of commitment is real for small operators. Emphasise that they're in control at every step."
+    obj:"What if we don't have anything to put in the bag?",
+    counter:"You can adjust or cancel bags right up until the collection window opens. If you sell out before end of service, you just reduce the bag count to zero — no customer is ever disappointed. Most partners start with a conservative number: two or three bags. Once they see how quickly they sell, they adjust upward. You're always in control.",
+    tip:"This is a fear of commitment. Remove all risk. They control the quantity, the timing, the content. Emphasise that flexibility."
   },
   {
-    obj:"We already work with a food bank / charity for our surplus",
-    counter:"That's genuinely brilliant — and TGTG doesn't replace that. A lot of our partners do both. The bags you sell through TGTG are typically the end-of-day surplus you can't always predict in time to organise a pickup. The charity gets what you plan for; TGTG captures what you couldn't. Some operators also use the TGTG revenue to fund their charity donations. Would that model work for you?",
-    tip:"Never position TGTG as competing with charity work. It's complementary. Honour what they're already doing."
-  },
-  {
-    obj:"I need to speak to my business partner / head office",
-    counter:"Of course — what would they need to see to feel comfortable? I'd rather give you what you need to have that conversation well. Would it help if I sent over a one-pager showing how it works and what a typical partner earns in the first month? I can also set up a call with all of you together if that's easier.",
-    tip:"Identify who the decision maker is and get in the room with them. An email forwarded to a business partner rarely converts. A call with all three of you usually does."
+    obj:"We already donate to a food bank",
+    counter:"That's brilliant — and Too Good To Go doesn't replace that. Most of our partners do both. The food bank typically collects what you plan in advance. Too Good To Go captures the surplus you couldn't predict — the extra prep at end of service, the items that didn't sell. Some partners use the TGTG revenue to fund their charitable giving. Would that model work for you?",
+    tip:"Never position TGTG as competing with charitable work. It's genuinely complementary. Acknowledge what they do and build alongside it."
   },
   {
     obj:"Is there a contract or minimum commitment?",
-    counter:"No contract, no minimum commitment, no setup fee. You can pause or stop at any time from the app. We make money when you sell bags — if it's not working for you, there's no cost to walking away. Most partners find that within the first two weeks they've covered any doubt about whether it's worth it.",
-    tip:"This objection is about risk. Remove all of it. No contract, no fees, no lock-in. Say it clearly and move on."
+    counter:"No contract, no minimum, no setup fee. You can pause or stop from the app whenever you want. We make money when you sell bags — if it's not working, there's nothing to walk away from. Most partners make their mind up in the first two weeks.",
+    tip:"This is a risk objection. Remove every element of risk in one clear sentence and move on. Don't over-explain."
   },
   {
-    obj:"How much do you take in commission?",
-    counter:"The commission comes out of the bag price — we don't add anything on top. You set the price, and we take a percentage of that. The way most partners think about it: any revenue from a bag that would have gone in the bin is 100% incremental. Even after commission, it's revenue you wouldn't have had. I can show you exactly what the maths looks like for your specific bag price if that's helpful.",
-    tip:"Don't quote the commission percentage cold — show the net calculation instead. The question is really 'is it worth it?' Answer that, not the percentage."
+    obj:"How much commission do you take?",
+    counter:"The commission comes out of the bag price — nothing is added on top for the customer. The way most partners think about it: any revenue from a bag that would have gone in the bin is 100% incremental. Even after our percentage, it's money that didn't exist before. I can show you exactly what the numbers look like for your specific bag price if that helps.",
+    tip:"Don't lead with the percentage. Show the net calculation — what they actually receive. The question behind the question is always 'is it worth it?'"
   },
   {
-    obj:"We tried it before and it didn't work",
-    counter:"I'm glad you told me that — can I ask what happened? What did you try and what went wrong? I want to make sure we don't repeat the same issue.",
-    tip:"Never defend TGTG before you understand what failed. Listen first. The failure was almost always one of three things: wrong bag price, wrong collection window, or too many bags for the actual surplus. All fixable."
+    obj:"We tried something like this before and it didn't work",
+    counter:"I'm glad you told me. Can I ask what happened — what did you try and what went wrong? I want to make sure we're not setting you up for the same problem.",
+    tip:"Never defend Too Good To Go before you understand what failed. Listen first. The failure was almost always wrong bag price, wrong collection window, or too many bags relative to actual surplus. All fixable."
+  },
+  {
+    obj:"I need to speak to my business partner / manager / head office",
+    counter:"Of course. What would they need to see to feel comfortable saying yes? I'd rather give you what you need to have that conversation well. I can send a one-pager showing how it works and what partners typically earn in the first month — or if it's easier, I could join a quick call with all of you together.",
+    tip:"Identify the real decision maker and find a way to be in the room with them. An email forwarded to a business partner rarely converts. A joint call usually does."
   },
 ];
 
 var BATTLECARDS = [
   {
-    name:'TheFork',
-    verdict:'Different product — address directly',
-    vClass:'bv-amber',
-    what:'Reservation and discovery platform. Venues offer discounts to appear in search results. Targets customers who have already decided to go out.',
-    think:'Drives some covers but operators report discount expectations compound over time. Different customer mindset to TGTG.',
-    diff:'TheFork intercepts demand that already exists. TGTG creates demand that would not have happened — customers who were not planning to go out, buying surplus food they would not normally buy. Completely different occasions.',
-    say:'"TheFork captures customers who had already decided to go to a restaurant. Too Good To Go captures customers who had not decided to go out yet — they\'re buying your surplus food specifically because they want to reduce waste and get something great. Different customer, different occasion, no cannibalisation."'
+    name:'Karma',
+    verdict:'Direct competitor — know the difference',
+    vClass:'bv-red',
+    what:'Surplus food app with a similar model. Smaller UK user base and lower consumer brand recognition than Too Good To Go.',
+    think:'Does the same thing at smaller scale. Operators sometimes mention it when comparing options.',
+    diff:'Too Good To Go has the largest surplus food community in the UK — more users means more reservations per Surprise Bag. Partner success is driven by demand. Our demand is bigger.',
+    say:'"Karma does something similar. The difference is scale — Too Good To Go has the largest community of customers specifically looking for surplus food in the UK. More customers means your Surprise Bag sells faster and more consistently. If you\'re going to do this, do it where the most people are looking."'
   },
   {
     name:'Olio',
-    verdict:'Different model — food sharing not revenue',
+    verdict:'Different model — sharing not revenue',
     vClass:'bv-neutral',
-    what:'Community food sharing app. Operators list surplus for free or at very low cost. No guaranteed revenue. Volunteer-based pickup.',
-    think:'Good for community goodwill but no commercial upside. Logistics are unpredictable.',
-    diff:'Olio is a donation/sharing platform. TGTG is a revenue platform. Partners on TGTG get paid for every bag sold, the transaction is guaranteed before the customer collects, and the logistics are clear. Complementary for operators who want both.',
-    say:'"Olio is fantastic for community giving — and TGTG is different. Every Magic Bag is paid for before the customer picks it up. You\'re not hoping someone comes — you have a confirmed reservation and a guaranteed payment. The commercial upside is the difference."'
+    what:'Community food sharing app. Operators list surplus for free or very low cost. No guaranteed revenue. Volunteer-based collection.',
+    think:'Good for community goodwill but no reliable commercial upside. Logistics unpredictable.',
+    diff:'Olio is a giving platform. Too Good To Go is a revenue platform. Every Surprise Bag is paid for before the customer collects — you have a confirmed reservation and a guaranteed payment. Complementary for operators who want both.',
+    say:'"Olio is great for community giving. Too Good To Go is different — every bag is paid for before the customer picks it up. You\'re not hoping someone comes. You have a confirmed order and a guaranteed payment. That\'s the commercial difference."'
+  },
+  {
+    name:'TheFork',
+    verdict:'Different product — not competitive',
+    vClass:'bv-neutral',
+    what:'Reservation and discovery platform. Venues offer discounts to appear in search. Targets customers who have already decided to go to a restaurant.',
+    think:'Drives some covers but creates discount expectations over time.',
+    diff:'TheFork captures demand that already exists. Too Good To Go creates demand that did not exist — customers who were not planning to go out, buying surplus food that would otherwise go to waste. Completely different occasions and customer mindsets.',
+    say:'"TheFork captures customers who had already decided to go to a restaurant. Too Good To Go captures customers who had not decided to go out — they\'re specifically looking for surplus food to rescue. Different customer, different occasion, no overlap."'
   },
   {
     name:'Deliveroo / Just Eat',
     verdict:'Different product — not competitive',
     vClass:'bv-neutral',
-    what:'Food delivery platforms. High commission (25–35%). Focused on delivery to home. No food waste angle.',
-    think:'Thin margins for operators after commission and packaging. Delivery and dine-in are different occasions.',
-    diff:'Deliveroo generates delivery revenue. TGTG generates in-store collection — customers come to you. Different occasion, no delivery cost, no packaging overhead, and a customer who is physically in or near your business.',
-    say:'"Deliveroo puts your food in someone\'s home. Too Good To Go brings a customer to your door. Different occasion, no delivery cost, and the customer is right there with you — which is often how you get a repeat visit."'
-  },
-  {
-    name:'Karma',
-    verdict:'Direct competitor — know the difference',
-    vClass:'bv-red',
-    what:'Surplus food app. Similar model to TGTG — restaurants list surplus at reduced price. Smaller UK user base than TGTG.',
-    think:'Smaller community means less demand per listing. Lower consumer brand recognition in the UK.',
-    diff:'TGTG has 103 million meals saved globally and the largest surplus food community in the UK. More users means more reservations per bag. Partner success is driven by demand — and our demand is larger.',
-    say:'"Karma does something similar. The difference is scale — Too Good To Go has the largest community of surplus food customers in the UK, which means more reservations per bag you list. If you\'re going to do this, do it where the most customers are looking."'
+    what:'Food delivery platforms. High commission. Focused on delivery to home. No food waste angle.',
+    think:'Thin margins for operators after commission and packaging. Delivery and in-store are different occasions.',
+    diff:'Deliveroo generates delivery revenue. Too Good To Go generates in-store collection — customers come to you, no delivery cost, no packaging overhead. And the product is surplus inventory, not your regular menu.',
+    say:'"Deliveroo puts your food in someone\'s home. Too Good To Go brings a customer to your door — and that customer is specifically there to collect surplus that would have gone to waste. Different product, different occasion, no competition."'
   },
 ];
 
-var MANAGER_EMAILS = [
+var MANAGER_TEMPLATES = [
   {
     title:'New rep welcome — team announcement',
     type:'manager',
     to:'Full team (Slack + email)',
     from:'Head of Independent Partners',
-    subject:'Welcome to the team — [FIRST NAME] joins us',
     body:`Team,
 
 I'm delighted to introduce [FIRST NAME] [LAST NAME], who joins us this week covering [TERRITORY].
 
-[FIRST NAME] brings [X years] of [BACKGROUND] and is already up to speed on Too Good To Go's mission and our phone sales approach.
+[FIRST NAME] brings [X years] of [BACKGROUND] and joins us at a great moment — [X] new partners joined Too Good To Go in [TERRITORY] last month alone.
 
 A few words from [FIRST NAME]:
-"[PERSONAL NOTE — ask them to write 2-3 sentences: what drew them to TGTG, something personal]"
+"[PERSONAL NOTE — 2-3 sentences: what drew them to TGTG, something personal]"
 
-[FIRST NAME] is on the phones from [START DATE] and will be in the [TEAM NAME] standup from day one. Please give them the warmest welcome — the kind that makes people glad they said yes.
+[FIRST NAME] is on the phones from [START DATE] and will be in standup from day one. Please give them the warmest welcome.
 
 Grant`
   },
   {
-    title:'Performance conversation invite — rep',
-    type:'manager',
-    to:'[REP NAME]',
-    from:'[TEAM LEAD NAME]',
-    subject:'Catch up this week — [REP NAME]',
-    body:`Hi [FIRST NAME],
-
-Can we find 30 minutes this week for a proper catch-up — outside our regular 1:1?
-
-I want to talk through how the last few weeks have felt for you, and be direct about what I'm seeing in the data. I'd rather have that conversation now than let it run.
-
-This is not a formal process — it's a conversation. But I want to be upfront so you're not walking in blind.
-
-When works for you this week?
-
-[TL NAME]`
-  },
-  {
-    title:'Weekly team win recognition — Slack',
+    title:'Win Wire — team Slack recognition',
     type:'slack',
-    to:'#too-good-to-go-uk',
+    to:'Team Slack channel',
     from:'Head of Independent Partners',
-    subject:'Win Wire',
     body:`🟢 Win Wire — [DATE]
 
-[REP NAME] — [VENUE NAME], [AREA]
+[REP NAME] — [BUSINESS NAME], [AREA]
 
-[SPECIFIC THING THEY DID: e.g. "Called three times over two days, found the owner on the third call, asked about Tuesday surplus before mentioning TGTG, and closed a 5-bag Monday window in under 8 minutes."]
+[SPECIFIC THING: e.g. "Called twice, got the owner on the second call, asked about end-of-day surplus before mentioning TGTG, and closed a 6-bag daily window in under 7 minutes. First bag live within the hour."]
 
-That's [X] bags a week. [X] meals saved every month. [X] that didn't exist on Monday.
+That's [X] Surprise Bags a week. [X] meals saved every month. Revenue that was a guaranteed £0 on Monday.
 
 That's the standard.`
   },
   {
-    title:'Friday close-out — team Slack message',
+    title:'Friday close-out — team message',
     type:'slack',
-    to:'#too-good-to-go-uk',
+    to:'Team Slack channel',
     from:'Head of Independent Partners',
-    subject:'End of week',
     body:`Week done.
 
-[X] bags agreed this week. [X] new partners live. [X] meals saved this month running total.
+[X] new partners live this week. [X] Surprise Bags agreed. [X] meals saved this month — running total.
 
-[SPECIFIC INDIVIDUAL RECOGNITION — name the rep, name the specific thing they did]
+[SPECIFIC INDIVIDUAL RECOGNITION — name the rep, name the specific thing]
 
-[SPECIFIC COACHING POINT — one thing the whole team works on next week, named specifically]
+[ONE COACHING POINT — what the whole team focuses on next week, named specifically]
 
-Next week we hold the standard and push it higher.
+That food was going in the bin. This week we stopped some of it. Next week we stop more.
 
-Have a good one.`
+Good weekend.`
+  },
+  {
+    title:'Performance conversation invite',
+    type:'manager',
+    to:'[REP NAME]',
+    from:'[TEAM LEAD NAME]',
+    body:`Hi [FIRST NAME],
+
+Can we find 30 minutes this week for a proper catch-up outside our regular 1:1?
+
+I want to talk through how the last few weeks have felt for you, and be direct about what I'm seeing in the data. I'd rather have that conversation now than let it run.
+
+This isn't a formal process — it's a conversation. But I want to flag it so you're not walking in blind.
+
+When works for you?
+
+[TL NAME]`
   },
 ];
 
-// ── RENDER FUNCTIONS ─────────────────────────────────────────────
-
-function renderEmails(){
-  var html = '';
-  EMAILS.forEach(function(e,i){
-    html += '<div class="email-card">' +
-      '<div class="ec-head"><div class="ec-title">'+e.title+'</div><span class="ec-type type-email">Email</span></div>' +
-      '<div class="ec-meta">' +
-        '<div class="ec-field"><strong>To:</strong> '+e.to+'</div>' +
-        '<div class="ec-field"><strong>From:</strong> '+e.from+'</div>' +
-        '<div class="ec-field"><strong>Subject:</strong> '+e.subject+'</div>' +
-      '</div>' +
-      '<div class="ec-body">'+escHtml(e.body)+'</div>' +
-      '<div class="ec-footer"><button class="copy-btn" onclick="copyText(this,`'+escJs(e.body)+'`)">Copy</button></div>' +
-    '</div>';
-  });
-  document.getElementById('email-list').innerHTML = html;
-}
+function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function escJs(s){return s.replace(/\\/g,'\\\\').replace(/`/g,'\\`').replace(/\$/g,'\\$');}
 
 function renderCalls(){
-  var html = '';
+  var h='';
   CALLS.forEach(function(c,i){
-    html += '<div class="pitch-card'+(i===0?' featured':'')+'">'+
+    h+='<div class="pitch-card'+(i===0?' featured':'')+'">'+
       '<div class="pc-label">'+c.label+'</div>'+
       '<div class="pc-title">'+c.title+'</div>'+
       '<div class="pc-sub">'+c.sub+'</div>'+
@@ -565,26 +665,51 @@ function renderCalls(){
       '<button class="pc-copy" onclick="copyText(this,`'+escJs(c.script)+'`)">Copy script</button>'+
     '</div>';
   });
-  document.getElementById('call-list').innerHTML = html;
+  document.getElementById('call-list').innerHTML=h;
+}
+
+function renderSegments(){
+  var h='';
+  SEGMENTS.forEach(function(s){
+    h+='<div class="seg-card">'+
+      '<div class="seg-name">'+s.name+'</div>'+
+      '<div class="seg-opener">'+s.opener+'</div>'+
+      '<div class="seg-why">'+s.why+'</div>'+
+    '</div>';
+  });
+  document.getElementById('seg-list').innerHTML=h;
+}
+
+function renderEmails(){
+  var h='';
+  EMAILS.forEach(function(e){
+    h+='<div class="email-card">'+
+      '<div class="ec-head"><div class="ec-title">'+e.title+'</div><span class="ec-type type-email">Email</span></div>'+
+      '<div class="ec-meta"><div class="ec-field"><strong>To:</strong> '+e.to+'</div><div class="ec-field"><strong>Subject:</strong> '+e.subject+'</div></div>'+
+      '<div class="ec-body">'+escHtml(e.body)+'</div>'+
+      '<div class="ec-footer"><button class="copy-btn" onclick="copyText(this,`'+escJs(e.body)+'`)">Copy</button></div>'+
+    '</div>';
+  });
+  document.getElementById('email-list').innerHTML=h;
 }
 
 function renderWhatsApp(){
-  var html = '';
+  var h='';
   WHATSAPP.forEach(function(w){
-    html += '<div class="email-card">'+
+    h+='<div class="email-card">'+
       '<div class="ec-head"><div class="ec-title">'+w.title+'</div><span class="ec-type type-whatsapp">WhatsApp</span></div>'+
       '<div class="ec-body">'+escHtml(w.body)+'</div>'+
       '<div class="ec-footer"><button class="copy-btn" onclick="copyText(this,`'+escJs(w.body)+'`)">Copy</button></div>'+
     '</div>';
   });
-  document.getElementById('whatsapp-list').innerHTML = html;
+  document.getElementById('whatsapp-list').innerHTML=h;
 }
 
 function renderObjections(){
-  var html = '';
+  var h='';
   OBJECTIONS.forEach(function(o){
-    html += '<div class="obj-card">'+
-      '<div class="oc-obj"><div><div class="oc-q">Owner says</div><div class="oc-obj-text">'+o.obj+'</div></div></div>'+
+    h+='<div class="obj-card">'+
+      '<div class="oc-obj"><div class="oc-q">Owner says</div><div class="oc-obj-text">'+o.obj+'</div></div>'+
       '<div class="oc-counter">'+
         '<div class="oc-a">Your response</div>'+
         '<div class="oc-text">'+o.counter+'</div>'+
@@ -593,68 +718,56 @@ function renderObjections(){
       '</div>'+
     '</div>';
   });
-  document.getElementById('obj-list').innerHTML = html;
+  document.getElementById('obj-list').innerHTML=h;
 }
 
 function renderBattlecards(){
-  var html = '';
+  var h='';
   BATTLECARDS.forEach(function(b){
-    html += '<div class="bc-card">'+
+    h+='<div class="bc-card">'+
       '<div class="bc-head"><div class="bc-name">'+b.name+'</div><div class="bc-verdict '+b.vClass+'">'+b.verdict+'</div></div>'+
       '<div class="bc-grid">'+
         '<div class="bc-cell"><div class="bc-cell-label">What they are</div><div class="bc-cell-text">'+b.what+'</div></div>'+
-        '<div class="bc-cell"><div class="bc-cell-label">Operator sentiment</div><div class="bc-cell-text">'+b.think+'</div></div>'+
+        '<div class="bc-cell"><div class="bc-cell-label">Operator view</div><div class="bc-cell-text">'+b.think+'</div></div>'+
         '<div class="bc-cell" style="grid-column:1/-1;border-right:none;"><div class="bc-cell-label">The difference</div><div class="bc-cell-text">'+b.diff+'</div></div>'+
       '</div>'+
       '<div class="bc-say"><div class="bc-say-label">What to say on the call</div><div class="bc-say-text">'+b.say+'</div><button class="bc-copy" onclick="copyText(this,`'+escJs(b.say)+'`)">Copy</button></div>'+
     '</div>';
   });
-  document.getElementById('bc-list').innerHTML = html;
+  document.getElementById('bc-list').innerHTML=h;
 }
 
 function renderManager(){
-  var html = '';
-  MANAGER_EMAILS.forEach(function(e){
-    var typeClass = e.type === 'slack' ? 'type-slack' : 'type-manager';
-    var typeLabel = e.type === 'slack' ? 'Slack' : 'Manager Email';
-    html += '<div class="email-card">'+
-      '<div class="ec-head"><div class="ec-title">'+e.title+'</div><span class="ec-type '+typeClass+'">'+typeLabel+'</span></div>'+
-      '<div class="ec-meta">'+
-        '<div class="ec-field"><strong>To:</strong> '+e.to+'</div>'+
-        '<div class="ec-field"><strong>From:</strong> '+e.from+'</div>'+
-      '</div>'+
+  var h='';
+  MANAGER_TEMPLATES.forEach(function(e){
+    var tc=e.type==='slack'?'type-slack':'type-manager';
+    var tl=e.type==='slack'?'Slack':'Manager Email';
+    h+='<div class="email-card">'+
+      '<div class="ec-head"><div class="ec-title">'+e.title+'</div><span class="ec-type '+tc+'">'+tl+'</span></div>'+
+      '<div class="ec-meta"><div class="ec-field"><strong>To:</strong> '+e.to+'</div></div>'+
       '<div class="ec-body">'+escHtml(e.body)+'</div>'+
       '<div class="ec-footer"><button class="copy-btn" onclick="copyText(this,`'+escJs(e.body)+'`)">Copy</button></div>'+
     '</div>';
   });
-  document.getElementById('mgr-list').innerHTML = html;
+  document.getElementById('mgr-list').innerHTML=h;
 }
 
-function escHtml(str){ return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function escJs(str){ return str.replace(/\\/g,'\\\\').replace(/`/g,'\\`').replace(/\$/g,'\\$'); }
-
-function showTab(id, btn){
+function showTab(id,btn){
   document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active');});
   document.querySelectorAll('.nav-tab').forEach(function(t){t.classList.remove('active');});
   document.getElementById('tab-'+id).classList.add('active');
   btn.classList.add('active');
 }
 
-function copyText(btn, text){
+function copyText(btn,text){
   navigator.clipboard.writeText(text).then(function(){
-    btn.textContent = 'Copied ✓';
-    btn.classList.add('copied');
-    setTimeout(function(){btn.textContent='Copy';btn.classList.remove('copied');},2000);
+    var orig=btn.textContent;
+    btn.textContent='Copied ✓';btn.classList.add('copied');
+    setTimeout(function(){btn.textContent=orig;btn.classList.remove('copied');},2000);
   });
 }
 
-// Init
-renderEmails();
-renderCalls();
-renderWhatsApp();
-renderObjections();
-renderBattlecards();
-renderManager();
+renderCalls();renderSegments();renderEmails();renderWhatsApp();renderObjections();renderBattlecards();renderManager();
 </script>
 </body>
 </html>
