@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Too Good To Go · HoI Week</title>
+<link rel="stylesheet" href="/brand.css">
+<style>
+:root{
+  --y:#FFD000;--yd:rgba(255,208,0,.10);--yl:rgba(255,208,0,.22);
+  --g:#22C55E;--gd:rgba(34,197,94,.08);--gl:rgba(34,197,94,.20);
+  --r:#EF4444;--rd:rgba(239,68,68,.08);
+  --b:#3B82F6;--bd:rgba(59,130,246,.08);
+  --p:#A855F7;--pd:rgba(168,85,247,.08);
+  --bg:#0f0f0f;--s:#1a1a1a;--b1:#2a2a2a;--t:#f5f5f5;--m:#777;
+}
+.hdr{background:#111;border-bottom:1px solid var(--b1);padding:13px 24px 13px 60px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;}
+.brand{font-size:13px;font-weight:800;letter-spacing:-.3px;}
+.brand em{color:var(--y);font-style:normal;}
+.hdr-r{font-size:11px;color:var(--m);}
+
+.hero{padding:28px 24px 20px;}
+.eye{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--y);margin-bottom:6px;}
+.h1{font-size:26px;font-weight:900;letter-spacing:-.5px;line-height:1.15;margin-bottom:8px;}
+.h-sub{font-size:13px;color:var(--m);line-height:1.75;max-width:580px;}
+
+.phase-tabs{display:flex;gap:6px;padding:0 24px 20px;}
+.ptab{padding:8px 16px;border-radius:20px;border:1px solid var(--b1);background:transparent;color:#555;font-size:11px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;}
+.ptab.on{border-color:var(--yl);background:var(--yd);color:var(--y);}
+
+.split-bar{margin:0 24px 20px;background:var(--s);border:1px solid var(--b1);border-radius:11px;padding:14px 18px;}
+.split-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--m);margin-bottom:10px;}
+.split-track{display:flex;height:8px;border-radius:4px;overflow:hidden;gap:2px;margin-bottom:10px;}
+.split-field{background:var(--y);border-radius:4px 0 0 4px;transition:width .4s;}
+.split-internal{background:var(--b);transition:width .4s;}
+.split-travel{background:var(--p);border-radius:0 4px 4px 0;transition:width .4s;}
+.split-legend{display:flex;gap:16px;flex-wrap:wrap;}
+.split-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--m);}
+.split-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
+
+.week-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:0 24px 20px;}
+@media(max-width:700px){.week-grid{grid-template-columns:1fr 1fr;}}
+
+.day{background:var(--s);border:1px solid var(--b1);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;}
+.day-hdr{padding:12px 14px 10px;}
+.day-name{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:2px;margin-bottom:3px;}
+.day-type{font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;display:inline-block;}
+.type-field{background:var(--yd);color:var(--y);}
+.type-internal{background:var(--bd);color:var(--b);}
+.type-mixed{background:var(--gd);color:var(--g);}
+.type-travel{background:var(--pd);color:var(--p);}
+.day-body{padding:0 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1;}
+.slot{display:flex;gap:8px;align-items:flex-start;}
+.slot-time{font-size:9px;font-weight:700;color:var(--m);white-space:nowrap;width:42px;flex-shrink:0;padding-top:2px;}
+.slot-content{font-size:12px;color:#aaa;line-height:1.55;flex:1;}
+.slot-content strong{color:#ddd;display:block;font-size:11px;font-weight:700;}
+.slot-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+
+.time-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:0 24px 20px;}
+@media(max-width:600px){.time-grid{grid-template-columns:1fr 1fr;}}
+.time-card{background:var(--s);border:1px solid var(--b1);border-radius:10px;padding:14px;}
+.time-n{font-size:24px;font-weight:900;line-height:1;letter-spacing:-1px;margin-bottom:3px;}
+.time-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--m);}
+.time-sub{font-size:11px;color:#444;margin-top:5px;line-height:1.55;}
+
+.principles{margin:0 24px 30px;background:var(--s);border:1px solid var(--b1);border-radius:12px;padding:20px;}
+.p-title{font-size:13px;font-weight:800;margin-bottom:14px;letter-spacing:-.2px;}
+.p-list{display:flex;flex-direction:column;gap:10px;}
+.p-item{display:flex;gap:10px;font-size:13px;color:#aaa;line-height:1.65;}
+.p-dot{width:6px;height:6px;border-radius:50%;background:var(--y);flex-shrink:0;margin-top:6px;}
+
+.note{margin:0 24px 10px;padding:12px 16px;background:#111;border-radius:9px;border-left:2px solid var(--y);font-size:12px;color:#777;line-height:1.7;}
+.note strong{color:#ddd;}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="brand"><em>Too Good</em> To Go · Head of Independent Partners Week</div>
+  <div class="hdr-r">Field-first · operator-led</div>
+</div>
+
+<div class="hero">
+  <div class="eye">Typical week · UK Head of Independent Partners</div>
+  <div class="h1">3.5 days field.<br>1 internal day.<br>0.5 days flex.</div>
+  <div class="h-sub">The job is won in venues, on phone floors, and in the room with operators. Internal meetings happen — but they do not run the week. The field runs the week. One dedicated internal day keeps the structure without letting it take over.</div>
+</div>
+
+<div class="phase-tabs">
+  <button class="ptab on" onclick="setPhase('early',this)">Phase 1 — Days 1–55 · Running London directly</button>
+  <button class="ptab" onclick="setPhase('mid',this)">Phase 2 — Days 56–90 · TLs in seat</button>
+  <button class="ptab" onclick="setPhase('scaled',this)">Scaled · Full management layer</button>
+</div>
+
+<div class="split-bar">
+  <div class="split-lbl">Time allocation</div>
+  <div class="split-track">
+    <div class="split-field" id="bar-field" style="width:65%"></div>
+    <div class="split-internal" id="bar-internal" style="width:20%"></div>
+    <div class="split-travel" id="bar-travel" style="width:15%"></div>
+  </div>
+  <div class="split-legend">
+    <div class="split-item"><div class="split-dot" style="background:var(--y)"></div><span id="leg-field">65% Field — venues, call-alongs, coaching</span></div>
+    <div class="split-item"><div class="split-dot" style="background:var(--b)"></div><span id="leg-internal">20% Internal — reviews, hiring, Chelsea, Jade Okafor</span></div>
+    <div class="split-item"><div class="split-dot" style="background:var(--p)"></div><span id="leg-travel">15% Travel — city visits, launch weeks</span></div>
+  </div>
+</div>
+
+<div class="time-grid">
+  <div class="time-card"><div class="time-n" style="color:var(--y)" id="t-field">3.5</div><div class="time-lbl">Days in field</div><div class="time-sub" id="t-field-sub">Venues, call-alongs, dial blitzes, coaching on phone floor</div></div>
+  <div class="time-card"><div class="time-n" style="color:var(--b)" id="t-internal">1</div><div class="time-lbl">Internal day</div><div class="time-sub" id="t-internal-sub">Wednesday — pipeline reviews, 1:1s, Chelsea sync, hiring interviews</div></div>
+  <div class="time-card"><div class="time-n" style="color:var(--g)" id="t-strategic">4–6</div><div class="time-lbl">Strategic closes</div><div class="time-sub" id="t-strategic-sub">Group operator conversations, flagship prospect calls per week</div></div>
+  <div class="time-card"><div class="time-n" style="color:var(--p)" id="t-rides">8–10</div><div class="time-lbl">Ride-along hours</div><div class="time-sub" id="t-rides-sub">Live coaching sessions per week across all cities</div></div>
+  <div class="time-card"><div class="time-n" style="color:var(--r)" id="t-hiring">3</div><div class="time-lbl">Hiring hours</div><div class="time-sub" id="t-hiring-sub">Interviews, debrief, briefing recruiters</div></div>
+  <div class="time-card"><div class="time-n" style="color:var(--m)" id="t-admin">2.5</div><div class="time-lbl">Reporting hrs</div><div class="time-sub" id="t-admin-sub">Chelsea brief, CRM review, pipeline health — mostly automated</div></div>
+</div>
+
+<div class="week-grid" id="week-grid"></div>
+
+<div class="note" id="phase-note">
+  <strong>Phase 1 note — running London directly.</strong> Until the London TL is in seat (day 50–55), the HoI is the operational centre of London. This compresses field time into London-heavy days. Travel to North cities happens once per week minimum — Manchester, Liverpool, Leeds each need at least one visit per fortnight. Scotland warm introductions happen by phone and planned trips, not daily presence.
+</div>
+
+<div class="principles">
+  <div class="p-title">Operating principles — how the week is structured</div>
+  <div class="p-list" id="principles-list"></div>
+</div>
+
+<script>
+var PHASES = {
+  early: {
+    label: 'Phase 1 — Days 1–55',
+    field: 65, internal: 22, travel: 13,
+    tField: '3', tInternal: '1', tStrategic: '4–6', tRides: '8–10', tHiring: '3', tAdmin: '3',
+    tFieldSub: 'London-heavy — running city directly until TL is in seat',
+    tInternalSub: 'Wednesday — pipeline reviews, manager 1:1s, Chelsea sync, hiring',
+    tStrategicSub: 'Priority: flagship London venues, group operator introductions',
+    tRidesSub: 'London call-alongs 3–4 per week, North cities 1 per week minimum',
+    tHiringSub: 'London TL, Scotland TL, Cardiff rep, Glasgow/Edinburgh/Newcastle phone reps',
+    tAdminSub: 'Weekly Chelsea brief, activation audit with Jade Okafor',
+    note: '<strong>Phase 1 note — running London directly.</strong> Until the London TL is in seat (day 50–55), the HoI is the operational centre of London. London-heavy call sessions in weeks 1–8. North city visits minimum once per fortnight each. Scotland warm introductions happen by phone and planned trips.',
+    days: [
+      {name:'Monday', type:'field', typeLabel:'Field day',
+       slots:[
+         {time:'07:30', dot:'var(--y)', content:'<strong>UK standup — all 5 cities</strong>Remote. 15 min. Sets the tone for the week. HoI leads.'},
+         {time:'09:00', dot:'var(--y)', content:'<strong>London — dial blitz</strong>Hackney corridor or South London density zone. 4–6 prospect calls. rep alongside where possible.'},
+         {time:'12:00', dot:'var(--g)', content:'<strong>Strategic prospect call</strong>Pre-arranged — group operator or flagship independent. Owner meeting only.'},
+         {time:'14:00', dot:'var(--y)', content:'<strong>Ride-along — bottom quartile rep</strong>Joint visit. Observe, don\'t rescue. Debrief after.'},
+         {time:'17:00', dot:'var(--b)', content:'<strong>Pipeline review prep</strong>Pull HubSpot. Flag gaps before Wednesday.'},
+         {time:'18:00', dot:'var(--p)', content:'<strong>Scotland warm intro calls</strong>Glasgow and Edinburgh operator relationships. 2–3 calls. Building pipeline before TL is in seat.'},
+       ]},
+      {name:'Tuesday', type:'mixed', typeLabel:'Field + North',
+       slots:[
+         {time:'07:30', dot:'var(--y)', content:'<strong>Standup — all cities</strong>'},
+         {time:'08:30', dot:'var(--p)', content:'<strong>Travel to Manchester or Leeds</strong>Train — 2hrs. Review pipeline data en route.'},
+         {time:'11:00', dot:'var(--y)', content:'<strong>North city call session</strong>Ride-along with top North rep. Venue visits. Observe the pitch live.'},
+         {time:'13:00', dot:'var(--y)', content:'<strong>Joint visit — strategic North venue</strong>HoI closes or supports close on a priority account.'},
+         {time:'15:00', dot:'var(--b)', content:'<strong>North manager 1:1</strong>Pipeline by rep. Deal quality. Coaching actions. Who is the step-up candidate?'},
+         {time:'17:00', dot:'var(--p)', content:'<strong>Return to London or home base</strong>'},
+       ]},
+      {name:'Wednesday', type:'internal', typeLabel:'Internal day',
+       slots:[
+         {time:'08:00', dot:'var(--b)', content:'<strong>Chelsea Kerr sync</strong>Weekly. 30 min. Pipeline health, hiring status, activation numbers, anything to escalate.'},
+         {time:'09:00', dot:'var(--b)', content:'<strong>Weekly pipeline review — all cities</strong>Managers present. Deal by deal. Deal score floor enforced. CRM compliance reviewed.'},
+         {time:'11:00', dot:'var(--b)', content:'<strong>Jade Okafor — AM alignment</strong>London activation plan progress. Manchester coverage. Venue health by city. Competing hypotheses reviewed.'},
+         {time:'12:30', dot:'var(--r)', content:'<strong>Hiring interviews</strong>London TL, Scotland TL, Cardiff rep — whichever stage they are at. Bar held on every hire.'},
+         {time:'14:30', dot:'var(--b)', content:'<strong>Other manager 1:1</strong>Coaching quality review. Team energy. Bottom quartile status.'},
+         {time:'15:30', dot:'var(--b)', content:'<strong>Desk — CRM audit, deal score review, comms</strong>The one time in the week for admin that cannot be delegated. Done here, not on the phones.'},
+         {time:'17:00', dot:'var(--g)', content:'<strong>Partner Health review</strong>Amber and red venues with AM. Intervention decisions made.'},
+       ]},
+      {name:'Thursday', type:'field', typeLabel:'Field day',
+       slots:[
+         {time:'07:30', dot:'var(--y)', content:'<strong>Standup — all cities</strong>'},
+         {time:'09:00', dot:'var(--y)', content:'<strong>London field — different territory from Monday</strong>South or East London rotation. Density strategy in action.'},
+         {time:'11:00', dot:'var(--y)', content:'<strong>Ride-along — top quartile rep</strong>Observe what good looks like. Extract it. Teach it on Friday.'},
+         {time:'13:30', dot:'var(--g)', content:'<strong>Group operator conversation</strong>Multi-site operator. 3–10 venues. HoI-led — rep in support.'},
+         {time:'15:30', dot:'var(--y)', content:'<strong>Walk-ins — supply gap territory</strong>Cold or warm. Fill the density gap the data identified this week.'},
+         {time:'17:30', dot:'var(--b)', content:'<strong>Win Wire</strong>Name the best close of the week. Specific. Public. Shared across all cities.'},
+       ]},
+      {name:'Friday', type:'mixed', typeLabel:'Mixed',
+       slots:[
+         {time:'07:30', dot:'var(--b)', content:'<strong>Chelsea brief — sent by 08:00</strong>Weekly written update. Pipeline, hiring, activation numbers, key decisions made. Takes 20 min to write.'},
+         {time:'08:30', dot:'var(--b)', content:'<strong>Standups — all cities</strong>End of week energy. Celebrate the week\'s wins specifically.'},
+         {time:'10:00', dot:'var(--y)', content:'<strong>Field — strategic or coaching</strong>One more prospect call or call-along. HoI sets the standard by still being on the phone floor on Friday.'},
+         {time:'12:30', dot:'var(--b)', content:'<strong>Flex — hiring, admin, planning</strong>Next week\'s city plan. Territory strategy reviewed. Density data pulled.'},
+         {time:'14:00', dot:'var(--g)', content:'<strong>Scotland/Cardiff pipeline call</strong>Warm intros progressed this week. What moved? What needs a site visit?'},
+         {time:'15:00', dot:'var(--b)', content:'<strong>Early close</strong>Field-first culture means protecting the weekend. Energy management is part of the job.'},
+       ]},
+    ],
+    principles: [
+      'The field is the default. Every decision about where to spend time starts with: what does the field need from me this week?',
+      'Wednesday is protected internal time. No prospect calls on Wednesday. No exceptions — the team needs to know where the HoI is on pipeline review day.',
+      'London is heavy in Phase 1. Running 26 phone reps directly until the London TL is in seat means London gets 3 of the 3.5 call sessions. This changes when the TL lands.',
+      'North cities get at least one visit per fortnight each. Manchester, Liverpool, Leeds — rotate. The North manager cannot be the only field presence in those cities.',
+      'Chelsea brief goes out Friday morning before 08:00. Always. It takes 20 minutes. If it is not written, something slipped.',
+      'Hiring is Thursday or Wednesday only. Interviews do not spill into call sessions. The field is for operators, not candidates.',
+      'The HoI is on the phones on Friday morning. This is visible leadership. Reps notice when the manager disappears after Wednesday.',
+    ]
+  },
+
+  mid: {
+    label: 'Phase 2 — Days 56–90',
+    field: 60, internal: 20, travel: 20,
+    tField: '3', tInternal: '1', tStrategic: '6–8', tRides: '6–8', tHiring: '2', tAdmin: '2',
+    tFieldSub: 'London TL running London — HoI shifts to strategic and Scotland prep',
+    tInternalSub: 'Wednesday — same structure, less London operational content',
+    tStrategicSub: 'Scotland warm intro visits begin. Cardiff support. Group operators.',
+    tRidesSub: 'Fewer London call-alongs, more North and Scotland cities',
+    tHiringSub: 'Scotland phone reps, North Midlands TL assessment, remaining structural hires',
+    tAdminSub: 'Chelsea brief, Scotland launch prep, activation audit check-ins',
+    note: '<strong>Phase 2 note — TLs in seat, Scotland building.</strong> London TL owns London. Scotland TL is building three-city pipeline. The HoI shifts from operational to strategic — more time in Scotland, more group operator conversations, less London daily management. Travel increases as Scotland and Cardiff require presence.',
+    days: [
+      {name:'Monday', type:'field', typeLabel:'Field day',
+       slots:[
+         {time:'07:30', dot:'var(--y)', content:'<strong>UK standup — all cities including Scotland TL</strong>'},
+         {time:'09:00', dot:'var(--p)', content:'<strong>Scotland visit or London strategic</strong>Alternating weeks — Glasgow/Edinburgh warm intros in person. When in London: group operator or flagship venue.'},
+         {time:'12:00', dot:'var(--g)', content:'<strong>Strategic group operator conversation</strong>Multi-site operators. HoI-led. Deals only the HoI can close.'},
+         {time:'14:00', dot:'var(--b)', content:'<strong>Scotland TL check-in</strong>Pipeline by city. Obstacles. What does the RM need from the HoI this week?'},
+         {time:'16:00', dot:'var(--y)', content:'<strong>Field — wherever the density gap is</strong>Demand-back data from the week reviewed. Go where the supply is thin.'},
+       ]},
+      {name:'Tuesday', type:'mixed', typeLabel:'North + strategic',
+       slots:[
+         {time:'07:30', dot:'var(--y)', content:'<strong>Standup</strong>'},
+         {time:'09:00', dot:'var(--p)', content:'<strong>North city — Manchester priority</strong>Manchester at 35-42% coverage needs attention. Ride-along with North rep. Activation quality review on the ground.'},
+         {time:'12:00', dot:'var(--y)', content:'<strong>Manchester prospect calls — supply gap territorys</strong>M4 Ancoats, M20 Didsbury. Density work alongside the rep.'},
+         {time:'15:00', dot:'var(--b)', content:'<strong>North manager 1:1</strong>Manchester coverage the specific topic. Who is the step-up candidate? What is blocking activation?'},
+         {time:'17:00', dot:'var(--p)', content:'<strong>Return journey — planning call</strong>'},
+       ]},
+      {name:'Wednesday', type:'internal', typeLabel:'Internal day',
+       slots:[
+         {time:'08:00', dot:'var(--b)', content:'<strong>Chelsea sync</strong>Scotland pipeline update now a standing agenda item.'},
+         {time:'09:00', dot:'var(--b)', content:'<strong>Pipeline review — all cities + Scotland TL</strong>Scotland TL presents their three-city pipeline for the first time.'},
+         {time:'11:00', dot:'var(--b)', content:'<strong>Jade Okafor — activation plan progress</strong>London and Manchester numbers. Are we moving? What changed this week?'},
+         {time:'12:30', dot:'var(--r)', content:'<strong>North Midlands TL — internal candidate review</strong>Has the step-up candidate been identified? Decision point if not.'},
+         {time:'14:00', dot:'var(--b)', content:'<strong>London TL 1:1</strong>First formal 1:1 now TL is in seat. Pipeline, team culture, CRM compliance.'},
+         {time:'15:30', dot:'var(--b)', content:'<strong>Scotland launch brief prep</strong>Chelsea needs the full plan. Territory strategy, day 14 signals, rep plan.'},
+       ]},
+      {name:'Thursday', type:'field', typeLabel:'Field + Cardiff',
+       slots:[
+         {time:'07:30', dot:'var(--y)', content:'<strong>Standup</strong>'},
+         {time:'08:30', dot:'var(--p)', content:'<strong>Cardiff visit</strong>CF10 and CF24. Ride-along with Cardiff rep. First prospect calls. Bristol team support reviewed.'},
+         {time:'12:00', dot:'var(--y)', content:'<strong>Cardiff — warm venue conversations</strong>Roath and Canton independents. HoI opens the doors. rep closes.'},
+         {time:'15:00', dot:'var(--b)', content:'<strong>Cardiff rep debrief</strong>What is working? What is the objection pattern? Cuisine diversity checked.'},
+         {time:'17:00', dot:'var(--p)', content:'<strong>Return</strong>'},
+       ]},
+      {name:'Friday', type:'mixed', typeLabel:'Mixed',
+       slots:[
+         {time:'07:30', dot:'var(--b)', content:'<strong>Chelsea brief — sent 08:00</strong>Scotland pipeline prominently featured.'},
+         {time:'09:00', dot:'var(--y)', content:'<strong>Field — London or strategic</strong>London TL is running the team. HoI joins one visit — strategic or coaching. Visible but not operational.'},
+         {time:'11:00', dot:'var(--b)', content:'<strong>Week review — all TLs</strong>London TL, Scotland TL, North manager. Brief. What moved? What is stuck?'},
+         {time:'13:00', dot:'var(--g)', content:'<strong>Scotland prep — warm intro calls</strong>Glasgow and Edinburgh operators. Relationships ahead of launch week.'},
+         {time:'15:00', dot:'var(--b)', content:'<strong>Early close</strong>'},
+       ]},
+    ],
+    principles: [
+      'The London TL runs London. The HoI moves from operational to strategic in London — one visit per week maximum, always alongside the TL, never bypassing them.',
+      'Manchester gets dedicated field time every week. 35-42% offer coverage is the same problem as London at an earlier stage. The North manager needs the HoI alongside them in Manchester specifically.',
+      'Scotland gets time every fortnight in person. Warm intro calls fill the alternate weeks. The Scotland TL is building but needs the HoI\'s personal network to accelerate the first 20 Glasgow venues.',
+      'Cardiff gets a monthly visit minimum. The rep is new. The Bristol team supports. The HoI\'s job is to open doors, not manage the day-to-day.',
+      'Wednesday stays protected internal. The structure does not change — the content does. Less London operational, more Scotland and Cardiff.',
+      'Travel is now 20% of the week. That means planning. Flights and trains are booked weekly on the Friday before. Reactive travel is expensive and exhausting.',
+    ]
+  },
+
+  scaled: {
+    label: 'Scaled — full management layer',
+    field: 55, internal: 20, travel: 25,
+    tField: '2.5', tInternal: '1', tStrategic: '8–10', tRides: '4–6', tHiring: '1.5', tAdmin: '1.5',
+    tFieldSub: 'More strategic, fewer coaching call-alongs — managers handle day-to-day coaching',
+    tInternalSub: 'Wednesday — multi-TL pipeline review, Chelsea sync, hiring is winding down',
+    tStrategicSub: 'Group accounts, national operators, brand partnerships — HoI-led only',
+    tRidesSub: 'Spot coaching, call-alongs with managers not phone reps directly',
+    tHiringSub: 'Declining — management layer is largely built',
+    tAdminSub: 'Chelsea brief, market expansion planning, next city decisions',
+    note: '<strong>Scaled note — management layer runs independently.</strong> London TL, Scotland TL, North manager, North Midlands TL all operating. The HoI\'s job shifts from field operator to commercial leader — strategic accounts, national partnerships, next city decisions, and the deals only the HoI can close. Travel increases as more cities are live.',
+    days: [
+      {name:'Monday', type:'field', typeLabel:'Strategic field',
+       slots:[
+         {time:'08:00', dot:'var(--b)', content:'<strong>All-hands standup — all cities</strong>Brief. Energy. One win from last week named.'},
+         {time:'09:00', dot:'var(--g)', content:'<strong>National or group operator</strong>The deal only the HoI can close. Multi-site. Quarterly cycle. Board-level relationship.'},
+         {time:'12:00', dot:'var(--y)', content:'<strong>City field — wherever the density gap is</strong>Demand-back data reviewed Sunday evening. Go where supply is thinnest.'},
+         {time:'15:00', dot:'var(--b)', content:'<strong>TL check-ins — quick round</strong>London TL, Scotland TL, North TL. 15 min each. Blockers only.'},
+       ]},
+      {name:'Tuesday', type:'travel', typeLabel:'Regional visit',
+       slots:[
+         {time:'08:30', dot:'var(--p)', content:'<strong>Travel to Scotland or Midlands</strong>Rotating. Scotland one week, Midlands next. Presence matters more than frequency.'},
+         {time:'11:00', dot:'var(--y)', content:'<strong>Field alongside TL</strong>Not coaching the phone reps directly — coaching the TL on how they coach. Different level of observation.'},
+         {time:'14:00', dot:'var(--g)', content:'<strong>Strategic venue in that city</strong>Michelin-listed or group anchor. The HoI\'s personal close. TL watches.'},
+         {time:'16:30', dot:'var(--p)', content:'<strong>Return journey</strong>'},
+       ]},
+      {name:'Wednesday', type:'internal', typeLabel:'Internal day',
+       slots:[
+         {time:'08:00', dot:'var(--b)', content:'<strong>Chelsea sync</strong>'},
+         {time:'09:00', dot:'var(--b)', content:'<strong>Multi-TL pipeline review</strong>All TLs present. HoI facilitates — does not run. TLs own their city numbers.'},
+         {time:'11:00', dot:'var(--b)', content:'<strong>Jade Okafor — quarterly market health</strong>Offer coverage trends, activation rates, cuisine diversity, partner health.'},
+         {time:'13:00', dot:'var(--r)', content:'<strong>Hiring — declining volume</strong>Final interviews for remaining structural hires. Bar-holding conversations.'},
+         {time:'14:30', dot:'var(--b)', content:'<strong>Expansion planning</strong>Next city decisions. Birmingham trigger. Sheffield from Leeds. Playbook review.'},
+         {time:'16:00', dot:'var(--b)', content:'<strong>Culture — win wire, team recognition</strong>Specific. Public. Named. This is the one internal thing that cannot be delegated.'},
+       ]},
+      {name:'Thursday', type:'field', typeLabel:'Strategic field',
+       slots:[
+         {time:'09:00', dot:'var(--g)', content:'<strong>National brand partnership or group account</strong>20+ venue operators. Six-week cycle. HoI-led.'},
+         {time:'12:00', dot:'var(--y)', content:'<strong>Spot call-along</strong>One rep, any city. Unannounced if possible. Standards are maintained by visibility.'},
+         {time:'14:30', dot:'var(--b)', content:'<strong>Manager coaching</strong>One TL — not pipeline review, coaching review. How are they developing their team?'},
+         {time:'16:30', dot:'var(--b)', content:'<strong>Win Wire — week\'s best close</strong>'},
+       ]},
+      {name:'Friday', type:'mixed', typeLabel:'Mixed',
+       slots:[
+         {time:'07:30', dot:'var(--b)', content:'<strong>Chelsea brief — sent 08:00</strong>'},
+         {time:'09:00', dot:'var(--b)', content:'<strong>All-TL brief</strong>15 minutes. What are you focused on next week? One blocker each.'},
+         {time:'10:00', dot:'var(--g)', content:'<strong>Strategic — wherever needed</strong>Warm intro call, site visit, or expansion planning visit.'},
+         {time:'13:00', dot:'var(--b)', content:'<strong>Early close</strong>The management layer runs without the HoI. This is the proof it is working.'},
+       ]},
+    ],
+    principles: [
+      'The HoI no longer runs cities. The TLs run cities. The HoI\'s job is to coach the coaches — observing how TLs develop their phone reps, not developing phone reps directly.',
+      'Strategic accounts are the HoI\'s primary field activity. The deals that require the HoI\'s personal credibility — national groups, Michelin operators, brand partnerships — only the HoI can close.',
+      'Travel increases as more cities are live. The HoI rotates through every active city at least monthly. Presence is not about management — it is about maintaining the relationship with each market.',
+      'Wednesday stays protected. Non-negotiable regardless of scale. The rhythm creates the culture.',
+      'The Friday early close is intentional. It is the visible proof that the management layer works. If the HoI cannot stop at 1pm on a Friday, the structure has not been built properly.',
+      'The Chelsea brief never stops. Week 1, week 90, week 200. It is the most important 20 minutes of the week.',
+    ]
+  }
+};
+
+var currentPhase = 'early';
+
+function setPhase(p, el){
+  currentPhase = p;
+  document.querySelectorAll('.ptab').forEach(function(t){t.classList.remove('on');});
+  el.classList.add('on');
+  render();
+}
+
+function render(){
+  var ph = PHASES[currentPhase];
+
+  
+  document.getElementById('bar-field').style.width = ph.field+'%';
+  document.getElementById('bar-internal').style.width = ph.internal+'%';
+  document.getElementById('bar-travel').style.width = ph.travel+'%';
+  document.getElementById('leg-field').textContent = ph.field+'% Field — venues, call-alongs, coaching';
+  document.getElementById('leg-internal').textContent = ph.internal+'% Internal — reviews, hiring, Chelsea, Jade Okafor';
+  document.getElementById('leg-travel').textContent = ph.travel+'% Travel — city visits, launch weeks';
+
+  
+  document.getElementById('t-field').textContent = ph.tField;
+  document.getElementById('t-internal').textContent = ph.tInternal;
+  document.getElementById('t-strategic').textContent = ph.tStrategic;
+  document.getElementById('t-rides').textContent = ph.tRides;
+  document.getElementById('t-hiring').textContent = ph.tHiring;
+  document.getElementById('t-admin').textContent = ph.tAdmin;
+  document.getElementById('t-field-sub').textContent = ph.tFieldSub;
+  document.getElementById('t-internal-sub').textContent = ph.tInternalSub;
+  document.getElementById('t-strategic-sub').textContent = ph.tStrategicSub;
+  document.getElementById('t-rides-sub').textContent = ph.tRidesSub;
+  document.getElementById('t-hiring-sub').textContent = ph.tHiringSub;
+  document.getElementById('t-admin-sub').textContent = ph.tAdminSub;
+
+  
+  document.getElementById('phase-note').innerHTML = ph.note;
+
+  
+  var h = '';
+  ph.days.forEach(function(day){
+    h += '<div class="day">';
+    h += '<div class="day-hdr">';
+    h += '<div class="day-name">'+day.name+'</div>';
+    h += '<span class="day-type type-'+day.type+'">'+day.typeLabel+'</span>';
+    h += '</div>';
+    h += '<div class="day-body">';
+    day.slots.forEach(function(s){
+      h += '<div class="slot">';
+      h += '<div class="slot-time">'+s.time+'</div>';
+      h += '<div class="slot-dot" style="background:'+s.dot+'"></div>';
+      h += '<div class="slot-content">'+s.content+'</div>';
+      h += '</div>';
+    });
+    h += '</div></div>';
+  });
+  document.getElementById('week-grid').innerHTML = h;
+
+  
+  var p = '';
+  ph.principles.forEach(function(pr){
+    p += '<div class="p-item"><div class="p-dot"></div><div>'+pr+'</div></div>';
+  });
+  document.getElementById('principles-list').innerHTML = p;
+}
+
+render();
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>
