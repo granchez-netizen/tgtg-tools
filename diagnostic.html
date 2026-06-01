@@ -8,24 +8,24 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{
-  -webkit-font-smoothing: antialiased;font-family:'Inter',sans-serif;background:#111;color:#fff;min-height:100vh;}
+  -webkit-font-smoothing: antialiased;font-family:'Inter',sans-serif;background:#f7f8f5;color:#1a1a1a;min-height:100vh;}
 .shell{max-width:960px;margin:0 auto;padding:20px 16px 60px;}
 
 .hdr{padding:20px 0 18px;border-bottom:1px solid #222;margin-bottom:24px;display:flex;justify-content:space-between;align-items:flex-end;}
-.brand{font-size:13px;font-weight:800;color:#fff;}
-.brand em{color:#FFD000;font-style:normal;}
-.hdr-title{font-size:26px;font-weight:800;color:#fff;margin-top:8px;}
-.hdr-title em{color:#FFD000;font-style:normal;}
+.brand{font-size:13px;font-weight:800;color:#ffffff;}
+.brand em{color:#6DBE4F;font-style:normal;}
+.hdr-title{font-size:26px;font-weight:800;color:#1a1a1a;margin-top:8px;}
+.hdr-title em{color:#6DBE4F;font-style:normal;}
 .hdr-sub{font-size:13px;color:#555;margin-top:5px;}
-.hdr-tag{font-size:10px;font-family:'Inter',sans-serif;font-weight:700;color:#FFD000;padding:4px 10px;border:1px solid #333;border-radius:4px;}
+.hdr-tag{font-size:10px;font-family:'Inter',sans-serif;font-weight:700;color:#6DBE4F;padding:4px 10px;border:1px solid #333;border-radius:4px;}
 
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px;}
 @media(max-width:640px){.cols{grid-template-columns:1fr;}}
 
 .panel{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;overflow:hidden;}
 .ph{padding:13px 18px;border-bottom:1px solid #222;}
-.ph-num{font-size:9px;font-family:'Inter',sans-serif;font-weight:700;color:#FFD000;letter-spacing:2px;margin-bottom:3px;}
-.ph-title{font-size:14px;font-weight:700;color:#fff;}
+.ph-num{font-size:9px;font-family:'Inter',sans-serif;font-weight:700;color:#6DBE4F;letter-spacing:2px;margin-bottom:3px;}
+.ph-title{font-size:14px;font-weight:700;color:#1a1a1a;}
 .ph-hint{font-size:11px;color:#555;margin-top:3px;font-style:italic;}
 .pb{padding:16px 18px;}
 
@@ -33,26 +33,26 @@ body{
 .metric-row:last-child{border-bottom:none;}
 .ml{font-size:12px;color:#888;font-weight:600;}
 .mi{display:flex;align-items:center;gap:4px;}
-.mi input{width:80px;padding:6px 10px;background:#111;border:1.5px solid #2a2a2a;border-radius:6px;font-size:13px;font-weight:700;color:#fff;text-align:right;font-family:inherit;}
-.mi input:focus{outline:none;border-color:#FFD000;}
+.mi input{width:80px;padding:6px 10px;background:#f7f8f5;border:1.5px solid #2a2a2a;border-radius:6px;font-size:13px;font-weight:700;color:#1a1a1a;text-align:right;font-family:inherit;}
+.mi input:focus{outline:none;border-color:#6DBE4F;}
 .mu{font-size:11px;color:#444;width:20px;}
-.city-input{width:100%;padding:9px 12px;background:#111;border:1.5px solid #2a2a2a;border-radius:8px;font-size:13px;color:#fff;font-family:inherit;margin-bottom:12px;}
-.city-input:focus{outline:none;border-color:#FFD000;}
+.city-input{width:100%;padding:9px 12px;background:#f7f8f5;border:1.5px solid #2a2a2a;border-radius:8px;font-size:13px;color:#1a1a1a;font-family:inherit;margin-bottom:12px;}
+.city-input:focus{outline:none;border-color:#6DBE4F;}
 
-.run-btn{width:100%;padding:14px;background:#FFD000;color:#000;border:none;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;margin-top:14px;transition:background .2s;}
-.run-btn:hover{background:rgba(255,208,0,.80);}
+.run-btn{width:100%;padding:14px;background:#6DBE4F;color:#000;border:none;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;margin-top:14px;transition:background .2s;}
+.run-btn:hover{background:rgba(109,190,79,.80);}
 .run-btn:disabled{background:#2a2a2a;color:#555;cursor:not-allowed;}
 
 .step-item{display:flex;gap:10px;margin-bottom:12px;align-items:flex-start;}
 .step-item:last-child{margin-bottom:0;}
-.step-n{width:22px;height:22px;border-radius:50%;background:#FFD000;color:#000;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-n{width:22px;height:22px;border-radius:50%;background:#6DBE4F;color:#000;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .step-t{font-size:13px;color:#aaa;line-height:1.5;}
-.prompt-box{background:#111;border:1px solid #222;border-radius:8px;padding:12px;margin-top:12px;font-family:monospace;font-size:11px;color:#666;line-height:1.7;}
-.prompt-box .kw{color:#FFD000;font-weight:700;}
+.prompt-box{background:#f7f8f5;border:1px solid #222;border-radius:8px;padding:12px;margin-top:12px;font-family:monospace;font-size:11px;color:#666;line-height:1.7;}
+.prompt-box .kw{color:#6DBE4F;font-weight:700;}
 
 .output-panel{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;overflow:hidden;}
 .op-head{padding:12px 18px;border-bottom:1px solid #222;display:flex;justify-content:space-between;align-items:center;}
-.op-title{font-size:14px;font-weight:700;color:#fff;}
+.op-title{font-size:14px;font-weight:700;color:#1a1a1a;}
 .badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;}
 .badge-wait{background:#222;color:#555;border:1px solid #333;}
 .badge-live{background:rgba(76,175,130,.15);color:#22C55E;border:1px solid rgba(76,175,130,.3);}
@@ -60,7 +60,7 @@ body{
   -webkit-font-smoothing: antialiased;padding:20px;}
 
 .loading-state{display:none;text-align:center;padding:40px 20px;}
-.spin{width:34px;height:34px;border:3px solid #2a2a2a;border-top-color:#FFD000;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 14px;}
+.spin{width:34px;height:34px;border:3px solid #2a2a2a;border-top-color:#6DBE4F;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 14px;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .loading-msg{font-size:12px;color:#555;font-family:monospace;}
 
@@ -70,26 +70,26 @@ body{
 .es-sub{font-size:12px;color:#333;}
 
 .diag-content{display:none;}
-.section-hdr{font-size:9px;font-weight:700;color:#FFD000;letter-spacing:2px;text-transform:uppercase;font-family:'Inter',sans-serif;padding-bottom:8px;border-bottom:1px solid #222;margin-bottom:12px;}
+.section-hdr{font-size:9px;font-weight:700;color:#6DBE4F;letter-spacing:2px;text-transform:uppercase;font-family:'Inter',sans-serif;padding-bottom:8px;border-bottom:1px solid #222;margin-bottom:12px;}
 .diag-section{margin-bottom:22px;}
 
-.problem-card{background:#111;border:1px solid #2a2a2a;border-radius:10px;padding:14px;margin-bottom:8px;}
+.problem-card{background:#f7f8f5;border:1px solid #2a2a2a;border-radius:10px;padding:14px;margin-bottom:8px;}
 .problem-card:last-child{margin-bottom:0;}
 .pc-top{display:flex;gap:10px;align-items:flex-start;margin-bottom:6px;}
-.pc-rank{width:24px;height:24px;border-radius:50%;background:#FFD000;color:#000;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.pc-title{font-size:14px;font-weight:700;color:#fff;}
-.pc-root{font-size:11px;color:#FFD000;font-weight:700;margin-left:34px;margin-bottom:4px;}
+.pc-rank{width:24px;height:24px;border-radius:50%;background:#6DBE4F;color:#000;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pc-title{font-size:14px;font-weight:700;color:#1a1a1a;}
+.pc-root{font-size:11px;color:#6DBE4F;font-weight:700;margin-left:34px;margin-bottom:4px;}
 .pc-detail{font-size:12px;color:#888;margin-left:34px;line-height:1.6;}
 
-.team-card{background:#111;border:1px solid #2a2a2a;border-radius:10px;padding:14px;font-size:13px;color:#aaa;line-height:1.7;}
+.team-card{background:#f7f8f5;border:1px solid #2a2a2a;border-radius:10px;padding:14px;font-size:13px;color:#aaa;line-height:1.7;}
 
 .move-card{background:rgba(26,92,58,.12);border:1px solid rgba(26,92,58,.3);border-radius:10px;padding:16px;}
 .move-metric{font-size:18px;font-weight:800;color:#22C55E;margin-bottom:4px;}
 .move-range{font-size:12px;color:#666;margin-bottom:10px;}
 .move-how{font-size:13px;color:#aaa;line-height:1.7;margin-bottom:8px;}
-.move-owner{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:#FFD000;background:rgba(184,132,30,.12);padding:4px 10px;border-radius:20px;border:1px solid rgba(184,132,30,.25);}
+.move-owner{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:#6DBE4F;background:rgba(109,190,79,.12);padding:4px 10px;border-radius:20px;border:1px solid rgba(109,190,79,.25);}
 
-.pushback-card{background:#0f0f0f;border:1px solid rgba(26,92,58,.3);border-radius:10px;padding:16px;}
+.pushback-card{background:#f0f2ed;border:1px solid rgba(26,92,58,.3);border-radius:10px;padding:16px;}
 .pushback-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #1a1a1a;align-items:flex-start;}
 .pushback-item:last-child{border-bottom:none;}
 .pb-dot{width:20px;height:20px;border-radius:50%;flex-shrink:0;margin-top:1px;}
@@ -138,7 +138,7 @@ body{
       <div class="metric-row"><span class="ml">Avg discount depth (%)</span><div class="mi"><input id="m-disc" type="number" value="24"><span class="mu">%</span></div></div>
       
       <div style="padding:10px 0 6px;border-top:1px solid #2a2a2a;margin-top:8px;">
-        <div style="font-size:9px;font-weight:700;color:#FFD000;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Time to first redemption</div>
+        <div style="font-size:9px;font-weight:700;color:#6DBE4F;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Time to first redemption</div>
         <div class="metric-row"><span class="ml">Avg days signed → first redemption</span><div class="mi"><input id="m-t2r" type="number" placeholder="e.g. 18" min="0"><span class="mu">days</span></div></div>
         <div class="metric-row"><span class="ml">% activated within 7 days</span><div class="mi"><input id="m-t2r7" type="number" placeholder="e.g. 22" min="0" max="100"><span class="mu">%</span></div></div>
         <div class="metric-row"><span class="ml">% never activated (0 redemptions)</span><div class="mi"><input id="m-t2r0" type="number" placeholder="e.g. 15" min="0" max="100"><span class="mu">%</span></div></div>
@@ -146,14 +146,14 @@ body{
 
       
       <div style="padding:10px 0 6px;border-top:1px solid #2a2a2a;margin-top:8px;">
-        <div style="font-size:9px;font-weight:700;color:#FFD000;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Rep consistency</div>
+        <div style="font-size:9px;font-weight:700;color:#6DBE4F;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Rep consistency</div>
         <div class="metric-row"><span class="ml">Top quartile conversion rate (%)</span><div class="mi"><input id="m-tq" type="number" placeholder="e.g. 34" min="0" max="100"><span class="mu">%</span></div></div>
         <div class="metric-row"><span class="ml">Bottom quartile conversion rate (%)</span><div class="mi"><input id="m-bq" type="number" placeholder="e.g. 8" min="0" max="100"><span class="mu">%</span></div></div>
       </div>
 
       
       <div style="padding:10px 0 6px;border-top:1px solid #2a2a2a;margin-top:8px;">
-        <div style="font-size:9px;font-weight:700;color:#FFD000;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Venue tier split</div>
+        <div style="font-size:9px;font-weight:700;color:#6DBE4F;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Venue tier split</div>
         <div class="metric-row"><span class="ml">Premium anchor (Michelin / notable)</span><div class="mi"><input id="m-vt-p" type="number" placeholder="e.g. 8" min="0" max="100"><span class="mu">%</span></div></div>
         <div class="metric-row"><span class="ml">Mid-market</span><div class="mi"><input id="m-vt-m" type="number" placeholder="e.g. 45" min="0" max="100"><span class="mu">%</span></div></div>
         <div class="metric-row"><span class="ml">Casual / independent</span><div class="mi"><input id="m-vt-c" type="number" placeholder="e.g. 47" min="0" max="100"><span class="mu">%</span></div></div>
@@ -161,7 +161,7 @@ body{
 
       
       <div style="padding:10px 0 6px;border-top:1px solid #2a2a2a;margin-top:8px;">
-        <div style="font-size:9px;font-weight:700;color:#FFD000;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Venue platform login frequency</div>
+        <div style="font-size:9px;font-weight:700;color:#6DBE4F;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Venue platform login frequency</div>
         <div class="metric-row"><span class="ml">Logged in last 14 days (%)</span><div class="mi"><input id="m-l14" type="number" placeholder="e.g. 45" min="0" max="100"><span class="mu">%</span></div></div>
         <div class="metric-row"><span class="ml">Not logged in 30+ days (%)</span><div class="mi"><input id="m-l30" type="number" placeholder="e.g. 35" min="0" max="100"><span class="mu">%</span></div></div>
         <div class="metric-row"><span class="ml">Never logged in post-signup (%)</span><div class="mi"><input id="m-l0" type="number" placeholder="e.g. 12" min="0" max="100"><span class="mu">%</span></div></div>
@@ -169,7 +169,7 @@ body{
 
       
       <div style="padding:10px 0 6px;border-top:1px solid #2a2a2a;margin-top:8px;">
-        <div style="font-size:9px;font-weight:700;color:#FFD000;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Cuisine diversity — top 3 types by % of portfolio</div>
+        <div style="font-size:9px;font-weight:700;color:#6DBE4F;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Cuisine diversity — top 3 types by % of portfolio</div>
         <div class="metric-row"><span class="ml">Top cuisine type (%)</span><div class="mi"><input id="m-c1" type="number" placeholder="e.g. 28" min="0" max="100"><span class="mu">%</span></div></div>
         <div class="metric-row"><span class="ml">Top cuisine type name</span><div class="mi" style="flex:none;width:auto;"><input id="m-c1n" type="text" placeholder="e.g. Indian" style="width:120px;"></div></div>
         <div class="metric-row"><span class="ml">2nd cuisine type (%)</span><div class="mi"><input id="m-c2" type="number" placeholder="e.g. 18" min="0" max="100"><span class="mu">%</span></div></div>
