@@ -8,9 +8,9 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
-:root{--y:#FFD000;--yd:rgba(255,208,0,.10);--yl:rgba(255,208,0,.22);--g:#22C55E;--gd:rgba(34,197,94,.08);--gl:rgba(34,197,94,.22);--r:#EF4444;--rd:rgba(239,68,68,.08);--rl:rgba(239,68,68,.22);--bg:#0f0f0f;--s:#1a1a1a;--b1:#2a2a2a;--t:#f5f5f5;--m:#666;}
+:root{--y:#6DBE4F;--yd:rgba(109,190,79,.10);--yl:rgba(109,190,79,.22);--g:#22C55E;--gd:rgba(34,197,94,.08);--gl:rgba(34,197,94,.22);--r:#EF4444;--rd:rgba(239,68,68,.08);--rl:rgba(239,68,68,.22);--bg:#ffffff;--s:#f7f8f5;--b1:#dde3d8;--t:#1a1a1a;--m:#5a6454;}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);-webkit-font-smoothing:antialiased;}
-.hdr{background:#111;border-bottom:1px solid var(--b1);padding:13px 24px 13px 60px;position:sticky;top:0;z-index:100;display:flex;align-items:center;}
+.hdr{background:#f7f8f5;border-bottom:1px solid var(--b1);padding:13px 24px 13px 60px;position:sticky;top:0;z-index:100;display:flex;align-items:center;}
 .brand{font-size:13px;font-weight:800;}.brand em{color:var(--y);font-style:normal;}
 .hero{max-width:880px;margin:0 auto;padding:36px 24px 20px;}
 .eye{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--y);margin-bottom:8px;}
@@ -18,20 +18,20 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);-webkit-
 .h1 em{color:var(--y);font-style:normal;}
 .sub{font-size:13px;color:#888;line-height:1.75;max-width:640px;}
 .wrap{max-width:880px;margin:0 auto;padding:0 24px 60px;}
-.crit{background:var(--s);border:1px solid var(--b1);border-radius:11px;padding:16px 18px;margin-bottom:10px;}
+.crit{background:#ffffff;border:1px solid #dde3d8;border-radius:11px;padding:16px 18px;margin-bottom:10px;}
 .crit-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px;}
 .crit-cat{font-size:9px;font-weight:700;color:var(--y);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;}
 .crit-label{font-size:14px;font-weight:800;margin-bottom:4px;}
 .crit-desc{font-size:12px;color:#666;line-height:1.6;}
-select.score-sel{background:#111;border:1px solid #333;border-radius:7px;color:var(--t);font-family:'Inter',sans-serif;font-size:12px;font-weight:700;padding:6px 10px;min-width:120px;flex-shrink:0;cursor:pointer;}
+select.score-sel{background:#f7f8f5;border:1px solid #333;border-radius:7px;color:var(--t);font-family:'Inter',sans-serif;font-size:12px;font-weight:700;padding:6px 10px;min-width:120px;flex-shrink:0;cursor:pointer;}
 .examples{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.ex{background:#0a0a0a;border-radius:7px;padding:10px 12px;font-size:11px;line-height:1.6;}
+.ex{background:#f0f2ed;border-radius:7px;padding:10px 12px;font-size:11px;line-height:1.6;}
 .ex.good{color:var(--g);}.ex.bad{color:var(--r);}
 .ex strong{display:block;margin-bottom:3px;}
-.total{margin-top:16px;background:#111;border:2px solid var(--b1);border-radius:12px;padding:20px;display:flex;align-items:center;justify-content:space-between;}
+.total{margin-top:16px;background:#f7f8f5;border:2px solid var(--b1);border-radius:12px;padding:20px;display:flex;align-items:center;justify-content:space-between;}
 .total-lbl{font-size:13px;color:#888;}
 .total-n{font-size:36px;font-weight:900;color:var(--y);}
-.notes{width:100%;margin-top:12px;background:var(--s);border:1px solid var(--b1);border-radius:9px;color:var(--t);font-family:'Inter',sans-serif;font-size:13px;padding:14px;min-height:80px;resize:vertical;}
+.notes{width:100%;margin-top:12px;background:#ffffff;border:1px solid #dde3d8;border-radius:9px;color:var(--t);font-family:'Inter',sans-serif;font-size:13px;padding:14px;min-height:80px;resize:vertical;}
 </style>
 </head>
 <body>
@@ -69,7 +69,7 @@ function upd(){
   });
   if(scored === 0) return;
   var p = Math.round(total);
-  var col = p >= 75 ? "#22C55E" : p >= 50 ? "#FFD000" : "#EF4444";
+  var col = p >= 75 ? "#22C55E" : p >= 50 ? "#6DBE4F" : "#EF4444";
   document.getElementById("total-n").textContent = p + " / 100";
   document.getElementById("total-n").style.color = col;
   document.getElementById("total-box").style.borderColor = col + "44";
