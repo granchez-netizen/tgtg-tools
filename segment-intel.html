@@ -6,12 +6,12 @@
 <title>Too Good To Go · Segment Intelligence</title>
 <link rel="stylesheet" href="/brand_tgt.css">
 <style>
-:root{--tgtg:#6DBE4F;--tgtgd:rgba(109,190,79,.07);--tgtgl:rgba(109,190,79,.18);--dark:#0a0a0a;--s1:#141414;--s2:#1a1a1a;--border:#2a2a2a;--text:#f5f5f5;--muted:#777;--danger:#EF4444;--warn:#FFD000;--good:#22C55E;--info:#3B82F6;}
+:root{--tgtg:#6DBE4F;--tgtgd:rgba(109,190,79,.07);--tgtgl:rgba(109,190,79,.18);--dark:#0a0a0a;--s1:#ffffff;--s2:#f7f8f5;--border:#2a2a2a;--text:#1a1a1a;--muted:#5a6454;--danger:#EF4444;--warn:#6DBE4F;--good:#22C55E;--info:#3B82F6;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--text);-webkit-font-smoothing:antialiased;}
-.hdr{background:#111;border-bottom:1px solid var(--border);padding:13px 24px 13px 60px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;}
+.hdr{background:#f7f8f5;border-bottom:1px solid var(--border);padding:13px 24px 13px 60px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;}
 .brand{font-size:13px;font-weight:800;}.brand em{color:var(--tgtg);font-style:normal;}
-.hdr-r{font-size:11px;color:var(--muted);}
+.hdr-r{font-size:11px;color:rgba(255,255,255,0.75);}
 .wrap{max-width:1100px;margin:0 auto;padding:24px 24px 80px;}
 .eye{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--tgtg);margin-bottom:6px;}
 .h1{font-size:28px;font-weight:900;letter-spacing:-.8px;line-height:1.1;margin-bottom:6px;}
@@ -33,23 +33,23 @@ body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--text);-we
 /* Overview row */
 .overview-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px;}
 @media(max-width:800px){.overview-grid{grid-template-columns:repeat(3,1fr);}}
-.ov-cell{background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;}
+.ov-cell{background:#ffffff;border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;}
 .ov-n{font-size:20px;font-weight:900;letter-spacing:-1px;line-height:1;color:var(--tgtg);}
 .ov-l{font-size:9px;color:var(--muted);margin-top:5px;font-weight:600;text-transform:uppercase;letter-spacing:1px;}
 
 /* Three column layout */
 .three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px;}
 @media(max-width:900px){.three-col{grid-template-columns:1fr;}}
-.col-card{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:16px;}
+.col-card{background:#ffffff;border:1px solid var(--border);border-radius:12px;padding:16px;}
 .col-title{font-size:10px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;}
 .col-item{padding:7px 0;border-bottom:1px solid #1a1a1a;font-size:11px;color:#bbb;line-height:1.6;}
 .col-item:last-child{border-bottom:none;}
 .col-item strong{color:var(--text);}
 
 /* Pitch section */
-.pitch-card{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px;}
+.pitch-card{background:#ffffff;border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px;}
 .pitch-title{font-size:10px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;}
-.pitch-script{font-size:12px;color:#ccc;line-height:1.9;background:#0f0f0f;border-radius:8px;padding:14px;position:relative;}
+.pitch-script{font-size:12px;color:#ccc;line-height:1.9;background:#f0f2ed;border-radius:8px;padding:14px;position:relative;}
 .pitch-script em{color:var(--tgtg);font-style:normal;font-weight:600;}
 .pitch-script strong{color:var(--text);}
 .copy-btn{position:absolute;top:10px;right:10px;padding:4px 10px;background:rgba(109,190,79,.12);border:1px solid rgba(109,190,79,.25);border-radius:5px;color:var(--tgtg);font-size:9px;font-weight:700;cursor:pointer;font-family:inherit;}
@@ -58,7 +58,7 @@ body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--text);-we
 
 /* Objections */
 .obj-list{display:grid;gap:8px;}
-.obj-item{background:#0f0f0f;border-radius:8px;overflow:hidden;}
+.obj-item{background:#f0f2ed;border-radius:8px;overflow:hidden;}
 .obj-q{padding:10px 12px;font-size:11px;font-weight:700;color:var(--danger);cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
 .obj-q .arr{color:#333;transition:transform .2s;font-size:10px;}
 .obj-item.open .obj-q .arr{transform:rotate(180deg);}
