@@ -6,45 +6,86 @@
 <title>Too Good To Go · Head of Indies OS</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap');
-:root{--tgtg:#6DBE4F;--bg:#090909;--s1:#111;--s2:#181818;--border:#222;--border2:#2a2a2a;--text:#f0f0f0;--muted:#666;}
+:root{
+  --tgtg:#6DBE4F;
+  --tgtg-dark:#4a9e32;
+  --tgtgd:rgba(109,190,79,.10);
+  --tgtgl:rgba(109,190,79,.25);
+  --bg:#ffffff;
+  --bg2:#f7f8f5;
+  --s1:#f2f4ef;
+  --border:#e4e8de;
+  --border2:#d4dace;
+  --text:#1a1a1a;
+  --muted:#6b7565;
+  --muted2:#9aa394;
+}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;min-height:100vh;padding:44px 20px 80px;}
-.wrap{max-width:620px;margin:0 auto;}
-.brand{font-size:13px;font-weight:800;margin-bottom:10px;}.brand em{color:var(--tgtg);font-style:normal;}
-.title{font-size:36px;font-weight:900;line-height:1.08;margin-bottom:10px;letter-spacing:-1px;}
-.title em{color:var(--tgtg);font-style:normal;}
-.sub{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:40px;}
-.section-lbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin:32px 0 12px;font-family:'DM Mono',monospace;}
-.tool{display:flex;align-items:flex-start;gap:14px;background:var(--s1);border:1px solid var(--border2);border-radius:14px;padding:18px 20px;margin-bottom:10px;text-decoration:none;color:var(--text);transition:border-color .2s,background .2s;}
-.tool:hover{border-color:rgba(109,190,79,.35);background:var(--s2);}
-.tool-icon{font-size:20px;flex-shrink:0;margin-top:2px;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;min-height:100vh;}
+
+/* TOP BAR */
+.topbar{background:var(--tgtg);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+.topbar-brand{font-size:15px;font-weight:800;color:#fff;letter-spacing:-.3px;}
+.topbar-sub{font-size:12px;color:rgba(255,255,255,.75);font-weight:500;}
+
+/* HERO */
+.hero{background:var(--bg2);border-bottom:1px solid var(--border);padding:48px 24px 40px;}
+.hero-inner{max-width:640px;margin:0 auto;}
+.hero-eye{font-size:10px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:3px;margin-bottom:12px;font-family:'DM Mono',monospace;}
+.hero-title{font-size:clamp(28px,5vw,44px);font-weight:900;line-height:1.08;margin-bottom:12px;letter-spacing:-1px;color:var(--text);}
+.hero-title em{color:var(--tgtg);font-style:normal;}
+.hero-sub{font-size:15px;color:var(--muted);line-height:1.8;max-width:560px;}
+.mission-strip{margin-top:20px;display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--tgtgd);border:1px solid var(--tgtgl);border-radius:10px;font-size:13px;color:var(--tgtg);font-weight:600;max-width:560px;}
+
+/* MAIN */
+.wrap{max-width:680px;margin:0 auto;padding:36px 24px 80px;}
+
+/* SECTION LABELS */
+.section-lbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin:32px 0 12px;font-family:'DM Mono',monospace;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.section-lbl:first-child{margin-top:0;}
+
+/* TOOL CARDS */
+.tool{display:flex;align-items:flex-start;gap:14px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:8px;text-decoration:none;color:var(--text);transition:all .2s;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+.tool:hover{border-color:var(--tgtg);box-shadow:0 2px 12px rgba(109,190,79,.12);transform:translateY(-1px);}
+.tool-icon{font-size:22px;flex-shrink:0;margin-top:1px;}
 .tool-body{flex:1;}
-.tool-eye{font-size:9px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;font-family:'DM Mono',monospace;}
-.tool-name{font-size:16px;font-weight:800;margin-bottom:4px;letter-spacing:-.3px;}
+.tool-eye{font-size:9px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:2px;margin-bottom:3px;font-family:'DM Mono',monospace;}
+.tool-name{font-size:15px;font-weight:800;margin-bottom:3px;letter-spacing:-.2px;color:var(--text);}
 .tool-desc{font-size:12px;color:var(--muted);line-height:1.65;}
-.tool-arr{color:var(--border2);font-size:16px;flex-shrink:0;margin-top:3px;transition:color .2s;}
+.tool-arr{color:var(--border2);font-size:18px;flex-shrink:0;margin-top:2px;transition:color .2s;font-weight:300;}
 .tool:hover .tool-arr{color:var(--tgtg);}
-.mission{background:rgba(109,190,79,.06);border:1px solid rgba(109,190,79,.18);border-radius:12px;padding:18px 20px;margin-bottom:32px;font-size:13px;color:#aaa;line-height:1.8;}
-.mission strong{color:var(--tgtg);}
+
+/* FOOTER */
+.footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--border);font-size:12px;color:var(--muted2);text-align:center;}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="brand"><em>Too Good</em> To Go · UK &amp; Ireland</div>
-  <div class="title">Head of Indies<br><em>Operating System.</em></div>
-  <div class="sub">Every tool built for the Head of Independent Partners role. Phone-first SMB acquisition, Team Lead development, partner retention, and impact at scale.</div>
 
-  <div class="mission">
-    ♻️ &nbsp;<strong>103 million meals saved.</strong> One third of food produced globally is wasted. Every partner added to Too Good To Go is a direct reduction in that number. This is the metric that matters above all others.
+<div class="topbar">
+  <div class="topbar-brand">Too Good To Go</div>
+  <div class="topbar-sub">Head of Independent Partners · UK &amp; Ireland</div>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eye">Grant Tinney · Operating System</div>
+    <div class="hero-title">Head of <em>Independent Partners.</em></div>
+    <div class="hero-sub">Every tool built for the role — phone-based SMB acquisition, Team Lead development, partner retention, and commercial impact at scale.</div>
+    <div class="mission-strip">
+      ♻️ &nbsp;103 million meals saved. Every partner signed is a direct reduction in global food waste.
+    </div>
   </div>
+</div>
 
-  <div class="section-lbl">Interview & Assessment</div>
+<div class="wrap">
+
+  <div class="section-lbl">Interview &amp; Assessment</div>
 
   <a class="tool" href="/mgr-review">
     <div class="tool-icon">🎯</div>
     <div class="tool-body">
       <div class="tool-eye">JD matched · STAR answers · gaps handled · questions to ask</div>
-      <div class="tool-name">Interview Prep & Smart Answers</div>
+      <div class="tool-name">Interview Prep &amp; Smart Answers</div>
       <div class="tool-desc">Every JD requirement mapped to CV. 12 likely questions with full answers. Three gaps pre-handled. Five sharp questions to ask Chelsea. Language guide — their words, not generic sales language.</div>
     </div>
     <div class="tool-arr">→</div>
@@ -63,9 +104,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
   <a class="tool" href="/90day">
     <div class="tool-icon">📋</div>
     <div class="tool-body">
-      <div class="tool-eye">Chelsea Kerr · Phase 1–3 · Week by week · Hard milestones</div>
+      <div class="tool-eye">Chelsea Kerr · Phase 1–3 · Week by week · 28 milestones</div>
       <div class="tool-name">90-Day Plan</div>
-      <div class="tool-desc">Built for Chelsea Kerr as Country Director. Chelsea meeting prep, days 1–30 diagnosis, pipeline audit, days 31–60 scaling, days 61–90 year 2 plan. 28 trackable milestones.</div>
+      <div class="tool-desc">Built for Chelsea Kerr as Country Director. Chelsea meeting prep, days 1–30 diagnosis, pipeline audit, days 31–60 scaling, days 61–90 year 2 plan.</div>
     </div>
     <div class="tool-arr">→</div>
   </a>
@@ -87,7 +128,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
     <div class="tool-body">
       <div class="tool-eye">3 teams · Quartile coaching · Individual plans · Training pathways</div>
       <div class="tool-name">Cohort Performance Engine</div>
-      <div class="tool-desc">Every rep in a quartile. Every quartile with a coaching plan. Three team views — Acquisition, Account Management, Growth. Resilience toolkit, hero dependency, day and week view, AI in prospecting.</div>
+      <div class="tool-desc">Every rep in a quartile. Every quartile with a coaching plan. Acquisition, Account Management, Growth. Resilience toolkit, hero dependency, AI in prospecting.</div>
     </div>
     <div class="tool-arr">→</div>
   </a>
@@ -96,8 +137,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
     <div class="tool-icon">🏆</div>
     <div class="tool-body">
       <div class="tool-eye">Team naming exercise · Competition formats · Accountability · Motivation</div>
-      <div class="tool-name">Team Culture & Competition</div>
-      <div class="tool-desc">The 45-minute team naming exercise — run by TLs, owned by the team. Six competition formats. Anti-sandbagging protocol. Resilience scripts for bad days. The high-activity standup format.</div>
+      <div class="tool-name">Team Culture &amp; Competition</div>
+      <div class="tool-desc">The 45-minute team naming exercise — run by TLs, owned by the team. Six competition formats. Anti-sandbagging protocol. Resilience scripts for bad days.</div>
     </div>
     <div class="tool-arr">→</div>
   </a>
@@ -105,9 +146,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
   <a class="tool" href="/team-lead-one-to-one">
     <div class="tool-icon">💬</div>
     <div class="tool-body">
-      <div class="tool-eye">Weekly · Team Lead · Development focused</div>
+      <div class="tool-eye">Weekly · Team Lead development · The ask</div>
       <div class="tool-name">Team Lead 1:1</div>
-      <div class="tool-desc">Weekly 1:1 template with each of the 3 Team Leads. Team performance, rep health, coaching capacity, pipeline, blockers, and the one ask. A leader conversation, not a rep conversation.</div>
+      <div class="tool-desc">Weekly 1:1 template with each of the 3 Team Leads. Team performance, rep health, coaching capacity, pipeline, blockers, and the one ask.</div>
     </div>
     <div class="tool-arr">→</div>
   </a>
@@ -129,7 +170,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
     <div class="tool-body">
       <div class="tool-eye">Phone-only · 7 criteria · Weighted score · Mission frame</div>
       <div class="tool-name">Call Coach Scorecard</div>
-      <div class="tool-desc">Score any acquisition or retention call across 7 weighted criteria. Opening hook, mission frame, surplus discovery, Magic Bag explanation, objection handling, commitment, next step. 75+ is coachable standard.</div>
+      <div class="tool-desc">Score any acquisition or retention call across 7 weighted criteria specific to TGTG's phone motion. 75+ is the coachable standard.</div>
     </div>
     <div class="tool-arr">→</div>
   </a>
@@ -149,7 +190,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
     <div class="tool-body">
       <div class="tool-eye">Ethnic food · QSR · Fine dining · Brunch · Win rates · Postcodes</div>
       <div class="tool-name">Segment Intelligence</div>
-      <div class="tool-desc">All segments ranked by win rate × deal value × churn. Deep dives per segment — top London postcodes, opening angles, objection responses. The strategic focus for the acquisition team.</div>
+      <div class="tool-desc">All segments ranked by win rate × deal value × churn. Deep dives per segment — top London postcodes, opening angles, objection responses.</div>
     </div>
     <div class="tool-arr">→</div>
   </a>
@@ -196,14 +237,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
     <div class="tool-arr">→</div>
   </a>
 
-  <div class="section-lbl">People & Performance</div>
+  <div class="section-lbl">People &amp; Performance</div>
 
   <a class="tool" href="/ramp">
     <div class="tool-icon">📈</div>
     <div class="tool-body">
       <div class="tool-eye">New hire tracking · Week-by-week gates · Early warning</div>
       <div class="tool-name">Rep Ramp Tracker</div>
-      <div class="tool-desc">Week-by-week gate system from hire to fully ramped. Flags ramp problems at week 3, not month 3. Track every rep against the ramp curve.</div>
+      <div class="tool-desc">Week-by-week gate system from hire to fully ramped. Flags ramp problems at week 3, not month 3.</div>
     </div>
     <div class="tool-arr">→</div>
   </a>
@@ -238,7 +279,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
     <div class="tool-arr">→</div>
   </a>
 
-  <div class="section-lbl">Mission & Impact</div>
+  <div class="section-lbl">Mission &amp; Impact</div>
 
   <a class="tool" href="/impact-dashboard">
     <div class="tool-icon">🌍</div>
@@ -260,9 +301,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
     <div class="tool-arr">→</div>
   </a>
 
-  <div style="margin-top:40px;padding-top:20px;border-top:1px solid var(--border2);font-size:11px;color:var(--muted);text-align:center;">
-    Built by <strong style="color:var(--text);">Grant Tinney</strong> · Head of Independent Partners · Too Good To Go UK &amp; Ireland
+  <div class="footer">
+    Built by <strong>Grant Tinney</strong> · Head of Independent Partners · Too Good To Go UK &amp; Ireland
   </div>
+
 </div>
 </body>
 </html>
