@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Too Good To Go · Segment Intelligence</title>
+<link rel="stylesheet" href="/brand_tgt.css">
+<style>
+:root{--tgtg:#6DBE4F;--tgtgd:rgba(109,190,79,.07);--tgtgl:rgba(109,190,79,.18);--dark:#0a0a0a;--s1:#141414;--s2:#1a1a1a;--border:#2a2a2a;--text:#f5f5f5;--muted:#777;--danger:#EF4444;--warn:#FFD000;--good:#22C55E;--info:#3B82F6;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--text);-webkit-font-smoothing:antialiased;}
+.hdr{background:#111;border-bottom:1px solid var(--border);padding:13px 24px 13px 60px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;}
+.brand{font-size:13px;font-weight:800;}.brand em{color:var(--tgtg);font-style:normal;}
+.hdr-r{font-size:11px;color:var(--muted);}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 24px 80px;}
+.eye{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--tgtg);margin-bottom:6px;}
+.h1{font-size:28px;font-weight:900;letter-spacing:-.8px;line-height:1.1;margin-bottom:6px;}
+.h1 em{color:var(--tgtg);font-style:normal;}
+.sub{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:24px;}
+
+/* Segment selector */
+.seg-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
+.seg-btn{padding:9px 16px;border-radius:8px;border:1px solid var(--border);background:transparent;color:#666;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s;}
+.seg-btn:hover{border-color:#555;color:#aaa;}
+.seg-btn.on{background:var(--tgtgd);border-color:var(--tgtgl);color:var(--tgtg);}
+.seg-btn .rank{display:inline-block;width:16px;height:16px;border-radius:50%;background:var(--tgtg);color:#000;font-size:9px;font-weight:900;text-align:center;line-height:16px;margin-right:5px;}
+.seg-btn.on .rank{background:var(--tgtg);}
+
+/* Segment panels */
+.seg-panel{display:none;}
+.seg-panel.on{display:block;}
+
+/* Overview row */
+.overview-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px;}
+@media(max-width:800px){.overview-grid{grid-template-columns:repeat(3,1fr);}}
+.ov-cell{background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;}
+.ov-n{font-size:20px;font-weight:900;letter-spacing:-1px;line-height:1;color:var(--tgtg);}
+.ov-l{font-size:9px;color:var(--muted);margin-top:5px;font-weight:600;text-transform:uppercase;letter-spacing:1px;}
+
+/* Three column layout */
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px;}
+@media(max-width:900px){.three-col{grid-template-columns:1fr;}}
+.col-card{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:16px;}
+.col-title{font-size:10px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;}
+.col-item{padding:7px 0;border-bottom:1px solid #1a1a1a;font-size:11px;color:#bbb;line-height:1.6;}
+.col-item:last-child{border-bottom:none;}
+.col-item strong{color:var(--text);}
+
+/* Pitch section */
+.pitch-card{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px;}
+.pitch-title{font-size:10px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;}
+.pitch-script{font-size:12px;color:#ccc;line-height:1.9;background:#0f0f0f;border-radius:8px;padding:14px;position:relative;}
+.pitch-script em{color:var(--tgtg);font-style:normal;font-weight:600;}
+.pitch-script strong{color:var(--text);}
+.copy-btn{position:absolute;top:10px;right:10px;padding:4px 10px;background:rgba(109,190,79,.12);border:1px solid rgba(109,190,79,.25);border-radius:5px;color:var(--tgtg);font-size:9px;font-weight:700;cursor:pointer;font-family:inherit;}
+.copy-btn:hover{background:rgba(109,190,79,.22);}
+.copy-btn.copied{color:var(--good);}
+
+/* Objections */
+.obj-list{display:grid;gap:8px;}
+.obj-item{background:#0f0f0f;border-radius:8px;overflow:hidden;}
+.obj-q{padding:10px 12px;font-size:11px;font-weight:700;color:var(--danger);cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+.obj-q .arr{color:#333;transition:transform .2s;font-size:10px;}
+.obj-item.open .obj-q .arr{transform:rotate(180deg);}
+.obj-a{display:none;padding:10px 12px;font-size:11px;color:#bbb;line-height:1.7;border-top:1px solid #1a1a1a;}
+.obj-a strong{color:var(--text);}
+.obj-item.open .obj-a{display:block;}
+
+/* Postcode table */
+.postcode-grid{display:grid;gap:8px;}
+.pc-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #1a1a1a;font-size:11px;}
+.pc-row:last-child{border-bottom:none;}
+.pc-code{font-weight:800;color:var(--text);width:60px;flex-shrink:0;}
+.pc-name{color:#888;flex:1;}
+.pc-count{font-weight:700;color:var(--tgtg);width:40px;text-align:right;flex-shrink:0;}
+.pc-bar-wrap{width:80px;height:4px;background:#1a1a1a;border-radius:2px;flex-shrink:0;}
+.pc-bar{height:100%;border-radius:2px;background:var(--tgtg);}
+.pc-pen{font-size:10px;color:var(--muted);width:50px;text-align:right;flex-shrink:0;}
+
+/* Comparison table */
+.comparison{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:11px;}
+.comparison th{padding:9px 12px;border-bottom:1px solid var(--tgtg);font-size:9px;font-weight:700;color:var(--tgtg);text-align:left;text-transform:uppercase;letter-spacing:1px;}
+.comparison td{padding:9px 12px;border-bottom:1px solid var(--border);}
+.comparison tr:hover{background:rgba(109,190,79,.03);}
+.seg-name{font-weight:700;}
+.highlight{color:var(--good);font-weight:700;}
+.warn-text{color:var(--warn);}
+.danger-text{color:var(--danger);}
+
+/* Section headings */
+.section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--tgtg);margin:20px 0 12px;}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="brand"><em>Too Good</em> To Go · Segment Intelligence</div>
+  <div class="hdr-r">Win rates · Deal economics · Where to focus</div>
+</div>
+
+<div class="wrap">
+  <div class="eye">Segment Intelligence</div>
+  <div class="h1">Win the <em>right</em> restaurants.<br>Not just more restaurants.</div>
+  <div class="sub">Ranked segments by win rate × deal value × retention. Which postcodes are underpenetrated. The exact opening angle and objection response for each type. Your team should know this before every call.</div>
+
+  <!-- COMPARISON TABLE -->
+  <div class="section-title">All Segments — Ranked by Strategic Value</div>
+  <table class="comparison">
+    <thead>
+      <tr>
+        <th>Rank</th><th>Segment</th><th>Win Rate</th><th>Avg Deal</th><th>Avg Churn</th><th>Market Size</th><th>Penetration</th><th>Strategic Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td class="seg-name">Ethnic (Indian / Thai / Viet)</td>
+        <td class="highlight">71%</td>
+        <td class="highlight">£680/mo</td>
+        <td class="highlight">8%</td>
+        <td>1,620 venues</td>
+        <td class="warn-text">1.4%</td>
+        <td class="highlight">⭐⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td class="seg-name">Brunch / Café</td>
+        <td class="highlight">68%</td>
+        <td>£590/mo</td>
+        <td class="highlight">6%</td>
+        <td>2,080 venues</td>
+        <td class="warn-text">1.6%</td>
+        <td class="highlight">⭐⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td class="seg-name">Fine Dining / French / Italian</td>
+        <td class="warn-text">52%</td>
+        <td class="highlight">£1,420/mo</td>
+        <td class="highlight">8%</td>
+        <td>280 venues</td>
+        <td class="warn-text">2.8%</td>
+        <td>⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td class="seg-name">Japanese / Sushi</td>
+        <td>66%</td>
+        <td>£720/mo</td>
+        <td>10%</td>
+        <td>420 venues</td>
+        <td class="highlight">0.9%</td>
+        <td>⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td class="seg-name">Bakery / Deli</td>
+        <td>74%</td>
+        <td>£340/mo</td>
+        <td>12%</td>
+        <td>1,840 venues</td>
+        <td>2.1%</td>
+        <td>⭐⭐⭐</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td class="seg-name">Pub / Bar</td>
+        <td>58%</td>
+        <td>£420/mo</td>
+        <td>16%</td>
+        <td>1,200 venues</td>
+        <td>3.4%</td>
+        <td>⭐⭐⭐</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td class="seg-name">Quick Service (QSR)</td>
+        <td class="highlight">71%</td>
+        <td class="danger-text">£380/mo</td>
+        <td class="danger-text">14%</td>
+        <td>2,140 venues</td>
+        <td>3.0%</td>
+        <td>⭐⭐</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SEGMENT SELECTOR -->
+  <div class="section-title">Segment Deep Dive</div>
+  <div class="seg-tabs">
+    <button class="seg-btn on" onclick="showSeg('ethnic')"><span class="rank">1</span>Ethnic Food</button>
+    <button class="seg-btn" onclick="showSeg('brunch')"><span class="rank">2</span>Brunch / Café</button>
+    <button class="seg-btn" onclick="showSeg('fine-dining')"><span class="rank">3</span>Fine Dining</button>
+    <button class="seg-btn" onclick="showSeg('japanese')"><span class="rank">4</span>Japanese</button>
+    <button class="seg-btn" onclick="showSeg('bakery')"><span class="rank">5</span>Bakery / Deli</button>
+    <button class="seg-btn" onclick="showSeg('pub')"><span class="rank">6</span>Pub / Bar</button>
+    <button class="seg-btn" onclick="showSeg('qsr')"><span class="rank">7</span>QSR</button>
+  </div>
+
+  <!-- ═══════════════════════ ETHNIC ═══════════════════════ -->
+  <div class="seg-panel on" id="panel-ethnic">
+    <div class="overview-grid">
+      <div class="ov-cell"><div class="ov-n">71%</div><div class="ov-l">Win Rate</div></div>
+      <div class="ov-cell"><div class="ov-n">£680</div><div class="ov-l">Avg Monthly Deal</div></div>
+      <div class="ov-cell"><div class="ov-n">8%</div><div class="ov-l">Annual Churn</div></div>
+      <div class="ov-cell"><div class="ov-n">1,620</div><div class="ov-l">UK Market Size</div></div>
+      <div class="ov-cell"><div class="ov-n">1.4%</div><div class="ov-l">Penetrated</div></div>
+    </div>
+
+    <div class="three-col">
+      <div class="col-card">
+        <div class="col-title">Why This Segment Wins</div>
+        <div class="col-item"><strong>Younger ownership:</strong> Higher digital/tech literacy. Less suspicious of new platforms.</div>
+        <div class="col-item"><strong>Clear quiet periods:</strong> Weekday lunch (Mon-Fri 11am-2pm) is consistently dead. The pain is obvious.</div>
+        <div class="col-item"><strong>Lower brand loyalty risk:</strong> Ethnic restaurants are less concerned about "cheapening" the brand. Mission resonance is high.</div>
+        <div class="col-item"><strong>High bag value:</strong> Curry houses / Vietnamese restaurants average £4.50-£6 per bag — above platform average.</div>
+        <div class="col-item"><strong>Mission alignment:</strong> Food waste narrative resonates strongly. Many owners have personal or cultural connection to food waste reduction.</div>
+      </div>
+      <div class="col-card">
+        <div class="col-title">Top London Postcodes</div>
+        <div class="postcode-grid">
+          <div class="pc-row"><div class="pc-code">E1</div><div class="pc-name">Whitechapel / Spitalfields</div><div class="pc-count">84</div><div class="pc-bar-wrap"><div class="pc-bar" style="width:90%"></div></div><div class="pc-pen">0.8%</div></div>
+          <div class="pc-row"><div class="pc-code">SW17</div><div class="pc-name">Tooting</div><div class="pc-count">61</div><div class="pc-bar-wrap"><div class="pc-bar" style="width:72%"></div></div><div class="pc-pen">1.2%</div></div>
+          <div class="pc-row"><div class="pc-code">HA1</div><div class="pc-name">Harrow</div><div class="pc-count">58</div><div class="pc-bar-wrap"><div class="pc-bar" style="width:68%"></div></div><div class="pc-pen">0.9%</div></div>
+          <div class="pc-row"><div class="pc-code">UB1</div><div class="pc-name">Southall</div><div class="pc-count">112</div><div class="pc-bar-wrap"><div class="pc-bar" style="width:100%"></div></div><div class="pc-pen">0.6%</div></div>
+          <div class="pc-row"><div class="pc-code">N4</div><div class="pc-name">Finsbury Park / Stroud Green</div><div class="pc-count">43</div><div class="pc-bar-wrap"><div class="pc-bar" style="width:50%"></div></div><div class="pc-pen">1.8%</div></div>
+          <div class="pc-row"><div class="pc-code">SE8</div><div class="pc-name">Deptford</div><div class="pc-count">31</div><div class="pc-bar-wrap"><div class="pc-bar" style="width:36%"></div></div><div class="pc-pen">1.1%</div></div>
+        </div>
+        <div style="font-size:9px;color:#444;margin-top:8px;">Count = venues in postcode · % = current TGTG penetration</div>
+      </div>
+      <div class="col-card">
+        <div class="col-title">Watch-Fors</div>
+        <div class="col-item"><strong>Owner not present:</strong> Many ethnic restaurants are family-run. If the owner isn't there, don't leave a message — come back when they are. The decision-maker must be in the room.</div>
+        <div class="col-item"><strong>Saturday service:</strong> Weekends are typically full for this segment. Avoid calling Fri–Sun. Mon–Wed AM is ideal.</div>
+        <div class="col-item"><strong>Language:</strong> If owner is more comfortable in their native language — find a common ground opener. Food and community resonates universally.</div>
+        <div class="col-item"><strong>Family consultation:</strong> Decision often needs family sign-off. Ask: "Is there anyone else who would want to see this before you decide?"</div>
+      </div>
+    </div>
+
+    <div class="pitch-card">
+      <div class="pitch-title">Opening Angle — Ethnic Restaurants</div>
+      <div class="pitch-script" id="script-ethnic">
+<strong>Opening (Discovery first, product second):</strong>
+"Hi, I'm [Name] from Too Good To Go — do you have 3 minutes? I was looking at your menu and I noticed you do a fantastic weekday lunch [or: weekday service]. I wanted to ask — how does your Monday-Wednesday lunch period compare to weekends? Do you get a lot of covers in that mid-week window?"
+
+[Let them answer. If they confirm it's quiet:]
+
+"That's really common for great restaurants like yours — the weekday lunch gap is one of the biggest sources of food waste we see. Across [Tooting / Whitechapel / this area], we're helping [X] restaurants in your area recover that revenue. Can I show you what it looks like in numbers for a restaurant like yours?"
+
+<em>[Move to Deal Calculator — use their specific numbers]</em>
+
+<strong>Mission angle (if owner is receptive):</strong>
+"The thing I love about restaurants like yours is that you already have a culture of not wasting food. TGTG just puts that on a platform where customers actively look for it. Your food, your price — we just fill the gap."
+      </div>
+      <button class="copy-btn" onclick="copyScript('script-ethnic', this)">Copy</button>
+    </div>
+
+    <div class="pitch-card">
+      <div class="pitch-title">Objection Responses — Ethnic Restaurants</div>
+      <div class="obj-list">
+        <div class="obj-item">
+          <div class="obj-q" onclick="toggleObj(this)">"We don't have leftover food — we cook to order." <span class="arr">▼</span></div>
+          <div class="obj-a">"That's exactly the point — TGTG isn't about leftovers. It's about a reserved bag of fresh food you'd normally cook for a time window you know is quiet. You control exactly what goes in, you choose the window, and you set the price. It's not different stock — it's the same quality, just a smarter use of your prep."</div>
+        </div>
+        <div class="obj-item">
+          <div class="obj-q" onclick="toggleObj(this)">"I don't want to discount my food." <span class="arr">▼</span></div>
+          <div class="obj-a">"You're not discounting — you're recovering revenue you'd otherwise lose. A quiet Monday lunch where you sell 6 TGTG bags at £4.50 is <strong>£27 you didn't have before</strong>. The bag isn't discounted in your mind — it's a different channel, like a delivery window that you control. And the customer is choosing TGTG specifically because they value the surprise element, not because they expect a restaurant-menu price."</div>
+        </div>
+        <div class="obj-item">
+          <div class="obj-q" onclick="toggleObj(this)">"We're already busy enough — I don't need more customers." <span class="arr">▼</span></div>
+          <div class="obj-a">"Perfect — let's target only your genuinely quiet windows. You set the days and times. If Monday 11am-1pm is always slow, you offer 6 bags in that window only. You're not adding pressure to busy periods — you're converting dead time into revenue."</div>
+        </div>
+        <div class="obj-item">
+          <div class="obj-q" onclick="toggleObj(this)">"What restaurants in this area use it?" <span class="arr">▼</span></div>
+          <div class="obj-a">Share 2–3 local examples from your current book (same postcode if possible). "Actually, [Venue Name] down the road has been on since [month] — they're doing [X] bags a week. Would it help if I put you in touch with them directly?" Direct owner testimonials are 3× more convincing than data.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ BRUNCH ═══════════════════════ -->
+  <div class="seg-panel" id="panel-brunch">
+    <div class="overview-grid">
+      <div class="ov-cell"><div class="ov-n">68%</div><div class="ov-l">Win Rate</div></div>
+      <div class="ov-cell"><div class="ov-n">£590</div><div class="ov-l">Avg Monthly Deal</div></div>
+      <div class="ov-cell"><div class="ov-n">6%</div><div class="ov-l">Annual Churn</div></div>
+      <div class="ov-cell"><div class="ov-n">2,080</div><div class="ov-l">UK Market Size</div></div>
+      <div class="ov-cell"><div class="ov-n">1.6%</div><div class="ov-l">Penetrated</div></div>
+    </div>
+    <div class="three-col">
+      <div class="col-card">
+        <div class="col-title">Why This Segment Wins</div>
+        <div class="col-item"><strong>Lowest churn:</strong> Brunch customers are habitual. Once they find a TGTG Saturday brunch bag they love, they return weekly. Owner sees consistent income.</div>
+        <div class="col-item"><strong>Predictable supply:</strong> Brunch prep is formulaic — pastries, eggs, avocado toast. Easy to package a magic bag.</div>
+        <div class="col-item"><strong>Younger owners:</strong> Most indie cafés and brunch spots are run by 25–40 year olds with high TGTG brand recognition and personal usage.</div>
+        <div class="col-item"><strong>Clear weekday gap:</strong> Most brunch spots kill on weekends but are 30-40% empty Mon-Fri. The pain point practically sells itself.</div>
+      </div>
+      <div class="col-card">
+        <div class="col-title">Top London Postcodes</div>
+        <div class="postcode-grid">
+          <div class="pc-row"><div class="pc-code">N1</div><div class="pc-name">Islington / Angel</div><div class="pc-count">92</div><div class="pc-bar-wrap"><div class="pc-bar" style="width:88%"></div></div><div class="pc-pen">2.1%</div></div>
+          <div class="pc-row"><div class="pc-code">E8</div><div class="pc-name">Hackney / London Fields</div><div class="pc-count">86</div><div class="pc-bar-wrap"><div class="pc-bar" style="width:82%"></div></div><div class="pc-pen">1.8%</div></div>
+          <div class="pc-row"><div class="pc-code">SW11</div><div class="pc-name">Battersea / Clapham</div><div class="pc-count">74</div><div class="pc-bar-wrap"><div class="pc-bar" style="width:70%"></div></div><div class="pc-pen">1.4%</div></div>
+          <div class="pc-row"><div class="pc-code">SE22</div><div class="pc-name">East Dulwich</div><div class="pc-count">52</div><div class="pc-bar-wrap"><div class="pc-bar" style="width:50%"></div></div><div class="pc-pen">1.1%</div></div>
+          <div class="pc-row"><div class="pc-code">W4</div><div class="pc-name">Chiswick</div><div class="pc-count">48</div><div class="pc-bar-wrap"><div class="pc-bar" style="width:46%"></div></div><div class="pc-pen">2.0%</div></div>
+        </div>
+        <div style="font-size:9px;color:#444;margin-top:8px;">Count = venues in postcode · % = current TGTG penetration</div>
+      </div>
+      <div class="col-card">
+        <div class="col-title">Watch-Fors</div>
+        <div class="col-item"><strong>Weekend-only offers:</strong> Don't let them set the offer only on weekends (when they're already busy). Push for weekday morning slots specifically.</div>
+        <div class="col-item"><strong>Allergen complexity:</strong> Some cafés have complex allergen menus. Check they can create a "surprise bag" that's safe to package without detailed allergen disclosure.</div>
+        <div class="col-item"><strong>Coffee shop hesitancy:</strong> Pure coffee shops (no food) aren't eligible. Make sure the venue has enough food prep to create a bag worth £3.50+.</div>
+      </div>
+    </div>
+    <div class="pitch-card">
+      <div class="pitch-title">Opening Angle — Brunch / Café</div>
+      <div class="pitch-script" id="script-brunch">
+<strong>Opening:</strong>
+"Hi, I'm [Name] from Too Good To Go. Quick question — when's your quietest period during the week? Monday-Wednesday morning, maybe?"
+
+[They confirm:]
+
+"That's exactly what we help with. We have thousands of people in [area] who specifically open TGTG in the morning looking for a breakfast or brunch bag. You'd set a window — say, Monday-Wednesday 8-10am — offer 6 bags at [£X], and they sell in minutes. Your morning team is already prepped — you just set aside a few extra portions."
+
+<em>[Show the Deal Calculator — use their specific numbers]</em>
+
+<strong>The brand angle:</strong>
+"Honestly, most of your customers will be the same demographic you already love — young professionals who care about sustainability. You're not changing who comes in — you're just filling the quiet Monday shift."
+      </div>
+      <button class="copy-btn" onclick="copyScript('script-brunch', this)">Copy</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ FINE DINING ═══════════════════════ -->
+  <div class="seg-panel" id="panel-fine-dining">
+    <div class="overview-grid">
+      <div class="ov-cell"><div class="ov-n">52%</div><div class="ov-l">Win Rate</div></div>
+      <div class="ov-cell"><div class="ov-n">£1,420</div><div class="ov-l">Avg Monthly Deal</div></div>
+      <div class="ov-cell"><div class="ov-n">8%</div><div class="ov-l">Annual Churn</div></div>
+      <div class="ov-cell"><div class="ov-n">280</div><div class="ov-l">UK Market Size</div></div>
+      <div class="ov-cell"><div class="ov-n">2.8%</div><div class="ov-l">Penetrated</div></div>
+    </div>
+    <div class="three-col">
+      <div class="col-card">
+        <div class="col-title">Why This Segment Wins</div>
+        <div class="col-item"><strong>Highest deal value:</strong> Average £1,420/month. One Dishoom-tier account = 4× a QSR account in revenue.</div>
+        <div class="col-item"><strong>Low churn when won:</strong> Fine dining owners who join tend to stay (pride in the partnership, staff buy-in).</div>
+        <div class="col-item"><strong>Quality positioning:</strong> We can position TGTG as a premium sustainability partner, not a discount marketplace. Language matters here.</div>
+      </div>
+      <div class="col-card">
+        <div class="col-title">Top London Postcodes</div>
+        <div class="postcode-grid">
+          <div class="pc-row"><div class="pc-code">WC2</div><div class="pc-name">Covent Garden</div><div class="pc-count">28</div><div class="pc-bar-wrap"><div class="pc-bar" style="width:80%"></div></div><div class="pc-pen">3.2%</div></div>
+          <div class="pc-row"><div class="pc-code">W1</div><div class="pc-name">Mayfair / Soho</div><div class="pc-count">42</div><div class="pc-bar-wrap"><div class="pc-bar" style="width:100%"></div></div><div class="pc-pen">2.1%</div></div>
+          <div class="pc-row"><div class="pc-code">SW3</div><div class="pc-name">Chelsea / Knightsbridge</div><div class="pc-count">31</div><div class="pc-bar-wrap"><div class="pc-bar" style="width:74%"></div></div><div class="pc-pen">1.8%</div></div>
+          <div class="pc-row"><div class="pc-code">EC1</div><div class="pc-name">Clerkenwell / Farringdon</div><div class="pc-count">24</div><div class="pc-bar-wrap"><div class="pc-bar" style="width:57%"></div></div><div class="pc-pen">3.8%</div></div>
+        </div>
+      </div>
+      <div class="col-card">
+        <div class="col-title">Watch-Fors</div>
+        <div class="col-item"><strong>Longer cycle:</strong> Average 28+ days to close vs. 14 for other segments. This is a relationship sale, not a call sale. Plan 3–4 touchpoints.</div>
+        <div class="col-item"><strong>Brand objection is the gatekeeper:</strong> You won't close without addressing "cheapening" head-on. Lead with our premium restaurant testimonials.</div>
+        <div class="col-item"><strong>Use Marco only:</strong> This segment requires your most experienced rep. Don't send a junior rep to a Michelin-recommended restaurant.</div>
+      </div>
+    </div>
+    <div class="pitch-card">
+      <div class="pitch-title">Opening Angle — Fine Dining</div>
+      <div class="pitch-script" id="script-fine-dining">
+<strong>Opening (Research-led — always personalise):</strong>
+"Hi, I'm [Name] from Too Good To Go. I was looking at your reviews on [Google / OpenTable] — your weekday lunch covers look genuinely strong. I'm curious — how does your Monday-Wednesday lunch compare to Thursday-Saturday service? Are you seeing similar demand?"
+
+[They confirm weekday is quieter:]
+
+"We're working with some of London's best independent restaurants — [Dishoom / similar tier] being one example — specifically around weekday slot optimisation. What they've done is offered a curated chef's selection bag during their quietest window. It's not discounting the menu — it's a separate product that brings a specific type of customer who's already invested in quality food. Can I walk you through the economics?"
+
+<em>[Do NOT use the word 'discount' in this segment. Use 'curated selection', 'sustainability partnership', 'chef's choice bag']</em>
+      </div>
+      <button class="copy-btn" onclick="copyScript('script-fine-dining', this)">Copy</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ JAPANESE ═══════════════════════ -->
+  <div class="seg-panel" id="panel-japanese">
+    <div class="overview-grid">
+      <div class="ov-cell"><div class="ov-n">66%</div><div class="ov-l">Win Rate</div></div>
+      <div class="ov-cell"><div class="ov-n">£720</div><div class="ov-l">Avg Monthly Deal</div></div>
+      <div class="ov-cell"><div class="ov-n">10%</div><div class="ov-l">Annual Churn</div></div>
+      <div class="ov-cell"><div class="ov-n">420</div><div class="ov-l">UK Market Size</div></div>
+      <div class="ov-cell"><div class="ov-n">0.9%</div><div class="ov-l">Penetrated</div></div>
+    </div>
+    <div class="three-col">
+      <div class="col-card">
+        <div class="col-title">Why This Segment Wins</div>
+        <div class="col-item"><strong>Highest avg deal value in ethnic:</strong> Sushi and ramen has higher bag values (£5–£8). 720/mo average is 6% above ethnic segment average.</div>
+        <div class="col-item"><strong>Almost untouched:</strong> 0.9% penetration — lowest of all segments. First-mover advantage available.</div>
+        <div class="col-item"><strong>Strong TGTG consumer crossover:</strong> Japanese food lovers tend to be young, urban, sustainability-conscious — exactly the TGTG user base.</div>
+      </div>
+      <div class="col-card">
+        <div class="col-title">Top Postcodes</div>
+        <div class="postcode-grid">
+          <div class="pc-row"><div class="pc-code">W1</div><div class="pc-name">Soho / Fitzrovia</div><div class="pc-count">38</div><div class="pc-bar-wrap"><div class="pc-bar" style="width:90%"></div></div><div class="pc-pen">0.8%</div></div>
+          <div class="pc-row"><div class="pc-code">SE1</div><div class="pc-name">London Bridge / Borough</div><div class="pc-count">22</div><div class="pc-bar-wrap"><div class="pc-bar" style="width:52%"></div></div><div class="pc-pen">1.1%</div></div>
+          <div class="pc-row"><div class="pc-code">EC2</div><div class="pc-name">Shoreditch / Liverpool St</div><div class="pc-count">28</div><div class="pc-bar-wrap"><div class="pc-bar" style="width:67%"></div></div><div class="pc-pen">0.7%</div></div>
+        </div>
+      </div>
+      <div class="col-card">
+        <div class="col-title">Watch-Fors</div>
+        <div class="col-item"><strong>Freshness concern:</strong> Sushi is a freshness-sensitive product. Ensure the offer window closes by midday / afternoon (not end of day). Frame as "lunchtime chef's selection".</div>
+        <div class="col-item"><strong>Owner not present:</strong> Many Japanese restaurants have management structures. Find out who signs off commercial decisions before presenting numbers.</div>
+      </div>
+    </div>
+    <div class="pitch-card">
+      <div class="pitch-title">Opening Angle — Japanese / Sushi</div>
+      <div class="pitch-script" id="script-japanese">
+<strong>Opening:</strong>
+"Hi, I'm [Name] from Too Good To Go. Quick question — do you ever end the day with unsold sushi or prep that you'd rather not throw away?"
+
+[Almost every sushi restaurant says yes:]
+
+"That's exactly what we help with. We have a specific lunchtime customer base in [area] who looks for premium Japanese food on TGTG. You'd offer a 'chef's lunch box' window — say, noon to 1pm, 8 bags — at [£5.50-£6]. Fresh food, specific window, your control. The bags sell in under 10 minutes on a good day."
+
+<em>[Freshness is your hook with this segment — not cost-saving]</em>
+      </div>
+      <button class="copy-btn" onclick="copyScript('script-japanese', this)">Copy</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ BAKERY ═══════════════════════ -->
+  <div class="seg-panel" id="panel-bakery">
+    <div class="overview-grid">
+      <div class="ov-cell"><div class="ov-n">74%</div><div class="ov-l">Win Rate</div></div>
+      <div class="ov-cell"><div class="ov-n">£340</div><div class="ov-l">Avg Monthly Deal</div></div>
+      <div class="ov-cell"><div class="ov-n">12%</div><div class="ov-l">Annual Churn</div></div>
+      <div class="ov-cell"><div class="ov-n">1,840</div><div class="ov-l">UK Market Size</div></div>
+      <div class="ov-cell"><div class="ov-n">2.1%</div><div class="ov-l">Penetrated</div></div>
+    </div>
+    <div class="three-col">
+      <div class="col-card">
+        <div class="col-title">Why This Segment Wins</div>
+        <div class="col-item"><strong>Highest win rate of all segments (74%):</strong> Bakeries are TGTG's natural fit. The product (end-of-day bread, pastries) is perfectly suited to a surprise bag model. Owners get it immediately.</div>
+        <div class="col-item"><strong>Quick close:</strong> Average 6–8 days to close (fastest). High owner familiarity with TGTG concept.</div>
+        <div class="col-item"><strong>High mission alignment:</strong> Food waste is a daily frustration. The sale almost makes itself.</div>
+      </div>
+      <div class="col-card">
+        <div class="col-title">Watch-Fors</div>
+        <div class="col-item"><strong>Lower deal value:</strong> £340/mo is the lowest of strategic segments. Volume play required to make this work for revenue targets.</div>
+        <div class="col-item"><strong>Higher churn:</strong> 12% annual. Often driven by seasonal closures, ownership changes, or feeling the economics aren't worth the admin.</div>
+      </div>
+      <div class="col-card">
+        <div class="col-title">When to Prioritise</div>
+        <div class="col-item">Great for <strong>volume targets and win rate numbers</strong>. When you need Q-end pipeline, bakeries close fast.</div>
+        <div class="col-item">Not your primary strategic focus — ethnic food and brunch have better unit economics. Use bakeries to hit volume, not to build a high-value book.</div>
+      </div>
+    </div>
+    <div class="pitch-card">
+      <div class="pitch-title">Opening Angle — Bakery / Deli</div>
+      <div class="pitch-script" id="script-bakery">
+<strong>Opening:</strong>
+"Hi, I'm [Name] from Too Good To Go. Do you ever throw away bread or pastries at the end of the day?"
+
+[They say yes — they always do:]
+
+"That's exactly what we fix. You put your end-of-day items in a bag, set a pickup window for the last hour you're open, and our customers collect it. You've already paid for the ingredients — this is pure recovery. I can show you the numbers in 2 minutes — do you have a moment?"
+
+<em>[This is the easiest close on the platform. Let the simplicity sell itself.]</em>
+      </div>
+      <button class="copy-btn" onclick="copyScript('script-bakery', this)">Copy</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ PUB ═══════════════════════ -->
+  <div class="seg-panel" id="panel-pub">
+    <div class="overview-grid">
+      <div class="ov-cell"><div class="ov-n">58%</div><div class="ov-l">Win Rate</div></div>
+      <div class="ov-cell"><div class="ov-n">£420</div><div class="ov-l">Avg Monthly Deal</div></div>
+      <div class="ov-cell"><div class="ov-n">16%</div><div class="ov-l">Annual Churn</div></div>
+      <div class="ov-cell"><div class="ov-n">1,200</div><div class="ov-l">UK Market Size</div></div>
+      <div class="ov-cell"><div class="ov-n">3.4%</div><div class="ov-l">Penetrated</div></div>
+    </div>
+    <div class="three-col">
+      <div class="col-card">
+        <div class="col-title">Characteristics</div>
+        <div class="col-item"><strong>Mid-tier economics:</strong> £420/mo is solid but churn at 16% hurts LTV. Net of churn, a pub account is worth less than it appears.</div>
+        <div class="col-item"><strong>Management layer:</strong> Many pubs are chain-managed. Decision-making can be above the venue manager. Identify who signs commercial decisions first.</div>
+        <div class="col-item"><strong>Brand ambivalence:</strong> Some publicans see TGTG as a "food" platform not relevant to them. Need to establish food service angle clearly.</div>
+      </div>
+      <div class="col-card">
+        <div class="col-title">Best Targets</div>
+        <div class="col-item"><strong>Gastropubs:</strong> Strong food offering, already food-brand-conscious. TGTG aligns with their positioning.</div>
+        <div class="col-item"><strong>Sunday roast specialists:</strong> Leftover roast prep is high-value bag content. Mon-Tue offer window (using Sunday prep surplus).</div>
+        <div class="col-item"><strong>Independent freehouses:</strong> Not chain-managed. Decision maker is in the building.</div>
+      </div>
+      <div class="col-card">
+        <div class="col-title">When to Deprioritise</div>
+        <div class="col-item">Avoid <strong>wet-led pubs</strong> (majority of revenue is drink, minimal food). They won't have enough food prep to create meaningful bags.</div>
+        <div class="col-item">Avoid <strong>chain managed houses</strong> (Stonegate, Mitchells & Butlers) — requires national agreement, not rep relationship. Flag to Country Director if a chain approaches you.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ QSR ═══════════════════════ -->
+  <div class="seg-panel" id="panel-qsr">
+    <div class="overview-grid">
+      <div class="ov-cell"><div class="ov-n">71%</div><div class="ov-l">Win Rate</div></div>
+      <div class="ov-cell"><div class="ov-n">£380</div><div class="ov-l">Avg Monthly Deal</div></div>
+      <div class="ov-cell"><div class="ov-n">14%</div><div class="ov-l">Annual Churn</div></div>
+      <div class="ov-cell"><div class="ov-n">2,140</div><div class="ov-l">UK Market Size</div></div>
+      <div class="ov-cell"><div class="ov-n">3.0%</div><div class="ov-l">Penetrated</div></div>
+    </div>
+    <div class="three-col">
+      <div class="col-card">
+        <div class="col-title">Strategic Role: Volume Lever</div>
+        <div class="col-item"><strong>Highest volume opportunity:</strong> 2,140 venues, 71% win rate, quick 8–12 day close cycle. When you need to hit quantity targets, this is your segment.</div>
+        <div class="col-item"><strong>Retention challenge:</strong> 14% annual churn — the highest of any strategic segment. Owner fatigue, competition from other platforms, low margin consciousness. Must build in quarterly check-in cadence.</div>
+        <div class="col-item"><strong>Good for new reps:</strong> Shorter sales cycle = faster learning. Perfect for ramping phone reps in their first 30 days.</div>
+      </div>
+      <div class="col-card">
+        <div class="col-title">Unit Economics Warning</div>
+        <div class="col-item"><strong>£380/mo × 12% commission = £45.60/mo.</strong> Net of acquisition cost (~£80), payback period is 1.8 months. If they churn at 14%, avg tenure is 8.5 months. <strong>Net LTV: £387.</strong> Low but positive.</div>
+        <div class="col-item">Compare: Ethnic food at £680/mo × 12% = £81.60/mo, 8% churn, 12.5 month avg tenure. <strong>Net LTV: £1,020.</strong> 2.6× QSR. Focus accordingly.</div>
+      </div>
+      <div class="col-card">
+        <div class="col-title">When to Use This Segment</div>
+        <div class="col-item">End-of-quarter volume push. New rep ramp (fast close cycle). Postcode whitespace where ethnic/brunch penetration is already high and QSR remains untouched.</div>
+        <div class="col-item"><strong>Not your primary strategic play.</strong> Use it to supplement, not lead.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="/nav_tgt.js"></script>
+<script>
+function showSeg(seg){
+  document.querySelectorAll('.seg-panel').forEach(function(p){p.classList.remove('on');});
+  document.querySelectorAll('.seg-btn').forEach(function(b){b.classList.remove('on');});
+  document.getElementById('panel-'+seg).classList.add('on');
+  event.currentTarget.classList.add('on');
+}
+function toggleObj(el){
+  el.parentElement.classList.toggle('open');
+}
+function copyScript(id, btn){
+  var text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(function(){
+    btn.textContent = 'Copied ✓';
+    btn.classList.add('copied');
+    setTimeout(function(){btn.textContent='Copy';btn.classList.remove('copied');},2000);
+  });
+}
+</script>
+</body>
+</html>
