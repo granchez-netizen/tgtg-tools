@@ -8,16 +8,16 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap');
 :root{
   --tgtg:#6DBE4F;--tgtgd:rgba(109,190,79,.08);--tgtgl:rgba(109,190,79,.22);
-  --bg:#080808;--s1:#111;--s2:#181818;--s3:#1e1e1e;
-  --border:#1e1e1e;--border2:#262626;
-  --text:#f0f0f0;--muted:#666;--muted2:#444;
+  --bg:#ffffff;--s1:#ffffff;--s2:#f7f8f5;--s3:#f0f2ed;
+  --border:#e4e8de;--border2:#dde3d8;
+  --text:#1a1a1a;--muted:#5a6454;--muted2:#8a9484;
   --danger:#EF4444;--warn:#F59E0B;--good:#22C55E;--info:#60A5FA;--purple:#A78BFA;
   /* Team colours */
   --acq:#6DBE4F;--am:#60A5FA;--growth:#F59E0B;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;}
-.topbar{background:var(--s1);border-bottom:1px solid var(--border2);padding:13px 24px 13px 60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.topbar{background:#6DBE4F;border-bottom:1px solid var(--border2);padding:13px 24px 13px 60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
 .brand{font-size:13px;font-weight:800;}.brand em{color:var(--tgtg);font-style:normal;}
 .topbar-pill{font-size:10px;font-weight:700;padding:4px 10px;border-radius:6px;background:var(--tgtgd);border:1px solid var(--tgtgl);color:var(--tgtg);}
 .wrap{max-width:1080px;margin:0 auto;padding:28px 24px 100px;}
@@ -68,11 +68,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 /* COMPETITION FORMATS */
 .comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:32px;}
 @media(max-width:700px){.comp-grid{grid-template-columns:1fr;}}
-.comp-card{background:var(--s1);border:1px solid var(--border2);border-radius:12px;padding:16px;}
+.comp-card{background:#ffffff;border:1px solid #dde3d8;border-radius:12px;padding:16px;}
 .comp-icon{font-size:24px;margin-bottom:8px;}
 .comp-name{font-size:13px;font-weight:700;margin-bottom:4px;}
 .comp-desc{font-size:11px;color:#bbb;line-height:1.7;margin-bottom:10px;}
-.comp-mechanics{background:var(--s2);border-radius:8px;padding:10px;}
+.comp-mechanics{background:#f7f8f5;border-radius:8px;padding:10px;}
 .cm-title{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--tgtg);margin-bottom:6px;font-family:'DM Mono',monospace;}
 .cm-item{font-size:10px;color:#999;padding:4px 0;border-bottom:1px solid var(--border);line-height:1.6;}
 .cm-item:last-child{border-bottom:none;}
@@ -81,21 +81,21 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 /* ACCOUNTABILITY */
 .accountability-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:32px;}
 @media(max-width:700px){.accountability-grid{grid-template-columns:1fr;}}
-.acc-card{background:var(--s1);border:1px solid var(--border2);border-radius:12px;padding:16px;}
+.acc-card{background:#ffffff;border:1px solid #dde3d8;border-radius:12px;padding:16px;}
 .acc-title{font-size:11px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;font-family:'DM Mono',monospace;}
 .acc-item{font-size:12px;color:#bbb;padding:7px 0;border-bottom:1px solid var(--border);line-height:1.65;}
 .acc-item:last-child{border-bottom:none;}
 .acc-item strong{color:var(--text);}
 
 /* RESILIENCE */
-.resilience-box{background:var(--s1);border:1px solid var(--border2);border-radius:14px;padding:20px;margin-bottom:20px;}
-.rb-scenario{background:var(--s2);border-radius:8px;padding:12px;margin-bottom:8px;}
+.resilience-box{background:#ffffff;border:1px solid #dde3d8;border-radius:14px;padding:20px;margin-bottom:20px;}
+.rb-scenario{background:#f7f8f5;border-radius:8px;padding:12px;margin-bottom:8px;}
 .rb-trigger{font-size:11px;font-weight:700;color:var(--warn);margin-bottom:6px;}
 .rb-response{font-size:11px;color:#bbb;line-height:1.7;}
 .rb-response strong{color:var(--text);}
 
 /* STANDUP SCRIPT */
-.script-box{background:var(--s1);border:1px solid var(--border2);border-radius:14px;overflow:hidden;margin-bottom:20px;}
+.script-box{background:#ffffff;border:1px solid #dde3d8;border-radius:14px;overflow:hidden;margin-bottom:20px;}
 .sb-hdr{padding:12px 16px;border-bottom:1px solid var(--border2);display:flex;justify-content:space-between;align-items:center;}
 .sb-title{font-size:10px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:2px;font-family:'DM Mono',monospace;}
 .copy-btn{padding:5px 12px;background:var(--tgtgd);border:1px solid var(--tgtgl);border-radius:5px;color:var(--tgtg);font-size:9px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;}
@@ -107,7 +107,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 
 /* MOTIVATIONAL MOMENTS */
 .moment-grid{display:grid;gap:10px;margin-bottom:32px;}
-.moment{background:var(--s1);border:1px solid var(--border2);border-radius:10px;padding:14px;display:flex;gap:12px;align-items:flex-start;}
+.moment{background:#ffffff;border:1px solid #dde3d8;border-radius:10px;padding:14px;display:flex;gap:12px;align-items:flex-start;}
 .moment-icon{font-size:20px;flex-shrink:0;}
 .moment-title{font-size:12px;font-weight:700;margin-bottom:4px;}
 .moment-text{font-size:11px;color:#bbb;line-height:1.7;}
@@ -119,7 +119,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 
 /* ONBOARDING SPEED */
 .speed-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:32px;}
-.speed-step{background:var(--s1);border:1px solid var(--border2);border-radius:12px;padding:14px;}
+.speed-step{background:#ffffff;border:1px solid #dde3d8;border-radius:12px;padding:14px;}
 .ss-num{font-size:28px;font-weight:900;color:var(--tgtg);letter-spacing:-1px;line-height:1;margin-bottom:6px;}
 .ss-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tgtg);margin-bottom:6px;font-family:'DM Mono',monospace;}
 .ss-desc{font-size:11px;color:#bbb;line-height:1.65;}
@@ -146,13 +146,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:20px;">
 
-      <div style="background:var(--s1);border:1px solid var(--border2);border-radius:12px;padding:16px;">
+      <div style="background:#ffffff;border:1px solid #dde3d8;border-radius:12px;padding:16px;">
         <div style="font-size:22px;font-weight:900;color:var(--tgtg);line-height:1;margin-bottom:6px;">1</div>
         <div style="font-size:11px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-family:'DM Mono',monospace;">5 min · The mission question</div>
         <div style="font-size:12px;color:#bbb;line-height:1.75;">TL asks: <strong style="color:var(--text);">"What are we actually here to do — in one sentence, not the job description version?"</strong> Go round the room. No wrong answers. Write every answer on the board. Look for the words that appear more than once.</div>
       </div>
 
-      <div style="background:var(--s1);border:1px solid var(--border2);border-radius:12px;padding:16px;">
+      <div style="background:#ffffff;border:1px solid #dde3d8;border-radius:12px;padding:16px;">
         <div style="font-size:22px;font-weight:900;color:var(--tgtg);line-height:1;margin-bottom:6px;">2</div>
         <div style="font-size:11px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-family:'DM Mono',monospace;">10 min · The identity questions</div>
         <div style="font-size:12px;color:#bbb;line-height:1.75;">Three questions, written answers first then shared:<br><br>
@@ -162,25 +162,25 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
         </div>
       </div>
 
-      <div style="background:var(--s1);border:1px solid var(--border2);border-radius:12px;padding:16px;">
+      <div style="background:#ffffff;border:1px solid #dde3d8;border-radius:12px;padding:16px;">
         <div style="font-size:22px;font-weight:900;color:var(--tgtg);line-height:1;margin-bottom:6px;">3</div>
         <div style="font-size:11px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-family:'DM Mono',monospace;">10 min · The name proposals</div>
         <div style="font-size:12px;color:#bbb;line-height:1.75;">Every rep writes one name suggestion on a card. Anonymous. TL reads them all aloud. No laughing off any suggestion — every one gets a 20-second explanation of why it fits. The room starts to feel which names land.</div>
       </div>
 
-      <div style="background:var(--s1);border:1px solid var(--border2);border-radius:12px;padding:16px;">
+      <div style="background:#ffffff;border:1px solid #dde3d8;border-radius:12px;padding:16px;">
         <div style="font-size:22px;font-weight:900;color:var(--tgtg);line-height:1;margin-bottom:6px;">4</div>
         <div style="font-size:11px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-family:'DM Mono',monospace;">10 min · The shortlist debate</div>
         <div style="font-size:12px;color:#bbb;line-height:1.75;">TL identifies the 3–4 names that got the most energy. Open debate: <strong style="color:var(--text);">"What does this name say about us? What does it not say?"</strong> Not a vote yet — a conversation. The team should be able to articulate why the name fits, not just that they like it.</div>
       </div>
 
-      <div style="background:var(--s1);border:1px solid var(--border2);border-radius:12px;padding:16px;">
+      <div style="background:#ffffff;border:1px solid #dde3d8;border-radius:12px;padding:16px;">
         <div style="font-size:22px;font-weight:900;color:var(--tgtg);line-height:1;margin-bottom:6px;">5</div>
         <div style="font-size:11px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-family:'DM Mono',monospace;">5 min · The commitment</div>
         <div style="font-size:12px;color:#bbb;line-height:1.75;">The final name is chosen. Then the most important part: <strong style="color:var(--text);">"What does this name ask of us every day?"</strong> Each rep says one word. TL writes them all down. Those words become the team's values — written by them, owned by them.</div>
       </div>
 
-      <div style="background:var(--s1);border:1px solid var(--border2);border-radius:12px;padding:16px;">
+      <div style="background:#ffffff;border:1px solid #dde3d8;border-radius:12px;padding:16px;">
         <div style="font-size:22px;font-weight:900;color:var(--tgtg);line-height:1;margin-bottom:6px;">6</div>
         <div style="font-size:11px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-family:'DM Mono',monospace;">5 min · The reveal</div>
         <div style="font-size:12px;color:#bbb;line-height:1.75;">TL brings the name to the all-team standup the next morning. Each team presents their name, their one-line reason, and the commitment word that goes with it. The Head of Indies hears all three together for the first time — and the competition between teams starts the moment the third name lands.</div>
@@ -282,8 +282,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
   <!-- SAVE / COPY -->
   <div style="display:flex;gap:10px;margin-bottom:40px;flex-wrap:wrap;">
     <button onclick="saveCards()" style="padding:10px 20px;background:var(--tgtg);border:none;border-radius:8px;color:#000;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:800;cursor:pointer;">Save team names</button>
-    <button onclick="copyCards()" style="padding:10px 20px;background:transparent;border:1px solid var(--border2);border-radius:8px;color:#888;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;">Copy all three to clipboard</button>
-    <button onclick="clearCards()" style="padding:10px 20px;background:transparent;border:1px solid var(--border2);border-radius:8px;color:#555;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;">Clear (before session)</button>
+    <button onclick="copyCards()" style="padding:10px 20px;background:transparent;border:1px solid #dde3d8;border-radius:8px;color:#888;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;">Copy all three to clipboard</button>
+    <button onclick="clearCards()" style="padding:10px 20px;background:transparent;border:1px solid #dde3d8;border-radius:8px;color:#555;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;">Clear (before session)</button>
   </div>
 
   <script>
