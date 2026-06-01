@@ -7,12 +7,12 @@
 <link rel="stylesheet" href="/brand.css">
 <style>
 :root{
-  --y:#FFD000;--g:#22C55E;--r:#EF4444;--b:#3B82F6;--p:#A855F7;
-  --bg:#0f0f0f;--s:#1a1a1a;--b1:#2a2a2a;--t:#f5f5f5;--m:#777;
+  --y:#6DBE4F;--g:#22C55E;--r:#EF4444;--b:#3B82F6;--p:#A855F7;
+  --bg:#ffffff;--s:#f7f8f5;--b1:#dde3d8;--t:#1a1a1a;--m:#5a6454;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);-webkit-font-smoothing:antialiased;}
-.hdr{background:#111;border-bottom:1px solid var(--b1);padding:13px 24px 13px 60px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;}
+.hdr{background:#f7f8f5;border-bottom:1px solid var(--b1);padding:13px 24px 13px 60px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;}
 .brand{font-size:13px;font-weight:800;letter-spacing:-.3px;}
 .brand em{color:var(--y);font-style:normal;}
 .hdr-r{font-size:11px;color:var(--m);}
@@ -24,7 +24,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);-webkit-
 
 .quad{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:20px 24px;}
 @media(max-width:700px){.quad{grid-template-columns:1fr;}}
-.qbox{background:var(--s);border-radius:13px;border:1.5px solid var(--b1);overflow:hidden;}
+.qbox{background:#ffffff;border-radius:13px;border:1.5px solid #dde3d8;overflow:hidden;}
 .qhdr{padding:14px 18px 10px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #1e1e1e;}
 .qicon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;flex-shrink:0;}
 .qlbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;}
@@ -39,7 +39,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);-webkit-
 .qtime{font-size:9px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;margin-top:3px;flex-shrink:0;}
 
 .close-section{padding:16px 24px 40px;}
-.close-box{background:#111;border:2px solid var(--y);border-radius:14px;padding:24px 28px;text-align:center;}
+.close-box{background:#f7f8f5;border:2px solid var(--y);border-radius:14px;padding:24px 28px;text-align:center;}
 .close-eye{font-size:9px;font-weight:700;color:var(--y);text-transform:uppercase;letter-spacing:3px;margin-bottom:10px;}
 .close-text{font-size:14px;color:#999;line-height:1.85;max-width:580px;margin:0 auto;}
 .close-text strong{color:var(--t);}
@@ -62,16 +62,16 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);-webkit-
 
   <div class="qbox">
     <div class="qhdr">
-      <div class="qicon" style="background:rgba(255,208,0,.12);color:var(--y);">M</div>
+      <div class="qicon" style="background:rgba(109,190,79,.12);color:var(--y);">M</div>
       <div><div class="qlbl" style="color:var(--y);">Five meetings</div><div class="qsub">Who I sit with and why, in order</div></div>
     </div>
     <div class="qlist">
-      <div class="qi" style="border-bottom:1px solid #222;margin-bottom:4px;padding-bottom:12px;"><div class="qn" style="background:rgba(255,208,0,.06);color:#555;font-size:8px;">PRE</div><div class="qc"><div class="qt" style="color:#888;font-size:12px;">Chelsea Kerr — 07:00 London / 16:00 Melbourne</div><div class="qd">Before the working day. His priorities before anyone shapes my thinking. What 90 days looks like from his seat. Weekly cadence set. Not counted as a meeting — this is the brief before the day starts.</div></div><div class="qtime" style="color:#444;">07:00</div></div>
-      <div class="qi"><div class="qn" style="background:rgba(255,208,0,.12);color:var(--y);">1</div><div class="qc"><div class="qt">All-hands sales standup — full rep team</div><div class="qd">Every rep. Every city. 15 minutes. I introduce myself, say three things: I am here to make you better at your job, I will be on the phones with you this week, and I am listening before I change anything. Then I shut up and watch the energy. Who speaks. Who stays quiet. What the rhythm feels like. The team sees me on Day 1 and knows the kind of leader who just walked in.</div></div><div class="qtime">09:00</div></div>
-      <div class="qi"><div class="qn" style="background:rgba(255,208,0,.12);color:var(--y);">2</div><div class="qc"><div class="qt">Jade Okafor + top Account Managers</div><div class="qd">Walk in with the coverage data. London 44.5% dropping to 33% at dinner. Manchester 20% Thursday. Liverpool 40.5% with no launch. One question: what is the activation failure mode? Joint audit starts week two.</div></div><div class="qtime">09:30</div></div>
-      <div class="qi"><div class="qn" style="background:rgba(255,208,0,.12);color:var(--y);">3</div><div class="qc"><div class="qt">Top 3 phone reps — coffee then dialto a venue</div><div class="qd">Coffee first. Then dialto a live venue together. I watch the pitch, the offer window conversation, the objection handling. Debrief on the phone floor. Not described — observed.</div></div><div class="qtime">10:30</div></div>
-      <div class="qi"><div class="qn" style="background:rgba(255,208,0,.12);color:var(--y);">4</div><div class="qc"><div class="qt">Bottom quartile phone reps — coffee</div><div class="qd">Same setting, same respect. Everyone gets coffee on Day 1. No performance framing. One question: what would make this week easier? They feel the friction hardest and they will tell you if you ask without a manager in the room.</div></div><div class="qtime">12:30</div></div>
-      <div class="qi"><div class="qn" style="background:rgba(255,208,0,.12);color:var(--y);">5</div><div class="qc"><div class="qt">Joint dormant prospect call — AM and HoI together</div><div class="qd">Walk into a dormant venue with the AM who owns it. One ask: shift the offer window to Tuesday-Thursday 5:30-7:30pm. Do it on their phone before we leave. The activation sprint in miniature. Both Sales and AM see how I operate from day one.</div></div><div class="qtime">16:30</div></div>
+      <div class="qi" style="border-bottom:1px solid #222;margin-bottom:4px;padding-bottom:12px;"><div class="qn" style="background:rgba(109,190,79,.06);color:#555;font-size:8px;">PRE</div><div class="qc"><div class="qt" style="color:#888;font-size:12px;">Chelsea Kerr — 07:00 London / 16:00 Melbourne</div><div class="qd">Before the working day. His priorities before anyone shapes my thinking. What 90 days looks like from his seat. Weekly cadence set. Not counted as a meeting — this is the brief before the day starts.</div></div><div class="qtime" style="color:#444;">07:00</div></div>
+      <div class="qi"><div class="qn" style="background:rgba(109,190,79,.12);color:var(--y);">1</div><div class="qc"><div class="qt">All-hands sales standup — full rep team</div><div class="qd">Every rep. Every city. 15 minutes. I introduce myself, say three things: I am here to make you better at your job, I will be on the phones with you this week, and I am listening before I change anything. Then I shut up and watch the energy. Who speaks. Who stays quiet. What the rhythm feels like. The team sees me on Day 1 and knows the kind of leader who just walked in.</div></div><div class="qtime">09:00</div></div>
+      <div class="qi"><div class="qn" style="background:rgba(109,190,79,.12);color:var(--y);">2</div><div class="qc"><div class="qt">Jade Okafor + top Account Managers</div><div class="qd">Walk in with the coverage data. London 44.5% dropping to 33% at dinner. Manchester 20% Thursday. Liverpool 40.5% with no launch. One question: what is the activation failure mode? Joint audit starts week two.</div></div><div class="qtime">09:30</div></div>
+      <div class="qi"><div class="qn" style="background:rgba(109,190,79,.12);color:var(--y);">3</div><div class="qc"><div class="qt">Top 3 phone reps — coffee then dialto a venue</div><div class="qd">Coffee first. Then dialto a live venue together. I watch the pitch, the offer window conversation, the objection handling. Debrief on the phone floor. Not described — observed.</div></div><div class="qtime">10:30</div></div>
+      <div class="qi"><div class="qn" style="background:rgba(109,190,79,.12);color:var(--y);">4</div><div class="qc"><div class="qt">Bottom quartile phone reps — coffee</div><div class="qd">Same setting, same respect. Everyone gets coffee on Day 1. No performance framing. One question: what would make this week easier? They feel the friction hardest and they will tell you if you ask without a manager in the room.</div></div><div class="qtime">12:30</div></div>
+      <div class="qi"><div class="qn" style="background:rgba(109,190,79,.12);color:var(--y);">5</div><div class="qc"><div class="qt">Joint dormant prospect call — AM and HoI together</div><div class="qd">Walk into a dormant venue with the AM who owns it. One ask: shift the offer window to Tuesday-Thursday 5:30-7:30pm. Do it on their phone before we leave. The activation sprint in miniature. Both Sales and AM see how I operate from day one.</div></div><div class="qtime">16:30</div></div>
     </div>
   </div>
 
