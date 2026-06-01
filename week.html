@@ -7,14 +7,14 @@
 <link rel="stylesheet" href="/brand.css">
 <style>
 :root{
-  --y:#FFD000;--yd:rgba(255,208,0,.10);--yl:rgba(255,208,0,.22);
+  --y:#6DBE4F;--yd:rgba(109,190,79,.10);--yl:rgba(109,190,79,.22);
   --g:#22C55E;--gd:rgba(34,197,94,.08);--gl:rgba(34,197,94,.20);
   --r:#EF4444;--rd:rgba(239,68,68,.08);
   --b:#3B82F6;--bd:rgba(59,130,246,.08);
   --p:#A855F7;--pd:rgba(168,85,247,.08);
-  --bg:#0f0f0f;--s:#1a1a1a;--b1:#2a2a2a;--t:#f5f5f5;--m:#777;
+  --bg:#ffffff;--s:#f7f8f5;--b1:#dde3d8;--t:#1a1a1a;--m:#5a6454;
 }
-.hdr{background:#111;border-bottom:1px solid var(--b1);padding:13px 24px 13px 60px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;}
+.hdr{background:#f7f8f5;border-bottom:1px solid var(--b1);padding:13px 24px 13px 60px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;}
 .brand{font-size:13px;font-weight:800;letter-spacing:-.3px;}
 .brand em{color:var(--y);font-style:normal;}
 .hdr-r{font-size:11px;color:var(--m);}
@@ -25,10 +25,10 @@
 .h-sub{font-size:13px;color:var(--m);line-height:1.75;max-width:580px;}
 
 .phase-tabs{display:flex;gap:6px;padding:0 24px 20px;}
-.ptab{padding:8px 16px;border-radius:20px;border:1px solid var(--b1);background:transparent;color:#555;font-size:11px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;}
+.ptab{padding:8px 16px;border-radius:20px;border:1px solid #dde3d8;background:transparent;color:#555;font-size:11px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;}
 .ptab.on{border-color:var(--yl);background:var(--yd);color:var(--y);}
 
-.split-bar{margin:0 24px 20px;background:var(--s);border:1px solid var(--b1);border-radius:11px;padding:14px 18px;}
+.split-bar{margin:0 24px 20px;background:#ffffff;border:1px solid #dde3d8;border-radius:11px;padding:14px 18px;}
 .split-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--m);margin-bottom:10px;}
 .split-track{display:flex;height:8px;border-radius:4px;overflow:hidden;gap:2px;margin-bottom:10px;}
 .split-field{background:var(--y);border-radius:4px 0 0 4px;transition:width .4s;}
@@ -41,7 +41,7 @@
 .week-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:0 24px 20px;}
 @media(max-width:700px){.week-grid{grid-template-columns:1fr 1fr;}}
 
-.day{background:var(--s);border:1px solid var(--b1);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;}
+.day{background:#ffffff;border:1px solid #dde3d8;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;}
 .day-hdr{padding:12px 14px 10px;}
 .day-name{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:2px;margin-bottom:3px;}
 .day-type{font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;display:inline-block;}
@@ -58,18 +58,18 @@
 
 .time-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:0 24px 20px;}
 @media(max-width:600px){.time-grid{grid-template-columns:1fr 1fr;}}
-.time-card{background:var(--s);border:1px solid var(--b1);border-radius:10px;padding:14px;}
+.time-card{background:#ffffff;border:1px solid #dde3d8;border-radius:10px;padding:14px;}
 .time-n{font-size:24px;font-weight:900;line-height:1;letter-spacing:-1px;margin-bottom:3px;}
 .time-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--m);}
 .time-sub{font-size:11px;color:#444;margin-top:5px;line-height:1.55;}
 
-.principles{margin:0 24px 30px;background:var(--s);border:1px solid var(--b1);border-radius:12px;padding:20px;}
+.principles{margin:0 24px 30px;background:#ffffff;border:1px solid #dde3d8;border-radius:12px;padding:20px;}
 .p-title{font-size:13px;font-weight:800;margin-bottom:14px;letter-spacing:-.2px;}
 .p-list{display:flex;flex-direction:column;gap:10px;}
 .p-item{display:flex;gap:10px;font-size:13px;color:#aaa;line-height:1.65;}
 .p-dot{width:6px;height:6px;border-radius:50%;background:var(--y);flex-shrink:0;margin-top:6px;}
 
-.note{margin:0 24px 10px;padding:12px 16px;background:#111;border-radius:9px;border-left:2px solid var(--y);font-size:12px;color:#777;line-height:1.7;}
+.note{margin:0 24px 10px;padding:12px 16px;background:#f7f8f5;border-radius:9px;border-left:2px solid var(--y);font-size:12px;color:#777;line-height:1.7;}
 .note strong{color:#ddd;}
 </style>
 </head>
