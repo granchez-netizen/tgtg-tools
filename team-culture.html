@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Too Good To Go · Team Culture & Competition</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap');
+:root{
+  --tgtg:#6DBE4F;--tgtgd:rgba(109,190,79,.08);--tgtgl:rgba(109,190,79,.22);
+  --bg:#080808;--s1:#111;--s2:#181818;--s3:#1e1e1e;
+  --border:#1e1e1e;--border2:#262626;
+  --text:#f0f0f0;--muted:#666;--muted2:#444;
+  --danger:#EF4444;--warn:#F59E0B;--good:#22C55E;--info:#60A5FA;--purple:#A78BFA;
+  /* Team colours */
+  --acq:#6DBE4F;--am:#60A5FA;--growth:#F59E0B;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;}
+.topbar{background:var(--s1);border-bottom:1px solid var(--border2);padding:13px 24px 13px 60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.brand{font-size:13px;font-weight:800;}.brand em{color:var(--tgtg);font-style:normal;}
+.topbar-pill{font-size:10px;font-weight:700;padding:4px 10px;border-radius:6px;background:var(--tgtgd);border:1px solid var(--tgtgl);color:var(--tgtg);}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 24px 100px;}
+
+/* HERO */
+.hero-eye{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--tgtg);margin-bottom:10px;font-family:'DM Mono',monospace;}
+.hero-h1{font-size:clamp(28px,5vw,48px);font-weight:900;letter-spacing:-1.5px;line-height:1.08;margin-bottom:10px;}
+.hero-h1 em{color:var(--tgtg);font-style:normal;}
+.hero-sub{font-size:14px;color:var(--muted);line-height:1.8;max-width:640px;margin-bottom:32px;}
+
+/* TEAM CARDS */
+.teams-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:40px;}
+@media(max-width:900px){.teams-grid{grid-template-columns:1fr;}}
+.team-card{border-radius:16px;overflow:hidden;}
+.tc-header{padding:22px 20px 18px;}
+.tc-icon{font-size:32px;margin-bottom:10px;}
+.tc-code{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:3px;margin-bottom:6px;font-family:'DM Mono',monospace;}
+.tc-name{font-size:20px;font-weight:900;letter-spacing:-.5px;line-height:1.1;margin-bottom:8px;}
+.tc-tagline{font-size:12px;line-height:1.7;opacity:.85;}
+.tc-body{padding:18px 20px;background:rgba(0,0,0,.4);}
+.tc-section{margin-bottom:14px;}
+.tc-section-title{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:2px;opacity:.6;margin-bottom:8px;font-family:'DM Mono',monospace;}
+.tc-item{font-size:11px;line-height:1.7;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05);opacity:.85;}
+.tc-item:last-child{border-bottom:none;}
+.tc-item strong{opacity:1;}
+/* Acq */
+.tc-acq{background:linear-gradient(135deg,#0d1a0d,#132013);}
+.tc-acq .tc-code{color:var(--acq);}
+.tc-acq .tc-name{color:var(--acq);}
+.tc-acq .tc-section-title{color:var(--acq);}
+/* AM */
+.tc-am{background:linear-gradient(135deg,#0d1220,#0f1a2e);}
+.tc-am .tc-code{color:var(--am);}
+.tc-am .tc-name{color:var(--am);}
+.tc-am .tc-section-title{color:var(--am);}
+/* Growth */
+.tc-growth{background:linear-gradient(135deg,#1a1500,#201a00);}
+.tc-growth .tc-code{color:var(--growth);}
+.tc-growth .tc-name{color:var(--growth);}
+.tc-growth .tc-section-title{color:var(--growth);}
+
+/* PHILOSOPHY */
+.sep{height:1px;background:var(--border2);margin:32px 0;}
+.section-eye{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--tgtg);margin-bottom:12px;font-family:'DM Mono',monospace;}
+.section-h2{font-size:22px;font-weight:900;letter-spacing:-.5px;margin-bottom:8px;}
+.section-sub{font-size:13px;color:var(--muted);line-height:1.75;max-width:680px;margin-bottom:24px;}
+
+/* COMPETITION FORMATS */
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:32px;}
+@media(max-width:700px){.comp-grid{grid-template-columns:1fr;}}
+.comp-card{background:var(--s1);border:1px solid var(--border2);border-radius:12px;padding:16px;}
+.comp-icon{font-size:24px;margin-bottom:8px;}
+.comp-name{font-size:13px;font-weight:700;margin-bottom:4px;}
+.comp-desc{font-size:11px;color:#bbb;line-height:1.7;margin-bottom:10px;}
+.comp-mechanics{background:var(--s2);border-radius:8px;padding:10px;}
+.cm-title{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--tgtg);margin-bottom:6px;font-family:'DM Mono',monospace;}
+.cm-item{font-size:10px;color:#999;padding:4px 0;border-bottom:1px solid var(--border);line-height:1.6;}
+.cm-item:last-child{border-bottom:none;}
+.cm-item strong{color:var(--text);}
+
+/* ACCOUNTABILITY */
+.accountability-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:32px;}
+@media(max-width:700px){.accountability-grid{grid-template-columns:1fr;}}
+.acc-card{background:var(--s1);border:1px solid var(--border2);border-radius:12px;padding:16px;}
+.acc-title{font-size:11px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;font-family:'DM Mono',monospace;}
+.acc-item{font-size:12px;color:#bbb;padding:7px 0;border-bottom:1px solid var(--border);line-height:1.65;}
+.acc-item:last-child{border-bottom:none;}
+.acc-item strong{color:var(--text);}
+
+/* RESILIENCE */
+.resilience-box{background:var(--s1);border:1px solid var(--border2);border-radius:14px;padding:20px;margin-bottom:20px;}
+.rb-scenario{background:var(--s2);border-radius:8px;padding:12px;margin-bottom:8px;}
+.rb-trigger{font-size:11px;font-weight:700;color:var(--warn);margin-bottom:6px;}
+.rb-response{font-size:11px;color:#bbb;line-height:1.7;}
+.rb-response strong{color:var(--text);}
+
+/* STANDUP SCRIPT */
+.script-box{background:var(--s1);border:1px solid var(--border2);border-radius:14px;overflow:hidden;margin-bottom:20px;}
+.sb-hdr{padding:12px 16px;border-bottom:1px solid var(--border2);display:flex;justify-content:space-between;align-items:center;}
+.sb-title{font-size:10px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:2px;font-family:'DM Mono',monospace;}
+.copy-btn{padding:5px 12px;background:var(--tgtgd);border:1px solid var(--tgtgl);border-radius:5px;color:var(--tgtg);font-size:9px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;}
+.copy-btn:hover{background:rgba(109,190,79,.18);}
+.copy-btn.copied{color:var(--good);}
+.sb-body{padding:16px;font-size:12px;color:#ccc;line-height:2;white-space:pre-wrap;}
+.sb-body em{color:var(--tgtg);font-style:normal;font-weight:600;}
+.sb-body strong{color:var(--text);}
+
+/* MOTIVATIONAL MOMENTS */
+.moment-grid{display:grid;gap:10px;margin-bottom:32px;}
+.moment{background:var(--s1);border:1px solid var(--border2);border-radius:10px;padding:14px;display:flex;gap:12px;align-items:flex-start;}
+.moment-icon{font-size:20px;flex-shrink:0;}
+.moment-title{font-size:12px;font-weight:700;margin-bottom:4px;}
+.moment-text{font-size:11px;color:#bbb;line-height:1.7;}
+.moment-text strong{color:var(--text);}
+
+/* NOTE */
+.note{font-size:11px;background:var(--tgtgd);border-left:2px solid var(--tgtg);padding:12px 14px;border-radius:0 6px 6px 0;color:#999;line-height:1.7;margin-top:12px;}
+.note strong{color:var(--tgtg);}
+
+/* ONBOARDING SPEED */
+.speed-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:32px;}
+.speed-step{background:var(--s1);border:1px solid var(--border2);border-radius:12px;padding:14px;}
+.ss-num{font-size:28px;font-weight:900;color:var(--tgtg);letter-spacing:-1px;line-height:1;margin-bottom:6px;}
+.ss-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tgtg);margin-bottom:6px;font-family:'DM Mono',monospace;}
+.ss-desc{font-size:11px;color:#bbb;line-height:1.65;}
+.ss-desc strong{color:var(--text);}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><em>Too Good</em> To Go · Head of Independent Partners</div>
+  <div class="topbar-pill">Culture · Competition · Motivation</div>
+</div>
+
+<div class="wrap">
+  <div class="hero-eye">Team Culture & Identity</div>
+  <div class="hero-h1">Three teams.<br>Three names.<br><em>Chosen by them.</em></div>
+  <div class="hero-sub">The team name comes from the team — not from a manager's slide. A name the team didn't choose is just a label. A name they built together in a room is a identity they'll defend, compete under, and use to hold each other accountable. Here's the exercise, the framework, and the live cards that fill in when they've decided.</div>
+
+  <!-- THE TEAM NAMING EXERCISE -->
+  <div style="background:rgba(109,190,79,.05);border:1.5px solid rgba(109,190,79,.2);border-radius:16px;padding:28px;margin-bottom:32px;">
+    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--tgtg);margin-bottom:12px;font-family:'DM Mono',monospace;">The Session · Run this in week 2</div>
+    <div style="font-size:20px;font-weight:900;letter-spacing:-.5px;margin-bottom:10px;">How to run the team naming exercise</div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.8;max-width:680px;margin-bottom:24px;">Each team runs this separately, with their Team Lead facilitating. 45 minutes. No manager in the room — you'll brief the TL beforehand. The name has to be earnt through the conversation, not picked from a list. Here's the exact format.</div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:20px;">
+
+      <div style="background:var(--s1);border:1px solid var(--border2);border-radius:12px;padding:16px;">
+        <div style="font-size:22px;font-weight:900;color:var(--tgtg);line-height:1;margin-bottom:6px;">1</div>
+        <div style="font-size:11px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-family:'DM Mono',monospace;">5 min · The mission question</div>
+        <div style="font-size:12px;color:#bbb;line-height:1.75;">TL asks: <strong style="color:var(--text);">"What are we actually here to do — in one sentence, not the job description version?"</strong> Go round the room. No wrong answers. Write every answer on the board. Look for the words that appear more than once.</div>
+      </div>
+
+      <div style="background:var(--s1);border:1px solid var(--border2);border-radius:12px;padding:16px;">
+        <div style="font-size:22px;font-weight:900;color:var(--tgtg);line-height:1;margin-bottom:6px;">2</div>
+        <div style="font-size:11px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-family:'DM Mono',monospace;">10 min · The identity questions</div>
+        <div style="font-size:12px;color:#bbb;line-height:1.75;">Three questions, written answers first then shared:<br><br>
+          <strong style="color:var(--text);">"If our team was a person, what three words describe them?"</strong><br>
+          <strong style="color:var(--text);">"What do we do that the other teams can't?"</strong><br>
+          <strong style="color:var(--text);">"What would make someone proud to say they're on this team?"</strong>
+        </div>
+      </div>
+
+      <div style="background:var(--s1);border:1px solid var(--border2);border-radius:12px;padding:16px;">
+        <div style="font-size:22px;font-weight:900;color:var(--tgtg);line-height:1;margin-bottom:6px;">3</div>
+        <div style="font-size:11px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-family:'DM Mono',monospace;">10 min · The name proposals</div>
+        <div style="font-size:12px;color:#bbb;line-height:1.75;">Every rep writes one name suggestion on a card. Anonymous. TL reads them all aloud. No laughing off any suggestion — every one gets a 20-second explanation of why it fits. The room starts to feel which names land.</div>
+      </div>
+
+      <div style="background:var(--s1);border:1px solid var(--border2);border-radius:12px;padding:16px;">
+        <div style="font-size:22px;font-weight:900;color:var(--tgtg);line-height:1;margin-bottom:6px;">4</div>
+        <div style="font-size:11px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-family:'DM Mono',monospace;">10 min · The shortlist debate</div>
+        <div style="font-size:12px;color:#bbb;line-height:1.75;">TL identifies the 3–4 names that got the most energy. Open debate: <strong style="color:var(--text);">"What does this name say about us? What does it not say?"</strong> Not a vote yet — a conversation. The team should be able to articulate why the name fits, not just that they like it.</div>
+      </div>
+
+      <div style="background:var(--s1);border:1px solid var(--border2);border-radius:12px;padding:16px;">
+        <div style="font-size:22px;font-weight:900;color:var(--tgtg);line-height:1;margin-bottom:6px;">5</div>
+        <div style="font-size:11px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-family:'DM Mono',monospace;">5 min · The commitment</div>
+        <div style="font-size:12px;color:#bbb;line-height:1.75;">The final name is chosen. Then the most important part: <strong style="color:var(--text);">"What does this name ask of us every day?"</strong> Each rep says one word. TL writes them all down. Those words become the team's values — written by them, owned by them.</div>
+      </div>
+
+      <div style="background:var(--s1);border:1px solid var(--border2);border-radius:12px;padding:16px;">
+        <div style="font-size:22px;font-weight:900;color:var(--tgtg);line-height:1;margin-bottom:6px;">6</div>
+        <div style="font-size:11px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-family:'DM Mono',monospace;">5 min · The reveal</div>
+        <div style="font-size:12px;color:#bbb;line-height:1.75;">TL brings the name to the all-team standup the next morning. Each team presents their name, their one-line reason, and the commitment word that goes with it. The Head of Indies hears all three together for the first time — and the competition between teams starts the moment the third name lands.</div>
+      </div>
+
+    </div>
+
+    <div style="background:rgba(0,0,0,.3);border-radius:10px;padding:14px;font-size:11px;color:#999;line-height:1.8;">
+      <strong style="color:var(--tgtg);">What you do before the session:</strong> Brief each TL separately on the format. Tell them the name must pass one test: <em style="color:var(--text);font-style:normal;">"Would you use this name when things are going badly, not just when they're going well?"</em> A name that only works when the team is winning isn't an identity — it's a mood. The names that stick are the ones people say through a hard Tuesday.<br><br>
+      <strong style="color:var(--tgtg);">What you do after:</strong> Put the three team names on the office screen, side by side, with the commitment words. That's the first thing everyone sees Monday morning. The competition starts when the names go live.
+    </div>
+  </div>
+
+  <!-- LIVE TEAM IDENTITY CARDS — editable -->
+  <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--tgtg);margin-bottom:14px;font-family:'DM Mono',monospace;">Team Identity Cards · Fill in after the session</div>
+
+  <div class="teams-grid" id="team-cards-grid">
+
+    <!-- TEAM ACQUISITION -->
+    <div class="team-card tc-acq" id="card-acq">
+      <div class="tc-header">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <input id="icon-acq" style="font-size:28px;width:40px;background:transparent;border:none;outline:none;cursor:pointer;" value="🎯" title="Click to change emoji">
+          <div style="flex:1;">
+            <div class="tc-code">Team · Acquisition</div>
+          </div>
+        </div>
+        <input id="name-acq" class="tc-name" style="background:transparent;border:none;outline:none;width:100%;font-size:20px;font-weight:900;letter-spacing:-.5px;color:var(--acq);font-family:'DM Sans',sans-serif;padding:0;margin-bottom:8px;" placeholder="Team name here…" value="">
+        <textarea id="tagline-acq" class="tc-tagline" style="background:transparent;border:none;outline:none;width:100%;font-size:12px;line-height:1.7;opacity:.85;resize:none;font-family:'DM Sans',sans-serif;color:inherit;min-height:80px;" placeholder="Their one-line reason — what they stand for in their own words…"></textarea>
+      </div>
+      <div class="tc-body">
+        <div class="tc-section">
+          <div class="tc-section-title">Commitment words</div>
+          <textarea id="values-acq" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;width:100%;padding:8px;font-size:11px;color:#bbb;line-height:1.7;resize:none;font-family:'DM Sans',sans-serif;min-height:60px;" placeholder="The words each rep said when you asked 'what does this name ask of us?' Add them here…"></textarea>
+        </div>
+        <div class="tc-section">
+          <div class="tc-section-title">What we stand for</div>
+          <div class="tc-item"><strong>High volume, high intent.</strong> 50+ meaningful dials a day. Close on the call. Onboard within 30 minutes to 2 hours.</div>
+          <div class="tc-item"><strong>Discovery before pitch.</strong> We know the owner's quiet period before we dial. We never open with the product.</div>
+          <div class="tc-item"><strong>Team target over personal glory.</strong> No sandbagging. Every rep contributes every week. We go again on day 1.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEAM ACCOUNT MANAGEMENT -->
+    <div class="team-card tc-am" id="card-am">
+      <div class="tc-header">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <input id="icon-am" style="font-size:28px;width:40px;background:transparent;border:none;outline:none;cursor:pointer;" value="🤝" title="Click to change emoji">
+          <div style="flex:1;">
+            <div class="tc-code">Team · Account Management</div>
+          </div>
+        </div>
+        <input id="name-am" class="tc-name" style="background:transparent;border:none;outline:none;width:100%;font-size:20px;font-weight:900;letter-spacing:-.5px;color:var(--am);font-family:'DM Sans',sans-serif;padding:0;margin-bottom:8px;" placeholder="Team name here…" value="">
+        <textarea id="tagline-am" class="tc-tagline" style="background:transparent;border:none;outline:none;width:100%;font-size:12px;line-height:1.7;opacity:.85;resize:none;font-family:'DM Sans',sans-serif;color:inherit;min-height:80px;" placeholder="Their one-line reason — what they stand for in their own words…"></textarea>
+      </div>
+      <div class="tc-body">
+        <div class="tc-section">
+          <div class="tc-section-title">Commitment words</div>
+          <textarea id="values-am" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;width:100%;padding:8px;font-size:11px;color:#bbb;line-height:1.7;resize:none;font-family:'DM Sans',sans-serif;min-height:60px;" placeholder="The words each rep said when you asked 'what does this name ask of us?' Add them here…"></textarea>
+        </div>
+        <div class="tc-section">
+          <div class="tc-section-title">What we stand for</div>
+          <div class="tc-item"><strong>Proactive before reactive.</strong> Every partner on a 6-week contact cadence. No account goes dark without a conversation first.</div>
+          <div class="tc-item"><strong>Revenue protection is revenue creation.</strong> Keeping a partner is worth 6 acquisition calls. We know our retention economics.</div>
+          <div class="tc-item"><strong>Upsell is service.</strong> "Would a Thursday morning slot make sense?" That's not a sales call. That's a great account manager.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEAM GROWTH -->
+    <div class="team-card tc-growth" id="card-growth">
+      <div class="tc-header">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <input id="icon-growth" style="font-size:28px;width:40px;background:transparent;border:none;outline:none;cursor:pointer;" value="🚀" title="Click to change emoji">
+          <div style="flex:1;">
+            <div class="tc-code">Team · Growth</div>
+          </div>
+        </div>
+        <input id="name-growth" class="tc-name" style="background:transparent;border:none;outline:none;width:100%;font-size:20px;font-weight:900;letter-spacing:-.5px;color:var(--growth);font-family:'DM Sans',sans-serif;padding:0;margin-bottom:8px;" placeholder="Team name here…" value="">
+        <textarea id="tagline-growth" class="tc-tagline" style="background:transparent;border:none;outline:none;width:100%;font-size:12px;line-height:1.7;opacity:.85;resize:none;font-family:'DM Sans',sans-serif;color:inherit;min-height:80px;" placeholder="Their one-line reason — what they stand for in their own words…"></textarea>
+      </div>
+      <div class="tc-body">
+        <div class="tc-section">
+          <div class="tc-section-title">Commitment words</div>
+          <textarea id="values-growth" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;width:100%;padding:8px;font-size:11px;color:#bbb;line-height:1.7;resize:none;font-family:'DM Sans',sans-serif;min-height:60px;" placeholder="The words each rep said when you asked 'what does this name ask of us?' Add them here…"></textarea>
+        </div>
+        <div class="tc-section">
+          <div class="tc-section-title">What we stand for</div>
+          <div class="tc-item"><strong>Complexity is our advantage.</strong> Multi-site deals take longer. We build the relationships others walked away from.</div>
+          <div class="tc-item"><strong>Non-food is our frontier.</strong> Florists, delis, artisan producers. We're building the model that doesn't exist yet.</div>
+          <div class="tc-item"><strong>Every win is a case study.</strong> We document everything. The playbooks we write become the curriculum for the whole function.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SAVE / COPY -->
+  <div style="display:flex;gap:10px;margin-bottom:40px;flex-wrap:wrap;">
+    <button onclick="saveCards()" style="padding:10px 20px;background:var(--tgtg);border:none;border-radius:8px;color:#000;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:800;cursor:pointer;">Save team names</button>
+    <button onclick="copyCards()" style="padding:10px 20px;background:transparent;border:1px solid var(--border2);border-radius:8px;color:#888;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;">Copy all three to clipboard</button>
+    <button onclick="clearCards()" style="padding:10px 20px;background:transparent;border:1px solid var(--border2);border-radius:8px;color:#555;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;">Clear (before session)</button>
+  </div>
+
+  <script>
+  // Persistence for team name cards
+  var FIELDS = ['icon-acq','name-acq','tagline-acq','values-acq','icon-am','name-am','tagline-am','values-am','icon-growth','name-growth','tagline-growth','values-growth'];
+  function saveCards(){
+    FIELDS.forEach(function(id){
+      var el = document.getElementById(id);
+      if(el) localStorage.setItem('tgtg_team_'+id, el.value||el.tagName==='INPUT'?el.value:'');
+    });
+    var btn = event.target;
+    btn.textContent = 'Saved ✓';
+    setTimeout(function(){btn.textContent='Save team names';},1800);
+  }
+  function loadCards(){
+    FIELDS.forEach(function(id){
+      var el = document.getElementById(id);
+      var saved = localStorage.getItem('tgtg_team_'+id);
+      if(el && saved !== null) el.value = saved;
+    });
+  }
+  function clearCards(){
+    if(!confirm('Clear all team names? This cannot be undone.')) return;
+    FIELDS.forEach(function(id){
+      var el = document.getElementById(id);
+      if(el){ el.value = ''; localStorage.removeItem('tgtg_team_'+id); }
+    });
+  }
+  function copyCards(){
+    var lines = [
+      '**Too Good To Go · Team Identity Cards**\n',
+      '**Team Acquisition · ' + (document.getElementById('icon-acq').value||'') + ' ' + (document.getElementById('name-acq').value||'[Name TBC]') + '**',
+      document.getElementById('tagline-acq').value||'[Tagline TBC]',
+      'Commitment: ' + (document.getElementById('values-acq').value||'[TBC]'),
+      '',
+      '**Team Account Management · ' + (document.getElementById('icon-am').value||'') + ' ' + (document.getElementById('name-am').value||'[Name TBC]') + '**',
+      document.getElementById('tagline-am').value||'[Tagline TBC]',
+      'Commitment: ' + (document.getElementById('values-am').value||'[TBC]'),
+      '',
+      '**Team Growth · ' + (document.getElementById('icon-growth').value||'') + ' ' + (document.getElementById('name-growth').value||'[Name TBC]') + '**',
+      document.getElementById('tagline-growth').value||'[Tagline TBC]',
+      'Commitment: ' + (document.getElementById('values-growth').value||'[TBC]'),
+    ];
+    navigator.clipboard.writeText(lines.join('\n')).then(function(){
+      var btn = event.target;
+      btn.textContent = 'Copied ✓';
+      setTimeout(function(){btn.textContent='Copy all three to clipboard';},1800);
+    });
+  }
+  document.addEventListener('DOMContentLoaded', loadCards);
+  </script>
+
+  <!-- COMPETITION MECHANICS -->
+  <div class="sep"></div>
+  <div class="section-eye">Competition & Incentives</div>
+  <div class="section-h2">The formats that<br>drive the culture.</div>
+  <div class="section-sub">Competition works when it's fair, visible, and tied to something that matters. Every format below is designed for a phone-first team where volume and quality both count — and where individual wins contribute to team outcomes, not just personal glory.</div>
+
+  <div class="comp-grid">
+
+    <div class="comp-card">
+      <div class="comp-icon">⚡</div>
+      <div class="comp-name">The Daily Dial Sprint</div>
+      <div class="comp-desc">First to 15 meaningful conversations in a day. Shared on screen. Counted live. No prize needed — the visibility is the competition.</div>
+      <div class="comp-mechanics">
+        <div class="cm-title">How it works</div>
+        <div class="cm-item"><strong>Start:</strong> Standup. Everyone's count starts at zero.</div>
+        <div class="cm-item"><strong>Rules:</strong> Meaningful conversation = owner answered, you had a discovery exchange (not just a callback). Rep self-reports. TL spot-checks.</div>
+        <div class="cm-item"><strong>Visible:</strong> Live count on the office screen, updated every hour. Team aggregate and individual leaderboard.</div>
+        <div class="cm-item"><strong>Win:</strong> First to 15 gets early finishes on Friday. The team record (most collective conversations in a single day) is tracked and chased.</div>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-icon">🏆</div>
+      <div class="comp-name">Monthly Team Championship</div>
+      <div class="comp-desc">All three teams compete on a single metric that changes monthly. Announced at the start of the month. Results at the last Friday standup. Winning team gets the trophy, a lunch, and the right to set next month's challenge.</div>
+      <div class="comp-mechanics">
+        <div class="cm-title">Monthly metric rotation</div>
+        <div class="cm-item"><strong>Month 1:</strong> Bags agreed (Acquisition wins this most often — that's fine. They know it.)</div>
+        <div class="cm-item"><strong>Month 2:</strong> Partner retention rate (AM's home turf — let them win)</div>
+        <div class="cm-item"><strong>Month 3:</strong> Average deal value closed (Growth's advantage)</div>
+        <div class="cm-item"><strong>Key rule:</strong> No metric that only one team can ever win. Rotate every quarter so no team is structurally disadvantaged.</div>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-icon">🎙️</div>
+      <div class="comp-name">Call of the Week</div>
+      <div class="comp-desc">Every Friday, the team nominates the best call of the week. Played (with permission) in the all-team standup. Rep explains what they did and why. The technique gets named and added to the Gold Standard.</div>
+      <div class="comp-mechanics">
+        <div class="cm-title">Format</div>
+        <div class="cm-item"><strong>Nomination:</strong> Any rep can nominate any call (including their own). TL selects two finalists.</div>
+        <div class="cm-item"><strong>Play:</strong> 60–90 second clip. The specific technique isolated and named: "The Quiet Period Mirror," "The Data-First Open," "The Three-Word Close."</div>
+        <div class="cm-item"><strong>Legacy:</strong> Winning call added to the Gold Standard library by name. The rep who originated it owns that technique permanently in the team culture.</div>
+        <div class="cm-item"><strong>Why:</strong> Public recognition + institutional knowledge. Both happen at once.</div>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-icon">🎯</div>
+      <div class="comp-name">Blitz Week (Quarter-End)</div>
+      <div class="comp-desc">The last week of each quarter. All three teams pause individual targets and work toward one number: total bags agreed for the quarter. Every deal matters. No sandbagging. No hoarding. The collective number is the only number.</div>
+      <div class="comp-mechanics">
+        <div class="cm-title">Rules of Blitz Week</div>
+        <div class="cm-item"><strong>Target:</strong> Set on Monday — visible to all three teams on a shared board. Updated live.</div>
+        <div class="cm-item"><strong>Sandbagging rule enforced:</strong> Any rep who was holding a deal from the previous week that closes in Blitz Week is recognised publicly — but not praised. The deal counts, but the pattern is noted.</div>
+        <div class="cm-item"><strong>Win reward:</strong> If the team hits the collective quarter target, the whole floor gets a shared experience (lunch, event, half-day Friday). All three teams win together or lose together.</div>
+        <div class="cm-item"><strong>The message:</strong> We are one commercial organisation. The team split is for coaching, not for competition against each other.</div>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-icon">🌟</div>
+      <div class="comp-name">The Rookie Rocket</div>
+      <div class="comp-desc">Specifically for reps in weeks 1–10 of their ramp. Separate leaderboard. Separate recognition. Competing against their own previous week's score — never against the established reps.</div>
+      <div class="comp-mechanics">
+        <div class="cm-title">Why this exists</div>
+        <div class="cm-item"><strong>Problem:</strong> A new rep on the same leaderboard as Marco Riley gets demoralised by week 2 and stops trying.</div>
+        <div class="cm-item"><strong>Solution:</strong> Their own chart. Their own week-on-week improvement tracked visibly. Their own recognition at standup.</div>
+        <div class="cm-item"><strong>Transition:</strong> When they hit the ramp gate and graduate, they join the main leaderboard. That transition is celebrated — it's the moment they become part of the team.</div>
+        <div class="cm-item"><strong>The signal it sends:</strong> We invest in the people we hire. Your first 10 weeks are about you growing, not proving yourself against veterans.</div>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-icon">🚫</div>
+      <div class="comp-name">Anti-Sandbagging Protocol</div>
+      <div class="comp-desc">Sandbagging — holding deals to carry into the next period — kills team culture faster than anything else. Here's how we prevent it and what we do when it happens.</div>
+      <div class="comp-mechanics">
+        <div class="cm-title">The system</div>
+        <div class="cm-item"><strong>Rule 1:</strong> Any deal at Stage 3 (offer window agreed) at the end of the month that doesn't close gets reviewed by the TL on day 1 of the new month. No exceptions.</div>
+        <div class="cm-item"><strong>Rule 2:</strong> Reps who consistently close above target in the last week of a month and below in the first week are flagged. This is a pattern, not a coincidence.</div>
+        <div class="cm-item"><strong>Consequence:</strong> No punishment — but public acknowledgement. "That deal carried across — it counts for last month's number, not this month's." The transparency is the deterrent.</div>
+        <div class="cm-item"><strong>Culture:</strong> The team's goal requires everyone's full output every week. One person sandbagging hurts everyone. The peer culture enforces this more effectively than any manager.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ACCOUNTABILITY -->
+  <div class="sep"></div>
+  <div class="section-eye">Accountability System</div>
+  <div class="section-h2">Everyone contributes.<br>Nobody hides.</div>
+  <div class="section-sub">Accountability in a phone sales team isn't about surveillance. It's about visibility — everyone can see the numbers, everyone understands the team goal, and everyone knows that their output affects the person sitting next to them.</div>
+
+  <div class="accountability-grid">
+    <div class="acc-card">
+      <div class="acc-title">Visible by Default</div>
+      <div class="acc-item"><strong>Daily leaderboard on the office screen.</strong> Updated at standup and again at 3pm. Not punitive — ambient. The rep who can see they're third is more motivated than the rep who doesn't know where they stand.</div>
+      <div class="acc-item"><strong>Team target progress bar.</strong> How many bags has the team agreed this week vs. target? Visible to all three teams on the shared Slack channel. Updated daily by TLs.</div>
+      <div class="acc-item"><strong>Weekly trajectory, not just weekly number.</strong> We track week-on-week changes, not just this week's absolute. A rep at 8 bags/week who was at 5 last week is doing better than a rep at 10 who was at 12. Trajectory matters.</div>
+    </div>
+
+    <div class="acc-card">
+      <div class="acc-title">The Team Goal Contract</div>
+      <div class="acc-item"><strong>Set at the start of each month, together.</strong> TL proposes the target, team stress-tests it, manager confirms. Everyone has contributed to the number they're accountable to. No number handed down from a spreadsheet.</div>
+      <div class="acc-item"><strong>No individual who hits target while the team misses gets to celebrate individually.</strong> This is the hardest culture shift. Excellent individual performance in service of a team miss is not a win. We celebrate when the team hits — not when individuals do.</div>
+      <div class="acc-item"><strong>The team member who covers for a struggling rep is recognised specifically.</strong> Helping a peer re-engage a stalled deal, coaching them on an objection before their next call — this is recognised publicly, named specifically.</div>
+    </div>
+
+    <div class="acc-card">
+      <div class="acc-title">Mid-Week Check-In (Wednesday 3pm)</div>
+      <div class="acc-item"><strong>Every TL posts a mid-week number in the shared channel.</strong> Not a narrative. Three numbers: dials, conversations, bags. Where are we against the weekly target? What's needed in the last two days?</div>
+      <div class="acc-item"><strong>If a team is 30%+ below pace on Wednesday, the Head of Indies is in their standup Thursday AM.</strong> Not to diagnose publicly — to understand privately with the TL. The team sees visible engagement, not visible alarm.</div>
+      <div class="acc-item"><strong>If a rep is below pace Wednesday who was fine Monday:</strong> 5-minute check-in call. Not "what's going on with your numbers" — "how are you getting on today?" Diagnose before you escalate.</div>
+    </div>
+
+    <div class="acc-card">
+      <div class="acc-title">The Friday Close</div>
+      <div class="acc-item"><strong>Friday standup is the week's accountability moment — but led with wins, not misses.</strong> Start with the call of the week (recognition). Then the team number vs. target. Then: what do we carry into Monday, and what do we need to finish today?</div>
+      <div class="acc-item"><strong>Chelsea's Friday brief includes the team's collective number.</strong> Not individual rep data — the team's performance against target. Chelsea sees the function as a whole. Individual coaching conversations stay internal.</div>
+      <div class="acc-item"><strong>End of week: every rep commits to one specific action for Monday AM.</strong> Written, not verbal. Shared in the team channel Sunday night. The act of writing it increases follow-through by 40%.</div>
+    </div>
+  </div>
+
+  <!-- ONBOARDING SPEED -->
+  <div class="sep"></div>
+  <div class="section-eye">Close to Live — Same Call</div>
+  <div class="section-h2">30 minutes to onboard.<br>2 hours maximum.</div>
+  <div class="section-sub">Closing a partner is the beginning, not the end. The goal is to have a magic bag live before the rep hangs up — or within 2 hours of the initial call. Every hour between close and first live bag is an hour of food waste we didn't prevent.</div>
+
+  <div class="speed-grid">
+    <div class="speed-step">
+      <div class="ss-num">0–5</div>
+      <div class="ss-label">Minutes · Close</div>
+      <div class="ss-desc">Owner says yes. Rep confirms the offer window verbally: day, time, bag count, bag value. <strong>Repeat it back.</strong> "So that's Monday to Wednesday, 12–2pm, 8 bags at £4.50. Yes?" Owner confirms. Move immediately.</div>
+    </div>
+    <div class="speed-step">
+      <div class="ss-num">5–15</div>
+      <div class="ss-label">Minutes · Portal</div>
+      <div class="ss-desc">Rep walks owner through the TGTG partner app while still on the phone. Account creation or login. <strong>Offer configured live.</strong> Don't let them do it alone after the call — they won't. Do it together, right now.</div>
+    </div>
+    <div class="speed-step">
+      <div class="ss-num">15–30</div>
+      <div class="ss-label">Minutes · First Bag Live</div>
+      <div class="ss-desc">The first magic bag offer goes live in the app while the rep is still on the call. Owner can see it. Rep confirms it's visible. <strong>Screenshot sent to the team channel: "Live! 🟢"</strong> This is the win that gets celebrated.</div>
+    </div>
+    <div class="speed-step">
+      <div class="ss-num">30–120</div>
+      <div class="ss-label">Minutes · Warm Handover</div>
+      <div class="ss-desc">Rep introduces the Account Manager by name via WhatsApp — not a generic email. AM sends a voice note to the owner in the first 2 hours. <strong>The owner feels looked after from the first moment.</strong> This is what prevents early churn.</div>
+    </div>
+    <div class="speed-step">
+      <div class="ss-num">Day 1</div>
+      <div class="ss-label">First Redemption Target</div>
+      <div class="ss-desc">First magic bag sold within 24–48 hours. AM monitors and calls if it doesn't happen. <strong>A partner with no redemption in the first 72 hours is 3× more likely to churn.</strong> The AM team knows this. They act before the data confirms the problem.</div>
+    </div>
+    <div class="speed-step">
+      <div class="ss-num">Day 7</div>
+      <div class="ss-label">First Check-In</div>
+      <div class="ss-desc">AM calls on day 7. Not to check if they're OK — to celebrate: "You've had X bags sold this week. Here's what your earning looks like." <strong>Make them proud of what they've joined.</strong> This is retention, not service.</div>
+    </div>
+  </div>
+
+  <!-- RESILIENCE & MOTIVATION -->
+  <div class="sep"></div>
+  <div class="section-eye">Picking Yourself Up</div>
+  <div class="section-h2">Three bad days.<br>What the manager does.</div>
+  <div class="section-sub">Phone sales rejection is constant. The difference between a rep who bounces and one who spirals is almost entirely about what happens in the 60 minutes after the third consecutive "no." Here's the practical system.</div>
+
+  <div class="resilience-box">
+    <div class="acc-title" style="color:var(--tgtg);margin-bottom:14px;">Practical Scripts — What You Actually Say</div>
+
+    <div class="rb-scenario">
+      <div class="rb-trigger">Day 1 of a bad run — rep had 3 rejections before lunch</div>
+      <div class="rb-response">"I noticed the morning was tough. Before you make the next call — tell me: what was one thing the second owner said that was interesting, even if they said no?" Get them talking about the customer, not themselves. Reset the frame from "I'm failing" to "I'm learning."</div>
+    </div>
+
+    <div class="rb-scenario">
+      <div class="rb-trigger">Day 2 — rep is quiet in the standup, not engaging</div>
+      <div class="rb-response">Don't address it in public. Walk to their desk at 11am: "How's the day going — honestly?" Give them 2 minutes to talk. Then: "Let's make one call together. I'll listen. You dial." The act of someone being alongside them removes the isolation that makes it spiral.</div>
+    </div>
+
+    <div class="rb-scenario">
+      <div class="rb-trigger">Day 3 — rep's dial count has dropped 40% from their baseline</div>
+      <div class="rb-response">"I'm not going to ask you to hit your number today. I'm going to ask you to make one call you actually care about — find a venue you think really needs TGTG and call them like you're the first person who's ever told them about it." Remove the target. Get them back in the mission. Then rebuild the volume.</div>
+    </div>
+
+    <div class="rb-scenario">
+      <div class="rb-trigger">Rep says "I don't think this role is for me"</div>
+      <div class="rb-response">Don't rescue immediately. Ask: "When was the last time you had a call that felt good?" They'll name one. Then: "That person. That call. That's what you're actually capable of. What was different about that day?" Return them to their own evidence. They convinced themselves they could do it once — you're helping them remember how.</div>
+    </div>
+
+    <div class="rb-scenario">
+      <div class="rb-trigger">The whole team has a bad Tuesday (lowest dial day)</div>
+      <div class="rb-response">Wednesday standup: Play the best call from last week — not this week. Name the technique. Name the rep. Then: "That's what this team sounds like when it's in flow. We had a hard Tuesday. That happens. Today we do it again." Don't pretend Tuesday didn't happen. Acknowledge it, name the best version of the team, and move on.</div>
+    </div>
+  </div>
+
+  <!-- STANDUP SCRIPT -->
+  <div class="sep"></div>
+  <div class="section-eye">The High-Activity Standup</div>
+  <div class="section-h2">20 minutes.<br>Energy-setting, not reporting.</div>
+
+  <div class="script-box">
+    <div class="sb-hdr">
+      <div class="sb-title">Monday AM · Acquisition Team · 09:00</div>
+      <button class="copy-btn" onclick="copyScript()">Copy script</button>
+    </div>
+    <div class="sb-body" id="standup-script">
+<strong>[Open — no preamble]</strong>
+"Good morning. New week. Let's go.
+
+Here's where we are against target: [X bags last week, Y bags this week so far]. The gap is Z.
+
+<em>[Play the call of the week clip — 60 seconds max]</em>
+
+That's [Rep Name]. Tuesday afternoon. What did they do? They asked about the quiet period before they said a word about us. That's the technique. That's what I want to hear in every call today.
+
+<strong>[Team goal moment]</strong>
+Our team target this week is [X bags]. That's not my target. That's ours. If someone's having a hard morning, cover for them — call one extra venue, offer to listen in on their next call. This is a team game.
+
+<strong>[The accountability ask]</strong>
+One commitment from each of you before we close. Not 'I'll try harder.' Something specific: a venue name, a callback time, a segment you're targeting. [Name], what's yours?
+
+<em>[Go round the room — 15 seconds per rep, no elaboration needed]</em>
+
+<strong>[Close]</strong>
+Thirty dials by noon. Fourteen meaningful conversations by 3pm. One closed bag before 5pm. Every rep. That's the standard.
+
+We do this because every owner who says yes stops throwing food away tomorrow. That's not a slogan. That's literally what happens.
+
+Let's go."</div>
+  </div>
+
+  <div class="moment-grid">
+    <div class="moment">
+      <div class="moment-icon">🎯</div>
+      <div>
+        <div class="moment-title">The Mission Reset — for when the team forgets why they're calling</div>
+        <div class="moment-text">Every rejection is a restaurant that's still wasting food tonight. Every yes is a restaurant that stops. <strong>The dials aren't the job — the outcomes are.</strong> The number on the leaderboard is just how we keep score of something that actually matters.</div>
+      </div>
+    </div>
+    <div class="moment">
+      <div class="moment-icon">🔥</div>
+      <div>
+        <div class="moment-title">The Comparison That Drives Volume</div>
+        <div class="moment-text">A rep who makes 30 dials and has 6 meaningful conversations is more valuable than one who makes 50 dials and has 2. <strong>We are training for quality conversations at high volume</strong> — not just high volume. The leaderboard tracks both. So does the coaching.</div>
+      </div>
+    </div>
+    <div class="moment">
+      <div class="moment-icon">🏅</div>
+      <div>
+        <div class="moment-title">Recognition That Lands</div>
+        <div class="moment-text">Generic praise ("great work this week!") does nothing. Specific praise ("When you asked 'what does a good Wednesday look like for you?' before pitching — that's exactly why they said yes") creates a moment the rep carries for a week. <strong>Always specific. Always named. Always public.</strong></div>
+      </div>
+    </div>
+    <div class="moment">
+      <div class="moment-icon">📞</div>
+      <div>
+        <div class="moment-title">The 3pm Reset Call</div>
+        <div class="moment-text">At 3pm every afternoon, the TL posts in the team channel: "Bags agreed today: X. Two hours left. What's one more?" It's not a pressure message. It's a <strong>team pulse</strong> — a reminder that the day isn't over and the collective number still needs everyone's contribution.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note"><strong>The culture you're building:</strong> A team that dials because they believe in what they're doing, competes because it's fun and fair, covers for each other because the goal is shared, and picks themselves up because the environment makes that easier than giving up. That's not motivational theory. That's what you create through staggered standups, visible leaderboards, specific recognition, and being on the floor when they're having a hard Tuesday.</div>
+</div>
+
+<script>
+function copyScript() {
+  var text = document.getElementById('standup-script').innerText;
+  navigator.clipboard.writeText(text).then(function(){
+    var btn = document.querySelector('.copy-btn');
+    btn.textContent = 'Copied ✓';
+    btn.classList.add('copied');
+    setTimeout(function(){btn.textContent='Copy script';btn.classList.remove('copied');},2000);
+  });
+}
+</script>
+</body>
+</html>
