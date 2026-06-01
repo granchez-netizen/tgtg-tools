@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Too Good To Go · Partner Revival</title>
+<link rel="stylesheet" href="/brand_tgt.css">
+<style>
+:root{--tgtg:#6DBE4F;--tgtgd:rgba(109,190,79,.08);--tgtgl:rgba(109,190,79,.18);--dark:#0a0a0a;--s1:#141414;--s2:#1a1a1a;--border:#2a2a2a;--text:#f5f5f5;--muted:#777;--danger:#EF4444;--warn:#FFD000;--good:#22C55E;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--text);-webkit-font-smoothing:antialiased;}
+.hdr{background:#111;border-bottom:1px solid var(--border);padding:13px 24px 13px 60px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;}
+.brand{font-size:13px;font-weight:800;letter-spacing:-.3px;}.brand em{color:var(--tgtg);font-style:normal;}
+.hdr-r{font-size:11px;color:var(--muted);}
+.wrap{max-width:900px;margin:0 auto;padding:24px 24px 80px;}
+.eye{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--tgtg);margin-bottom:6px;}
+.h1{font-size:28px;font-weight:900;letter-spacing:-.8px;line-height:1.1;margin-bottom:6px;}
+.h1 em{color:var(--tgtg);font-style:normal;}
+.sub{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:24px;}
+
+/* Input panel */
+.input-panel{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:20px;}
+.panel-title{font-size:10px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;}
+.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+@media(max-width:600px){.field-grid{grid-template-columns:1fr;}}
+.field{display:flex;flex-direction:column;gap:5px;}
+.field label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);}
+.field input,.field select,.field textarea{background:#0f0f0f;border:1.5px solid var(--border);border-radius:8px;color:var(--text);font-family:inherit;font-size:13px;padding:9px 12px;transition:border-color .15s;outline:none;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--tgtg);}
+.field textarea{resize:vertical;min-height:70px;line-height:1.6;}
+.field select option{background:#1a1a1a;}
+.field.full{grid-column:1/-1;}
+.generate-btn{width:100%;padding:12px;background:var(--tgtg);border:none;border-radius:9px;color:#000;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer;transition:opacity .15s;margin-top:4px;}
+.generate-btn:hover{opacity:.88;}
+.generate-btn:disabled{opacity:.4;cursor:not-allowed;}
+
+/* Output sections */
+.output{display:none;}
+.output.on{display:block;}
+
+/* Status indicator */
+.status-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;}
+.status-cell{background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;}
+.sc-n{font-size:22px;font-weight:900;letter-spacing:-1px;line-height:1;}
+.sc-l{font-size:9px;color:var(--muted);margin-top:5px;font-weight:600;text-transform:uppercase;}
+.sc-n.danger{color:var(--danger);}
+.sc-n.warn{color:var(--warn);}
+.sc-n.good{color:var(--good);}
+@media(max-width:600px){.status-bar{grid-template-columns:1fr 1fr;}}
+
+/* Diagnosis */
+.diag-box{border-radius:12px;padding:16px;margin-bottom:14px;}
+.diag-box.red{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.18);}
+.diag-box.yellow{background:rgba(255,208,0,.06);border:1px solid rgba(255,208,0,.18);}
+.diag-box.green{background:rgba(109,190,79,.06);border:1px solid rgba(109,190,79,.18);}
+.db-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;}
+.db-label.red{color:var(--danger);}
+.db-label.yellow{color:var(--warn);}
+.db-label.green{color:var(--tgtg);}
+.db-text{font-size:12px;color:#ccc;line-height:1.7;}
+.db-text strong{color:var(--text);}
+
+/* Decision tree */
+.decision-tree{background:var(--s1);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px;}
+.dt-hdr{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.dt-title{font-size:11px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;}
+.dt-badge{font-size:9px;font-weight:700;padding:2px 8px;border-radius:4px;}
+.badge-red{background:rgba(239,68,68,.15);color:var(--danger);}
+.badge-yellow{background:rgba(255,208,0,.12);color:var(--warn);}
+.badge-green{background:rgba(109,190,79,.12);color:var(--tgtg);}
+.option{padding:14px 16px;border-bottom:1px solid #1a1a1a;cursor:pointer;}
+.option:last-child{border-bottom:none;}
+.option:hover{background:rgba(109,190,79,.03);}
+.option.selected{background:rgba(109,190,79,.06);border-left:3px solid var(--tgtg);}
+.opt-hdr{display:flex;align-items:center;gap:10px;margin-bottom:0;}
+.opt-tag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;flex-shrink:0;}
+.opt-name{font-size:12px;font-weight:700;}
+.opt-detail{display:none;margin-top:10px;font-size:11px;color:#bbb;line-height:1.7;}
+.opt-detail.on{display:block;}
+.opt-detail strong{color:var(--text);}
+.opt-economics{background:#0f0f0f;border-radius:6px;padding:10px;margin-top:8px;font-size:11px;}
+.oe-row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #1a1a1a;}
+.oe-row:last-child{border-bottom:none;}
+.oe-l{color:var(--muted);}
+.oe-r{font-weight:600;}
+.oe-r.green{color:var(--good);}
+.oe-r.red{color:var(--danger);}
+
+/* Script generator */
+.script-box{background:var(--s1);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px;}
+.sb-hdr{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.sb-title{font-size:11px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;}
+.copy-btn{padding:5px 12px;background:rgba(109,190,79,.12);border:1px solid rgba(109,190,79,.25);border-radius:6px;color:var(--tgtg);font-size:10px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s;}
+.copy-btn:hover{background:rgba(109,190,79,.22);}
+.copy-btn.copied{background:rgba(34,197,94,.15);border-color:rgba(34,197,94,.3);color:var(--good);}
+.script-body{padding:16px;font-size:12px;color:#ccc;line-height:1.9;white-space:pre-wrap;}
+.script-body em{color:var(--tgtg);font-style:normal;font-weight:600;}
+.script-body strong{color:var(--text);}
+
+/* Timeline */
+.timeline{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px;}
+.tl-title{font-size:10px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;}
+.tl-item{display:flex;gap:12px;padding:8px 0;border-bottom:1px solid #1a1a1a;font-size:11px;}
+.tl-item:last-child{border-bottom:none;}
+.tl-day{width:50px;font-weight:700;color:var(--tgtg);flex-shrink:0;}
+.tl-action{color:#bbb;line-height:1.6;}
+.tl-action strong{color:var(--text);}
+
+/* Risk badge at top */
+.risk-indicator{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;margin-bottom:20px;}
+.ri-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.ri-text{font-size:12px;font-weight:600;}
+.risk-critical{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);}
+.risk-critical .ri-dot{background:var(--danger);}
+.risk-critical .ri-text{color:var(--danger);}
+.risk-high{background:rgba(255,208,0,.06);border:1px solid rgba(255,208,0,.18);}
+.risk-high .ri-dot{background:var(--warn);}
+.risk-high .ri-text{color:var(--warn);}
+.risk-medium{background:rgba(109,190,79,.06);border:1px solid rgba(109,190,79,.18);}
+.risk-medium .ri-dot{background:var(--tgtg);}
+.risk-medium .ri-text{color:var(--tgtg);}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="brand"><em>Too Good</em> To Go · Partner Revival</div>
+  <div class="hdr-r">At-risk accounts · Systematic re-engagement</div>
+</div>
+
+<div class="wrap">
+  <div class="eye">Partner Revival Engine</div>
+  <div class="h1">Save the account.<br><em>Or plan the exit.</em></div>
+  <div class="sub">Enter the partner details. Get a root-cause diagnosis, 3-option decision tree with economics, a re-engagement script, and a 14-day action timeline. No dark accounts. No surprises.</div>
+
+  <!-- INPUT PANEL -->
+  <div class="input-panel">
+    <div class="panel-title">Partner Details</div>
+    <div class="field-grid">
+      <div class="field">
+        <label>Venue Name</label>
+        <input type="text" id="venue-name" placeholder="e.g. La Cour, King's Road">
+      </div>
+      <div class="field">
+        <label>Cuisine / Segment</label>
+        <select id="segment">
+          <option value="">Select segment</option>
+          <option value="fine-dining">Fine Dining / French / Italian</option>
+          <option value="ethnic">Ethnic (Indian / Thai / Vietnamese)</option>
+          <option value="brunch">Brunch / Café</option>
+          <option value="qsr">Quick Service (QSR)</option>
+          <option value="pub">Pub / Bar</option>
+          <option value="bakery">Bakery / Deli</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Weeks Live on TGTG</label>
+        <input type="number" id="weeks-live" placeholder="e.g. 8" min="1">
+      </div>
+      <div class="field">
+        <label>Current Weekly Bookings</label>
+        <input type="number" id="current-bookings" placeholder="e.g. 2" min="0">
+      </div>
+      <div class="field">
+        <label>Projected Weekly Bookings (at launch)</label>
+        <input type="number" id="projected-bookings" placeholder="e.g. 6" min="1">
+      </div>
+      <div class="field">
+        <label>Average Bag Value (£)</label>
+        <input type="number" id="bag-value" placeholder="e.g. 4.50" step="0.50">
+      </div>
+      <div class="field">
+        <label>Commission Rate (%)</label>
+        <input type="number" id="commission" placeholder="e.g. 12" min="8" max="25">
+      </div>
+      <div class="field">
+        <label>Days Since Last Owner Contact</label>
+        <input type="number" id="days-dark" placeholder="e.g. 14" min="0">
+      </div>
+      <div class="field">
+        <label>Offer Type</label>
+        <select id="offer-type">
+          <option value="standard">Standard (time-limited)</option>
+          <option value="open">Open-ended</option>
+          <option value="seasonal">Seasonal / Promotional</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Days Until Offer Expires</label>
+        <input type="number" id="days-to-expiry" placeholder="e.g. 7 (or 0 if expired)" min="0">
+      </div>
+      <div class="field full">
+        <label>Owner's Last Known Sentiment</label>
+        <select id="sentiment">
+          <option value="engaged">Still engaged / asking questions</option>
+          <option value="cool">Cooling — responses slower</option>
+          <option value="silent">Gone silent / not responding</option>
+          <option value="negative">Expressed disappointment or frustration</option>
+          <option value="threatening">Threatening to leave / asked to cancel</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label>What Do You Think the Root Cause Is?</label>
+        <textarea id="root-cause" placeholder="e.g. Launched with too low a discount offer. Quiet periods not matching TGTG demand. Owner expected higher booking volume in first month."></textarea>
+      </div>
+    </div>
+    <button class="generate-btn" id="generate-btn" onclick="generate()">Generate Revival Plan →</button>
+  </div>
+
+  <!-- OUTPUT -->
+  <div class="output" id="output">
+
+    <div id="risk-indicator" class="risk-indicator risk-critical">
+      <div class="ri-dot"></div>
+      <div class="ri-text" id="risk-text">CRITICAL RISK — Immediate action required</div>
+    </div>
+
+    <!-- STATUS BAR -->
+    <div class="status-bar">
+      <div class="status-cell">
+        <div class="sc-n danger" id="stat-performance">—</div>
+        <div class="sc-l">Performance vs Target</div>
+      </div>
+      <div class="status-cell">
+        <div class="sc-n warn" id="stat-revenue">—</div>
+        <div class="sc-l">Monthly Revenue at Risk</div>
+      </div>
+      <div class="status-cell">
+        <div class="sc-n danger" id="stat-dark">—</div>
+        <div class="sc-l">Days Since Contact</div>
+      </div>
+      <div class="status-cell">
+        <div class="sc-n warn" id="stat-expiry">—</div>
+        <div class="sc-l">Days to Offer Expiry</div>
+      </div>
+    </div>
+
+    <!-- DIAGNOSIS -->
+    <div id="diagnosis-container"></div>
+
+    <!-- DECISION TREE -->
+    <div class="decision-tree">
+      <div class="dt-hdr">
+        <div class="dt-title">3-Option Decision Tree</div>
+        <div class="dt-badge badge-yellow">Pick one before the call</div>
+      </div>
+
+      <div class="option" id="opt-extend" onclick="selectOption('extend')">
+        <div class="opt-hdr">
+          <span class="opt-tag badge-green">Option A</span>
+          <span class="opt-name">Extend the Offer (Save)</span>
+        </div>
+        <div class="opt-detail" id="detail-extend"></div>
+      </div>
+
+      <div class="option" id="opt-renegotiate" onclick="selectOption('renegotiate')">
+        <div class="opt-hdr">
+          <span class="opt-tag badge-yellow">Option B</span>
+          <span class="opt-name">Renegotiate the Economics</span>
+        </div>
+        <div class="opt-detail" id="detail-renegotiate"></div>
+      </div>
+
+      <div class="option" id="opt-exit" onclick="selectOption('exit')">
+        <div class="opt-hdr">
+          <span class="opt-tag badge-red">Option C</span>
+          <span class="opt-name">Plan a Graceful Exit</span>
+        </div>
+        <div class="opt-detail" id="detail-exit"></div>
+      </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <div class="script-box">
+      <div class="sb-hdr">
+        <div class="sb-title">Re-Engagement Script</div>
+        <button class="copy-btn" id="copy-script-btn" onclick="copyScript()">Copy Script</button>
+      </div>
+      <div class="script-body" id="script-body"></div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="timeline">
+      <div class="tl-title">14-Day Action Timeline</div>
+      <div id="timeline-body"></div>
+    </div>
+
+  </div>
+</div>
+
+<script src="/nav_tgt.js"></script>
+<script>
+var state = {};
+
+function generate(){
+  var venueName = document.getElementById('venue-name').value.trim() || 'The Venue';
+  var segment = document.getElementById('segment').value || 'other';
+  var weeksLive = parseInt(document.getElementById('weeks-live').value) || 8;
+  var currentBkgs = parseInt(document.getElementById('current-bookings').value) || 2;
+  var projBkgs = parseInt(document.getElementById('projected-bookings').value) || 6;
+  var bagValue = parseFloat(document.getElementById('bag-value').value) || 4.50;
+  var commission = parseFloat(document.getElementById('commission').value) || 12;
+  var daysDark = parseInt(document.getElementById('days-dark').value) || 0;
+  var offerType = document.getElementById('offer-type').value;
+  var daysToExpiry = parseInt(document.getElementById('days-to-expiry').value) || 14;
+  var sentiment = document.getElementById('sentiment').value;
+  var rootCause = document.getElementById('root-cause').value.trim();
+
+  state = {venueName,segment,weeksLive,currentBkgs,projBkgs,bagValue,commission,daysDark,offerType,daysToExpiry,sentiment,rootCause};
+
+  // Calc revenue
+  var weeklyRevenue = currentBkgs * bagValue;
+  var monthlyRevenue = weeklyRevenue * 4.3;
+  var monthlyCommission = monthlyRevenue * (commission/100);
+  var performancePct = Math.round((currentBkgs / projBkgs) * 100);
+  var annualAtRisk = monthlyCommission * 12;
+
+  // Risk level
+  var riskLevel = 'high';
+  if(performancePct < 40 || sentiment === 'threatening' || daysToExpiry <= 5) riskLevel = 'critical';
+  else if(performancePct >= 60 && sentiment !== 'negative' && daysDark < 14) riskLevel = 'medium';
+
+  // Update risk indicator
+  var ri = document.getElementById('risk-indicator');
+  var rt = document.getElementById('risk-text');
+  ri.className = 'risk-indicator risk-'+riskLevel;
+  if(riskLevel==='critical') rt.textContent = 'CRITICAL RISK — Immediate action required within 48 hours';
+  else if(riskLevel==='high') rt.textContent = 'HIGH RISK — Site visit or call required this week';
+  else rt.textContent = 'MEDIUM RISK — Re-engagement needed within 7 days';
+
+  // Update stats
+  document.getElementById('stat-performance').textContent = performancePct+'%';
+  document.getElementById('stat-performance').className = 'sc-n ' + (performancePct<50?'danger':performancePct<75?'warn':'good');
+  document.getElementById('stat-revenue').textContent = '£'+Math.round(monthlyCommission)+'/mo';
+  document.getElementById('stat-dark').textContent = daysDark+'d';
+  document.getElementById('stat-dark').className = 'sc-n ' + (daysDark>14?'danger':daysDark>7?'warn':'good');
+  document.getElementById('stat-expiry').textContent = daysToExpiry<=0 ? 'Expired' : daysToExpiry+'d';
+  document.getElementById('stat-expiry').className = 'sc-n ' + (daysToExpiry<=3?'danger':daysToExpiry<=7?'warn':'good');
+
+  // Diagnosis
+  var diagContainer = document.getElementById('diagnosis-container');
+  var diagHtml = '';
+
+  // Determine likely root causes
+  var causes = [];
+  if(performancePct < 40) causes.push({level:'red',title:'CRITICAL: Severely Under-performing vs Projection',text:'<strong>Only '+performancePct+'% of projected bookings</strong> — at '+currentBkgs+' bags/week vs '+projBkgs+' expected. This is either a demand mismatch (wrong offer timing/discount), a visibility issue (listing not optimised), or the owner hasn\'t properly set up their supply chain. <strong>Diagnosis priority:</strong> Ask the owner to show you their TGTG listing and last 4 weeks booking calendar on the first call.'});
+  else if(performancePct < 70) causes.push({level:'yellow',title:'ATTENTION: Underperforming — Needs Intervention',text:'At '+currentBkgs+' bags/week against a '+projBkgs+' projection, the account is at <strong>'+performancePct+'% of target</strong>. Without intervention, the owner will disengage. The booking volume may recover with offer window adjustments or marketing push.'});
+
+  if(daysDark > 14) causes.push({level:'red',title:'CRITICAL: Owner Gone Dark ('+daysDark+' days)',text:'No contact in '+daysDark+' days. Silence at this stage almost always signals a) owner has lost faith in the platform, b) owner is testing a competitor, or c) owner is simply overwhelmed. <strong>Action:</strong> Do not text or email first — call direct. Acknowledgement that you\'ve been checking the account and noticed the pattern.'});
+  else if(daysDark > 7) causes.push({level:'yellow',title:'WARNING: Contact Lag ('+daysDark+' days)',text:'Last contact '+daysDark+' days ago. For an account showing declining bookings, this lag creates a perception gap — the owner assumes TGTG isn\'t monitoring their performance. <strong>Proactive contact this week.</strong>'});
+
+  if(daysToExpiry <= 7 && daysToExpiry >= 0) causes.push({level:'red',title:'URGENT: Offer Expiry in '+daysToExpiry+' Day'+(daysToExpiry===1?'':'s'),text:'The offer window expires in '+daysToExpiry+' days. Without an extension or renegotiation signed before expiry, the account will drop off the platform automatically. <strong>This is a hard deadline.</strong> Get signed amendment or confirm exit before '+daysToExpiry+' days.'});
+  else if(daysToExpiry <= 0) causes.push({level:'red',title:'CRITICAL: Offer Already Expired',text:'The offer window has expired. The listing may still be live but with degraded visibility. Owner is likely unaware of the impact on their booking flow. <strong>Immediate extension required.</strong>'});
+
+  if(sentiment==='threatening') causes.push({level:'red',title:'HIGH ALERT: Owner Threatened to Leave',text:'The owner has explicitly expressed intent to cancel or leave. This is not a standard churn risk — it\'s an active exit in progress. <strong>Next contact must lead with acknowledgement, not a pitch.</strong> Listen first. Understand their specific frustration. Come with a solution, not a script.'});
+  else if(sentiment==='negative') causes.push({level:'yellow',title:'SENTIMENT: Owner Frustrated',text:'Owner expressed disappointment or frustration. This is recoverable — but only if the next interaction directly addresses their specific concern. Do not default to generic reassurance. <strong>Ask: What specifically hasn\'t worked for you?</strong>'});
+
+  if(rootCause) causes.push({level:'yellow',title:'Your Hypothesis',text:rootCause});
+
+  if(causes.length === 0) causes.push({level:'green',title:'Manageable Risk',text:'No critical flags — but early intervention here prevents a harder conversation later. Use the re-engagement script below to reconnect and course-correct the account\'s trajectory.'});
+
+  causes.forEach(function(c){
+    diagHtml += '<div class="diag-box '+c.level+'"><div class="db-label '+c.level+'">'+c.title+'</div><div class="db-text">'+c.text+'</div></div>';
+  });
+  diagContainer.innerHTML = diagHtml;
+
+  // Decision tree options
+  var mktgCost = 120;
+  var extendROI = Math.round((monthlyCommission * 3) / mktgCost);
+  var newCommission = Math.min(commission + 3, 20);
+  var newGuarantee = Math.round(monthlyCommission * 0.7);
+
+  document.getElementById('detail-extend').innerHTML =
+    '<strong>When to use:</strong> Owner is still engaged, account shows some traction, bookings below target but not zero. Extend the offer by 4–6 weeks with a marketing push.<br><br>'+
+    '<div class="opt-economics">'+
+      '<div class="oe-row"><div class="oe-l">Extend offer 4 weeks + marketing push</div><div class="oe-r red">-£'+mktgCost+' cost</div></div>'+
+      '<div class="oe-row"><div class="oe-l">Additional commission from recovered bookings</div><div class="oe-r green">+£'+Math.round(monthlyCommission*1.4)+'/mo (est.)</div></div>'+
+      '<div class="oe-row"><div class="oe-l">ROI on marketing spend</div><div class="oe-r green">'+extendROI+'× over 3 months</div></div>'+
+    '</div><br>'+
+    '<strong>What you need:</strong> Signed amendment (4-week extension). Owner commits to operating the offer window consistently.<br>'+
+    '<strong>Deadline:</strong> Amendment signed this week or downgrade to Option B.';
+
+  document.getElementById('detail-renegotiate').innerHTML =
+    '<strong>When to use:</strong> Original offer terms were too aggressive (owner unhappy with margin). Renegotiate to a sustainable model that keeps them on platform.<br><br>'+
+    '<div class="opt-economics">'+
+      '<div class="oe-row"><div class="oe-l">New commission rate</div><div class="oe-r">'+newCommission+'% (up from '+commission+'%)</div></div>'+
+      '<div class="oe-row"><div class="oe-l">Weekly booking guarantee (min)</div><div class="oe-r">'+Math.round(currentBkgs*1.3)+' bags/week ('+Math.round(currentBkgs*1.3 * bagValue)+' revenue)</div></div>'+
+      '<div class="oe-row"><div class="oe-l">Owner net revenue after commission</div><div class="oe-r green">£'+Math.round(currentBkgs*1.3*bagValue*(1-newCommission/100)*4.3)+'/mo</div></div>'+
+    '</div><br>'+
+    '<strong>The ask:</strong> "We want to make this work for your margin. Let\'s restructure: '+newCommission+'% commission, minimum '+Math.round(currentBkgs*1.3)+' bags per week guarantee from our side. Does that work?"<br>'+
+    '<strong>Deadline:</strong> Decision by end of meeting. If no, move to Option C.';
+
+  document.getElementById('detail-exit').innerHTML =
+    '<strong>When to use:</strong> Owner is disengaged and unlikely to recover, or the economics don\'t work for either side. Plan a graceful exit that preserves the relationship for a future return.<br><br>'+
+    '<div class="opt-economics">'+
+      '<div class="oe-row"><div class="oe-l">Annual revenue loss from exit</div><div class="oe-r red">-£'+Math.round(annualAtRisk)+'</div></div>'+
+      '<div class="oe-row"><div class="oe-l">Time freed for new acquisition</div><div class="oe-r green">+8h/month</div></div>'+
+      '<div class="oe-row"><div class="oe-l">Future re-engagement probability (6mo)</div><div class="oe-r">42% if exit is clean</div></div>'+
+    '</div><br>'+
+    '<strong>How to exit cleanly:</strong> "I understand this hasn\'t delivered what we both hoped. Let\'s agree to close the partnership now — no hard feelings. When the time is right, we\'d love to try again with a better-structured offer." Leave them feeling respected, not abandoned.<br>'+
+    '<strong>Follow-up:</strong> Send a thank-you note 48h after exit conversation. Log for re-approach in 3 months.';
+
+  // Script
+  var segmentContext = {
+    'fine-dining': 'quieter weekday service',
+    'ethnic': 'their weekday lunch gap',
+    'brunch': 'their weekday brunch slots',
+    'qsr': 'end-of-day surplus',
+    'pub': 'afternoon quiet periods',
+    'bakery': 'end-of-day pastries and bread',
+    'other': 'their quiet periods'
+  };
+  var context = segmentContext[segment] || 'quiet periods';
+
+  var script = `Hi [Owner's Name], it's [Your Name] from Too Good To Go. How are you?
+
+I'm reaching out because I've been monitoring ${venueName}'s account and I want to be straight with you — the bookings haven't been where we both expected them to be. ${currentBkgs} bags a week when we projected ${projBkgs}.
+
+Before I say anything else — I want to hear from you. What's your honest read on how it's been going?
+
+[LISTEN — let them talk. Don't interrupt. Take notes.]
+
+[IF THEY'RE FRUSTRATED:]
+That's completely fair. Let me tell you what I see on our end and what I think we can do about it.
+
+[IF THEY'RE DISENGAGED:]
+I appreciate your honesty. Here's what I'd like to propose — give me 5 minutes to share what I think is fixable, and then you can decide.
+
+---
+
+The data tells me the issue is likely [root cause from your diagnosis]. Here's what I'd like to try:
+
+Option A: We extend your offer for 4 weeks, I'll push a marketing campaign to your specific ${context}, and we'll check in at week 2.
+
+Option B: We restructure the economics — move to ${Math.round(commission+3)}% commission and a ${Math.round(currentBkgs*1.3)}-bag weekly minimum that we guarantee on our end.
+
+Option C: If neither of those works for you, I'd rather we close this cleanly now and come back when the timing is better.
+
+Which of those three sounds most interesting to you?
+
+[WAIT FOR THEIR ANSWER]
+
+[IF THEY CHOOSE A OR B:]
+Perfect. I'll send you the amendment today. Can we confirm by Thursday?
+
+[IF THEY CHOOSE C OR RESIST:]
+I understand. Let me make sure we close this properly so there are no loose ends. I'll send you a confirmation email today and we'll have the listing updated within 24 hours. I genuinely hope we get a chance to work together again.`;
+
+  document.getElementById('script-body').textContent = script;
+  state.script = script;
+
+  // Timeline
+  var isUrgent = riskLevel === 'critical';
+  var timelineHtml = '';
+  var timeline = [
+    {day: 'Today', action: '<strong>Prepare before the call:</strong> Pull the last 4 weeks of booking data from TGTG dashboard. Know the exact numbers before you dial. Decide which of the 3 options you\'re leading with.'},
+    {day: isUrgent?'Today':'Day 1', action: '<strong>Make the call:</strong> Use the re-engagement script above. Open by acknowledging the performance gap. Listen first. Present 3 options. Get a verbal agreement.'},
+    {day: 'Day 1–2', action: '<strong>Send follow-up email:</strong> Summarise the call in 3 bullet points. Attach the amendment (if Option A or B). Set a signing deadline of 48 hours.'},
+    {day: 'Day 3', action: '<strong>Chase if no reply:</strong> One WhatsApp message: "Hi [Name], just checking you received the amendment. Can we confirm by tomorrow?" If no reply after 24h, assume exit.'},
+    {day: 'Day 5', action: '<strong>Decision deadline:</strong> If amendment not signed, move to Option C. Initiate exit conversation — brief, respectful, no pressure. Log the account for 3-month re-approach.'},
+    {day: 'Day 7', action: '<strong>If saved (Option A/B):</strong> Check booking levels. Are they trending up? If not up within 7 days of marketing push, escalate to Country Director.'},
+    {day: 'Day 14', action: '<strong>2-week review:</strong> Call the owner. "It\'s been 2 weeks — bookings are at [X]. Here\'s what we\'re seeing." Reinforce the partnership or confirm exit if numbers haven\'t moved.'},
+  ];
+  timeline.forEach(function(t){
+    timelineHtml += '<div class="tl-item"><div class="tl-day">'+t.day+'</div><div class="tl-action">'+t.action+'</div></div>';
+  });
+  document.getElementById('timeline-body').innerHTML = timelineHtml;
+
+  document.getElementById('output').classList.add('on');
+  document.getElementById('output').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function selectOption(opt){
+  ['extend','renegotiate','exit'].forEach(function(o){
+    document.getElementById('opt-'+o).classList.remove('selected');
+    document.getElementById('detail-'+o).classList.remove('on');
+  });
+  document.getElementById('opt-'+opt).classList.add('selected');
+  document.getElementById('detail-'+opt).classList.add('on');
+}
+
+function copyScript(){
+  if(!state.script) return;
+  navigator.clipboard.writeText(state.script).then(function(){
+    var btn = document.getElementById('copy-script-btn');
+    btn.textContent = 'Copied ✓';
+    btn.classList.add('copied');
+    setTimeout(function(){btn.textContent='Copy Script';btn.classList.remove('copied');},2000);
+  });
+}
+</script>
+</body>
+</html>
