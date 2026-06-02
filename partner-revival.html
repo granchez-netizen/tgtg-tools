@@ -138,7 +138,7 @@ body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--text);-we
     <div class="field-grid">
       <div class="field">
         <label>Venue Name</label>
-        <input type="text" id="venue-name" placeholder="e.g. La Cour, King's Road">
+        <input type="text" id="venue-name" placeholder="e.g. Meze & More, Bethnal Green's Road">
       </div>
       <div class="field">
         <label>Cuisine / Segment</label>
@@ -201,7 +201,7 @@ body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--text);-we
       </div>
       <div class="field full">
         <label>What Do You Think the Root Cause Is?</label>
-        <textarea id="root-cause" placeholder="e.g. Launched with too low a discount offer. Quiet periods not matching TGTG demand. Owner expected higher booking volume in first month."></textarea>
+        <textarea id="root-cause" placeholder="e.g. Surprise Bag price set too low — not generating expected revenue. Collection window not matching their actual surplus timing. Owner expected more reservations in first month."></textarea>
       </div>
     </div>
     <button class="generate-btn" id="generate-btn" onclick="generate()">Generate Revival Plan →</button>
@@ -344,7 +344,7 @@ function generate(){
   // Determine likely root causes
   var causes = [];
   if(performancePct < 40) causes.push({level:'red',title:'CRITICAL: Severely Under-performing vs Projection',text:'<strong>Only '+performancePct+'% of projected bookings</strong> — at '+currentBkgs+' bags/week vs '+projBkgs+' expected. This is either a demand mismatch (wrong offer timing/discount), a visibility issue (listing not optimised), or the owner hasn\'t properly set up their supply chain. <strong>Diagnosis priority:</strong> Ask the owner to show you their TGTG listing and last 4 weeks booking calendar on the first call.'});
-  else if(performancePct < 70) causes.push({level:'yellow',title:'ATTENTION: Underperforming — Needs Intervention',text:'At '+currentBkgs+' bags/week against a '+projBkgs+' projection, the account is at <strong>'+performancePct+'% of target</strong>. Without intervention, the owner will disengage. The booking volume may recover with offer window adjustments or marketing push.'});
+  else if(performancePct < 70) causes.push({level:'yellow',title:'ATTENTION: Underperforming — Needs Intervention',text:'At '+currentBkgs+' bags/week against a '+projBkgs+' projection, the account is at <strong>'+performancePct+'% of target</strong>. Without intervention, the owner will disengage. The bag reservation volume may recover with offer window adjustments or marketing push.'});
 
   if(daysDark > 14) causes.push({level:'red',title:'CRITICAL: Owner Gone Dark ('+daysDark+' days)',text:'No contact in '+daysDark+' days. Silence at this stage almost always signals a) owner has lost faith in the platform, b) owner is testing a competitor, or c) owner is simply overwhelmed. <strong>Action:</strong> Do not text or email first — call direct. Acknowledgement that you\'ve been checking the account and noticed the pattern.'});
   else if(daysDark > 7) causes.push({level:'yellow',title:'WARNING: Contact Lag ('+daysDark+' days)',text:'Last contact '+daysDark+' days ago. For an account showing declining bookings, this lag creates a perception gap — the owner assumes TGTG isn\'t monitoring their performance. <strong>Proactive contact this week.</strong>'});
