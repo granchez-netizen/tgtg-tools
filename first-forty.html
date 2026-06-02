@@ -201,7 +201,7 @@
         </div>
         <div class="field-row fr-2">
           <div class="field-group"><label class="fl">Rep Who Closed It</label>
-            <input type="text" id="f-bdm" placeholder="Name"></div>
+            <input type="text" id="f-rep" placeholder="Name"></div>
           <div class="field-group"><label class="fl">AM Owner</label>
             <input type="text" id="f-am" placeholder="Name"></div>
         </div>
@@ -262,7 +262,7 @@ let venues = [];
 let currentVenueIdx = null;
 
 const MILESTONES = [
-  {day:0,  title:'Venue signed — brief handed to AM',      desc:'rep passes Visit Brief, offer structure, contact, and go-live date to AM. First Forty programme starts today.',    owner:'sales',  key:'signed'},
+  {day:0,  title:'Venue signed — brief handed to AM',      desc:'rep passes Call Brief, offer structure, contact, and go-live date to AM. First Forty programme starts today.',    owner:'sales',  key:'signed'},
   {day:1,  title:'Portal set up & offer configured',        desc:'AM confirms venue is live on the platform with the correct offer, time window, and cover cap.',                    owner:'am',     key:'portal'},
   {day:2,  title:'WhatsApp intro sent to operator',         desc:'AM sends a personal WhatsApp introducing themselves and confirming what to expect in the first week.',             owner:'am',     key:'whatsapp'},
   {day:3,  title:'Leave-behinds confirmed live in venue',   desc:'QR table-tent and £10 off coupons confirmed in venue. rep checks on next pass or AM confirms via operator.',       owner:'both',   key:'leavebehind'},
@@ -270,7 +270,7 @@ const MILESTONES = [
   {day:14, title:'Day 14 — Team Lead review',           desc:'Team Lead reviews activation data. Is the offer generating covers in genuinely quiet periods? Reprogram if needed.', owner:'sales',key:'day14'},
   {day:21, title:'Day 21 — Offer optimisation',             desc:'AM reviews offer performance. Adjust time window, depth, or cap if cover volume is below threshold.',              owner:'am',     key:'day21'},
   {day:30, title:'Day 30 — Activation milestone',           desc:'Target: minimum 4 incremental covers across at least 2 different offer windows. If not reached: escalate to HoI.', owner:'both',  key:'day30'},
-  {day:35, title:'Day 35 — Repeat diner check',             desc:'Is the venue generating repeat visitors? Review diner return rate data. Flag to marketing if consumer side needs support.', owner:'am', key:'day35'},
+  {day:35, title:'Day 35 — Repeat customer check',             desc:'Is the venue generating repeat reservationors? Review diner return rate data. Flag to marketing if consumer side needs support.', owner:'am', key:'day35'},
   {day:40, title:'Day 40 — First Forty complete',           desc:'Venue graduates to ongoing partner health monitoring. AM continues quarterly reviews. Partner Health scoring begins.', owner:'am',  key:'day40'},
 ];
 
@@ -349,7 +349,7 @@ function renderDashboard(){
             <div class="health-dot ${hdClass}"></div>
             <div class="venue-nm">${v.name}</div>
           </div>
-          <div class="venue-meta">${v.city} · rep: ${v.bdm} · AM: ${v.am}</div>
+          <div class="venue-meta">${v.city} · rep: ${v.rep} · AM: ${v.am}</div>
         </div>
         <div class="venue-card-right">
           <div class="day-badge" style="color:${health==='red'?'#EF4444':health==='amber'?'#6DBE4F':'#22C55E'}">${dayNum}</div>
@@ -442,7 +442,7 @@ function addVenue(){
   const v={
     name,
     city:document.getElementById('f-city').value||'Unknown',
-    bdm:document.getElementById('f-bdm').value||'—',
+    bdm:document.getElementById('f-rep').value||'—',
     am:document.getElementById('f-am').value||'—',
     contact:document.getElementById('f-contact').value||'—',
     phone:document.getElementById('f-phone').value||'—',
@@ -460,7 +460,7 @@ function addVenue(){
   renderDashboard();
   switchTab('dashboard',null);
   
-  ['f-name','f-city','f-bdm','f-am','f-contact','f-phone','f-signdate','f-livedate','f-aov','f-discount','f-cap','f-slot'].forEach(id=>{
+  ['f-name','f-city','f-rep','f-am','f-contact','f-phone','f-signdate','f-livedate','f-aov','f-discount','f-cap','f-slot'].forEach(id=>{
     const el=document.getElementById(id);
     if(el) el.value='';
   });
