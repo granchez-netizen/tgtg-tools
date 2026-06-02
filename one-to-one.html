@@ -351,13 +351,13 @@ input::placeholder { color: rgba(0,0,0,.25); }
 }
 .callout strong { color: var(--ink); }
 
-.venue-block {
+.call-block {
   border: 1.5px solid var(--rule);
   background: var(--white);
   margin-bottom: 16px;
   overflow: hidden;
 }
-.venue-block-head {
+.call-block-head {
   background: #F0EDE8;
   padding: 10px 16px;
   display: flex;
@@ -374,7 +374,7 @@ input::placeholder { color: rgba(0,0,0,.25); }
   padding: 3px 10px;
   border: 1px solid var(--rule);
 }
-.venue-name-input {
+.call-name-input {
   flex: 1;
   border: none;
   background: transparent;
@@ -384,7 +384,7 @@ input::placeholder { color: rgba(0,0,0,.25); }
   color: var(--ink);
   outline: none;
 }
-.venue-name-input::placeholder { color: rgba(0,0,0,.3); font-weight: 400; }
+.call-name-input::placeholder { color: rgba(0,0,0,.3); font-weight: 400; }
 .outcome-sel {
   display: flex;
   gap: 6px;
@@ -402,7 +402,7 @@ input::placeholder { color: rgba(0,0,0,.25); }
   transition: all .15s;
 }
 .outcome-btn:hover { border-color: var(--ink); color: var(--ink); }
-.venue-block-body {
+.call-block-body {
   -webkit-font-smoothing: antialiased;
   padding: 16px;
   display: grid;
@@ -629,10 +629,10 @@ input::placeholder { color: rgba(0,0,0,.25); }
     </div>
 
     
-    <div class="venue-block">
-      <div class="venue-block-head">
-        <span class="venue-num">Venue 1</span>
-        <input class="venue-name-input" type="text" placeholder="Venue name and territory...">
+    <div class="call-block">
+      <div class="call-block-head">
+        <span class="call-num">Call 1</span>
+        <input class="call-name-input" type="text" placeholder="Partner name and territory...">
         <div class="outcome-sel">
           <button class="outcome-btn">Signed</button>
           <button class="outcome-btn">Follow-up</button>
@@ -640,7 +640,7 @@ input::placeholder { color: rgba(0,0,0,.25); }
           <button class="outcome-btn">Not in</button>
         </div>
       </div>
-      <div class="venue-block-body">
+      <div class="call-block-body">
         <div class="field-group">
           <div class="field-label">Pre-call preparation <span>Did they research the venue surplus pattern and deald period?</span></div>
           <textarea placeholder="What did the rep know before walking in? Did they check Popular Times? Did they have a pitch angle ready?"></textarea>
@@ -663,16 +663,16 @@ input::placeholder { color: rgba(0,0,0,.25); }
         </div>
         <div class="field-group">
           <div class="field-label">Close and next step <span>Did they ask for a commitment?</span></div>
-          <textarea placeholder="Did they ask for the close or leave it open? If follow-up: was a specific time agreed? HubSpot updated on the spot?"></textarea>
+          <textarea placeholder="Did they ask for the close or leave it open? If follow-up: was a specific time agreed? Salesforce updated on the spot?"></textarea>
         </div>
       </div>
     </div>
 
     
-    <div class="venue-block">
-      <div class="venue-block-head">
-        <span class="venue-num">Venue 2</span>
-        <input class="venue-name-input" type="text" placeholder="Venue name and territory...">
+    <div class="call-block">
+      <div class="call-block-head">
+        <span class="call-num">Call 2</span>
+        <input class="call-name-input" type="text" placeholder="Partner name and territory...">
         <div class="outcome-sel">
           <button class="outcome-btn">Signed</button>
           <button class="outcome-btn">Follow-up</button>
@@ -680,7 +680,7 @@ input::placeholder { color: rgba(0,0,0,.25); }
           <button class="outcome-btn">Not in</button>
         </div>
       </div>
-      <div class="venue-block-body">
+      <div class="call-block-body">
         <div class="field-group">
           <div class="field-label">Opening and discovery</div>
           <textarea placeholder="How did they open? Did they discover the quiet period before pitching?"></textarea>
@@ -694,17 +694,17 @@ input::placeholder { color: rgba(0,0,0,.25); }
           <textarea placeholder="What came up? How was it handled?"></textarea>
         </div>
         <div class="field-group">
-          <div class="field-label">Close and HubSpot discipline</div>
+          <div class="field-label">Close and Salesforce discipline</div>
           <textarea placeholder="Close attempted? Next step agreed and logged?"></textarea>
         </div>
       </div>
     </div>
 
     
-    <div class="venue-block">
-      <div class="venue-block-head">
-        <span class="venue-num">Venue 3</span>
-        <input class="venue-name-input" type="text" placeholder="Venue name and territory...">
+    <div class="call-block">
+      <div class="call-block-head">
+        <span class="call-num">Venue 3</span>
+        <input class="call-name-input" type="text" placeholder="Partner name and territory...">
         <div class="outcome-sel">
           <button class="outcome-btn">Signed</button>
           <button class="outcome-btn">Follow-up</button>
@@ -712,7 +712,7 @@ input::placeholder { color: rgba(0,0,0,.25); }
           <button class="outcome-btn">Not in</button>
         </div>
       </div>
-      <div class="venue-block-body">
+      <div class="call-block-body">
         <div class="field-group">
           <div class="field-label">Opening and discovery</div>
           <textarea placeholder="How did they open?"></textarea>
@@ -797,7 +797,7 @@ input::placeholder { color: rgba(0,0,0,.25); }
             </div>
           </div>
           <div class="tl-row">
-            <span class="tl-label">HubSpot logged on the spot / WhatsApp follow-up sent</span>
+            <span class="tl-label">Salesforce logged on the spot / WhatsApp follow-up sent</span>
             <div class="tl-btns">
               <button class="tl-btn green" onclick="toggleTL(this)">Strong</button>
               <button class="tl-btn amber" onclick="toggleTL(this)">Developing</button>
@@ -826,11 +826,11 @@ input::placeholder { color: rgba(0,0,0,.25); }
     <div class="two-col">
       <div class="field-group">
         <div class="field-label">What they did well <span>Name the specific moment and venue</span></div>
-        <textarea rows="5" placeholder="Be specific — name the venue, the objection, and exactly what they said. E.g. 'At [Venue 2] the way you reframed the brand objection by referencing the cover cap was exactly right. That is the version we teach the team.'"></textarea>
+        <textarea rows="5" placeholder="Be specific — name the venue, the objection, and exactly what they said. E.g. 'At [Call 2] the way you reframed the brand objection by referencing the cover cap was exactly right. That is the version we teach the team.'"></textarea>
       </div>
       <div class="field-group">
         <div class="field-label">Primary development area <span>One thing — the most important one</span></div>
-        <textarea rows="5" placeholder="One thing only. The most impactful change. E.g. 'At [Venue 1] you pitched before asking about their quiet period. Ask one question first: what's your quietest night of the week? Everything else follows from their answer.'"></textarea>
+        <textarea rows="5" placeholder="One thing only. The most impactful change. E.g. 'At [Call 1] you pitched before asking about their quiet period. Ask one question first: what's your quietest night of the week? Everything else follows from their answer.'"></textarea>
       </div>
     </div>
     <div class="field-group">
@@ -1048,7 +1048,7 @@ input::placeholder { color: rgba(0,0,0,.25); }
       <input class="signoff-input" type="text" placeholder="Time shared">
     </div>
     <div class="signoff-item">
-      <div class="signoff-label">HubSpot note added</div>
+      <div class="signoff-label">Salesforce note added</div>
       <input class="signoff-input" type="text" placeholder="Yes / No">
     </div>
   </div>
