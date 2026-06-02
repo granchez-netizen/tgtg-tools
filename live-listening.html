@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Too Good To Go · Live Listening</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap');
+:root{
+  --tgtg:#6DBE4F;--tgtgd:rgba(109,190,79,.09);--tgtgl:rgba(109,190,79,.25);
+  --bg:#ffffff;--bg2:#f7f8f5;--border:#e4e8de;--border2:#dde3d8;
+  --text:#1a1a1a;--muted:#5a6454;--muted2:#8a9484;
+  --danger:#EF4444;--dangerd:rgba(239,68,68,.07);--dangerl:rgba(239,68,68,.18);
+  --warn:#F59E0B;--warnd:rgba(245,158,11,.07);--warnl:rgba(245,158,11,.18);
+  --good:#22C55E;--goodd:rgba(34,197,94,.08);--goodl:rgba(34,197,94,.18);
+  --info:#60A5FA;--infod:rgba(96,165,250,.08);--infol:rgba(96,165,250,.18);
+  --purple:#A78BFA;--purpled:rgba(167,139,250,.08);--purplel:rgba(167,139,250,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;padding-bottom:80px;}
+.wrap{max-width:680px;margin:0 auto;padding:20px 16px 80px;}
+.hero-eye{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--tgtg);margin-bottom:8px;font-family:'DM Mono',monospace;}
+.hero-h1{font-size:28px;font-weight:900;letter-spacing:-1px;line-height:1.1;margin-bottom:8px;}
+.hero-h1 em{color:var(--tgtg);font-style:normal;}
+.hero-sub{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:24px;}
+
+/* META */
+.meta-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+@media(max-width:480px){.meta-row{grid-template-columns:1fr;}}
+.field-group{display:flex;flex-direction:column;gap:5px;}
+.fl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted2);font-family:'DM Mono',monospace;}
+input.fi,select.fi,textarea.fi{width:100%;padding:10px 13px;background:var(--bg2);border:1.5px solid var(--border);border-radius:9px;font-size:14px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;transition:border-color .15s;}
+input.fi:focus,select.fi:focus,textarea.fi:focus{border-color:var(--tgtg);}
+input.fi::placeholder,textarea.fi::placeholder{color:var(--muted2);}
+textarea.fi{resize:vertical;line-height:1.65;}
+
+/* SECTION */
+.section{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.04);}
+.sec-eye{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--tgtg);margin-bottom:12px;font-family:'DM Mono',monospace;}
+
+/* SCORE CRITERIA */
+.crit{padding:12px 0;border-bottom:1px solid var(--border);}
+.crit:last-child{border-bottom:none;padding-bottom:0;}
+.crit-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px;}
+.crit-label{font-size:13px;font-weight:700;flex:1;}
+.crit-weight{font-size:9px;font-weight:700;color:var(--tgtg);font-family:'DM Mono',monospace;flex-shrink:0;padding-top:2px;}
+.crit-desc{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:10px;}
+.score-btns{display:flex;gap:6px;flex-wrap:wrap;}
+.sb{padding:7px 14px;border-radius:7px;border:1.5px solid var(--border);background:transparent;font-size:10px;font-weight:700;cursor:pointer;color:var(--muted);transition:all .15s;font-family:'DM Sans',sans-serif;}
+.sb.miss.on{background:var(--dangerd);border-color:var(--dangerl);color:var(--danger);}
+.sb.part.on{background:var(--warnd);border-color:var(--warnl);color:var(--warn);}
+.sb.hit.on{background:var(--goodd);border-color:var(--goodl);color:var(--good);}
+
+/* SCORE TOTAL */
+.total-bar{background:var(--tgtg);border-radius:12px;padding:20px 24px;margin:16px 0;display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.total-n{font-size:52px;font-weight:900;letter-spacing:-2px;line-height:1;color:#fff;}
+.total-info{flex:1;color:#fff;}
+.total-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;opacity:.75;margin-bottom:4px;}
+.total-grade{font-size:16px;font-weight:800;}
+.total-track{height:8px;background:rgba(255,255,255,.2);border-radius:4px;margin-top:10px;overflow:hidden;}
+.total-fill{height:100%;border-radius:4px;background:rgba(255,255,255,.75);transition:width .5s;}
+
+/* MOMENTS */
+.moment-card{background:var(--bg2);border-radius:9px;padding:13px 15px;margin-bottom:8px;}
+.mc-label{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;font-family:'DM Mono',monospace;}
+.mc-good{color:var(--good);}
+.mc-concern{color:var(--danger);}
+.mc-neutral{color:var(--tgtg);}
+
+/* COACHING COMMIT */
+.commit-box{background:var(--tgtgd);border:1.5px solid var(--tgtgl);border-radius:10px;padding:14px 16px;}
+.commit-eye{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--tgtg);margin-bottom:8px;font-family:'DM Mono',monospace;}
+
+/* COPY BTN */
+.copy-btn{width:100%;padding:13px;background:var(--tgtg);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:16px;transition:opacity .15s;}
+.copy-btn:hover{opacity:.88;}
+.copy-btn.copied{background:var(--good);}
+</style>
+</head>
+<body>
+<div style="background:var(--tgtg);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;">
+  <div style="font-size:13px;font-weight:800;color:#fff;">Too Good To Go · UK &amp; Ireland</div>
+  <div style="font-size:11px;color:rgba(255,255,255,.75);">Head of Independent Partners · Live Listening</div>
+</div>
+<div class="wrap">
+  <div class="hero-eye">Inside Sales · Phone Coaching</div>
+  <div class="hero-h1">Live <em>Listening.</em></div>
+  <div class="hero-sub">Listen to a live live listeningside a rep. Score in real time. Debrief immediately — within 60 minutes of the call ending. The coaching that lands is the coaching that happens now, not at end of day.</div>
+
+  <!-- META -->
+  <div class="section">
+    <div class="sec-eye">Session Details</div>
+    <div class="meta-row">
+      <div class="field-group"><label class="fl">Rep name</label><input class="fi" id="m-rep" placeholder="Rep name"></div>
+      <div class="field-group"><label class="fl">Team</label>
+        <select class="fi" id="m-team">
+          <option>Acquisition</option><option>Account Management</option><option>Growth</option>
+        </select>
+      </div>
+    </div>
+    <div class="meta-row">
+      <div class="field-group"><label class="fl">Business called</label><input class="fi" id="m-biz" placeholder="e.g. Meze &amp; More, Bethnal Green"></div>
+      <div class="field-group"><label class="fl">Category</label>
+        <select class="fi" id="m-cat">
+          <option>Restaurant</option><option>Café</option><option>Bakery</option><option>Pastry Shop</option>
+          <option>Sushi Restaurant</option><option>Takeaway Restaurant</option><option>Buffet Restaurant</option>
+          <option>Hotel</option><option>Supermarket</option><option>Beverage Shop</option>
+          <option>Butcher Shop</option><option>Fruit &amp; Veg Store</option><option>Flower &amp; Plant Store</option>
+          <option>Flower &amp; Plant Stall</option><option>Pet Store</option><option>Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="meta-row">
+      <div class="field-group"><label class="fl">Call type</label>
+        <select class="fi" id="m-type">
+          <option>Cold acquisition</option><option>Warm follow-up</option><option>Partner retention check-in</option><option>Revival call</option>
+        </select>
+      </div>
+      <div class="field-group"><label class="fl">Outcome</label>
+        <select class="fi" id="m-outcome">
+          <option>Surprise Bag agreed — live on call</option><option>Follow-up booked</option><option>Not interested</option><option>Not reached</option><option>Needs more info</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCORING -->
+  <div class="section" id="scoring-section">
+    <div class="sec-eye">Score the Call — 7 Criteria · 100 Points</div>
+    <div id="crits"></div>
+  </div>
+
+  <!-- SCORE TOTAL -->
+  <div class="total-bar">
+    <div class="total-n" id="total-n">0</div>
+    <div class="total-info">
+      <div class="total-lbl">Call score</div>
+      <div class="total-grade" id="total-grade">Score the call above</div>
+      <div class="total-track"><div class="total-fill" id="total-fill" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <!-- KEY MOMENTS -->
+  <div class="section">
+    <div class="sec-eye">Key Moments — What Happened</div>
+    <div class="moment-card">
+      <div class="mc-label mc-good">✓ The moment that worked</div>
+      <textarea class="fi" id="moment-good" rows="2" placeholder="Exact words or action that moved the call forward. Quote it if possible."></textarea>
+    </div>
+    <div class="moment-card">
+      <div class="mc-label mc-concern">✗ The moment the call lost momentum</div>
+      <textarea class="fi" id="moment-bad" rows="2" placeholder="Exact moment — what they said, what happened, what they should have said instead."></textarea>
+    </div>
+    <div class="moment-card">
+      <div class="mc-label mc-neutral">→ The replacement line</div>
+      <textarea class="fi" id="moment-replace" rows="2" placeholder="Write the exact words you want them to use next time. Specific enough to practise."></textarea>
+    </div>
+  </div>
+
+  <!-- COACHING COMMIT -->
+  <div class="section">
+    <div class="sec-eye">Debrief — Happens Now</div>
+    <div style="font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:14px;">The debrief happens within 60 minutes of the call ending — not end of day. One specific thing. One replacement line. One next call to apply it on.</div>
+    <div class="commit-box">
+      <div class="commit-eye">The coaching commitment</div>
+      <div class="field-group" style="margin-bottom:10px;"><label class="fl">One thing to develop</label>
+        <textarea class="fi" id="c-focus" rows="2" placeholder="Specific skill — not 'improve discovery'. e.g. 'Ask about the surplus timing before mentioning TGTG.'"></textarea>
+      </div>
+      <div class="field-group" style="margin-bottom:10px;"><label class="fl">The next call — apply this on</label>
+        <input class="fi" id="c-next" placeholder="e.g. Next call after this debrief. Rep applies the replacement line.">
+      </div>
+      <div class="field-group"><label class="fl">Review — when and how</label>
+        <input class="fi" id="c-review" placeholder="e.g. Weekly 1:1 Tuesday — listen to that next call together.">
+      </div>
+    </div>
+  </div>
+
+  <button class="copy-btn" id="copy-btn" onclick="copySession()">Copy session to coaching log</button>
+</div>
+
+<script>
+var CRITS = [
+  {id:'c1',w:10,label:'Opened with their surplus — not with TGTG',
+   desc:'Did the rep lead with a question about the owner's quiet period or surplus pattern before mentioning Too Good To Go?',
+   good:'Asked about end-of-day surplus before any pitch.',bad:'Opened with: "I'm calling from Too Good To Go..."'},
+  {id:'c2',w:20,label:'Discovered the surplus type and timing',
+   desc:'Did the rep ask which days, times, and types of surplus exist — and wait for the answer before proposing a Surprise Bag?',
+   good:'"What do you typically have left at the end of a Tuesday?"',bad:'Moved straight to pitching without confirming the surplus.'},
+  {id:'c3',w:20,label:'Framed as found revenue — waste-to-revenue',
+   desc:'Did the rep explain that the food already costs money, and a Surprise Bag turns a guaranteed £0 into found revenue?',
+   good:'"That food is already on your books. It earns you nothing in the bin. Every bag sold is revenue that didn't exist before."',bad:'Led with platform stats or number of users.'},
+  {id:'c4',w:15,label:'Handled objections without backing off',
+   desc:'When the owner pushed back — on brand, commission, time — did the rep hold the frame and address it directly?',
+   good:'Held the frame: "The Surprise Bag only shows in the collection window — your regular customers never see it."',bad:'Agreed partially, deflected, or moved on without resolving it.'},
+  {id:'c5',w:20,label:'Closed the Surprise Bag window on the call',
+   desc:'Did the rep close a specific day, time, bag count, and price on this call — not leaving it to a follow-up?',
+   good:'"Let's set up your first Surprise Bag now — takes 8 minutes. What does Tuesday afternoon look like?"',bad:'Left the close open: "Think about it and I'll call you next week."'},
+  {id:'c6',w:10,label:'Walked partner through the app live',
+   desc:'Did the rep attempt to onboard the partner on this call — walking through the TGTG partner app together while still on the phone?',
+   good:'Walked through account creation and first bag listing live on the call.',bad:'Said "I'll send you a link" or left setup to AM.'},
+  {id:'c7',w:5,label:'Clear next step agreed and logged',
+   desc:'Did the call end with a named next action, specific time, and Salesforce logged before the next dial?',
+   good:'Next step confirmed verbally and logged in Salesforce within 30 minutes.',bad:'Ended with "I'll be in touch" — no specific commitment.'},
+];
+
+var scores = {};
+
+function buildCrits(){
+  var h = '';
+  CRITS.forEach(function(c){
+    h += '<div class="crit">'+
+      '<div class="crit-top"><div class="crit-label">'+c.label+'</div><div class="crit-weight">'+c.w+'pts</div></div>'+
+      '<div class="crit-desc">'+c.desc+'</div>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:11px;margin-bottom:10px;">'+
+        '<div style="background:var(--goodd);border-radius:6px;padding:8px 10px;color:var(--good);border-left:2px solid var(--good);">'+c.good+'</div>'+
+        '<div style="background:var(--dangerd);border-radius:6px;padding:8px 10px;color:var(--danger);border-left:2px solid var(--danger);">'+c.bad+'</div>'+
+      '</div>'+
+      '<div class="score-btns">'+
+        '<button class="sb miss" onclick="score(this,''+c.id+'',0)">✗ Missed (0)</button>'+
+        '<button class="sb part" onclick="score(this,''+c.id+'','+Math.round(c.w*0.5)+')">~ Partial ('+Math.round(c.w*0.5)+')</button>'+
+        '<button class="sb hit" onclick="score(this,''+c.id+'','+c.w+')">✓ Hit ('+c.w+')</button>'+
+      '</div>'+
+    '</div>';
+  });
+  document.getElementById('crits').innerHTML = h;
+}
+
+function score(btn, id, pts){
+  scores[id] = pts;
+  btn.closest('.score-btns').querySelectorAll('.sb').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+  updateTotal();
+}
+
+function updateTotal(){
+  var total = Object.values(scores).reduce(function(s,v){return s+v;},0);
+  document.getElementById('total-n').textContent = total;
+  document.getElementById('total-fill').style.width = total+'%';
+  var grade = total >= 90 ? 'Excellent — name this call in Friday standup' :
+              total >= 75 ? 'Good — one coaching point, one next call' :
+              total >= 60 ? 'Developing — structured debrief now, joint call this week' :
+              total >= 40 ? 'Below standard — intensive coaching this week' :
+              'Critical — TL live listening session within 48 hours';
+  document.getElementById('total-grade').textContent = grade;
+}
+
+function copySession(){
+  var rep = document.getElementById('m-rep').value||'—';
+  var team = document.getElementById('m-team').value;
+  var biz = document.getElementById('m-biz').value||'—';
+  var cat = document.getElementById('m-cat').value;
+  var type = document.getElementById('m-type').value;
+  var outcome = document.getElementById('m-outcome').value;
+  var total = Object.values(scores).reduce(function(s,v){return s+v;},0);
+  var d = new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
+
+  var scoreLines = CRITS.map(function(c){
+    var s = scores[c.id] !== undefined ? scores[c.id] : '—';
+    return '  '+c.label+': '+s+'/'+c.w;
+  }).join('
+');
+
+  var text = 'LIVE LISTENING SESSION — '+d+'
+
+'+
+    'Rep: '+rep+' · Team: '+team+'
+'+
+    'Business: '+biz+' ('+cat+')
+'+
+    'Call type: '+type+'
+'+
+    'Outcome: '+outcome+'
+
+'+
+    'SCORE: '+total+'/100
+
+'+
+    scoreLines+'
+
+'+
+    'WHAT WORKED:
+'+(document.getElementById('moment-good').value||'—')+'
+
+'+
+    'WHERE IT LOST MOMENTUM:
+'+(document.getElementById('moment-bad').value||'—')+'
+
+'+
+    'REPLACEMENT LINE:
+'+(document.getElementById('moment-replace').value||'—')+'
+
+'+
+    'COACHING FOCUS: '+(document.getElementById('c-focus').value||'—')+'
+'+
+    'NEXT CALL: '+(document.getElementById('c-next').value||'—')+'
+'+
+    'REVIEW: '+(document.getElementById('c-review').value||'—');
+
+  navigator.clipboard.writeText(text).then(function(){
+    var btn = document.getElementById('copy-btn');
+    btn.textContent = 'Copied ✓';
+    btn.classList.add('copied');
+    setTimeout(function(){btn.textContent='Copy session to coaching log';btn.classList.remove('copied');},2000);
+  });
+}
+
+buildCrits();
+</script>
+</body>
+</html>
