@@ -21,7 +21,7 @@
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;padding-bottom:80px;}
 
 :root {
-  --ink: #0f0f0f;
+  --ink:#1a1a1a;
   --white: #ffffff;
   --soft: #2a2a2a;
   --muted: #888888;
@@ -81,7 +81,7 @@ body {
   font-size: 10px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: rgba(255,255,255,.5);
+  color:var(--muted);
   padding: 0 20px;
   cursor: pointer;
   border: none;
@@ -92,7 +92,7 @@ body {
   display: flex;
   align-items: center;
 }
-.nav-tab:hover { color: rgba(255,255,255,.85); }
+.nav-tab:hover { color:var(--text); }
 .nav-tab.active { color: var(--tgtg); border-bottom-color: var(--tgtg); }
 
 .print-btn {
@@ -594,11 +594,11 @@ input::placeholder { color: rgba(0,0,0,.25); }
   <div style="font-size:11px;color:rgba(255,255,255,.75);">Head of Independent Partners · 1:1 Templates</div>
 </div>
 
-<div class="sheet active" id="sheet-call-along">
+<div class="sheet active" id="sheet-live-listening">
 
   <div class="tmpl-header">
     <span class="tmpl-tag">Too Good To Go · Coaching Template · 01</span>
-    <div class="tmpl-title">Call-Along<br><em>Observation Record</em></div>
+    <div class="tmpl-title">Live Listening<br><em>Coaching Record</em></div>
     <div class="tmpl-sub">Completed by the Head of Independent Partners during or immediately after joint prospect calls. Shared with the rep same day.</div>
     <div class="tmpl-meta">
       <div class="meta-item">
@@ -1214,7 +1214,7 @@ input::placeholder { color: rgba(0,0,0,.25); }
 
     <div class="field-group">
       <div class="field-label">Support needed from your manager this week</div>
-      <textarea rows="3" placeholder="Specific requests only. A call-along on a specific venue? An introduction? A pricing question? An escalation?"></textarea>
+      <textarea rows="3" placeholder="Specific requests only. A live listening session on a specific call? An introduction? A pricing question? An escalation?"></textarea>
     </div>
   </div>
 
