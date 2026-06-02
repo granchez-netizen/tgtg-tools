@@ -4,788 +4,644 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Too Good To Go · Training Hub</title>
-<link rel="stylesheet" href="/brand.css">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-*{box-sizing:border-box;margin:0;padding:0;}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap');
 :root{
-  --y:#6DBE4F;--yd:rgba(109,190,79,.1);--yl:rgba(109,190,79,.22);
-  --g:#22C55E;--gd:rgba(34,197,94,.08);--gl:rgba(34,197,94,.2);
-  --r:#EF4444;--rd:rgba(239,68,68,.07);--rl:rgba(239,68,68,.2);
-  --b:#3B82F6;--bd:rgba(59,130,246,.08);--bl:rgba(59,130,246,.2);
-  --p:#A855F7;--pd:rgba(168,85,247,.08);--pl:rgba(168,85,247,.2);
-  --bg:#ffffff;--s:#f7f8f5;--b1:#dde3d8;--t:#1a1a1a;--m:#5a6454;
+  --tgtg:#6DBE4F;--tgtgd:rgba(109,190,79,.09);--tgtgl:rgba(109,190,79,.25);
+  --bg:#ffffff;--bg2:#f7f8f5;--border:#e4e8de;--border2:#dde3d8;
+  --text:#1a1a1a;--muted:#5a6454;--muted2:#8a9484;
+  --danger:#EF4444;--dangerd:rgba(239,68,68,.07);--dangerl:rgba(239,68,68,.2);
+  --warn:#F59E0B;--warnd:rgba(245,158,11,.07);--warnl:rgba(245,158,11,.2);
+  --good:#22C55E;--goodd:rgba(34,197,94,.08);--goodl:rgba(34,197,94,.2);
+  --info:#60A5FA;--infod:rgba(96,165,250,.08);--infol:rgba(96,165,250,.2);
+  --purple:#A78BFA;--purpled:rgba(167,139,250,.08);--purplel:rgba(167,139,250,.2);
 }
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-height:100vh;-webkit-font-smoothing:antialiased;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;padding-bottom:80px;}
+.hdr{background:var(--tgtg);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+.brand{font-size:13px;font-weight:800;color:#fff;}
+.hdr-sub{font-size:11px;color:rgba(255,255,255,.75);}
+.wrap{max-width:960px;margin:0 auto;padding:28px 20px;}
+.hero-eye{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--tgtg);margin-bottom:10px;font-family:'DM Mono',monospace;}
+.hero-h1{font-size:clamp(24px,4vw,40px);font-weight:900;letter-spacing:-1px;line-height:1.1;margin-bottom:10px;}
+.hero-h1 em{color:var(--tgtg);font-style:normal;}
+.hero-sub{font-size:13px;color:var(--muted);line-height:1.8;max-width:600px;margin-bottom:32px;}
 
-.hdr{background:#f7f8f5;border-bottom:1px solid var(--b1);padding:14px 24px;position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;}
-.brand{font-size:14px;font-weight:800;letter-spacing:-.3px;}
-.brand em{color:var(--y);font-style:normal;}
-.hdr-right{font-size:11px;color:var(--m);}
+/* PROGRAMME TABS */
+.prog-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;}
+.prog-tab{padding:8px 18px;border-radius:8px;border:1px solid var(--border);background:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--muted);transition:all .15s;}
+.prog-tab.active{background:var(--tgtg);border-color:var(--tgtg);color:#fff;}
 
-.sec-tabs{display:flex;border-bottom:1px solid var(--b1);background:#f7f8f5;padding:0 24px;gap:4px;}
-.sec-tab{padding:13px 18px;font-size:12px;font-weight:700;cursor:pointer;color:#555;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;}
-.sec-tab.on{color:var(--y);border-bottom-color:var(--y);}
+.prog{display:none;}.prog.active{display:block;}
 
-.sec-hero{padding:26px 24px 0;}
-.sec-eye{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:3px;margin-bottom:5px;}
-.sec-title{font-size:24px;font-weight:900;letter-spacing:-.5px;margin-bottom:5px;}
-.sec-sub{font-size:13px;color:var(--m);line-height:1.7;max-width:620px;margin-bottom:20px;}
+/* SESSION CARDS */
+.sessions{display:flex;flex-direction:column;gap:12px;}
+.sess{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04);}
+.sess-hdr{padding:14px 18px;display:flex;align-items:flex-start;gap:14px;cursor:pointer;background:var(--bg2);border-bottom:1px solid var(--border);}
+.sess-num{font-size:11px;font-weight:800;color:var(--tgtg);width:28px;flex-shrink:0;font-family:'DM Mono',monospace;margin-top:2px;}
+.sess-title{font-size:14px;font-weight:800;flex:1;letter-spacing:-.2px;}
+.sess-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px;}
+.sess-tag{font-size:9px;font-weight:700;padding:2px 8px;border-radius:6px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.5px;}
+.t-core{background:var(--tgtgd);color:var(--tgtg);border:1px solid var(--tgtgl);}
+.t-coach{background:var(--purpled);color:var(--purple);border:1px solid var(--purplel);}
+.t-data{background:var(--infod);color:var(--info);border:1px solid var(--infol);}
+.t-culture{background:var(--goodd);color:var(--good);border:1px solid var(--goodl);}
+.t-hard{background:var(--dangerd);color:var(--danger);border:1px solid var(--dangerl);}
+.sess-dur{font-size:10px;color:var(--muted2);margin-left:auto;white-space:nowrap;flex-shrink:0;font-family:'DM Mono',monospace;}
+.sess-body{display:none;padding:18px;}
+.sess.open .sess-body{display:block;}
+.sess-sub{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px;}
+.obj-list{margin-bottom:14px;}
+.obj-item{display:flex;gap:10px;font-size:12px;color:#444;padding:6px 0;border-bottom:1px solid var(--border);line-height:1.65;}
+.obj-item:last-child{border-bottom:none;}
+.obj-dot{width:6px;height:6px;border-radius:50%;background:var(--tgtg);flex-shrink:0;margin-top:6px;}
+.script-box{background:var(--bg2);border-radius:8px;padding:14px;border-left:3px solid var(--tgtg);font-size:12px;color:#333;line-height:1.85;font-family:'DM Mono',monospace;margin-bottom:12px;white-space:pre-wrap;}
+.question-box{background:#fff8f0;border:1px solid var(--warnl);border-radius:8px;padding:12px 14px;font-size:12px;color:#444;line-height:1.75;margin-bottom:10px;}
+.question-box strong{color:var(--warn);}
 
-.prog-wrap{margin:0 24px 20px;background:#ffffff;border:1px solid #dde3d8;border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;}
-.prog-lbl{font-size:10px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:1.5px;white-space:nowrap;}
-.prog-track{flex:1;height:4px;background:#222;border-radius:2px;}
-.prog-fill{height:100%;border-radius:2px;background:var(--y);transition:width .4s;}
-.prog-fill.g{background:var(--g);}
-.prog-pct{font-size:13px;font-weight:800;color:var(--y);white-space:nowrap;}
-.prog-pct.g{color:var(--g);}
+/* QUARTILE SECTION */
+.quartile-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px;}
+@media(max-width:700px){.quartile-grid{grid-template-columns:1fr;}}
+.q-card{border-radius:12px;padding:18px;border:1px solid var(--border);}
+.q1{background:#f0fdf4;border-color:var(--goodl);}
+.q2{background:var(--tgtgd);border-color:var(--tgtgl);}
+.q3{background:#fffbeb;border-color:var(--warnl);}
+.q4{background:#fef2f2;border-color:var(--dangerl);}
+.q-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;font-family:'DM Mono',monospace;margin-bottom:6px;}
+.q1 .q-label{color:var(--good);}
+.q2 .q-label{color:var(--tgtg);}
+.q3 .q-label{color:var(--warn);}
+.q4 .q-label{color:var(--danger);}
+.q-title{font-size:15px;font-weight:800;margin-bottom:6px;letter-spacing:-.2px;}
+.q-def{font-size:11px;color:var(--muted);line-height:1.65;margin-bottom:12px;}
+.q-actions{font-size:11px;line-height:1.8;}
+.q-actions li{margin-left:14px;margin-bottom:4px;color:#333;}
+.q-actions li strong{color:var(--text);}
+.q-badge{display:inline-block;font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;margin-top:8px;font-family:'DM Mono',monospace;}
+.q1 .q-badge{background:var(--goodd);color:var(--good);border:1px solid var(--goodl);}
+.q2 .q-badge{background:var(--tgtgd);color:var(--tgtg);border:1px solid var(--tgtgl);}
+.q3 .q-badge{background:var(--warnd);color:var(--warn);border:1px solid var(--warnl);}
+.q4 .q-badge{background:var(--dangerd);color:var(--danger);border:1px solid var(--dangerl);}
 
-.grid{padding:0 24px 60px;display:flex;flex-direction:column;gap:10px;}
-
-.tcard{background:#ffffff;border:1px solid #dde3d8;border-radius:12px;overflow:hidden;transition:border-color .2s;}
-.tcard.done{border-color:rgba(34,197,94,.3);}
-.tcard-head{padding:16px 18px;display:flex;align-items:flex-start;gap:12px;cursor:pointer;user-select:none;}
-.tcard-icon{font-size:20px;width:40px;height:40px;background:#f7f8f5;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.tcard-mid{flex:1;}
-.tcard-top{display:flex;align-items:center;gap:7px;margin-bottom:3px;flex-wrap:wrap;}
-.tcard-title{font-size:15px;font-weight:800;letter-spacing:-.2px;}
-.tcard-meta{font-size:12px;color:var(--m);line-height:1.55;}
-.tcard-end{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;padding-top:2px;}
-
-.chk{width:22px;height:22px;border-radius:6px;border:1.5px solid #333;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;}
-.chk.done{background:var(--g);border-color:var(--g);}
-.chk svg{display:none;}
-.chk.done svg{display:block;}
-.arr{color:#333;font-size:11px;transition:transform .25s;}
-.tcard.open .arr{transform:rotate(180deg);}
-
-.tag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;text-transform:uppercase;letter-spacing:.8px;}
-.tm{background:var(--pd);color:var(--p);}
-.tf{background:var(--yd);color:var(--y);}
-.tp{background:var(--bd);color:var(--b);}
-.tg{background:var(--gd);color:var(--g);}
-.td{background:#1e1e1e;color:#555;}
-
-.tcard-content{display:none;border-top:1px solid #222;padding:18px 18px 20px;}
-.tcard.open .tcard-content{display:block;}
-.delivered-by{display:inline-flex;align-items:center;gap:6px;background:var(--yd);border:1px solid var(--yl);border-radius:7px;padding:5px 11px;font-size:11px;font-weight:700;color:var(--y);margin-bottom:16px;}
-.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
-@media(max-width:620px){.content-grid{grid-template-columns:1fr;}}
-.c-lbl{font-size:9px;font-weight:700;color:var(--y);text-transform:uppercase;letter-spacing:2px;margin-bottom:7px;}
-.c-list{display:flex;flex-direction:column;gap:5px;}
-.c-item{display:flex;align-items:flex-start;gap:7px;font-size:12px;color:#aaa;line-height:1.55;}
-.dot{width:5px;height:5px;border-radius:50%;background:var(--y);flex-shrink:0;margin-top:5px;}
-.dot.b{background:var(--b);}
-
-.agenda{background:#f7f8f5;border-radius:9px;padding:12px 14px;}
-.a-row{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid #1a1a1a;font-size:12px;}
-.a-row:last-child{border-bottom:none;}
-.a-time{color:var(--y);font-weight:700;font-size:10px;white-space:nowrap;width:52px;flex-shrink:0;padding-top:2px;}
-.a-text{color:#aaa;line-height:1.55;flex:1;}
-.a-text strong{color:#ddd;}
-
-.res-section{margin-bottom:14px;}
-.res-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px;}
-.res-btn{font-size:11px;font-weight:600;padding:5px 11px;border-radius:7px;background:#f7f8f5;color:#999;border:1px solid #2a2a2a;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;display:inline-flex;align-items:center;gap:5px;}
-.res-btn:hover{border-color:var(--y);color:var(--y);}
-.res-btn::before{content:'📄';font-size:10px;}
-
-.done-btn{width:100%;padding:10px;border-radius:8px;border:1.5px solid #dde3d8;background:transparent;font-size:12px;font-weight:700;color:#555;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;margin-top:2px;}
-.done-btn:hover{border-color:var(--g);color:var(--g);}
-.done-btn.done{background:var(--gd);border-color:var(--gl);color:var(--g);}
-
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:300;align-items:center;justify-content:center;padding:20px;}
-.overlay.on{display:flex;}
-.rmodal{background:#1a1a1a;border:1px solid #dde3d8;border-radius:14px;padding:24px;width:100%;max-width:560px;max-height:88vh;overflow-y:auto;}
-.rmodal-title{font-size:17px;font-weight:900;margin-bottom:3px;letter-spacing:-.3px;}
-.rmodal-sub{font-size:11px;color:var(--m);margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--b1);}
-.rmodal-body{font-size:13px;color:#bbb;line-height:1.85;white-space:pre-wrap;}
-.rmodal-body strong{color:#eee;display:block;margin-top:14px;margin-bottom:2px;}
-.rmodal-body strong:first-child{margin-top:0;}
-.rmodal-close{margin-top:20px;padding:10px;border-radius:8px;border:1px solid #dde3d8;background:transparent;color:var(--m);font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;width:100%;transition:all .15s;}
-.rmodal-close:hover{border-color:var(--y);color:var(--y);}
+.sep{height:1px;background:var(--border);margin:28px 0;}
+.section-eye{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--tgtg);margin-bottom:12px;font-family:'DM Mono',monospace;}
+.section-h2{font-size:20px;font-weight:900;letter-spacing:-.4px;margin-bottom:8px;}
+.section-sub{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:20px;}
 </style>
 </head>
 <body>
 
 <div class="hdr">
-  <div class="brand"><em>Too Good</em> To Go · Training Hub</div>
-  <div class="hdr-right" id="hdr-stat">Loading…</div>
+  <div class="brand">Too Good To Go · UK &amp; Ireland</div>
+  <div class="hdr-sub">Head of Independent Partners · Training Hub</div>
 </div>
 
-<div class="sec-tabs">
-  <div class="sec-tab on" onclick="switchSec('sm',this)">TL Development — HoI → Team Leads &amp; Senior phone reps · 6 sessions</div>
-  <div class="sec-tab" onclick="switchSec('team',this)">Team Programme — HoI → All phone reps · 10 sessions</div>
-</div>
+<div class="wrap">
+  <div class="hero-eye">Phone Sales Training</div>
+  <div class="hero-h1">Build every rep.<br>Coach every TL.<br><em>Raise the floor.</em></div>
+  <div class="hero-sub">Two programmes — one for Team Leads, one for the full rep team. Every session is phone-first, specific to Too Good To Go's Surprise Bag model, and tied to a measurable outcome. Training without behaviour change is just a meeting.</div>
 
-<div id="sec-sm">
-  <div class="sec-hero">
-    <div class="sec-eye" style="color:var(--p)">Train the trainer · Head of Independent Partners → Team Leads &amp; Senior phone reps</div>
-    <div class="sec-title">TL Development Programme</div>
-    <div class="sec-sub">6 sessions. The objective is not to make managers better sellers. It is to make them better coaches — so that every session compounds down through the rep layer and into the market.</div>
-  </div>
-  <div class="prog-wrap">
-    <div class="prog-lbl">TL programme · 6 sessions</div>
-    <div class="prog-track"><div class="prog-fill" id="sm-fill" style="width:0%"></div></div>
-    <div class="prog-pct" id="sm-pct">0 / 6</div>
-  </div>
-  <div class="grid" id="sm-grid"></div>
-</div>
+  <!-- QUARTILE SEGMENTATION — featured top -->
+  <div class="section-eye">Rep Segmentation — Before Any Training Begins</div>
+  <div class="section-h2">Quartile the team first.<br>Then tailor the training.</div>
+  <div class="section-sub">Generic training delivers generic results. Every rep gets placed into a performance quartile based on dials, meaningful conversations, and Surprise Bag close rate before any training programme starts. The training they receive depends on the quartile they're in — not on how long they've been in the role.</div>
 
-<div id="sec-team" style="display:none">
-  <div class="sec-hero">
-    <div class="sec-eye" style="color:var(--y)">Full team · Head of Independent Partners → All phone reps · mandatory before first solo visit</div>
-    <div class="sec-title">Field Sales Training Programme</div>
-    <div class="sec-sub">10 sessions covering methodology, objection handling, CRM discipline, field execution, and the pitch certification every rep must pass before their first solo prospect call. Click any resource chip to open the full template or framework.</div>
-  </div>
-  <div class="prog-wrap">
-    <div class="prog-lbl">Team programme · 10 sessions</div>
-    <div class="prog-track"><div class="prog-fill g" id="team-fill" style="width:0%"></div></div>
-    <div class="prog-pct g" id="team-pct">0 / 10</div>
-  </div>
-  <div class="grid" id="team-grid"></div>
-</div>
+  <div class="quartile-grid">
+    <div class="q-card q1">
+      <div class="q-label">Q1 · Top Performers</div>
+      <div class="q-title">The Standard Bearers</div>
+      <div class="q-def">Above target on dials, meaningful conversations, and close rate. Consistent week-on-week. Closing Surprise Bags on the call and onboarding within 2 hours.</div>
+      <ul class="q-actions">
+        <li><strong>Method extraction:</strong> Document their best opening, objection handle, and close. Name it. Add it to the Gold Standard. They teach it at standup.</li>
+        <li><strong>Development path:</strong> Where are they heading? TL track, territory expansion, specialist segment lead? Give them the path before they look for it elsewhere.</li>
+        <li><strong>Stretch target:</strong> New segment — ethnic food, non-food, multi-site. Their next challenge keeps them engaged.</li>
+        <li><strong>Training role:</strong> Call of the Week nominations. Coaching moments in standup. Peer mentoring for Q3 reps.</li>
+      </ul>
+      <div class="q-badge">Retain · Develop · Extract method</div>
+    </div>
 
-<div class="overlay" id="roverlay" onclick="closeRes()">
-  <div class="rmodal" onclick="event.stopPropagation()">
-    <div class="rmodal-title" id="res-title"></div>
-    <div class="rmodal-sub" id="res-sub"></div>
-    <div class="rmodal-body" id="res-body"></div>
-    <button class="rmodal-close" onclick="closeRes()">Close</button>
+    <div class="q-card q2">
+      <div class="q-label">Q2 · Solid Performers</div>
+      <div class="q-title">The Backbone</div>
+      <div class="q-def">Meeting target most weeks. Consistent dialler with good conversation quality. Close rate slightly below Q1 — the gap is usually in the close, not the discovery.</div>
+      <ul class="q-actions">
+        <li><strong>Closing focus:</strong> The specific skill to develop is closing the Surprise Bag window on the call — not following up tomorrow. Role-play the close in weekly 1:1.</li>
+        <li><strong>AI call analysis:</strong> Every call scored. The pattern in the AI feedback tells you what to coach specifically — not what you think the problem is.</li>
+        <li><strong>Paired call-alongs:</strong> Listen to a Q1 rep once per week. Debrief immediately after. What did they do differently at the 4-minute mark?</li>
+        <li><strong>Recognition:</strong> Named specifically in standup when they close above their average. The acknowledgement matters — this quartile often goes unrecognised.</li>
+      </ul>
+      <div class="q-badge">Develop · Close coaching · Recognition</div>
+    </div>
+
+    <div class="q-card q3">
+      <div class="q-label">Q3 · Below Target</div>
+      <div class="q-title">The Coachable</div>
+      <div class="q-def">Below target on at least two of three metrics. Not yet a performance concern — a coaching opportunity. The distinction matters: Q3 reps who don't move after 4 weeks of structured coaching become a concern. Before that, they get the full programme.</div>
+      <ul class="q-actions">
+        <li><strong>Diagnose first:</strong> Skill gap (can't do it), confidence gap (won't try it), or effort gap (isn't doing it)? Each requires a different response.</li>
+        <li><strong>Weekly structured coaching:</strong> One specific skill per week. Not "be better at objections" — "when they say 'we don't waste much,' your next line is: tell me about your quietest day."</li>
+        <li><strong>Call-along this week:</strong> TL listens to three live calls and gives written feedback within 60 minutes. Not end of day — within the hour.</li>
+        <li><strong>Check-in cadence:</strong> TL checks in at 11am and 3pm. Not to pressure — to diagnose. "How's the morning going?" before "what's your dial count?"</li>
+      </ul>
+      <div class="q-badge">Coach · Diagnose · Weekly review</div>
+    </div>
+
+    <div class="q-card q4">
+      <div class="q-label">Q4 · Underperforming</div>
+      <div class="q-title">Decision Required</div>
+      <div class="q-def">Consistently below target across all metrics for 3+ weeks. Coaching has not produced movement. This quartile requires a direct conversation — not more of the same training.</div>
+      <ul class="q-actions">
+        <li><strong>Direct conversation this week:</strong> "Here's what I'm seeing. Here's what needs to change. Here's the timeline — 3 weeks to reach X." Specific, documented, clear.</li>
+        <li><strong>Diagnose root cause:</strong> Wrong role? Personal situation? Management failure? The honest answer changes the response. Don't PIP someone whose problem is a bad onboarding.</li>
+        <li><strong>If skill gap — intensive:</strong> Daily 15-minute role-play. Script the specific call. Listen live. Feedback immediately. Repeat.</li>
+        <li><strong>If motivation or fit — honest conversation:</strong> Is this the right role for them? Ask it directly. The answer saves everyone time.</li>
+      </ul>
+      <div class="q-badge">Direct conversation · PIP if warranted</div>
+    </div>
+  </div>
+
+  <div style="background:var(--bg2);border-left:3px solid var(--tgtg);padding:12px 16px;border-radius:0 8px 8px 0;font-size:12px;color:var(--muted);line-height:1.75;margin-bottom:32px;">
+    <strong style="color:var(--text);">How to assign quartiles:</strong> Pull the last 4 weeks of data — dials per day, meaningful conversations per 50 dials, Surprise Bags agreed per week. Rank all reps. Top 25% = Q1, next 25% = Q2, next 25% = Q3, bottom 25% = Q4. Review and re-assign every 4 weeks. A rep who moves from Q3 to Q2 is recognised publicly. A rep who moves from Q4 to Q3 gets a specific acknowledgement in their 1:1.
+  </div>
+
+  <!-- PROGRAMME SELECTOR -->
+  <div class="section-eye">Training Programmes</div>
+  <div class="prog-tabs">
+    <button class="prog-tab active" onclick="setProg('tl',this)">👔 Head of Indies → Team Leads</button>
+    <button class="prog-tab" onclick="setProg('rep',this)">📞 Full Team → All Reps</button>
+  </div>
+
+  <!-- TL PROGRAMME -->
+  <div class="prog active" id="prog-tl">
+    <div style="font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:20px;padding:14px 16px;background:var(--bg2);border-radius:8px;">
+      <strong style="color:var(--text);">For the Head of Indies to run with all three Team Leads.</strong> These sessions develop the TLs as coaches, not just managers. A TL who can coach call quality, diagnose performance gaps, and develop their team independently is the multiplier that scales the whole function. 8 sessions. Fortnightly. 60–90 minutes each.
+    </div>
+    <div class="sessions" id="tl-sessions"></div>
+  </div>
+
+  <!-- REP PROGRAMME -->
+  <div class="prog" id="prog-rep">
+    <div style="font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:20px;padding:14px 16px;background:var(--bg2);border-radius:8px;">
+      <strong style="color:var(--text);">For the Head of Indies and TLs to run with all phone reps.</strong> 10 sessions across the first 12 weeks. Every session is specific to TGTG's Surprise Bag model — surplus discovery, objection handling, closing on the call, onboarding within 2 hours. Quartile-specific breakouts after every session.
+    </div>
+    <div class="sessions" id="rep-sessions"></div>
   </div>
 </div>
 
 <script>
-var DONE = JSON.parse(localStorage.getItem('ec_training3')||'{}');
+var TL_SESSIONS = [
+  {
+    num:'S1', title:'What coaching actually is — and what it isn't',
+    tags:['Coach','90 min'], dur:'90 min',
+    sub:'Most Team Leads manage activity. Very few coach behaviour. This session draws the line between the two and gives every TL a repeatable coaching model.',
+    objectives:[
+      'Distinguish between reporting activity (dial counts, bag numbers) and coaching behaviour (specific call technique)',
+      'Learn the Situation-Behaviour-Impact feedback model and use it on a real call from the past week',
+      'Commit to one coaching action for each of their reps before the next session'
+    ],
+    script:`FACILITATOR: "Tell me about a call one of your reps made this week that you want to coach on."
 
-var RES = {
-  'GROW Model':{
-    title:'GROW Coaching Model',
-    sub:'Use this structure in every coaching conversation. You ask. They answer.',
-    body:`<strong>G — Goal</strong>
-What does the rep want to achieve in this conversation? In this quarter?
-"What would a great outcome for you look like here?"
+[TL describes the call]
 
-<strong>R — Reality</strong>
-What is actually happening right now? Data, behaviour, pattern — not interpretation.
-"Walk me through what happened in that visit. What did you say? What did they say?"
+FACILITATOR: "What specifically did they say — word for word — at the moment the call went wrong?"
 
-<strong>O — Options</strong>
-Generate options together. Do not hand them the answer.
-"What are three different ways you could have handled that objection?"
-"What would the top performer in the team have done?"
+[TL recalls the moment]
 
-<strong>W — Will</strong>
-What are they going to do? Specific. Committed. Time-bound.
-"Which option are you going to try in your next visit this week?"
-"What will I see differently by Friday?"
+FACILITATOR: "That's the moment. Not 'they need to improve their objection handling.' That specific line. That's what you coach.
 
-<strong>The coach's rule</strong>
-You ask. They answer. The moment you start answering your own questions, you have stopped coaching and started managing.`
+Now — what would you want them to say instead? Write it out."
+
+[TL writes the alternative]
+
+FACILITATOR: "That's the coaching. Not a general direction. A specific replacement. 
+
+The rep needs to hear: what they said, what effect it had, and what to say instead. Three things. In that order. Every time."`
   },
-  'SBI Feedback':{
-    title:'SBI Feedback Framework',
-    sub:'Situation · Behaviour · Impact. The only feedback structure that actually lands.',
-    body:`<strong>S — Situation</strong>
-Name the specific moment. Not "lately" or "sometimes." The exact visit, call, or meeting.
-"In the pipeline review this morning when we were looking at the Shoreditch cluster…"
+  {
+    num:'S2', title:'Call quality scoring — how to use AI analysis in coaching',
+    tags:['Coach','Data','60 min'], dur:'60 min',
+    sub:'AI call analysis gives every TL feedback on every call. This session teaches TLs to use that output in coaching — not just to report it.',
+    objectives:[
+      'Read an AI call analysis report and identify the two most coachable moments',
+      'Translate an AI score into a specific coaching conversation with the rep',
+      'Build a weekly rhythm: AI report reviewed Monday morning, coaching action by Tuesday 1:1'
+    ],
+    script:`FACILITATOR: "Here's an AI analysis from a real call. [Share anonymised output]
 
-<strong>B — Behaviour</strong>
-What they said or did. Observable. Not interpreted. Never about character.
-"…you moved on from the deal before we'd identified who the economic buyer was."
+Read the scores. Now — ignore the overall score. Which single criterion score, if improved by 20 points, would have the biggest impact on this rep's close rate?
 
-<strong>I — Impact</strong>
-What happened as a result. Business outcome, team effect, or how it landed.
-"…which means there is no qualified next step, and that deal is now invisible in the forecast."
+[TL identifies the criterion]
 
-<strong>Corrective example (full)</strong>
-"In the Bristol review yesterday [S], you estimated 90% close probability on a venue that hasn't returned a call in three weeks [B]. That is the third time this month and means our forecast is unreliable for Chelsea [I]."
+FACILITATOR: "Good. Now — what's the coaching action? Not 'improve your surplus discovery.' What specific question do you want them to ask at minute 2?
 
-<strong>Positive example (full)</strong>
-"In that dial on Vyner Street this morning [S], you opened with a question about Tuesday occupancy before saying a word about TGTG [B]. The operator had sold herself before you pitched [I]. That is the Challenger teach moment. Teach it to the team on Friday."`
+Write it. We're going to role-play it."
+
+[Role-play the improved moment]
+
+FACILITATOR: "That's what goes into the 1:1 on Tuesday. The AI found the moment. You coach the replacement."`,
   },
-  'Weekly 1:1 Agenda':{
-    title:'Weekly 1:1 Agenda',
-    sub:'30 minutes. Every week. Non-negotiable. Close the laptop.',
-    body:`<strong>0–5 min — Rep's agenda first</strong>
-Always start with what they want to cover. It signals this is their time.
-"What do you want to make sure we get to today?"
+  {
+    num:'S3', title:'Quartile management — tailoring your approach per rep',
+    tags:['Coach','Core','75 min'], dur:'75 min',
+    sub:'One coaching style for all reps produces average results. This session gives TLs a clear framework for managing Q1 through Q4 differently.',
+    objectives:[
+      'Assign every rep on their team to a quartile using the last 4 weeks of data',
+      'Identify the right coaching approach for each quartile — development for Q1, close coaching for Q2, structured intervention for Q3, direct conversation for Q4',
+      'Design one specific coaching action for each rep this week, quartile-appropriate'
+    ],
+    script:`FACILITATOR: "Pull up your team's data for the last 4 weeks. We're going to assign quartiles now, together.
 
-<strong>5–15 min — One deal deep</strong>
-Pick one deal from their pipeline. Use MEDDIC to diagnose. Ask, don't tell.
-"Walk me through where this one actually stands. Who is your champion?"
+For each rep: dials per day average, meaningful conversations per 50 dials, Surprise Bags agreed per week. Rank them.
 
-<strong>15–22 min — Development focus</strong>
-One skill, one behaviour, one coaching moment from the week. Specific.
-"The objection handling on Tuesday — let's replay that. What would you do differently?"
+[TL builds the ranking]
 
-<strong>22–28 min — Blockers and support</strong>
-What do they need from you that they are not getting?
-"What is slowing you down that I could remove?"
+FACILITATOR: "Now — your Q4 rep. What have you tried in the last 4 weeks to move them?
 
-<strong>28–30 min — Commitment</strong>
-One specific thing they are going to do before the next 1:1. Written down by both.
-"What is the one thing you are committing to this week?"
+[TL describes what they've done]
 
-<strong>Manager rule</strong>
-Close the laptop. Phone face-down. This is the most important 30 minutes of their week.`
+FACILITATOR: "Has it worked?
+
+[TL answers honestly]
+
+FACILITATOR: "If four weeks of coaching hasn't moved them — what are you going to do differently this week? Not more of the same. What changes?"
+
+[TL commits to a specific action different from what they've tried]`
   },
-  'MEDDIC Scorecard':{
-    title:'TGTG MEDDIC Deal Scorecard',
-    sub:'Score 0–2 per element. 10+ = qualified. Below 6 = diagnose or kill.',
-    body:`Rate each element: 0 = unknown, 1 = partially confirmed, 2 = fully confirmed
+  {
+    num:'S4', title:'Pipeline hygiene — owning the forecast',
+    tags:['Data','Core','60 min'], dur:'60 min',
+    sub:'A TL who owns their pipeline knows every deal, every next action, and every close date. A TL who doesn't is guessing. This session makes the pipeline real.',
+    objectives:[
+      'Review every open deal in their team's pipeline — not just the top 10',
+      'Apply the kill-or-action rule: any deal with no next step and no contact in 7 days gets a 48-hour reactivation deadline or gets closed',
+      'Build a weekly pipeline review habit that takes 20 minutes, not 2 hours'
+    ],
+    script:`FACILITATOR: "Open your CRM. Let's go through your pipeline deal by deal. For each one I want three things: next action, who owns it, and when.
 
-<strong>M — Metrics (0–2)</strong>
-Do you know the venue's actual quiet-night revenue loss?
-Can you articulate the £ value of the problem in the operator's own language?
+[TL walks through deals]
 
-<strong>E — Economic Buyer (0–2)</strong>
-Have you spoken to the owner or final decision-maker — not just the floor manager?
-Do they know about TGTG and have they engaged with the concept?
+FACILITATOR: "This deal. Last contact 9 days ago. No next step. What's the situation?"
 
-<strong>D — Decision Criteria (0–2)</strong>
-Do you know what matters most to them? Brand protection? Revenue? Ease of use? Control?
-Have they told you what a good solution looks like?
+[TL explains]
 
-<strong>D — Decision Process (0–2)</strong>
-Do you know the steps between now and a signed agreement?
-Is there a partner, accountant, or ops director who needs to be involved?
+FACILITATOR: "Is it live or dead? Give me a binary answer."
 
-<strong>I — Identify Pain (0–2)</strong>
-Has the operator said the problem out loud — in their own words?
-Do they agree the status quo (empty tables) is unacceptable?
+[TL answers]
 
-<strong>C — Champion (0–2)</strong>
-Is there someone inside the venue who wants this to happen?
-Will they advocate for TGTG when you are not in the room?
+FACILITATOR: "If it's live — reactivation call today, outcome logged by 5pm. If it's dead — close it now. In the system. 
 
-<strong>Score guide</strong>
-10–12 → Qualified. Progress with urgency.
-7–9   → Identify and fill the weakest element this week.
-4–6   → This is a prospect, not a deal. Back to discovery.
-0–3   → Not yet in pipeline. Move to nurture.`
+A pipeline full of hope is not a pipeline. It's a wish list. The number you give the Head of Indies is the number they give Chelsea. Make it real."`,
   },
-  'Pipeline Review Template':{
-    title:'Weekly Pipeline Review Template',
-    sub:'25 minutes per city. Diagnostic not descriptive. Manager asks — rep defends.',
-    body:`<strong>Before the review</strong>
-Pull the live pipeline from HubSpot. Sort by expected close date.
-Flag any deal with no activity in 7+ days before the meeting starts. Do not let them arrive as surprises.
+  {
+    num:'S5', title:'Running a standup that changes behaviour',
+    tags:['Culture','Core','60 min'], dur:'60 min',
+    sub:'Most standups report what happened yesterday. A great standup changes what happens today. This session redesigns the standup as a coaching and culture tool.',
+    objectives:[
+      'Restructure their standup: win first, number second, coaching point third, commitment last',
+      'Give specific public recognition — name the rep, name the technique, name the result',
+      'End every standup with one commitment from every rep — written, not verbal'
+    ],
+    script:`FACILITATOR: "Tell me how your standup runs today. Walk me through the last one."
 
-<strong>Opening (2 min)</strong>
-"We have [X] in qualified, [Y] in proposal, [Z] in close. I want to understand the three that matter most this week."
+[TL describes their standup]
 
-<strong>Deal by deal (18 min)</strong>
-For each deal in focus, ask:
-• "Where does this actually stand?"
-• "Who is the economic buyer and have you spoken to them directly?"
-• "What is their decision process — who else needs to say yes?"
-• "What is the specific next step and when does it happen?"
-If the rep cannot answer: "What do you need to find out — and by when?"
+FACILITATOR: "How long did the team feel energised after it? What was the first thing they did when they sat back down?
 
-<strong>Forecast (3 min)</strong>
-Commit: deals closing this week with high confidence.
-Likely: deals closing this month.
-Pipeline: everything else — no guesses dressed as commits.
+[TL reflects]
 
-<strong>Close (2 min)</strong>
-One coaching action per rep. Specific. Time-bound.
-"By Thursday I want you to have spoken to the owner directly — not the manager."
+FACILITATOR: "The standup changes behaviour or it reports it. Here's the test: after your standup, does each rep know specifically what they're going to do differently on their next call?
 
-<strong>Manager rule</strong>
-You are diagnosing, not selling. The moment you suggest how to close the deal, the rep stops learning.`
+If yes — it's a coaching standup. If no — it's a reporting meeting.
+
+What's the one thing you're going to change tomorrow morning?"`,
   },
-  'Five Objections Guide':{
-    title:'TGTG — The Five Core Objections',
-    sub:'Response guide for every rep. Know all five before your first solo visit.',
-    body:`<strong>1. "Discounting damages our brand."</strong>
-Framework: Challenger reframe
-"I understand that completely — and that is exactly why this works differently. You choose when the offer runs, the discount depth, and which sessions it covers. A Tuesday at 6pm with three empty covers is not your brand — it is invisible. TGTG makes it visible, without touching Friday night."
+  {
+    num:'S6', title:'Resilience — managing a team through a hard week',
+    tags:['Culture','Coach','60 min'], dur:'60 min',
+    sub:'Every team has hard weeks. A TL who knows what to do when their team is struggling keeps the team together. A TL who panics makes it worse.',
+    objectives:[
+      'Identify the three signals that a rep is about to disengage — before they resign or check out',
+      'Know the difference between a skill slump (coaching fixes it), a confidence slump (presence fixes it), and a motivation slump (conversation fixes it)',
+      'Have the right conversation with a struggling rep — not a performance conversation, a human one'
+    ],
+    script:`FACILITATOR: "Think of the last time someone on your team had a hard three days. What did you do?
 
-<strong>2. "Your commission is too high."</strong>
-Framework: ACR — Acknowledge, Clarify, Respond
-"Fair point to raise. Can I ask — too high compared to what? An empty table earns £0. On a £60 bill we take £12 and you net £33 on a cover you would not have had. What number would you need to see to make this work for you?"
+[TL describes their response]
 
-<strong>3. "We are already on TheFork / First Table."</strong>
-Framework: Boomerang
-"Good — that tells me you are already comfortable with demand-generation platforms. TGTG is additive, not competitive. Different diner profile, different behaviour. Most of our venues run alongside both. What is your quiet-night occupancy looking like right now?"
+FACILITATOR: "What did you not do that you wish you had?
 
-<strong>4. "We are too busy — we do not need more covers."</strong>
-Framework: Feel-Felt-Found + redirect
-"A lot of our busiest venues said exactly the same thing. What they found is that TGTG fills the specific windows they cannot fill themselves — early week, early evening, the gaps between peaks. It does not compete with your Saturday night. It monetises your Tuesday."
+[TL reflects honestly]
 
-<strong>5. "Let me think about it."</strong>
-Framework: Clarify and anchor
-"Of course. What specifically do you want to think through? I want to make sure I have given you everything you need." [Listen, then:] "If those are the main questions, could we get a provisional start date in the diary now — and if it does not feel right in a week, we can move it? Setup is free and takes 20 minutes."`
+FACILITATOR: "Here's what a hard three days usually needs: one manager who sits alongside them for one call. Not to coach. Not to pressure. Just to be there.
+
+The act of not being alone changes the next dial. That's not soft management — that's the fastest route back to full activity. What stops you from doing that today?"`,
   },
-  'SPIN Question Bank':{
-    title:'SPIN Question Bank — TGTG Context',
-    sub:'Questions for each stage of a prospect call. Use in sequence. Never pitch before N.',
-    body:`<strong>S — Situation questions</strong>
-"How long have you been open in this location?"
-"What is your current table capacity and average occupancy across the week?"
-"Which platforms are you currently using to drive covers?"
-"How does your Tuesday evening compare to your Saturday?"
+  {
+    num:'S7', title:'Developing your best people — keeping Q1 reps',
+    tags:['Core','Coach','60 min'], dur:'60 min',
+    sub:'Top performers leave when they stop seeing a path. This session gives TLs the tools to keep their best people growing — before they start looking elsewhere.',
+    objectives:[
+      'Have a development conversation with every Q1 and Q2 rep this week — not a performance conversation, a future conversation',
+      'Identify the next step for each top performer: TL track, territory lead, specialist segment, peer coaching role',
+      'Know the warning signs that a top performer is beginning to disengage — and what to do before they hand in their notice'
+    ],
+    script:`FACILITATOR: "Who on your team is your best performer? Name them.
 
-<strong>P — Problem questions</strong>
-"What is your biggest challenge with Monday to Wednesday covers right now?"
-"Are there sessions where you are consistently running below 50% capacity?"
-"What happens to your kitchen and front-of-house team on a quiet Tuesday evening?"
-"How much revenue do you estimate you are leaving on the table on slow nights?"
+[TL names the rep]
 
-<strong>I — Implication questions</strong>
-"If that pattern continues for another year, what does it mean for your margins?"
-"What is the impact on your team when they are standing around on a quiet night?"
-"If a competitor opens nearby and fills their Tuesday nights — how does that change your position?"
-"What does it cost you every week to have covers you cannot fill?"
+FACILITATOR: "When did you last have a conversation with them about where they're heading — not this month's target, but what they want their career to look like in 18 months?
 
-<strong>N — Need-Payoff questions</strong>
-"If you could reliably fill three extra covers every Tuesday and Wednesday, what would that be worth annually?"
-"Would it be valuable if you could choose exactly which sessions to activate — no commitment, no minimum?"
-"If you could fill those quiet sessions without touching your pricing on peak nights, would that solve the problem?"`
+[TL answers]
+
+FACILITATOR: "That conversation is the retention tool. Not the bonus, not the recognition — the conversation about the path. A rep who can see where they're going doesn't look for it somewhere else.
+
+What's the next step for this person? Be specific. What would you offer them in the next 90 days that they can't get anywhere else right now?"`,
   },
-  'Cialdini Principles':{
-    title:'Cialdini — 6 Principles Applied to TGTG',
-    sub:'Use deliberately. Never manipulatively. Know which principle you are using before you use it.',
-    body:`<strong>1. Reciprocity</strong>
-Give before you ask. Share a useful insight about their quiet inventory before pitching.
-"I looked at your Google reviews before coming in — your Tuesday evening reviews are actually strong. The issue is not experience, it is visibility."
+  {
+    num:'S8', title:'The TL's own performance — what does good look like for you?',
+    tags:['Coach','Core','90 min'], dur:'90 min',
+    sub:'The final session turns the coaching lens on the TL themselves. What does an excellent Team Lead look like at Too Good To Go? Where are each of them relative to that standard?',
+    objectives:[
+      'Self-assess against five TL competencies: call coaching quality, pipeline grip, team culture, upward communication, and rep development',
+      'Identify one thing to double down on and one thing to change in the next quarter',
+      'Set a personal development commitment for the next 90 days — with a check-in date'
+    ],
+    script:`FACILITATOR: "Score yourself honestly against five things: how specifically you coach, how well you know your pipeline, what the energy in your standup is like, how proactively you communicate upward, and how many of your reps have improved in the last 90 days.
 
-<strong>2. Commitment and Consistency</strong>
-Get small agreements early that lead naturally to the big one.
-"You agree empty tables earn £0?" → "You agree Tuesday is your quietest night?" → "So any revenue from Tuesday is better than nothing?"
+[TL self-scores]
 
-<strong>3. Social Proof</strong>
-Name a comparable venue they will respect — ideally nearby.
-"Café OTO two streets away has been running with us for six months — their Wednesday bookings are up 40%."
+FACILITATOR: "Where are you most proud?
 
-<strong>4. Authority</strong>
-Establish expertise early. Reference data they do not have.
-"We see across 4,000 venues — the ones that activate Tuesday at 6:30pm consistently outperform their own forecast by 15–20%."
+[TL identifies their strength]
 
-<strong>5. Liking</strong>
-Find genuine common ground. Know something real about their venue before you dial.
-"I saw you won Time Out's Best Neighbourhood Restaurant — genuinely impressive for a 30-cover room."
+FACILITATOR: "Where are you avoiding being honest with yourself?
 
-<strong>6. Scarcity</strong>
-Use only when true. Never manufacture urgency.
-"We are limiting new venues in E8 to protect the consumer experience — I can hold a spot for two weeks but after that it goes to open applications."`
+[TL identifies the real development area]
+
+FACILITATOR: "That's the work. Not the thing you scored lowest on necessarily — the thing you've been avoiding. What are you going to do about it in the next 30 days? Specifically."`,
   },
-  'TGTG Pitch Script':{
-    title:'TGTG Pitch Anatomy — 8 Minutes',
-    sub:'The one pitch. Learn it cold. Adapt the details. Never skip a stage.',
-    body:`<strong>Opening question (60 sec)</strong>
-Do not start with "Let me tell you about TGTG."
-Start with their number: "How many covers are you running on a Tuesday evening right now?"
-[Let them answer.] "And what is your capacity?" [Pause. Let them do the maths.]
-
-<strong>Teach moment (90 sec)</strong>
-"Every empty table earns you exactly £0. Your kitchen is staffed, the lights are on, the team is there — the only variable is whether there is a customer in the seat."
-"TGTG fills those covers with real-time offers, only when you choose to activate them. No commitment. No minimum."
-
-<strong>The economics (90 sec)</strong>
-Use their numbers. If AOV is £55:
-"A diner comes in on a Tuesday at 25% off — they pay £41. We take £11 commission. You net £30."
-"Without us, you net £0 on that cover. With us, £30." [Pause.]
-
-<strong>Proposed offer (60 sec)</strong>
-Suggest a specific starting point — do not ask them to design the offer cold.
-"For a venue like yours I would suggest starting with Tuesday and Wednesday, 6–7:30pm, at 20%. Low depth, off-peak only, your brand completely protected."
-
-<strong>Handle the objection (60–90 sec)</strong>
-Let them raise it. Do not pre-empt. Use the right framework.
-
-<strong>Close (60 sec)</strong>
-"Setup is free and takes 20 minutes. You can pause or stop at any time — no lock-in."
-"Can we get you live before next Tuesday so you can see what the data looks like from week one?"`
-  },
-  'Territory Density Guide':{
-    title:'Territory Density Strategy',
-    sub:'How to build a week that actually moves the marketplace — not just your activity count.',
-    body:`<strong>The principle</strong>
-Liquidity is local. A city is not a market — a territory is.
-One venue in E8 is worth less than five venues in E8. Density drives the consumer flywheel.
-
-<strong>How to cluster your week</strong>
-Monday:    E8 (Hackney Central) — walk everything within 800m of Broadway Market
-Tuesday:   E2 (Bethnal Green) — Columbia Road to Cambridge Heath
-Wednesday: N1 (Islington) — Upper Street corridor
-Thursday:  SE15 (Peckham) — Rye Lane to Bellenden Road
-Friday:    Follow up on the week's warm conversations
-
-<strong>The clustering rule</strong>
-Never criss-cross the city in one day.
-In every territory you visit, aim to leave with 3+ venues signed or in active conversation.
-Five venues in one territory drives more consumer behaviour than five venues in five different territorys.
-
-<strong>Walk-in vs booked visit</strong>
-Booked: economic buyer confirmed, MEDDIC at least partially complete.
-Walk-in: cold cluster. Walk every venue on the street. Get to the owner.
-"I am working with a few of your neighbours — do you have 10 minutes?"
-
-<strong>Density trigger</strong>
-Once you have 4+ active venues in a territory, flag for marketing to amplify consumer-side demand in that zone. Sales and marketing should move together.`
-  },
-  'City Launch Checklist':{
-    title:'New City Launch Checklist',
-    sub:'Day 1 to Day 90. What the Global Head of Independent Partners should see at each checkpoint.',
-    body:`<strong>Pre-launch (before Day 1)</strong>
-□ Territory strategy agreed — top 3 zones identified, ICP defined
-□ rep hired locally (or internal transfer confirmed)
-□ 10 warm venue introductions identified — not cold, known operators
-□ AM assigned and briefed before first close
-□ Consumer marketing budget confirmed for day 30 activation
-
-<strong>Week 1 — Anchor venues</strong>
-□ Rep dialling every day — no remote week one
-□ 5+ anchor prospect calls completed
-□ 2+ venues signed or in final conversation
-□ HubSpot pipeline live with named deals only (no ghost prospects)
-
-<strong>Day 14 — First checkpoint</strong>
-□ 8–10 venues signed in target territorys
-□ First redemptions live (at least 3 venues transacting)
-□ AM has completed onboarding calls with all signed venues
-□ Go-live page quality reviewed and approved for every venue
-□ Rep CRM fully current — no gaps
-
-<strong>Month 1 — Liquidity target</strong>
-□ 20+ venues live and transacting
-□ Density concentrated in 2–3 territorys (not spread)
-□ Weekday redemption share above 35%
-□ Consumer marketing activated in top territory
-
-<strong>Day 90 — Scaling trigger</strong>
-□ 50+ active venues, 75%+ transacting weekly
-□ Second rep hired or in process
-□ Partner Health scoring live for all venues
-□ Launch playbook updated with city-specific learnings`
-  },
-  'PIP Framework':{
-    title:'Performance Improvement Plan — Framework',
-    sub:'Use after the informal conversation has not produced change. Document everything.',
-    body:`<strong>Before the PIP</strong>
-A PIP should never be a surprise. There should have been at least one documented informal conversation first.
-The rep should know this conversation is coming.
-
-<strong>PIP structure</strong>
-Duration: 4–8 weeks (typical). State the exact end date at the start.
-Review cadence: weekly with the manager. Documented every time.
-Support offered: coaching sessions, joint visits, additional training. Written into the plan.
-Success criteria: specific, measurable, observable. Not "improve attitude."
-
-<strong>Example success criteria</strong>
-"Log all visits in HubSpot same day, 100% compliance, for 4 consecutive weeks."
-"Achieve minimum 8 new prospect calls per week for 6 consecutive weeks."
-"Close 3 qualified deals within the 8-week period."
-
-<strong>Documentation rule</strong>
-Write up every weekly review immediately. Include: what was covered, what was committed, what evidence was provided, next review date.
-If you cannot prove it was documented, it did not happen.
-
-<strong>UK employment law basics</strong>
-A fair process must be followed before any dismissal. This means: clear expectations communicated in writing, reasonable opportunity to improve, support offered, right to be accompanied at formal meetings.
-When in doubt, involve People & Culture before the formal process begins.
-
-<strong>The exit conversation (if needed)</strong>
-Professional. Respectful. Specific about why. No surprises if the process has been run correctly.
-The conversation should take under 20 minutes. Long exit conversations mean the process was not managed well earlier.`
-  }
-};
-
-var TL = [
-  {id:'sm1',icon:'🎯',title:'Coaching for Performance',
-   tags:[['Management','tm'],['3 hours','td']],
-   meta:'How to coach reps to improve — not just manage them to a number.',
-   by:'Head of Independent Partners · Head of Independent Partners',
-   obj:['Understand the difference between managing and coaching at scale','Apply the GROW model to a live rep conversation from this week','Deliver SBI feedback — Situation, Behaviour, Impact — without it landing as personal criticism','Run a weekly 1:1 that actually changes behaviour, not just reports on it','Diagnose will vs skill and choose the right response for each'],
-   agenda:[['0–20m','<strong>Why coaching beats managing at scale.</strong> The compounding argument — one coached rep coaches the next. The manager who manages gets output today. The manager who coaches gets a better team in 90 days.'],
-            ['20–50m','<strong>The GROW model in practice.</strong> Live role play with a real rep scenario from this week — not a hypothetical.'],
-            ['50–80m','<strong>SBI feedback.</strong> Specific, observable, non-personal. Practice in pairs using real moments from the last two weeks.'],
-            ['80–120m','<strong>The weekly 1:1.</strong> Structure, cadence, what to cover, what not to. Each manager builds their own format against the template.'],
-            ['120–150m','<strong>The de-motivated rep.</strong> Will vs skill diagnosis. When coaching is the right intervention and when it is not.'],
-            ['150–180m','<strong>Accountability without micromanagement.</strong> How to hold a rep to a coaching commitment and check progress without taking the work back.']],
-   res:['GROW Model','SBI Feedback','Weekly 1:1 Agenda']},
-
-  {id:'sm2',icon:'📊',title:'MEDDIC for Managers — Diagnosing Deals',
-   tags:[['Methodology','tp'],['2 hours','td']],
-   meta:'How to use MEDDIC to coach stalled deals in a pipeline review — not just report on them.',
-   by:'Head of Independent Partners · Head of Independent Partners',
-   obj:['Diagnose a stalled deal using MEDDIC in under 5 minutes','Ask the right questions in a review without inadvertently selling the deal yourself','Coach a rep through a weak MEDDIC without taking the deal away from them','Tell the difference between a deal that needs coaching and a deal that is dead','Run a weekly pipeline review that surfaces risk — not just volume'],
-   agenda:[['0–20m','<strong>MEDDIC refresher.</strong> All six elements in a hospitality marketplace context. Why each matters specifically to a venue sales conversation.'],
-            ['20–50m','<strong>Deal diagnosis live.</strong> Real pipeline deals. Manager uses MEDDIC to question each one. Rep defends or adjusts. No theory.'],
-            ['50–80m','<strong>Coaching after the review.</strong> The conversation that happens between the pipeline review and the next visit. How to help without doing it for them.'],
-            ['80–100m','<strong>Dead vs stalled.</strong> The specific signals that tell you to coach vs kill. How to have that conversation without damaging the relationship.'],
-            ['100–120m','<strong>Build your review format.</strong> Each manager leaves with the structure they will run every week. No excuses for an unstructured review after this session.']],
-   res:['MEDDIC Scorecard','Pipeline Review Template']},
-
-  {id:'sm3',icon:'⚡',title:'Motivating Your Team',
-   tags:[['Management','tm'],['2 hours','td']],
-   meta:'How to build a culture where people hold themselves accountable — and want to perform.',
-   by:'Head of Independent Partners · Head of Independent Partners',
-   obj:['Understand what drives each rep individually — intrinsic vs extrinsic motivation','Design recognition that actually lands — not generic praise that bounces off','Run a team that holds itself accountable without the manager as enforcer','Handle a team slump — energy, pace, and the reset conversation','Give hard feedback to a high performer without damaging the trust you have built'],
-   agenda:[['0–25m','<strong>What actually motivates people.</strong> Why money alone does not sustain performance. What the research and the field both say.'],
-            ['25–55m','<strong>Knowing your reps individually.</strong> A one-page motivational profile per rep. What do they care about? What makes them switch off? What have you assumed that might be wrong?'],
-            ['55–80m','<strong>Recognition that lands.</strong> Specific, public, immediate. Win Wire in practice. Why vague praise is worse than no praise.'],
-            ['80–100m','<strong>The team slump.</strong> What causes it, how to spot it at the standup before it shows in the numbers, and the reset conversation.'],
-            ['100–120m','<strong>Hard feedback without breaking trust.</strong> How to be direct and remain the manager people want to work for. The distinction between the behaviour and the person.']],
-   res:['SBI Feedback','Weekly 1:1 Agenda']},
-
-  {id:'sm4',icon:'🔍',title:'Running an Effective Pipeline Review',
-   tags:[['Process','tp'],['90 min','td']],
-   meta:'Turn the weekly pipeline review from a reporting session into a coaching intervention.',
-   by:'Head of Independent Partners · Head of Independent Partners',
-   obj:['Run a review that diagnoses problems rather than describes them','Ask questions that make the rep solve the deal — never the manager','Spot sandbagging, false confidence, and CRM fiction in real time','Build a forecast the business can actually rely on','Keep reviews sharp — 25 minutes per city, zero tolerance for drift'],
-   agenda:[['0–15m','<strong>What a pipeline review is not.</strong> Not a status update. Not a numbers read-out. Not a CRM audit. Why most pipeline reviews waste an hour and change nothing.'],
-            ['15–40m','<strong>The diagnostic review format.</strong> Deal by deal. One MEDDIC question per deal. Manager asks — rep answers. No leading questions.'],
-            ['40–60m','<strong>Spotting fiction.</strong> Sandbagging, wishful thinking, over-confident reps. The signals. How to call it without embarrassing the rep in front of the team.'],
-            ['60–80m','<strong>Forecast that the business trusts.</strong> Commit, likely, pipeline. What qualifies for each bucket. No wishful thinking in commit.'],
-            ['80–90m','<strong>Practice.</strong> Each manager runs a 10-minute review live. Others observe and give structured feedback on question quality.']],
-   res:['Pipeline Review Template','MEDDIC Scorecard']},
-
-  {id:'sm5',icon:'⚖️',title:'Performance Management and Difficult Conversations',
-   tags:[['Management','tm'],['3 hours','td']],
-   meta:'How to manage underperformance early, fairly, and without losing good people unnecessarily.',
-   by:'Head of Independent Partners · Head of Independent Partners',
-   obj:['Spot underperformance early — before it becomes an entrenched pattern','Have the informal conversation before it becomes a formal process','Document correctly every time — protecting the rep and the business','Run a PIP that gives the rep a genuine chance to recover','Know when a conversation has become a legal matter and how to act'],
-   agenda:[['0–20m','<strong>Early signals.</strong> CRM behaviour, energy in the standup, pipeline movement — what to watch before the numbers drop.'],
-            ['20–50m','<strong>The informal conversation first.</strong> Direct, documented, non-threatening. Role play in pairs using real scenarios.'],
-            ['50–80m','<strong>Formal PIP structure.</strong> Timeline, success criteria, support commitment, UK employment law basics. Nothing should surprise you in a formal process.'],
-            ['80–110m','<strong>Documentation discipline.</strong> What to record, how, when, what HR needs. If it is not documented, it did not happen.'],
-            ['110–150m','<strong>The exit conversation.</strong> When recovery is not happening. Professional, respectful, clean. Long exit conversations mean the process was managed badly earlier.'],
-            ['150–180m','<strong>Culture protection.</strong> How underperformance managed well strengthens a team. How it managed badly damages everyone — including the high performers watching.']],
-   res:['SBI Feedback','PIP Framework']},
-
-  {id:'sm6',icon:'🚀',title:'City Launch Playbook for Team Leads',
-   tags:[['Field','tf'],['2 hours','td']],
-   meta:'How to plan and execute a new TGTG city launch — and hit the Day 14 signals on time.',
-   by:'Head of Independent Partners · Head of Independent Partners',
-   obj:['Build a territory density strategy before Day 1 of a launch','Identify and close anchor venues in the first week','Know exactly what the Day 14 signals are and what to do if they are missed','Hire and ramp a new rep inside a compressed launch timeline','Avoid the four mistakes that slow every new city launch'],
-   agenda:[['0–20m','<strong>Why density beats spread.</strong> The liquidity argument. Geographic concentration as the non-negotiable operating principle for any new city.'],
-            ['20–45m','<strong>Territory strategy.</strong> How to read a new city — independent density, diner demand signals, AOV profile, competitor presence.'],
-            ['45–70m','<strong>Anchor venue strategy.</strong> Why the first 10 venues define the market perception. How to identify and approach them before Day 1.'],
-            ['70–90m','<strong>Day 14 review.</strong> Specific signals. What they mean. What to do if they are not where they need to be.'],
-            ['90–110m','<strong>Hiring inside a launch.</strong> Recruit locally, ramp fast, retain when launch momentum inevitably slows.'],
-            ['110–120m','<strong>The four mistakes.</strong> Geographic spread too early. Low deal scores accepted under pressure. No diner activation at launch. Hero-rep dependency from week one.']],
-   res:['Territory Density Guide','City Launch Checklist']},
 ];
 
-var TEAM = [
-  {id:'t1',icon:'📐',title:'MEDDIC — Certification',
-   tags:[['Methodology','tp'],['3 hours','td']],
-   meta:'Mandatory before first solo visit. Pass mark 80%. No exceptions.',
-   by:'Head of Independent Partners · Head of Independent Partners',
-   obj:['Define all six MEDDIC elements in a hospitality context without prompting','Apply MEDDIC from first contact through to signed agreement','Calculate the TGTG deal score on a live deal and know what it means','Identify which MEDDIC element is weakest in any stalled deal','Pass the certification at 80% or above'],
-   agenda:[['0–30m','<strong>Why MEDDIC.</strong> What it does to conversion when applied consistently. The cost of deals that fail for preventable reasons.'],
-            ['30–70m','<strong>M and E.</strong> Metrics — make the operator say their number out loud. Economic Buyer — who actually signs the agreement, and have you spoken to them?'],
-            ['70–100m','<strong>D and D.</strong> Decision Criteria — what matters most to this operator? Decision Process — what happens between today and a signed agreement?'],
-            ['100–130m','<strong>I — Identify Pain.</strong> The empty table conversation. Pain before pitch. Never pitch before the problem is explicit.'],
-            ['130–160m','<strong>C — Champion.</strong> How to find, develop, and keep the person on your side when you are not in the building.'],
-            ['160–180m','<strong>Certification.</strong> Each rep completes a MEDDIC scorecard on a live deal from their pipeline. Peer review and feedback.']],
-   res:['MEDDIC Scorecard']},
+var REP_SESSIONS = [
+  {
+    num:'S1', title:'The mission — why this call matters',
+    tags:['Core','45 min'], dur:'45 min',
+    sub:'Before any technique, every rep needs to understand what they're actually doing on every call. This session builds genuine belief in the TGTG mission — because belief is the best sales tool.',
+    objectives:[
+      'Understand the global food waste problem and TGTG's role in solving it',
+      'Frame every call as a rescue operation — not a sales pitch',
+      'Know the Surprise Bag model inside out: how it works, how partners get paid, what the customer experience is'
+    ],
+    script:`FACILITATOR: "One in three meals produced globally goes to waste. Every unsold pastry, every prep that didn't sell, every fruit and veg box that goes in the bin at the end of the day — that's the problem we solve.
 
-  {id:'t2',icon:'🔥',title:'Challenger Sale — Teach, Tailor, Take Control',
-   tags:[['Methodology','tp'],['3 hours','td']],
-   meta:'Stop pitching features. Start reframing how the operator thinks about their quiet inventory.',
-   by:'Head of Independent Partners · Head of Independent Partners',
-   obj:['Deliver a Teach moment that reframes how an operator sees their quiet nights — before you say a word about TGTG','Tailor the commercial insight to the specific venue type and owner profile','Take control of the sales conversation without being aggressive or pushy','Handle the brand objection using the Challenger reframe — without apologising for the product','Recognise yourself on the Challenger profile — and what to develop if you are not there yet'],
-   agenda:[['0–25m','<strong>The Challenger insight.</strong> Why relationship-building alone does not win complex sales. What the research says about what top-performing reps actually do differently.'],
-            ['25–60m','<strong>Teach.</strong> The commercial insight that reframes the operator\'s view of their quiet inventory. Practice the TGTG teach moment until it is fluent.'],
-            ['60–90m','<strong>Tailor.</strong> The same insight delivered differently to a Michelin-starred restaurant vs a casual neighbourhood bistro vs a cocktail bar.'],
-            ['90–120m','<strong>Take Control.</strong> How to drive the conversation to a decision without pushing. The close that feels like a natural conclusion.'],
-            ['120–160m','<strong>The brand objection.</strong> Challenger reframe. Role play until every rep can handle it without hesitation and without apology.'],
-            ['160–180m','<strong>Live pitch.</strong> Each rep delivers a Challenger-framed pitch to the room. Scored on Teach quality, Tailor, and Taking Control.']],
-   res:['Five Objections Guide','TGTG Pitch Script']},
+A Surprise Bag turns that waste into revenue. Food that was worth £0 — or worse, a disposal cost — earns the partner money. Every call you make today is a chance to add one more business to that number.
 
-  {id:'t3',icon:'🔄',title:'SPIN Selling — Questions That Open Deals',
-   tags:[['Methodology','tp'],['2 hours','td']],
-   meta:'Make the operator sell TGTG to themselves before you say a word about it.',
-   by:'Head of Independent Partners · Head of Independent Partners',
-   obj:['Open with Situation questions that build context — not just data collection','Surface the real problem with Implication questions that amplify the cost of inaction','Use Need-Payoff questions that make the operator articulate the solution in their own words','Never pitch before the pain is explicit','Compress the full SPIN sequence into a 20-minute prospect call without it feeling like an interview'],
-   agenda:[['0–20m','<strong>Why SPIN works.</strong> The psychology of self-persuasion. Why operators trust their own conclusions more than yours.'],
-            ['20–50m','<strong>S and P.</strong> Situation questions to establish context. Problem questions to surface real pain. Drill both until the questions feel natural.'],
-            ['50–80m','<strong>I and N.</strong> Implication questions that amplify the cost of inaction. Need-Payoff questions that make the operator name the solution.'],
-            ['80–100m','<strong>SPIN in 20 minutes.</strong> How to compress the full sequence into a fast venue conversation without it feeling mechanical.'],
-            ['100–120m','<strong>Live role play.</strong> Rep as rep, rep as operator. Full SPIN sequence. Feedback focuses on question quality — not technique.']],
-   res:['SPIN Question Bank']},
+You are not selling a subscription. You are calling a bakery that throws away 12 croissants every Tuesday and offering them a way to earn £18 from them instead of binning them.
 
-  {id:'t4',icon:'🧠',title:'NLP and Influence in Sales',
-   tags:[['Methodology','tp'],['2 hours','td']],
-   meta:'Cialdini\'s six principles, VAK communication styles, rapport, and reframing — applied to hospitality sales.',
-   by:'Head of Independent Partners · Head of Independent Partners',
-   obj:['Apply Cialdini\'s six principles of influence to the TGTG pitch — deliberately and ethically','Build genuine rapport in the first 60 seconds of a prospect call','Identify a venue owner\'s VAK preference and adapt your communication style in real time','Reframe the brand objection using NLP language patterns','Use anchoring and mirroring to build trust — and know where the ethical line is'],
-   agenda:[['0–25m','<strong>Cialdini\'s six principles.</strong> Reciprocity, commitment, social proof, authority, liking, scarcity. Specific TGTG application for each.'],
-            ['25–50m','<strong>Rapport in 60 seconds.</strong> Body language, mirroring, pacing. How the first impression determines the quality of the rest of the visit.'],
-            ['50–75m','<strong>VAK preference.</strong> Visual, auditory, kinaesthetic. How to identify which an operator is and adapt your language in real time.'],
-            ['75–95m','<strong>Reframing.</strong> NLP language patterns that shift how an objection lands. Practice the brand objection reframe.'],
-            ['95–120m','<strong>Anchoring.</strong> How to anchor a positive state to TGTG. Where the ethical line is and why staying on the right side of it matters for the long-term relationship.']],
-   res:['Cialdini Principles']},
+Does that change how you feel about picking up the phone?"`
+  },
+  {
+    num:'S2', title:'Surplus discovery — asking before pitching',
+    tags:['Core','60 min'], dur:'60 min',
+    sub:'The most common failure on a TGTG acquisition call is pitching before discovering. This session builds the habit of understanding the partner's surplus before describing the product.',
+    objectives:[
+      'Ask the surplus discovery question — "do you throw food away at the end of the day?" — and let the silence work',
+      'Follow the partner's answer to understand surplus type, volume, and timing before mentioning TGTG',
+      'Use the partner's own words to frame the Surprise Bag — their surplus, their window, their price'
+    ],
+    script:`[Role-play — two reps, one as rep, one as partner]
 
-  {id:'t5',icon:'🛡️',title:'Objection Handling Masterclass',
-   tags:[['Field','tf'],['3 hours','td']],
-   meta:'Every TGTG objection. Three frameworks. Certification at the end. No rep leaves until they can handle all five.',
-   by:'Head of Independent Partners · Head of Independent Partners',
-   obj:['Respond to all five core TGTG objections without hesitation or apology','Apply Feel-Felt-Found, ACR, and Boomerang to the right objection type','Know which framework fits which objection before you are in the room','Handle a hostile operator scenario under pressure — not just a polite role play','Never over-explain, justify excessively, or apologise in response to an objection'],
-   agenda:[['0–20m','<strong>Objection psychology.</strong> Why objections signal engagement not rejection. The mindset shift that changes how the conversation feels.'],
-            ['20–50m','<strong>The five TGTG objections.</strong> Brand damage. Commission too high. Already on other platforms. Too busy. Let me think about it. A response for each — before frameworks.'],
-            ['50–80m','<strong>Feel-Felt-Found.</strong> When to use it, how to use it, why it works for emotional objections. Brand and loyalty concerns.'],
-            ['80–110m','<strong>ACR — Acknowledge, Clarify, Respond.</strong> For logical objections. Commission conversation. Platform comparison.'],
-            ['110–130m','<strong>Boomerang.</strong> Turning the objection into the reason to sign. "You are too busy on weekends — that is exactly why TGTG works for Tuesday."'],
-            ['130–150m','<strong>Hostile operator scenario.</strong> Full objection sequence under pressure. Difficult character. Group observation and feedback.'],
-            ['150–180m','<strong>Certification.</strong> Each rep delivers responses to all five objections live. Pass = confident delivery, no apology, named framework used correctly.']],
-   res:['Five Objections Guide']},
+REP: "Hi — do you throw food away at the end of the day?"
 
-  {id:'t6',icon:'💾',title:'CRM Discipline and Data Hygiene',
-   tags:[['Process','tp'],['90 min','td']],
-   meta:'Why CRM discipline is a professional standard — not an admin burden. And how to make it frictionless.',
-   by:'Head of Independent Partners · Head of Independent Partners',
-   obj:['Log every visit the same day — every time, without exception','Apply the TGTG naming convention correctly for every venue from day one','Use voice memo logging on the move — no laptop or desk required','Understand why CRM discipline protects the rep — not just the manager','Know what a trusted pipeline looks like and why it matters for your own earnings forecast'],
-   agenda:[['0–15m','<strong>Why CRM matters for you — not for me.</strong> Clean pipeline = better coaching, better territory decisions, better forecast of your own commission.'],
-            ['15–35m','<strong>The TGTG naming standard.</strong> Live audit of current records. Fix bad naming in real time. Everyone leaves knowing the standard.'],
-            ['35–55m','<strong>Voice memo logging.</strong> Every rep logs a visit in under 60 seconds using voice. Done in the session, not in theory.'],
-            ['55–75m','<strong>Pipeline stages.</strong> What counts as qualified? What moves a deal forward? No guessing. No creative interpretation.'],
-            ['75–90m','<strong>30-day commitment.</strong> Each rep commits to a personal CRM standard. Written down. Reviewed at the next session.']],
-   res:['Pipeline Review Template']},
+PARTNER: "We have some things left over sometimes, yeah."
 
-  {id:'t7',icon:'☀️',title:'Running an Effective Sales Meeting',
-   tags:[['Process','tp'],['90 min','td']],
-   meta:'How to run a standup that sets the tone for the whole day — in 15 minutes or less.',
-   by:'Head of Independent Partners · Head of Independent Partners',
-   obj:['Open a standup with energy and direction in under two minutes','Use the three-question format without it becoming a passive reporting loop','Deliver one micro-coaching moment the whole team learns from — in 90 seconds','Close with a team commitment and a clear daily target','Adapt the format when the team is flat — without being sycophantic about it'],
-   agenda:[['0–15m','<strong>What a great standup feels like.</strong> Energy, specificity, brevity. What a bad one looks like and why it happens when managers stop leading them properly.'],
-            ['15–40m','<strong>The three-question format.</strong> What did you do yesterday? What are you doing today? What do you need? How to keep each answer tight.'],
-            ['40–65m','<strong>The micro-coaching moment.</strong> One rep, one specific thing, 90 seconds maximum. The whole team hears it and learns from it.'],
-            ['65–80m','<strong>The low-energy standup.</strong> How to reset the room when the team is flat without false energy or empty cheerleading.'],
-            ['80–90m','<strong>Practice.</strong> Each manager or senior rep runs a 10-minute standup. Room scores energy, specificity, and coaching moment quality.']],
-   res:['Weekly 1:1 Agenda']},
+REP: "What kind of things, typically?"
 
-  {id:'t8',icon:'🏆',title:'TGTG Pitch Certification',
-   tags:[['Field','tf'],['Half day','td']],
-   meta:'Mandatory for all phone reps before the first solo visit. Pass mark 80%. Retakes available once.',
-   by:'Head of Independent Partners · Head of Independent Partners',
-   obj:['Deliver the full TGTG pitch in under 8 minutes without notes or prompting','Handle all five core objections without hesitation — using a named framework for each','Open with a venue-specific question — never a generic intro about TGTG','Calculate and present the revenue estimate correctly, including commission mechanics','Close with a specific proposed offer and a named, dated next step'],
-   agenda:[['0–30m','<strong>Pitch anatomy.</strong> Opening question. Teach moment. Empty table stat. Proposed offer. Objection. Close. Eight minutes.'],
-            ['30–60m','<strong>Revenue calculation drill.</strong> AOV, discount, commission, venue net. Three different venue types until the maths is automatic.'],
-            ['60–90m','<strong>Objection handling under pressure.</strong> Fast-fire objections. No preparation time. Must use a named framework. No apologies.'],
-            ['90–150m','<strong>Certification run-throughs.</strong> Each rep delivers the full pitch to a panel of two. Scored on opening, teach moment, calculation, objection handling, close.'],
-            ['150–180m','<strong>Retakes.</strong> Any rep below 80% receives five minutes of focused coaching and a retake. No rep goes on a solo visit until certified.']],
-   res:['TGTG Pitch Script','Five Objections Guide','MEDDIC Scorecard']},
+PARTNER: "Pastries in the morning. Sometimes lunch prep."
 
-  {id:'t9',icon:'🗺️',title:'Field Execution and Territory Management',
-   tags:[['Field','tf'],['2 hours','td']],
-   meta:'How to build a week that maximises venue quality, density, and conversion — not just visit count.',
-   by:'Head of Independent Partners · Head of Independent Partners',
-   obj:['Build a weekly field plan that clusters visits by territory — never criss-crossing the city','Use the demand-back density data to decide where to concentrate effort','Know when a dial is more effective than a booked visit — and how to handle both','Understand how your territory feeds the marketplace — not just your own pipeline','Use the pitch generator to arrive knowing more about the venue than the owner expects'],
-   agenda:[['0–20m','<strong>Territory as a marketplace problem.</strong> Your territory is not just your target — it is the product. Every gap you leave is a gap in the consumer experience.'],
-            ['20–50m','<strong>Territory clustering.</strong> How to build a week where every day covers one zone. Why criss-crossing the city kills conversion rate and energy.'],
-            ['50–75m','<strong>Walk-in vs booked visit.</strong> When each is right. How to convert a dial. What to do when the owner is not there.'],
-            ['75–95m','<strong>AI-powered visit prep.</strong> Demo of the pitch generator on a named venue. How to dial with information the operator does not expect you to have.'],
-            ['95–120m','<strong>Weekly planning session.</strong> Each rep builds next week\'s field plan live in the room. Manager reviews and approves before the session ends.']],
-   res:['Territory Density Guide']},
+REP: "What time do you usually close / finish service?"
 
-  {id:'t10',icon:'🤝',title:'AM Handover — Getting It Right',
-   tags:[['Process','tg'],['90 min','td']],
-   meta:'Joint session with the AM team. The handover standard that prevents churn before it starts.',
-   by:'Head of Independent Partners · Head of Independent Partners + Head of Account Management',
-   obj:['Complete a handover that gives the AM everything they need before the first onboarding call','Understand what a strong go-live page looks like — and what a weak one costs the venue','Know what the AM needs that is not captured in HubSpot','Understand what happens to the venue — and to your deal quality score — if the handover is weak','Build the rep–AM relationship that makes both sides want to get this right'],
-   agenda:[['0–15m','<strong>Why handover quality is a sales metric.</strong> A venue that churns in 60 days is a failed deal, not a successful close. The rep owns this too.'],
-            ['15–35m','<strong>The handover standard.</strong> What the AM needs. What the rep owns before passing. What the AM owns before go-live.'],
-            ['35–55m','<strong>Go-live page quality.</strong> Live examples — strong and weak. Naming convention, images, offer text, session timing. The rep\'s role in getting this right.'],
-            ['55–70m','<strong>The first 40 days.</strong> What activation looks like. Why the rep should check in at day 14. What a weak activation does to the marketplace.'],
-            ['70–90m','<strong>Joint Q&A.</strong> phone reps and AMs in the same room. Real questions about where handovers go wrong and how to fix them — from both sides.']],
-   res:['City Launch Checklist']},
+PARTNER: "About 3pm."
+
+FACILITATOR: "Stop. [To the rep] You now know: bakery-type surplus, morning and lunch, 3pm close. That's your Surprise Bag. A mix of pastries and lunch prep, collection window 2:30–3pm. You haven't mentioned TGTG yet. You don't need to. Now explain the product using their exact surplus."`,
+  },
+  {
+    num:'S3', title:'The waste-to-revenue frame — the financial close',
+    tags:['Core','60 min'], dur:'60 min',
+    sub:'The pitch that closes is the financial reframe: this food costs money whether it sells or not. A Surprise Bag turns a guaranteed loss into found revenue. Every rep needs to be able to walk through this in 90 seconds.',
+    objectives:[
+      'Deliver the waste-to-revenue frame clearly and confidently without notes',
+      'Calculate the monthly revenue for a specific partner's Surprise Bag on the call',
+      'Handle the commission question — not with a percentage but with a net calculation'
+    ],
+    script:`"Here's the financial picture — and it's simple.
+
+That food is already made. The cost is already on your books. If it goes in the bin tonight, it earns you £0. If you sell 5 Surprise Bags at £4 each, you earn £20 that didn't exist before. Our percentage comes out of that — so you net roughly £[X] per day this would have been nothing.
+
+That's not a discount. That's found revenue from inventory you were going to lose.
+
+Over a month — 5 bags, 5 days a week — that's £[X] a month that currently goes in the bin. Does that change how you think about it?"
+
+[DEBRIEF: Can every rep do this calculation live on a call without stumbling?]`,
+  },
+  {
+    num:'S4', title:'Objection handling — the nine responses',
+    tags:['Core','75 min'], dur:'75 min',
+    sub:'Nine objections. Nine responses. Every rep knows all of them before they make a solo call. This session is entirely role-play — no slides, no theory.',
+    objectives:[
+      'Handle all nine objections from the Gold Standard library without hesitation',
+      'Hold the waste-to-revenue frame through every objection — never soften or retreat',
+      'Know when an objection is resistance (handle it) vs genuine incompatibility (thank them and move on)'
+    ],
+    script:`[Rapid-fire role-play — facilitator plays the partner, rep handles objections cold]
+
+"We don't do discounts."
+"We don't really have waste."
+"What's in the bag?"
+"What if we don't have anything?"
+"We donate to a food bank."
+"Is there a contract?"
+"How much commission?"
+"We tried something similar before."
+"I need to speak to my partner."
+
+[RULE: Rep cannot pause for more than 3 seconds. If they pause, facilitator says "the partner just hung up." That's what happens in real life. Repetition until every response is automatic.]`,
+  },
+  {
+    num:'S5', title:'Closing on the call — the Surprise Bag window close',
+    tags:['Core','60 min'], dur:'60 min',
+    sub:'The most important moment on every TGTG acquisition call. The rep must close the Surprise Bag window — day, time, number of bags, price — before ending the call. No follow-up tomorrow. Close today.',
+    objectives:[
+      'Close the Surprise Bag window in the same call as the initial pitch',
+      'Use the "let's set it up together now" technique to move from agreement to live in the same conversation',
+      'Handle the "I'll think about it" stall without backing off'
+    ],
+    script:`"So based on what you've told me — your Tuesday mornings are your quietest, and you usually have pastries and some lunch prep left. Let's set up your first Surprise Bag now while we're on the phone.
+
+Three things: what day and time for collection — sounds like Tuesday 12–1pm. How many bags — let's start with 3, we can always adjust. And bag price — £4.50 would be standard for a bakery mix.
+
+I can walk you through creating the listing in the app right now — takes about 8 minutes. Are you near a phone or laptop?"
+
+[DEBRIEF: What happens when they say "I need to think about it"?]
+
+"Of course — what specifically do you need to think through? I'd rather answer that now than leave you with an open question."`,
+  },
+  {
+    num:'S6', title:'Onboarding on the call — live within 2 hours',
+    tags:['Core','45 min'], dur:'45 min',
+    sub:'Closing is the beginning. The goal is a live Surprise Bag in the partner's app before the rep hangs up — or within 2 hours if the partner needs to do it themselves. This session makes that the standard, not the aspiration.',
+    objectives:[
+      'Walk a partner through creating their TGTG account and listing a Surprise Bag while on the phone',
+      'Confirm the first bag is live before ending the call',
+      'Hand over to the AM team with a specific warm introduction — name, venue, first bag details — within 30 minutes of the call ending'
+    ],
+    script:`ONBOARDING SEQUENCE ON THE CALL:
+
+0–5 min: Confirm the Surprise Bag details — day, time, quantity, price. Repeat back.
+5–15 min: Walk partner through partner app. Account creation or login. Rep talks them through every screen.
+15–25 min: First Surprise Bag configured and listed. Rep confirms it's showing in the app.
+25–30 min: Screenshot of live listing sent to team Slack: "[VENUE NAME] live 🟢 — [X] bags, [TIME]"
+30 min: AM team warm introduction: "[AM NAME] — this is [VENUE]. First bag live Tuesday 12–1pm, 3 bags at £4.50. Owner is [NAME], very engaged. Call within 24 hours."
+
+[STANDARD: Any rep who ends a call with a verbal yes but no live listing is not finished. The job ends when the bag is live.]`,
+  },
+  {
+    num:'S7', title:'CRM discipline — logging builds your pipeline',
+    tags:['Data','Core','45 min'], dur:'45 min',
+    sub:'A rep who doesn't log is a rep who can't forecast, can't be coached, and can't be trusted with a pipeline review. CRM discipline is non-negotiable. This session makes it a habit, not a chore.',
+    objectives:[
+      'Log every call within 30 minutes — outcome, next action, date',
+      'Know the three fields that matter: stage, next action, close-by date',
+      'Understand why a clean pipeline protects them — not just the manager'
+    ],
+    script:`FACILITATOR: "Open your CRM. Find your last three calls. Are they logged?
+
+[Reps check]
+
+FACILITATOR: "For the ones that are — do they have a next action and a date?
+
+[Reps check]
+
+FACILITATOR: "For the ones that don't — what happened to those conversations? Can you reconstruct them?
+
+[Reps reflect]
+
+FACILITATOR: "Here's the rule. Every call logged within 30 minutes. Outcome — what happened. Next action — what you're doing. Date — when.
+
+If it's not in the CRM, it didn't happen. And a deal that didn't happen doesn't count toward your number."`,
+  },
+  {
+    num:'S8', title:'Call-along debrief — learning from live calls',
+    tags:['Coach','Culture','60 min'], dur:'60 min',
+    sub:'The fastest way to improve is to make a call alongside someone better and debrief immediately. This session teaches reps how to use call-alongs as a learning tool — not just an observation exercise.',
+    objectives:[
+      'Listen to a Q1 rep's call and identify the one specific thing they did differently',
+      'Give and receive specific feedback using the Situation-Behaviour-Impact model',
+      'Make one live call immediately after the debrief — applying one specific technique from what they observed'
+    ],
+    script:`STRUCTURE FOR EVERY CALL-ALONG:
+
+1. Listen to the call (or a recording). Do not interrupt. Take notes on one specific moment.
+2. Debrief within 60 minutes: "At [minute X], you said [specific line]. What was the effect?" 
+3. Identify the one technique to apply: "On your next call, when the partner says [X], try saying [Y]."
+4. Make the next call immediately. Apply the technique.
+5. Debrief that call: "Did it work? What changed?"
+
+FACILITATOR: "The call-along is only useful if you apply one thing immediately. If you watch and don't change — you observed, you didn't learn."`,
+  },
+  {
+    num:'S9', title:'The AM handover — setting up partner success',
+    tags:['Core','45 min'], dur:'45 min',
+    sub:'A rep who doesn't hand over to AM properly is setting their own partner up to churn. The acquisition rep owns the relationship until the AM is properly briefed. This session defines exactly what a warm handover looks like.',
+    objectives:[
+      'Deliver a warm handover within 30 minutes of a partner going live',
+      'Include: partner name, venue name, surplus type, first Surprise Bag details, owner personality, any concerns',
+      'Know that a partner who churns within 30 days is partly an acquisition failure — the handover is part of the job'
+    ],
+    script:`WARM HANDOVER TEMPLATE:
+
+"[AM NAME] — live partner for you.
+
+Partner: [OWNER NAME], [VENUE NAME], [AREA]
+Surprise Bag: [DETAILS — type, time, quantity, price]
+First bag live: [DATE/TIME]
+
+Owner notes: [e.g. 'Very engaged, keen on the sustainability angle. Has two other locations — worth asking about in month 2. Call her on her mobile, not the venue line.']
+
+Concern: [e.g. 'Not sure she fully understood the bag flexibility — worth confirming she knows she can adjust the count daily.']
+
+Please call within 24 hours. I told her you'd be in touch."
+
+[STANDARD: A handover that doesn't include owner notes is not a warm handover. It's a data transfer.]`,
+  },
+  {
+    num:'S10', title:'Quartile review — where am I and what's my plan?',
+    tags:['Core','Coach','60 min'], dur:'60 min',
+    sub:'The session every rep has every 4 weeks with their TL. Where are they in the quartile ranking? What's their specific development focus? What does the next 4 weeks look like? Done right, this is the most motivating conversation a rep can have.',
+    objectives:[
+      'Know their own quartile — dials, conversations, close rate — versus the team average',
+      'Understand the one specific skill they're developing this cycle and why',
+      'Leave with a written commitment for the next 4 weeks — not a vague goal, a specific number and behaviour'
+    ],
+    script:`TL: "Here's where your numbers are versus the team for the last 4 weeks. [Share the data]
+
+You're in [Q1/Q2/Q3/Q4]. Here's what that means for how we work together this cycle.
+
+The one thing we're focused on is [SPECIFIC SKILL — e.g. 'closing the Surprise Bag window in the same call — your conversation-to-close rate is 14% and the Q1 average is 28%. The gap is almost entirely in what happens after the partner says they're interested.']
+
+Here's what that looks like in practice: [SPECIFIC TECHNIQUE]
+
+Your commitment for the next 4 weeks: [SPECIFIC MEASURABLE — e.g. 'Close the bag window on the call in at least 3 out of every 5 interested conversations. Log the outcome in CRM immediately.']
+
+We review this in 4 weeks. Not as a performance conversation — as a progress conversation. I want to show you the number moving."`,
+  },
 ];
 
-function openRes(key){
-  var r=RES[key]; if(!r) return;
-  document.getElementById('res-title').textContent=r.title;
-  document.getElementById('res-sub').textContent=r.sub;
-  document.getElementById('res-body').innerHTML=r.body;
-  document.getElementById('roverlay').classList.add('on');
-}
-function closeRes(){ document.getElementById('roverlay').classList.remove('on'); }
-
-function switchSec(sec,el){
-  document.querySelectorAll('.sec-tab').forEach(function(t){t.classList.remove('on');});
-  el.classList.add('on');
-  document.getElementById('sec-sm').style.display=sec==='sm'?'block':'none';
-  document.getElementById('sec-team').style.display=sec==='team'?'block':'none';
-}
-
-function markDone(id,btn){
-  DONE[id]=!DONE[id];
-  localStorage.setItem('ec_training3',JSON.stringify(DONE));
-  var card=document.getElementById('c-'+id);
-  var chk=document.getElementById('chk-'+id);
-  card.classList.toggle('done',!!DONE[id]);
-  chk.classList.toggle('done',!!DONE[id]);
-  btn.textContent=DONE[id]?'✓ Delivered — click to unmark':'Mark as delivered';
-  btn.classList.toggle('done',!!DONE[id]);
-  updateProg();
-}
-
-function toggle(id){
-  document.getElementById('c-'+id).classList.toggle('open');
-}
-
-function updateProg(){
-  var sd=TL.filter(function(s){return DONE[s.id];}).length;
-  var td=TEAM.filter(function(s){return DONE[s.id];}).length;
-  document.getElementById('sm-fill').style.width=Math.round(sd/TL.length*100)+'%';
-  document.getElementById('sm-pct').textContent=sd+' / '+TL.length;
-  document.getElementById('team-fill').style.width=Math.round(td/TEAM.length*100)+'%';
-  document.getElementById('team-pct').textContent=td+' / '+TEAM.length;
-  document.getElementById('hdr-stat').textContent=(sd+td)+' of '+(TL.length+TEAM.length)+' sessions delivered';
-}
-
-function renderSessions(arr,containerId){
-  var h='';
-  arr.forEach(function(s){
-    var done=!!DONE[s.id];
-    h+='<div class="tcard'+(done?' done':'')+'" id="c-'+s.id+'">';
-    
-    h+='<div class="tcard-head" onclick="toggle(\''+s.id+'\')">';
-    h+='<div class="tcard-icon">'+s.icon+'</div>';
-    h+='<div class="tcard-mid">';
-    h+='<div class="tcard-top"><span class="tcard-title">'+s.title+'</span>';
-    s.tags.forEach(function(t){ h+='<span class="tag '+t[1]+'">'+t[0]+'</span>'; });
-    h+='</div><div class="tcard-meta">'+s.meta+'</div></div>';
-    h+='<div class="tcard-end">';
-    h+='<div class="chk'+(done?' done':'')+'" id="chk-'+s.id+'">';
-    h+='<svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1 3.5L4 6.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>';
-    h+='<div class="arr">▾</div></div></div>';
-    
-    h+='<div class="tcard-content">';
-    h+='<div class="delivered-by">👤 '+s.by+'</div>';
-    h+='<div class="content-grid">';
-    
-    h+='<div><div class="c-lbl">Learning objectives</div><div class="c-list">';
-    s.obj.forEach(function(o){ h+='<div class="c-item"><div class="dot"></div><div>'+o+'</div></div>'; });
-    h+='</div></div>';
-    
-    h+='<div><div class="c-lbl">Session agenda</div><div class="agenda">';
-    s.agenda.forEach(function(a){ h+='<div class="a-row"><div class="a-time">'+a[0]+'</div><div class="a-text">'+a[1]+'</div></div>'; });
-    h+='</div></div>';
-    h+='</div>'; 
-    
-    if(s.res && s.res.length){
-      h+='<div class="res-section"><div class="c-lbl">Resources &amp; templates — click to open</div>';
-      h+='<div class="res-chips">';
-      s.res.forEach(function(r){
-        h+='<button class="res-btn" onclick="openRes(\''+r.replace(/'/g,"\\'")+'\')" title="Open: '+r+'">'+r+'</button>';
-      });
-      h+='</div></div>';
-    }
-    h+='<button class="done-btn'+(done?' done':'')+'" onclick="markDone(\''+s.id+'\',this)">'+(done?'✓ Delivered — click to unmark':'Mark as delivered')+'</button>';
-    h+='</div></div>'; 
+function renderSessions(sessions, containerId) {
+  var html = '';
+  sessions.forEach(function(s) {
+    var tags = s.tags.map(function(t) {
+      var cls = t === 'Core' ? 't-core' : t === 'Coach' ? 't-coach' : t === 'Data' ? 't-data' : t === 'Culture' ? 't-culture' : 't-hard';
+      return '<span class="sess-tag ' + cls + '">' + t + '</span>';
+    }).join('');
+    html += '<div class="sess" onclick="toggleSess(this)">' +
+      '<div class="sess-hdr">' +
+        '<div class="sess-num">' + s.num + '</div>' +
+        '<div style="flex:1;">' +
+          '<div class="sess-title">' + s.title + '</div>' +
+          '<div class="sess-meta">' + tags + '</div>' +
+        '</div>' +
+        '<div class="sess-dur">' + s.dur + '</div>' +
+      '</div>' +
+      '<div class="sess-body">' +
+        '<div class="sess-sub">' + s.sub + '</div>' +
+        '<div style="font-size:10px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;font-family:DM Mono,monospace;">Objectives</div>' +
+        '<div class="obj-list">' +
+          s.objectives.map(function(o) {
+            return '<div class="obj-item"><div class="obj-dot"></div><div>' + o + '</div></div>';
+          }).join('') +
+        '</div>' +
+        '<div style="font-size:10px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;font-family:DM Mono,monospace;">Facilitator Script</div>' +
+        '<div class="script-box">' + s.script.replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</div>' +
+      '</div>' +
+    '</div>';
   });
-  document.getElementById(containerId).innerHTML=h;
+  document.getElementById(containerId).innerHTML = html;
 }
 
-renderSessions(TL,'sm-grid');
-renderSessions(TEAM,'team-grid');
-updateProg();
+function setProg(id, btn) {
+  document.querySelectorAll('.prog').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.prog-tab').forEach(function(t){t.classList.remove('active');});
+  document.getElementById('prog-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleSess(el) {
+  el.classList.toggle('open');
+}
+
+renderSessions(TL_SESSIONS, 'tl-sessions');
+renderSessions(REP_SESSIONS, 'rep-sessions');
 </script>
-<script src="/nav.js"></script>
 </body>
 </html>
