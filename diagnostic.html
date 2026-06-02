@@ -134,7 +134,7 @@ body{
       <div class="metric-row"><span class="ml">Consumer MoM growth (%)</span><div class="mi"><input id="m-con" type="number" value="22"><span class="mu">%</span></div></div>
       <div class="metric-row"><span class="ml">Repeat rate 90d (%)</span><div class="mi"><input id="m-rep" type="number" value="19"><span class="mu">%</span></div></div>
       <div class="metric-row"><span class="ml">New venues 90d</span><div class="mi"><input id="m-new" type="number" value="186"><span class="mu"></span></div></div>
-      <div class="metric-row"><span class="ml">Deal score ≥50 (%)</span><div class="mi"><input id="m-ds" type="number" value="38"><span class="mu">%</span></div></div>
+      <div class="metric-row"><span class="ml">Bags agreed per week</span><div class="mi"><input id="m-bags" type="number" value="38"><span class="mu">%</span></div></div>
       <div class="metric-row"><span class="ml">Avg discount depth (%)</span><div class="mi"><input id="m-disc" type="number" value="24"><span class="mu">%</span></div></div>
       
       <div style="padding:10px 0 6px;border-top:1px solid #2a2a2a;margin-top:8px;">
@@ -294,7 +294,7 @@ async function runDiagnosis() {
   var con   = parseFloat(v('m-con').value) || 22;
   var rep   = parseFloat(v('m-rep').value) || 19;
   var newV  = parseFloat(v('m-new').value) || 186;
-  var ds    = parseFloat(v('m-ds').value) || 38;
+  var ds    = parseFloat(v('m-bags').value) || 38;
   var disc  = parseFloat(v('m-disc').value) || 24;
   var l14   = parseFloat(v('m-l14').value)  || 0;
   var l30   = parseFloat(v('m-l30').value)  || 0;
@@ -361,7 +361,7 @@ async function runDiagnosis() {
 
   
   var dsCtx = (100 - ds) > 50
-    ? (100 - ds) + '% of deals below a deal score of 50. The offer structure conversation is being skipped — not occasionally, habitually. '
+    ? (100 - ds) + '% of deals below a bag close rate of 3 per week. The offer structure conversation is being skipped — not occasionally, habitually. '
     : ds + '% of deals at or above a score of 50. The offer structure conversation is happening on the majority of deals. The problem is in the minority pulling the median down. ';
   set('team-diag', dsCtx + 'The rep who closes a venue with a committed Tuesday and Wednesday offer window already in the dashboard is doing a different job from the rep who closes a venue blank. Both count as a close. One builds the marketplace. The coaching question is: what is being agreed before the handshake, and is it consistent across the team?');
 
@@ -386,7 +386,7 @@ async function runDiagnosis() {
   var sprintTarget = Math.min(mw + 10, 25);
   set('move-metric', 'Weekday redemption share on the sprint cohort — Mon to Thu');
   set('move-range', 'Current city-wide: ' + mw + '% Mon–Wed → Sprint cohort target: ' + sprintTarget + '% Mon–Thu within 30 days');
-  set('move-how', 'Sales and AM jointly identify the 20–30 highest-scoring venues (deal score ≥ 50) that are transacting exclusively or predominantly on weekends. Named rep and named AM assigned to each. One joint call per venue. One ask: open the dashboard together, shift the offer window to Tuesday–Thursday 5:30–7:30pm, do it on their phone before you leave. The habit is built in the room — not explained in a follow-up email. Daily standup on the sprint. Weekly number to Chelsea. The city-wide metric moves when the sprint cohort moves.');
+  set('move-how', 'Sales and AM jointly identify the 20–30 highest-potential venues that are transacting exclusively or predominantly on weekends. Named rep and named AM assigned to each. One joint call per venue. One ask: open the dashboard together, shift the offer window to Tuesday–Thursday 5:30–7:30pm, do it on their phone before you leave. The habit is built in the room — not explained in a follow-up email. Daily standup on the sprint. Weekly number to Chelsea. The city-wide metric moves when the sprint cohort moves.');
   set('move-owner', 'Named sprint lead — Sales and AM co-own. Daily standup. Weekly readout to HoI.');
 
   
