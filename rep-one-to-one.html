@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Too Good To Go · Coaching & 1:1 Templates</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap');
+:root{
+  --tgtg:#6DBE4F;--tgtgd:rgba(109,190,79,.09);--tgtgl:rgba(109,190,79,.25);
+  --bg:#ffffff;--bg2:#f7f8f5;--border:#e4e8de;--border2:#dde3d8;
+  --text:#1a1a1a;--muted:#5a6454;--muted2:#8a9484;
+  --danger:#EF4444;--dangerd:rgba(239,68,68,.07);--dangerl:rgba(239,68,68,.18);
+  --warn:#F59E0B;--warnd:rgba(245,158,11,.07);--warnl:rgba(245,158,11,.18);
+  --good:#22C55E;--goodd:rgba(34,197,94,.08);--goodl:rgba(34,197,94,.18);
+  --info:#60A5FA;--infod:rgba(96,165,250,.08);--infol:rgba(96,165,250,.18);
+  --purple:#A78BFA;--purpled:rgba(167,139,250,.08);--purplel:rgba(167,139,250,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;padding-bottom:80px;}
+
+:root {
+  --ink:#1a1a1a;
+  --white: #ffffff;
+  --soft: #2a2a2a;
+  --muted: #888888;
+  --rule: #2a2a2a;
+  --bg:#ffffff;
+  --gold: #6DBE4F;
+  --gold-d: #8f6315;
+  --gold-pale: #f8efda;
+  --gold-mid: #e8d5a0;
+  --green: #22C55E;
+  --green-pale: #edf7f2;
+  --red: #EF4444;
+  --red-pale: #fdf0ee;
+  --blue: #1e3a5f;
+  --blue-pale: #edf3fa;
+  --amber: #6DBE4F;
+  --amber-pale: #fef9ec;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  -webkit-font-smoothing: antialiased;
+  font-family:'DM Sans',sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.nav {
+  background: var(--text);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: stretch;
+  border-bottom: 2px solid var(--tgtg);
+}
+.nav-logo {
+  font-family:'DM Sans',sans-serif;
+  font-size: 18px;
+  color:#fff;
+  padding: 14px 24px;
+  border-right: 1px solid rgba(255,255,255,.12);
+  white-space: nowrap;
+}
+.nav-logo span { color: var(--tgtg); }
+.nav-tabs {
+  display: flex;
+  flex: 1;
+  overflow-x: auto;
+}
+.nav-tab {
+  font-family:'DM Sans',sans-serif;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color:var(--muted);
+  padding: 0 20px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: all .2s;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  display: flex;
+  align-items: center;
+}
+.nav-tab:hover { color:var(--text); }
+.nav-tab.active { color: var(--tgtg); border-bottom-color: var(--tgtg); }
+
+.print-btn {
+  font-family:'DM Sans',sans-serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: var(--tgtg);
+  color:#fff;
+  border: none;
+  padding: 0 20px;
+  cursor: pointer;
+  transition: background .2s;
+  white-space: nowrap;
+}
+.print-btn:hover { background: #4a9e32; }
+
+.sheet { display: none; max-width: 900px; margin: 0 auto; padding: 40px 32px 80px; }
+.sheet.active { display: block; }
+
+.tmpl-header {
+  background: var(--text);
+  color:#fff;
+  padding: 36px 40px 28px;
+  margin: 0 -32px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.tmpl-header::after {
+  content: '';
+  position: absolute;
+  right: -60px; top: -60px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: var(--tgtg);
+  opacity: .06;
+}
+.tmpl-tag {
+  font-family:'DM Sans',sans-serif;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--tgtg);
+  margin-bottom: 8px;
+  display: block;
+}
+.tmpl-title {
+  font-family:'DM Sans',sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+.tmpl-title em { font-style: italic; color: var(--tgtg); }
+.tmpl-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,.55);
+  max-width: 560px;
+  line-height: 1.55;
+}
+.tmpl-meta {
+  display: flex;
+  gap: 32px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,.1);
+  flex-wrap: wrap;
+}
+.meta-item { }
+.meta-l {
+  font-family:'DM Sans',sans-serif;
+  font-size: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+  margin-bottom: 4px;
+}
+.meta-input {
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(255,255,255,.25);
+  color:#fff;
+  font-family:'DM Sans',sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  width: 160px;
+  padding: 4px 0;
+  outline: none;
+}
+.meta-input::placeholder { color: rgba(255,255,255,.25); }
+.meta-input:focus { border-bottom-color: var(--tgtg); }
+
+.section {
+  margin-bottom: 28px;
+}
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.section-num {
+  font-family:'DM Sans',sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #4a9e32;
+  min-width: 24px;
+}
+.section-title {
+  font-family:'DM Sans',sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.section-title-large {
+  font-family:'DM Sans',sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text);
+}
+
+.obs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.obs-card {
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: var(--white);
+  overflow: hidden;
+}
+.obs-card-head {
+  background: var(--text);
+  color:#fff;
+  font-family:'DM Sans',sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 8px 14px;
+}
+.obs-card-body {
+  -webkit-font-smoothing: antialiased; padding: 12px 14px; }
+
+.rating-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.rating-row:last-child { border-bottom: none; }
+.rating-label {
+  flex: 1;
+  font-size: 13px;
+  color: var(--soft);
+}
+.rating-dots {
+  display: flex;
+  gap: 6px;
+}
+.dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  transition: all .15s;
+  position: relative;
+}
+.dot:hover { border-color: var(--tgtg); background: var(--tgtgd); }
+.dot-label {
+  font-family:'DM Sans',sans-serif;
+  font-size: 9px;
+  color: var(--muted);
+  margin-left: 4px;
+}
+
+.tl-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.tl-row:last-child { border-bottom: none; }
+.tl-label { flex: 1; font-size: 13px; color: var(--soft); }
+.tl-btns { display: flex; gap: 6px; }
+.tl-btn {
+  font-family:'DM Sans',sans-serif;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  background: none;
+  transition: all .15s;
+}
+.tl-btn.green { border-color: #22C55E; color: #22C55E; }
+.tl-btn.green:hover, .tl-btn.green.sel { background: #22C55E; color: #000; }
+.tl-btn.amber { border-color: #6DBE4F; color: #6DBE4F; }
+.tl-btn.amber:hover, .tl-btn.amber.sel { background:#6DBE4F;color:#000; }
+.tl-btn.red { border-color: #EF4444; color: #EF4444; }
+.tl-btn.red:hover, .tl-btn.red.sel { background: #EF4444; color: #fff; }
+
+.field-group {
+  margin-bottom: 16px;
+}
+.field-label {
+  font-family:'DM Sans',sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.field-label span {
+  font-size: 9px;
+  color: var(--border);
+  font-style: italic;
+  letter-spacing: 0;
+  text-transform: none;
+}
+textarea {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  font-family:'DM Sans',sans-serif;
+  font-size: 13.5px;
+  color: var(--text);
+  padding: 12px 14px;
+  resize: vertical;
+  outline: none;
+  line-height: 1.6;
+  transition: border-color .15s;
+  min-height: 80px;
+}
+textarea:focus { border-color: var(--tgtg); }
+textarea::placeholder { color: rgba(0,0,0,.25); }
+input[type="text"], input[type="date"] {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  font-family:'DM Sans',sans-serif;
+  font-size: 13.5px;
+  color: var(--text);
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color .15s;
+}
+input[type="text"]:focus, input[type="date"]:focus { border-color: var(--tgtg); }
+input::placeholder { color: rgba(0,0,0,.25); }
+
+.callout {
+  background: var(--tgtgd);
+  border-left: 3px solid var(--tgtg);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: var(--soft);
+  line-height: 1.55;
+}
+.callout strong { color: var(--text); }
+
+.call-block {
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.call-block-head {
+  background: #F0EDE8;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.venue-num {
+  font-family:'DM Sans',sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+  background: var(--white);
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+}
+.call-name-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family:'DM Sans',sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  outline: none;
+}
+.call-name-input::placeholder { color: rgba(0,0,0,.3); font-weight: 400; }
+.outcome-sel {
+  display: flex;
+  gap: 6px;
+}
+.outcome-btn {
+  font-family:'DM Sans',sans-serif;
+  font-size: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  background: none;
+  color: var(--muted);
+  transition: all .15s;
+}
+.outcome-btn:hover { border-color: var(--text); color: var(--text); }
+.call-block-body {
+  -webkit-font-smoothing: antialiased;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.pipeline-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+.pipeline-table th {
+  font-family:'DM Sans',sans-serif;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 2px solid var(--text);
+  background: var(--bg);
+}
+.pipeline-table td {
+  padding: 0;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.pipeline-table td input[type="text"] {
+  border: none;
+  border-right: 1px solid var(--border);
+  font-size: 13px;
+  padding: 10px 12px;
+  height: 100%;
+  background: var(--white);
+}
+.pipeline-table td:last-child input[type="text"] { border-right: none; }
+.pipeline-table tr:last-child td { border-bottom: none; }
+.pipeline-table td input[type="text"]:focus { background: var(--tgtgd); border-color: var(--tgtg); z-index: 1; position: relative; }
+
+.score-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin-bottom: 24px;
+}
+.score-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 16px 14px;
+  text-align: center;
+}
+.score-card-label {
+  font-family:'DM Sans',sans-serif;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.score-card-input {
+  font-family:'DM Sans',sans-serif;
+  font-size: 28px;
+  color: var(--text);
+  border: none;
+  background: none;
+  text-align: center;
+  width: 100%;
+  outline: none;
+}
+.score-card-sub {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 28px 0;
+}
+.divider-line { flex: 1; height: 1px; background: var(--border); }
+.divider-text {
+  font-family:'DM Sans',sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.signoff {
+  background: var(--text);
+  color:#fff;
+  padding: 24px 28px;
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+.signoff-item { }
+.signoff-label {
+  font-family:'DM Sans',sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+  margin-bottom: 6px;
+}
+.signoff-input {
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(255,255,255,.2);
+  color:#fff;
+  font-family:'DM Sans',sans-serif;
+  font-size: 13px;
+  width: 100%;
+  padding: 4px 0;
+  outline: none;
+}
+.signoff-input:focus { border-bottom-color: var(--tgtg); }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+.rep-card {
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  padding: 14px 16px;
+  margin-bottom: 8px;
+}
+.rep-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.rep-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+.rep-name input { border: none; background: none; font-size: 13px; font-weight: 600; color: var(--text); outline: none; width: 200px; }
+
+.check-list { list-style: none; padding: 0; }
+.check-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--soft);
+}
+.check-list li:last-child { border-bottom: none; }
+.check-list input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--tgtg);
+  cursor: pointer;
+}
+
+@media print {
+  .nav { display: none; }
+  .sheet { display: block !important; page-break-after: always; padding: 20px; }
+  .tmpl-header { margin: 0 0 24px; padding: 24px 28px; }
+  textarea { min-height: 60px; }
+  body {
+  -webkit-font-smoothing: antialiased; background: white; }
+  .print-btn { display: none; }
+}
+
+@media(max-width:600px){input,select,textarea{font-size:16px !important;}}
+</style>
+</head>
+<body>
+
+<div style="background:#6DBE4F;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;">
+  <div style="font-size:13px;font-weight:800;color:#fff;">Too Good To Go · UK &amp; Ireland</div>
+  <div style="font-size:11px;color:rgba(255,255,255,.75);">Head of Independent Partners · 1:1 Templates</div>
+</div>
+
+<div class="sheet active" id="sheet-live-listening">
+
+  <div class="tmpl-header">
+    <span class="tmpl-tag">Too Good To Go · Coaching Template · 01</span>
+    <div class="tmpl-title">Live Listening<br><em>Coaching Record</em></div>
+    <div class="tmpl-sub">Completed by the Head of Independent Partners during or immediately after joint prospect calls. Shared with the rep same day.</div>
+    <div class="tmpl-meta">
+      <div class="meta-item">
+        <div class="meta-l">Rep Name</div>
+        <input class="meta-input" type="text" placeholder="Full name">
+      </div>
+      <div class="meta-item">
+        <div class="meta-l">Date</div>
+        <input class="meta-input" type="text" placeholder="DD / MM / YYYY">
+      </div>
+      <div class="meta-item">
+        <div class="meta-l">Territory / Zone</div>
+        <input class="meta-input" type="text" placeholder="e.g. Hackney E8">
+      </div>
+      <div class="meta-item">
+        <div class="meta-l">Session Type</div>
+        <input class="meta-input" type="text" placeholder="Joint call / Shadow / Full day">
+      </div>
+      <div class="meta-item">
+        <div class="meta-l">Completed by</div>
+        <input class="meta-input" type="text" placeholder="Head of Independent Partners · Head of Independent Partners">
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Purpose of this session:</strong> To observe the full rep field motion — preparation, opening, pitch, objection handling, and close — and provide specific, actionable coaching the same day. This document is shared with the rep after the session. It is not a performance review. It is a coaching record.
+  </div>
+
+  
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <span class="section-title">Calls — Observation per Call</span>
+    </div>
+
+    
+    <div class="call-block">
+      <div class="call-block-head">
+        <span class="call-num">Call 1</span>
+        <input class="call-name-input" type="text" placeholder="Partner name and territory...">
+        <div class="outcome-sel">
+          <button class="outcome-btn">Signed</button>
+          <button class="outcome-btn">Follow-up</button>
+          <button class="outcome-btn">No</button>
+          <button class="outcome-btn">Not in</button>
+        </div>
+      </div>
+      <div class="call-block-body">
+        <div class="field-group">
+          <div class="field-label">Pre-call preparation <span>Did they research the venue surplus pattern and deald period?</span></div>
+          <textarea placeholder="What did the rep know before walking in? Did they research the venue's likely surplus pattern before calling? Did they have a pitch angle ready?"></textarea>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Opening <span>Did they establish the Tuesday problem quickly?</span></div>
+          <textarea placeholder="How did they open the conversation? Did they lead with a question about quiet periods or did they pitch immediately?"></textarea>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Pitch — TGTG margin logic <span>Was the £ maths used? Offer type explained?</span></div>
+          <textarea placeholder="Did they walk through the waste-to-revenue frame? Did they explain how Surprise Bag pricing works and what the partner nets per bag? Did they tailor to this venue's surplus type?"></textarea>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Objection handling <span>What came up and how was it handled?</span></div>
+          <textarea placeholder="Brand objection? Commission rate? 'We're already busy'? Note the exact objection and the rep's response."></textarea>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Offer structure proposed <span>Was the window matched to the surplus pattern? Right depth? Right window?</span></div>
+          <textarea placeholder="What Surprise Bag did they propose? Day / time / bag count / price. Was the collection window matched to the partner's actual surplus?"></textarea>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Close and next step <span>Did they ask for a commitment?</span></div>
+          <textarea placeholder="Did they ask for the close or leave it open? If follow-up: was a specific time agreed? Salesforce updated on the spot?"></textarea>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="call-block">
+      <div class="call-block-head">
+        <span class="call-num">Call 2</span>
+        <input class="call-name-input" type="text" placeholder="Partner name and territory...">
+        <div class="outcome-sel">
+          <button class="outcome-btn">Signed</button>
+          <button class="outcome-btn">Follow-up</button>
+          <button class="outcome-btn">No</button>
+          <button class="outcome-btn">Not in</button>
+        </div>
+      </div>
+      <div class="call-block-body">
+        <div class="field-group">
+          <div class="field-label">Opening and discovery</div>
+          <textarea placeholder="How did they open? Did they discover the quiet period before pitching?"></textarea>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Pitch quality</div>
+          <textarea placeholder="TGTG value proposition clear? Offer types explained? Maths used?"></textarea>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Objection handling</div>
+          <textarea placeholder="What came up? How was it handled?"></textarea>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Close and Salesforce discipline</div>
+          <textarea placeholder="Close attempted? Next step agreed and logged?"></textarea>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="call-block">
+      <div class="call-block-head">
+        <span class="call-num">Venue 3</span>
+        <input class="call-name-input" type="text" placeholder="Partner name and territory...">
+        <div class="outcome-sel">
+          <button class="outcome-btn">Signed</button>
+          <button class="outcome-btn">Follow-up</button>
+          <button class="outcome-btn">No</button>
+          <button class="outcome-btn">Not in</button>
+        </div>
+      </div>
+      <div class="call-block-body">
+        <div class="field-group">
+          <div class="field-label">Opening and discovery</div>
+          <textarea placeholder="How did they open?"></textarea>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Pitch quality</div>
+          <textarea placeholder="TGTG value proposition clear?"></textarea>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Objection handling</div>
+          <textarea placeholder="What came up?"></textarea>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Close and next step</div>
+          <textarea placeholder="Close attempted?"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <span class="section-title">Skills Assessment — Session Overall</span>
+    </div>
+    <div class="obs-grid">
+      <div class="obs-card">
+        <div class="obs-card-head">Commercial skills</div>
+        <div class="obs-card-body">
+          <div class="tl-row">
+            <span class="tl-label">Pre-call preparation (Google reviews, surplus research, category knowledge)</span>
+            <div class="tl-btns">
+              <button class="tl-btn green" onclick="toggleTL(this)">Strong</button>
+              <button class="tl-btn amber" onclick="toggleTL(this)">Developing</button>
+              <button class="tl-btn red" onclick="toggleTL(this)">Focus area</button>
+            </div>
+          </div>
+          <div class="tl-row">
+            <span class="tl-label">Tuesday problem / dead period established</span>
+            <div class="tl-btns">
+              <button class="tl-btn green" onclick="toggleTL(this)">Strong</button>
+              <button class="tl-btn amber" onclick="toggleTL(this)">Developing</button>
+              <button class="tl-btn red" onclick="toggleTL(this)">Focus area</button>
+            </div>
+          </div>
+          <div class="tl-row">
+            <span class="tl-label">Margin / contribution maths delivered clearly</span>
+            <div class="tl-btns">
+              <button class="tl-btn green" onclick="toggleTL(this)">Strong</button>
+              <button class="tl-btn amber" onclick="toggleTL(this)">Developing</button>
+              <button class="tl-btn red" onclick="toggleTL(this)">Focus area</button>
+            </div>
+          </div>
+          <div class="tl-row">
+            <span class="tl-label">Offer structure quality (weekday-primary, right depth)</span>
+            <div class="tl-btns">
+              <button class="tl-btn green" onclick="toggleTL(this)">Strong</button>
+              <button class="tl-btn amber" onclick="toggleTL(this)">Developing</button>
+              <button class="tl-btn red" onclick="toggleTL(this)">Focus area</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="obs-card">
+        <div class="obs-card-head">Sales craft</div>
+        <div class="obs-card-body">
+          <div class="tl-row">
+            <span class="tl-label">Objection handling — brand / commission / timing</span>
+            <div class="tl-btns">
+              <button class="tl-btn green" onclick="toggleTL(this)">Strong</button>
+              <button class="tl-btn amber" onclick="toggleTL(this)">Developing</button>
+              <button class="tl-btn red" onclick="toggleTL(this)">Focus area</button>
+            </div>
+          </div>
+          <div class="tl-row">
+            <span class="tl-label">Close attempted — asked for commitment</span>
+            <div class="tl-btns">
+              <button class="tl-btn green" onclick="toggleTL(this)">Strong</button>
+              <button class="tl-btn amber" onclick="toggleTL(this)">Developing</button>
+              <button class="tl-btn red" onclick="toggleTL(this)">Focus area</button>
+            </div>
+          </div>
+          <div class="tl-row">
+            <span class="tl-label">Salesforce logged on the spot / WhatsApp follow-up sent</span>
+            <div class="tl-btns">
+              <button class="tl-btn green" onclick="toggleTL(this)">Strong</button>
+              <button class="tl-btn amber" onclick="toggleTL(this)">Developing</button>
+              <button class="tl-btn red" onclick="toggleTL(this)">Focus area</button>
+            </div>
+          </div>
+          <div class="tl-row">
+            <span class="tl-label">Energy, presence, and operator rapport</span>
+            <div class="tl-btns">
+              <button class="tl-btn green" onclick="toggleTL(this)">Strong</button>
+              <button class="tl-btn amber" onclick="toggleTL(this)">Developing</button>
+              <button class="tl-btn red" onclick="toggleTL(this)">Focus area</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <span class="section-title">Coaching Debrief — Specific, Named, Same Day</span>
+    </div>
+    <div class="two-col">
+      <div class="field-group">
+        <div class="field-label">What they did well <span>Name the specific moment and venue</span></div>
+        <textarea rows="5" placeholder="Be specific — name the venue, the objection, and exactly what they said. E.g. 'At [Call 2] the way you reframed the brand objection by referencing the bag count was exactly right. That is the version we teach the team.'"></textarea>
+      </div>
+      <div class="field-group">
+        <div class="field-label">Primary development area <span>One thing — the most important one</span></div>
+        <textarea rows="5" placeholder="One thing only. The most impactful change. E.g. 'At [Call 1] you pitched before asking about their quiet period. Ask one question first: what's your quietest night of the week? Everything else follows from their answer.'"></textarea>
+      </div>
+    </div>
+    <div class="field-group">
+      <div class="field-label">Agreed actions before next session <span>Specific, owned, dated</span></div>
+      <textarea rows="4" placeholder="What is the rep going to do differently tomorrow? What are they going to practise? Who owns what? When do we review?"></textarea>
+    </div>
+    <div class="field-group">
+      <div class="field-label">Win Wire nomination <span>Is there a moment from this session worth sharing with the whole team on Friday?</span></div>
+      <textarea rows="3" placeholder="If yes: describe the moment in one paragraph that the rep can walk the team through on Friday. If no: note why not this week."></textarea>
+    </div>
+  </div>
+
+  
+  <div class="two-col" style="margin-bottom:24px;">
+    <div class="field-group">
+      <div class="field-label">Next accompaniment date</div>
+      <input type="text" placeholder="Date and territory">
+    </div>
+    <div class="field-group">
+      <div class="field-label">Focus for next session</div>
+      <input type="text" placeholder="The one thing we're watching">
+    </div>
+  </div>
+
+  <div class="signoff">
+    <div class="signoff-item">
+      <div class="signoff-label">Head of Independent Partners signature</div>
+      <input class="signoff-input" type="text" placeholder="Head of Independent Partners">
+    </div>
+    <div class="signoff-item">
+      <div class="signoff-label">rep signature (receipt)</div>
+      <input class="signoff-input" type="text" placeholder="Received and read">
+    </div>
+    <div class="signoff-item">
+      <div class="signoff-label">Shared via</div>
+      <input class="signoff-input" type="text" placeholder="Email / Slack / WhatsApp">
+    </div>
+  </div>
+
+</div>
+
+<div class="sheet" id="sheet-call">
+
+  <div class="tmpl-header">
+    <span class="tmpl-tag">Too Good To Go · Coaching Template · 02</span>
+    <div class="tmpl-title">Cold Call<br><em>Observation Record</em></div>
+    <div class="tmpl-sub">Completed while live-listening or reviewing a call recording. Shared with the rep immediately after. One call per form.</div>
+    <div class="tmpl-meta">
+      <div class="meta-item">
+        <div class="meta-l">Rep Name</div>
+        <input class="meta-input" type="text" placeholder="Full name">
+      </div>
+      <div class="meta-item">
+        <div class="meta-l">Date and Time</div>
+        <input class="meta-input" type="text" placeholder="DD/MM/YYYY · HH:MM">
+      </div>
+      <div class="meta-item">
+        <div class="meta-l">Venue Called</div>
+        <input class="meta-input" type="text" placeholder="Venue name and territory">
+      </div>
+      <div class="meta-item">
+        <div class="meta-l">Call Type</div>
+        <input class="meta-input" type="text" placeholder="Cold / Warm / Reactivation / Follow-up">
+      </div>
+      <div class="meta-item">
+        <div class="meta-l">Call Outcome</div>
+        <input class="meta-input" type="text" placeholder="Meeting booked / Callback / No / Not reached">
+      </div>
+      <div class="meta-item">
+        <div class="meta-l">Call Duration</div>
+        <input class="meta-input" type="text" placeholder="MM:SS">
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Listening principle:</strong> Note the exact words used at each stage. Paraphrase is not enough for coaching — the rep needs to hear what they actually said, not a summary. The most powerful coaching moment is playing back the specific line that landed or the specific moment that broke the flow.
+  </div>
+
+  
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <span class="section-title">Call Stages — Observed in Sequence</span>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">Opening (first 30 seconds) <span>Did they establish who they are and why this call is worth 90 seconds?</span></div>
+      <textarea placeholder="Exact or near-exact words used. Did they hook immediately or ramble? Did they name the venue specifically? Did they sound confident or apologetic? Note the tone."></textarea>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">Discovery question <span>Did they ask about the venue's quiet period before pitching?</span></div>
+      <textarea placeholder="What question did they ask? Was it open or closed? Did they let the venue owner answer before speaking again? Note how long they stayed quiet after asking."></textarea>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">TGTG pitch <span>Did they frame TGTG as a solution to the problem the owner just named?</span></div>
+      <textarea placeholder="How did they position TGTG? Did they explain the Surprise Bag model and collection window? Did they personalise to what the owner said about their quiet period? Did they run the contribution maths or leave it abstract?"></textarea>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">Objections raised and handled</div>
+      <textarea placeholder="List each objection exactly as the operator said it. Then note the rep's response word for word if possible. What worked? What didn't? What should they have said?"></textarea>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">Close or next step <span>Did they close the Surprise Bag window or book a follow-up?</span></div>
+      <textarea placeholder="How did they ask for the close or next step? Was it confident or tentative? Did they close a next step on the call? Was a follow-up WhatsApp agreed?"></textarea>
+    </div>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <span class="section-title">Call Skills Scorecard</span>
+    </div>
+
+    <div class="obs-grid">
+      <div class="obs-card">
+        <div class="obs-card-head">Opening and framing</div>
+        <div class="obs-card-body">
+          <div class="tl-row">
+            <span class="tl-label">Confident opener — clear who, why, and the hook</span>
+            <div class="tl-btns">
+              <button class="tl-btn green" onclick="toggleTL(this)">Strong</button>
+              <button class="tl-btn amber" onclick="toggleTL(this)">Dev</button>
+              <button class="tl-btn red" onclick="toggleTL(this)">Focus</button>
+            </div>
+          </div>
+          <div class="tl-row">
+            <span class="tl-label">Asked one discovery question before pitching</span>
+            <div class="tl-btns">
+              <button class="tl-btn green" onclick="toggleTL(this)">Strong</button>
+              <button class="tl-btn amber" onclick="toggleTL(this)">Dev</button>
+              <button class="tl-btn red" onclick="toggleTL(this)">Focus</button>
+            </div>
+          </div>
+          <div class="tl-row">
+            <span class="tl-label">Listened — paused after questions, didn't fill silence</span>
+            <div class="tl-btns">
+              <button class="tl-btn green" onclick="toggleTL(this)">Strong</button>
+              <button class="tl-btn amber" onclick="toggleTL(this)">Dev</button>
+              <button class="tl-btn red" onclick="toggleTL(this)">Focus</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="obs-card">
+        <div class="obs-card-head">Pitch and close</div>
+        <div class="obs-card-body">
+          <div class="tl-row">
+            <span class="tl-label">TGTG value prop clear — not just "we drive bookings"</span>
+            <div class="tl-btns">
+              <button class="tl-btn green" onclick="toggleTL(this)">Strong</button>
+              <button class="tl-btn amber" onclick="toggleTL(this)">Dev</button>
+              <button class="tl-btn red" onclick="toggleTL(this)">Focus</button>
+            </div>
+          </div>
+          <div class="tl-row">
+            <span class="tl-label">Personalised to what the owner said</span>
+            <div class="tl-btns">
+              <button class="tl-btn green" onclick="toggleTL(this)">Strong</button>
+              <button class="tl-btn amber" onclick="toggleTL(this)">Dev</button>
+              <button class="tl-btn red" onclick="toggleTL(this)">Focus</button>
+            </div>
+          </div>
+          <div class="tl-row">
+            <span class="tl-label">Asked for the meeting / next step / close</span>
+            <div class="tl-btns">
+              <button class="tl-btn green" onclick="toggleTL(this)">Strong</button>
+              <button class="tl-btn amber" onclick="toggleTL(this)">Dev</button>
+              <button class="tl-btn red" onclick="toggleTL(this)">Focus</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <span class="section-title">Coaching Debrief</span>
+    </div>
+    <div class="two-col">
+      <div class="field-group">
+        <div class="field-label">The line that worked <span>Exact quote if possible</span></div>
+        <textarea rows="4" placeholder="The specific thing they said that moved the conversation forward. Quote it back exactly. This is what we want them to use again."></textarea>
+      </div>
+      <div class="field-group">
+        <div class="field-label">The moment it changed <span>When and why did the call shift?</span></div>
+        <textarea rows="4" placeholder="If the call went off track: the exact moment and what caused it. If it went well: the moment the owner's tone shifted and what the rep had just said."></textarea>
+      </div>
+    </div>
+    <div class="field-group">
+      <div class="field-label">One thing to practise before tomorrow's calls</div>
+      <textarea rows="3" placeholder="Specific, actionable, one thing only. What are they going to say differently on the next call?"></textarea>
+    </div>
+    <div class="field-group">
+      <div class="field-label">Suggested script improvement <span>If applicable — write the better version of the line that didn't land</span></div>
+      <textarea rows="3" placeholder="Write the alternative version. Not 'try something different' — write the actual words they should use."></textarea>
+    </div>
+  </div>
+
+  <div class="signoff">
+    <div class="signoff-item">
+      <div class="signoff-label">Observed by</div>
+      <input class="signoff-input" type="text" placeholder="Head of Independent Partners · Head of Independent Partners">
+    </div>
+    <div class="signoff-item">
+      <div class="signoff-label">Shared with rep at</div>
+      <input class="signoff-input" type="text" placeholder="Time shared">
+    </div>
+    <div class="signoff-item">
+      <div class="signoff-label">Salesforce note added</div>
+      <input class="signoff-input" type="text" placeholder="Yes / No">
+    </div>
+  </div>
+
+</div>
+
+<div class="sheet" id="sheet-rep">
+
+  <div class="tmpl-header">
+    <span class="tmpl-tag">Too Good To Go · Management Template · 03</span>
+    <div class="tmpl-title">rep Weekly<br><em>One-to-One</em></div>
+    <div class="tmpl-sub">Completed by the Head of Independent Partners or Team Lead. Shared with the rep at the end of the session. Every week, same structure, same day.</div>
+    <div class="tmpl-meta">
+      <div class="meta-item">
+        <div class="meta-l">Rep Name</div>
+        <input class="meta-input" type="text" placeholder="Full name">
+      </div>
+      <div class="meta-item">
+        <div class="meta-l">Week Commencing</div>
+        <input class="meta-input" type="text" placeholder="Mon DD/MM/YYYY">
+      </div>
+      <div class="meta-item">
+        <div class="meta-l">1:1 with</div>
+        <input class="meta-input" type="text" placeholder="Head of Independent Partners / Manager name">
+      </div>
+      <div class="meta-item">
+        <div class="meta-l">1:1 number</div>
+        <input class="meta-input" type="text" placeholder="Week 1 of role / Session #12">
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <span class="section-title">Performance Snapshot — This Week</span>
+    </div>
+    <div class="score-row">
+      <div class="score-card">
+        <div class="score-card-label">Deals closed</div>
+        <input class="score-card-input" type="text" placeholder="0">
+        <div class="score-card-sub">Target: 5–7/week</div>
+      </div>
+      <div class="score-card">
+        <div class="score-card-label">Month to date</div>
+        <input class="score-card-input" type="text" placeholder="0">
+        <div class="score-card-sub">Floor: 20 / Avg: 25–30</div>
+      </div>
+      <div class="score-card">
+        <div class="score-card-label">Weekday-primary deals</div>
+        <input class="score-card-input" type="text" placeholder="0%">
+        <div class="score-card-sub">Target: 100%</div>
+      </div>
+      <div class="score-card">
+        <div class="score-card-label">Venues activated (30d)</div>
+        <input class="score-card-input" type="text" placeholder="0">
+        <div class="score-card-sub">Target: all signed venues</div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <span class="section-title">Pipeline — Named Deals</span>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">Likely to close this week <span>Named venues only — no generic "a few in Hackney"</span></div>
+      <table class="pipeline-table">
+        <thead>
+          <tr>
+            <th style="width:28%">Venue name</th>
+            <th style="width:15%">Territory</th>
+            <th style="width:20%">Offer proposed</th>
+            <th style="width:17%">Status</th>
+            <th style="width:20%">Close date / action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" placeholder="Venue name"></td>
+            <td><input type="text" placeholder="E.g. E8"></td>
+            <td><input type="text" placeholder="E.g. 25% Tue–Thu EB"></td>
+            <td><input type="text" placeholder="E.g. Verbal yes"></td>
+            <td><input type="text" placeholder="E.g. Contract sent Mon"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="Venue name"></td>
+            <td><input type="text" placeholder=""></td>
+            <td><input type="text" placeholder=""></td>
+            <td><input type="text" placeholder=""></td>
+            <td><input type="text" placeholder=""></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="Venue name"></td>
+            <td><input type="text" placeholder=""></td>
+            <td><input type="text" placeholder=""></td>
+            <td><input type="text" placeholder=""></td>
+            <td><input type="text" placeholder=""></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="Venue name"></td>
+            <td><input type="text" placeholder=""></td>
+            <td><input type="text" placeholder=""></td>
+            <td><input type="text" placeholder=""></td>
+            <td><input type="text" placeholder=""></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="Venue name"></td>
+            <td><input type="text" placeholder=""></td>
+            <td><input type="text" placeholder=""></td>
+            <td><input type="text" placeholder=""></td>
+            <td><input type="text" placeholder=""></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="two-col">
+      <div class="field-group">
+        <div class="field-label">Deals going cold <span>14+ days open with no progress — name them</span></div>
+        <textarea rows="4" placeholder="Venue name, days open, last contact, what's blocking it. Are they worth pursuing or should they be killed and the time reinvested?"></textarea>
+      </div>
+      <div class="field-group">
+        <div class="field-label">Activation check <span>Venues signed in the last 30 days — are they transacting?</span></div>
+        <textarea rows="4" placeholder="Name any venue signed in the last 30 days that hasn't had its first redemption yet. What's the plan to get them live this week?"></textarea>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <span class="section-title">Priorities and Focus</span>
+    </div>
+
+    <div class="two-col">
+      <div class="field-group">
+        <div class="field-label">This week's priorities <span>3 things — ranked</span></div>
+        <textarea rows="5" placeholder="1. [Named action, named venue, named outcome]&#10;2. [Named action, named venue, named outcome]&#10;3. [Named action, named venue, named outcome]"></textarea>
+      </div>
+      <div class="field-group">
+        <div class="field-label">Next week's setup <span>What goes in the diary now for next week?</span></div>
+        <textarea rows="5" placeholder="What calls should already be booked for next week? What pipeline needs to be moved forward this week to set up the next?"></textarea>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">Blockers — what is slowing you down? <span>Manager needs to know and act on these</span></div>
+      <textarea rows="4" placeholder="What is getting in the way of hitting target? Product, process, territory, personal — name it honestly. This is the manager's action list, not just a note."></textarea>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">Support needed from your manager this week</div>
+      <textarea rows="3" placeholder="Specific requests only. A live listening session on a specific call? An introduction? A pricing question? An escalation?"></textarea>
+    </div>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <span class="section-title">Development and Coaching Focus</span>
+    </div>
+
+    <div class="two-col">
+      <div class="field-group">
+        <div class="field-label">Current coaching focus <span>One thing from last session — have they actioned it?</span></div>
+        <textarea rows="4" placeholder="What was the one development action from last week's 1:1? Have they put it into practice? What happened when they did?"></textarea>
+      </div>
+      <div class="field-group">
+        <div class="field-label">New development focus this week</div>
+        <textarea rows="4" placeholder="One thing only. Agreed between manager and rep. Named skill or behaviour. Specific enough to observe and measure."></textarea>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">Training notes — Cialdini / MEDDIC / Challenger</div>
+      <textarea rows="3" placeholder="Any micro-session content discussed this week? Any principle applied in a live deal? Note which framework and which specific application."></textarea>
+    </div>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <span class="section-title">Personal Check-In</span>
+    </div>
+    <div class="two-col">
+      <div class="field-group">
+        <div class="field-label">How are you feeling about the role and the week? <span>Honest signal only</span></div>
+        <textarea rows="4" placeholder="Energy level, confidence, any personal situation affecting work. Not graded — used to calibrate support."></textarea>
+      </div>
+      <div class="field-group">
+        <div class="field-label">Anything else you want me to know?</div>
+        <textarea rows="4" placeholder="Open floor. Team dynamics, product feedback, market intelligence, anything worth raising."></textarea>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">06</span>
+      <span class="section-title">Manager Notes — Not Shared With rep</span>
+    </div>
+    <div class="callout">
+      This section is for the manager's internal record only. Do not share with the rep. Used to track trajectory, flag patterns, and prepare for escalation conversations if needed.
+    </div>
+    <div class="two-col">
+      <div class="field-group">
+        <div class="field-label">Manager's read on this rep this week</div>
+        <textarea rows="4" placeholder="Trajectory: improving / plateau / declining. Specific observations. Anything that differs from what the rep reported vs what the data shows."></textarea>
+      </div>
+      <div class="field-group">
+        <div class="field-label">Intervention required?</div>
+        <textarea rows="4" placeholder="If below 3 Surprise Bags agreed per week for 3 consecutive weeks: is a formal intervention plan required? Flag here before it becomes urgent."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="signoff">
+    <div class="signoff-item">
+      <div class="signoff-label">Manager</div>
+      <input class="signoff-input" type="text" placeholder="Name and date">
+    </div>
+    <div class="signoff-item">
+      <div class="signoff-label">rep acknowledgement</div>
+      <input class="signoff-input" type="text" placeholder="Read and agreed">
+    </div>
+    <div class="signoff-item">
+      <div class="signoff-label">Next 1:1</div>
+      <input class="signoff-input" type="text" placeholder="Date and time booked">
+    </div>
+  </div>
+
+</div>
+
+<div class="sheet" id="sheet-sm">
+
+  <div class="tmpl-header">
+    <span class="tmpl-tag">Too Good To Go · Management Template · 04</span>
+    <div class="tmpl-title">Team Lead<br><em>Weekly 1:1</em></div>
+    <div class="tmpl-sub">Head of Independent Partners with each Team Lead. Strategic, team-level, forward-looking. Shared with the Team Lead after the session. Different from the rep template — this is about the team, not individual pipeline.</div>
+    <div class="tmpl-meta">
+      <div class="meta-item">
+        <div class="meta-l">Team Lead</div>
+        <input class="meta-input" type="text" placeholder="Full name">
+      </div>
+      <div class="meta-item">
+        <div class="meta-l">Territory / Region</div>
+        <input class="meta-input" type="text" placeholder="E.g. London / North / Scotland">
+      </div>
+      <div class="meta-item">
+        <div class="meta-l">Week Commencing</div>
+        <input class="meta-input" type="text" placeholder="Mon DD/MM/YYYY">
+      </div>
+      <div class="meta-item">
+        <div class="meta-l">Head of Independent Partners</div>
+        <input class="meta-input" type="text" placeholder="Head of Independent Partners">
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <span class="section-title">Team Performance — This Week</span>
+    </div>
+    <div class="score-row">
+      <div class="score-card">
+        <div class="score-card-label">Team total deals</div>
+        <input class="score-card-input" type="text" placeholder="0">
+        <div class="score-card-sub">vs target</div>
+      </div>
+      <div class="score-card">
+        <div class="score-card-label">Weekday-primary %</div>
+        <input class="score-card-input" type="text" placeholder="0%">
+        <div class="score-card-sub">Target: 100%</div>
+      </div>
+      <div class="score-card">
+        <div class="score-card-label">Reps at / above floor</div>
+        <input class="score-card-input" type="text" placeholder="0 / 0">
+        <div class="score-card-sub">Floor: 20/month</div>
+      </div>
+      <div class="score-card">
+        <div class="score-card-label">Activation rate (30d)</div>
+        <input class="score-card-input" type="text" placeholder="0%">
+        <div class="score-card-sub">Target: all venues</div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <span class="section-title">Team Status — Rep by Rep Traffic Light</span>
+    </div>
+    <div class="callout">
+      One row per rep. Be honest. Green = on track or above. Amber = at risk, needs attention this week. Red = below floor, intervention in motion.
+    </div>
+
+    <div id="rep-rows">
+      
+    </div>
+
+    <div id="rep-cards"></div>
+    <button onclick="addRepCard()" style="width:100%;padding:12px;margin-top:8px;margin-bottom:16px;background:transparent;border:1.5px dashed #2a2a2a;border-radius:10px;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;" onmouseover="this.style.borderColor='#6DBE4F';this.style.color='#6DBE4F'" onmouseout="this.style.borderColor='#2a2a2a';this.style.color='#555'">+ Add Rep</button>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <span class="section-title">Key Wins, Risks, and Priorities</span>
+    </div>
+
+    <div class="two-col">
+      <div class="field-group">
+        <div class="field-label">Key wins this week <span>Named venues / reps / moments worth celebrating</span></div>
+        <textarea rows="4" placeholder="Which rep had the best close? Which venue is the best quality deal of the week? Any Win Wire nominations from the team this week?"></textarea>
+      </div>
+      <div class="field-group">
+        <div class="field-label">Biggest risks to team target this month <span>Named and specific</span></div>
+        <textarea rows="4" placeholder="What could prevent this team hitting target? Rep departure risk? Territory gap? Pipeline thin in a specific area? Name the risk and the mitigation."></textarea>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">High-value pipeline — group accounts or flagship venues <span>Named, staged, next action</span></div>
+      <textarea rows="4" placeholder="Any group account conversations in motion? Any flagship venue that needs senior support or a HoI joint call? Name the venue, the status, and what you need from Grant."></textarea>
+    </div>
+
+    <div class="two-col">
+      <div class="field-group">
+        <div class="field-label">Your priorities this week — as a manager <span>Not your team's priorities — yours</span></div>
+        <textarea rows="4" placeholder="What are you personally focused on this week as a manager? Coaching a specific rep? Running a team blitz? Closing a difficult deal alongside someone?"></textarea>
+      </div>
+      <div class="field-group">
+        <div class="field-label">Setup for next week — what goes in the diary now?</div>
+        <textarea rows="4" placeholder="What needs to be booked, agreed, or planned today to set up a strong next week? Team standup agenda? Specific live listening sessions? Hiring calls?"></textarea>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <span class="section-title">Coaching Capacity and Standards</span>
+    </div>
+
+    <div class="two-col">
+      <div class="field-group">
+        <div class="field-label">How much time are you spending on coaching vs firefighting?</div>
+        <textarea rows="4" placeholder="Honest answer. If over 40% of your time is on admin, reporting, or firefighting — that is a structural problem to solve together this week, not next month."></textarea>
+      </div>
+      <div class="field-group">
+        <div class="field-label">What standard behaviours are you seeing slip?</div>
+        <textarea rows="4" placeholder="CRM discipline? Weekend-primary deals creeping back in? Close quality dropping? Activation follow-up being skipped? Name what you're seeing and how you're addressing it."></textarea>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">Rep development highlight this week <span>The Scott principle — who is operating beyond their title right now?</span></div>
+      <textarea rows="3" placeholder="Which rep is coaching peers, taking ownership, raising standards without being asked? Name them and what they did. This is the future management layer."></textarea>
+    </div>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <span class="section-title">Hiring, Operations, and Blockers</span>
+    </div>
+
+    <div class="two-col">
+      <div class="field-group">
+        <div class="field-label">Hiring pipeline update</div>
+        <textarea rows="4" placeholder="Any open roles? Candidates in process? CVs reviewed? Interviews this week? Any hiring decisions needed from HoI?"></textarea>
+      </div>
+      <div class="field-group">
+        <div class="field-label">Blockers — what do you need from Grant this week?</div>
+        <textarea rows="4" placeholder="Specific asks only. A joint call on a specific account? A decision on a structural issue? Escalation support? Product feedback to pass up? Name it."></textarea>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">City / territory intelligence <span>What is happening in the market that Chelsea should know?</span></div>
+      <textarea rows="3" placeholder="Competitor activity? New venue clusters? A group account opportunity? A territory where the pipeline is suddenly moving? This feeds the Chelsea brief."></textarea>
+    </div>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">06</span>
+      <span class="section-title">Manager Check-In</span>
+    </div>
+    <div class="two-col">
+      <div class="field-group">
+        <div class="field-label">How are you feeling about the role, the team, and the week?</div>
+        <textarea rows="4" placeholder="Energy and confidence as a manager. What's going well, what's hard. Is this role feeling right? What would make it better?"></textarea>
+      </div>
+      <div class="field-group">
+        <div class="field-label">Anything else for Grant to know — off the record if needed</div>
+        <textarea rows="4" placeholder="Team dynamics, anything that doesn't belong in a written record but needs to be said out loud."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="signoff">
+    <div class="signoff-item">
+      <div class="signoff-label">Head of Independent Partners</div>
+      <input class="signoff-input" type="text" placeholder="Head of Independent Partners · date">
+    </div>
+    <div class="signoff-item">
+      <div class="signoff-label">Team Lead</div>
+      <input class="signoff-input" type="text" placeholder="Name · acknowledged">
+    </div>
+    <div class="signoff-item">
+      <div class="signoff-label">Next 1:1</div>
+      <input class="signoff-input" type="text" placeholder="Date and time booked">
+    </div>
+  </div>
+
+</div>
+
+<script>
+function show(id) {
+  document.querySelectorAll('.sheet').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('sheet-' + id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function toggleTL(btn) {
+  const group = btn.closest('.tl-btns');
+  group.querySelectorAll('.tl-btn').forEach(b => b.classList.remove('sel'));
+  btn.classList.add('sel');
+}
+
+function addRepCard(name){
+  var container = document.getElementById('rep-cards');
+  var card = document.createElement('div');
+  card.className = 'rep-card';
+  card.innerHTML = '<div class="rep-card-head">' +
+    '<span class="rep-name"><input type="text" placeholder="Rep name" value="'+(name||'')+'"></span>' +
+    '<div class="tl-btns">' +
+    '<button class="tl-btn green" onclick="toggleTL(this)">On track</button>' +
+    '<button class="tl-btn amber" onclick="toggleTL(this)">At risk</button>' +
+    '<button class="tl-btn red" onclick="toggleTL(this)">Below floor</button>' +
+    '</div>' +
+    '<button onclick="this.closest(\'.rep-card\').remove()" style="background:none;border:none;color:var(--text);cursor:pointer;font-size:14px;padding:4px 8px;" title="Remove">&times;</button>' +
+    '</div>' +
+    '<div class="field-group" style="margin:0;">' +
+    '<textarea rows="2" placeholder="MTD deals / pipeline quality / key observation this week / any intervention in motion"></textarea>' +
+    '</div>';
+  container.appendChild(card);
+  card.querySelectorAll('textarea').forEach(function(ta){
+    ta.addEventListener('input',function(){this.style.height='auto';this.style.height=Math.max(80,this.scrollHeight)+'px';});
+  });
+}
+
+for(var i=0;i<5;i++) addRepCard('');
+
+document.querySelectorAll('.outcome-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const group = this.closest('.outcome-sel');
+    group.querySelectorAll('.outcome-btn').forEach(b => {
+      b.style.background = '';
+      b.style.color = '';
+      b.style.borderColor = '';
+    });
+    this.style.background = '#111';
+    this.style.color = '#fff';
+    this.style.borderColor = '#111';
+  });
+});
+
+document.querySelectorAll('textarea').forEach(ta => {
+  ta.addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = Math.max(80, this.scrollHeight) + 'px';
+  });
+});
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>
