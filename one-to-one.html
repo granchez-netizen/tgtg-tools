@@ -579,19 +579,19 @@ input::placeholder { color: rgba(0,0,0,.25); }
 <nav class="nav">
   <div class="nav-logo">Eat<span>Club</span></div>
   <div class="nav-tabs">
-    <button class="nav-tab active" onclick="show('field')">01 · Field Accompaniment</button>
+    <button class="nav-tab active" onclick="show('call-along')">01 · Call-Along</button>
     <button class="nav-tab" onclick="show('call')">02 · Cold Call Observation</button>
-    <button class="nav-tab" onclick="show('bdm')">03 · rep Weekly 1:1</button>
+    <button class="nav-tab" onclick="show('rep')">03 · Rep Weekly 1:1</button>
     <button class="nav-tab" onclick="show('sm')">04 · Team Lead 1:1</button>
   </div>
   <button class="print-btn" onclick="window.print()">Print / PDF</button>
 </nav>
 
-<div class="sheet active" id="sheet-field">
+<div class="sheet active" id="sheet-call-along">
 
   <div class="tmpl-header">
     <span class="tmpl-tag">Too Good To Go · Coaching Template · 01</span>
-    <div class="tmpl-title">Field Accompaniment<br><em>Observation Record</em></div>
+    <div class="tmpl-title">Call-Along<br><em>Observation Record</em></div>
     <div class="tmpl-sub">Completed by the Head of Independent Partners during or immediately after joint prospect calls. Shared with the rep same day.</div>
     <div class="tmpl-meta">
       <div class="meta-item">
@@ -608,7 +608,7 @@ input::placeholder { color: rgba(0,0,0,.25); }
       </div>
       <div class="meta-item">
         <div class="meta-l">Session Type</div>
-        <input class="meta-input" type="text" placeholder="Joint visit / Shadow / Full day">
+        <input class="meta-input" type="text" placeholder="Joint call / Shadow / Full day">
       </div>
       <div class="meta-item">
         <div class="meta-l">Completed by</div>
@@ -625,7 +625,7 @@ input::placeholder { color: rgba(0,0,0,.25); }
   <div class="section">
     <div class="section-head">
       <span class="section-num">01</span>
-      <span class="section-title">Venue Visits — Observation per Stop</span>
+      <span class="section-title">Calls — Observation per Call</span>
     </div>
 
     
@@ -642,7 +642,7 @@ input::placeholder { color: rgba(0,0,0,.25); }
       </div>
       <div class="venue-block-body">
         <div class="field-group">
-          <div class="field-label">Pre-visit preparation <span>Did they use Google Popular Times? Know the dead period?</span></div>
+          <div class="field-label">Pre-call preparation <span>Did they research the venue surplus pattern and deald period?</span></div>
           <textarea placeholder="What did the rep know before walking in? Did they check Popular Times? Did they have a pitch angle ready?"></textarea>
         </div>
         <div class="field-group">
@@ -938,7 +938,7 @@ input::placeholder { color: rgba(0,0,0,.25); }
     </div>
 
     <div class="field-group">
-      <div class="field-label">Close or next step <span>Did they ask for a meeting / visit / decision?</span></div>
+      <div class="field-label">Close or next step <span>Did they close the Surprise Bag window or book a follow-up?</span></div>
       <textarea placeholder="How did they ask for the close or next step? Was it confident or tentative? Did they offer a specific time for a visit? Was a follow-up WhatsApp agreed?"></textarea>
     </div>
   </div>
@@ -1055,7 +1055,7 @@ input::placeholder { color: rgba(0,0,0,.25); }
 
 </div>
 
-<div class="sheet" id="sheet-bdm">
+<div class="sheet" id="sheet-rep">
 
   <div class="tmpl-header">
     <span class="tmpl-tag">Too Good To Go · Management Template · 03</span>
@@ -1361,8 +1361,8 @@ input::placeholder { color: rgba(0,0,0,.25); }
       
     </div>
 
-    <div id="bdm-cards"></div>
-    <button onclick="addBDMCard()" style="width:100%;padding:12px;margin-top:8px;margin-bottom:16px;background:transparent;border:1.5px dashed #2a2a2a;border-radius:10px;color:#555;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;" onmouseover="this.style.borderColor='#6DBE4F';this.style.color='#6DBE4F'" onmouseout="this.style.borderColor='#2a2a2a';this.style.color='#555'">+ Add Rep</button>
+    <div id="rep-cards"></div>
+    <button onclick="addRepCard()" style="width:100%;padding:12px;margin-top:8px;margin-bottom:16px;background:transparent;border:1.5px dashed #2a2a2a;border-radius:10px;color:#555;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;" onmouseover="this.style.borderColor='#6DBE4F';this.style.color='#6DBE4F'" onmouseout="this.style.borderColor='#2a2a2a';this.style.color='#555'">+ Add Rep</button>
   </div>
 
   
@@ -1385,7 +1385,7 @@ input::placeholder { color: rgba(0,0,0,.25); }
 
     <div class="field-group">
       <div class="field-label">High-value pipeline — group accounts or flagship venues <span>Named, staged, next action</span></div>
-      <textarea rows="4" placeholder="Any group account conversations in motion? Any flagship venue that needs senior support or a HoI joint visit? Name the venue, the status, and what you need from Grant."></textarea>
+      <textarea rows="4" placeholder="Any group account conversations in motion? Any flagship venue that needs senior support or a HoI joint call? Name the venue, the status, and what you need from Grant."></textarea>
     </div>
 
     <div class="two-col">
@@ -1438,7 +1438,7 @@ input::placeholder { color: rgba(0,0,0,.25); }
       </div>
       <div class="field-group">
         <div class="field-label">Blockers — what do you need from Grant this week?</div>
-        <textarea rows="4" placeholder="Specific asks only. A joint visit on a specific account? A decision on a structural issue? Escalation support? Product feedback to pass up? Name it."></textarea>
+        <textarea rows="4" placeholder="Specific asks only. A joint call on a specific account? A decision on a structural issue? Escalation support? Product feedback to pass up? Name it."></textarea>
       </div>
     </div>
 
@@ -1498,8 +1498,8 @@ function toggleTL(btn) {
   btn.classList.add('sel');
 }
 
-function addBDMCard(name){
-  var container = document.getElementById('bdm-cards');
+function addRepCard(name){
+  var container = document.getElementById('rep-cards');
   var card = document.createElement('div');
   card.className = 'rep-card';
   card.innerHTML = '<div class="rep-card-head">' +
@@ -1520,7 +1520,7 @@ function addBDMCard(name){
   });
 }
 
-for(var i=0;i<5;i++) addBDMCard('');
+for(var i=0;i<5;i++) addRepCard('');
 
 document.querySelectorAll('.outcome-btn').forEach(btn => {
   btn.addEventListener('click', function() {
