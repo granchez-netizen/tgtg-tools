@@ -101,7 +101,7 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.7;}
     <button class="tnav" onclick="setTool('revival',this)">🔄 Revival Script</button>
     <button class="tnav" onclick="setTool('1on1',this)">💬 1:1 Prep</button>
     <button class="tnav" onclick="setTool('standup-gen',this)">☀️ Standup Script</button>
-    <button class="tnav" onclick="setTool('call-analysis',this)">📞 Call Analysis</button>
+    <button class="tnav" onclick="setTool('call-analysis',this)">📞 Call Analysis <span class="badge">10 criteria</span></button>
   </div>
 
   <!-- ═══ CHELSEA BRIEF ═══ -->
@@ -462,7 +462,7 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.7;}
   <!-- ═══ CALL ANALYSIS ═══ -->
   <div class="tool-panel" id="panel-call-analysis">
     <div class="time-pill">⏱ Saves ~20 min per coaching session</div>
-    <div class="tool-intro"><strong>AI Call Analysis — Salesforce transcript.</strong> Copy a call transcript from Salesforce and paste it below. The AI scores the call across 7 TGTG-specific criteria, pulls direct evidence from the transcript, writes a coaching plan for the rep, and gives the Team Lead the exact words to use in the debrief. No manual scoring. No guessing what to coach.</div>
+    <div class="tool-intro"><strong>AI Call Analysis — Salesforce transcript.</strong> Paste a call transcript from Salesforce. The AI scores the call across 10 criteria covering the full TGTG sales process — decision maker confirmed, intro, fact-find, surplus discovery, waste-to-revenue frame, objection handling, Surprise Bag close, onboarding, CRM, and call control. Direct evidence pulled from the transcript. Coaching plan and TL debrief script written for you.</div>
 
     <div class="ai-form">
       <label class="form-label">Rep name</label>
@@ -488,7 +488,7 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.7;}
     </div>
 
     <div class="output-box" id="out-call-analysis">
-      <div class="output-eye">Call Analysis — Scores · Evidence · Coaching Plan · TL Debrief Script</div>
+      <div class="output-eye">Call Analysis — 10 Criteria · Sales Process · Evidence · Coaching Plan · TL Debrief</div>
       <div class="output-content" id="out-call-analysis-content"></div>
       <div class="copy-strip">
         <button class="copy-btn" onclick="copyOut('out-call-analysis-content',this)">Copy full analysis</button>
