@@ -325,7 +325,7 @@ function generate(){
   var rt = document.getElementById('risk-text');
   ri.className = 'risk-indicator risk-'+riskLevel;
   if(riskLevel==='critical') rt.textContent = 'CRITICAL RISK — Immediate action required within 48 hours';
-  else if(riskLevel==='high') rt.textContent = 'HIGH RISK — Site visit or call required this week';
+  else if(riskLevel==='high') rt.textContent = 'HIGH RISK — Check-in call or call required this week';
   else rt.textContent = 'MEDIUM RISK — Re-engagement needed within 7 days';
 
   // Update stats
