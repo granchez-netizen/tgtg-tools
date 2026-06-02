@@ -112,7 +112,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
     <div class="screen-sub">Fill this in leaving the venue — while it is fresh.</div>
 
     <label class="fl">rep</label>
-    <select class="fi" id="s1-rep" onchange="if(this.value==='__custom'){this.style.display='none';document.getElementById('s1-bdm-custom').style.display='block';document.getElementById('s1-bdm-custom').focus();}">
+    <select class="fi" id="s1-rep" onchange="if(this.value==='__custom'){this.style.display='none';document.getElementById('s1-rep-custom').style.display='block';document.getElementById('s1-rep-custom').focus();}">
       <option value="" disabled selected>Select rep...</option>
     </select>
     <input class="fi" id="s1-rep-custom" type="text" placeholder="Type Rep name..." style="display:none;" autocomplete="off">
@@ -387,7 +387,7 @@ function populateDropdown(names) {
 
 function getRepName(){
   var sel = document.getElementById('s1-bdm');
-  var custom = document.getElementById('s1-bdm-custom');
+  var custom = document.getElementById('s1-rep-custom');
   if(sel.value === '__custom' || sel.style.display === 'none'){
     return custom.value.trim() || 'Unknown rep';
   }
