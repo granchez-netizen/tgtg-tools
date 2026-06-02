@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap');
+:root{
+  --tgtg:#6DBE4F;--tgtgd:rgba(109,190,79,.09);--tgtgl:rgba(109,190,79,.25);
+  --teal:#6DBE4F;--teal-l:rgba(109,190,79,.09);--teal-ll:rgba(109,190,79,.06);
+  --bg:#ffffff;--bg2:#f7f8f5;--border:#e4e8de;--border2:#dde3d8;--cream:#f7f8f5;
+  --text:#1a1a1a;--muted:#5a6454;--muted2:#8a9484;--t:#1a1a1a;--t2:#5a6454;--m:#5a6454;
+  --b1:#e4e8de;--b2:#8a9484;
+  --danger:#EF4444;--dangerd:rgba(239,68,68,.07);--dangerl:rgba(239,68,68,.18);
+  --warn:#F59E0B;--warnd:rgba(245,158,11,.07);--warnl:rgba(245,158,11,.18);--yd:rgba(245,158,11,.07);--yl:rgba(245,158,11,.18);
+  --good:#22C55E;--goodd:rgba(34,197,94,.08);--goodl:rgba(34,197,94,.18);
+  --g:#22C55E;--gd:rgba(34,197,94,.08);--gl:rgba(34,197,94,.18);
+  --r:#EF4444;--rd:rgba(239,68,68,.07);--rl:rgba(239,68,68,.18);
+  --y:#6DBE4F;
+  --info:#60A5FA;--purple:#A78BFA;
+  --ink:#1a1a1a;--white:#ffffff;--soft:#2a2a2a;--rule:#e4e8de;
+  --gold:#6DBE4F;--gold-d:#4a9e32;--gold-pale:rgba(109,190,79,.09);--gold-mid:rgba(109,190,79,.22);
+  --amber:#6DBE4F;--amber-pale:rgba(109,190,79,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:#ffffff;color:#1a1a1a;-webkit-font-smoothing:antialiased;padding-bottom:80px;}
+@media(max-width:600px){input,select,textarea{font-size:16px !important;}}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Too Good To Go · Pipeline Forecast</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{--y:#6DBE4F;--yd:rgba(109,190,79,.10);--yl:rgba(109,190,79,.22);--g:#22C55E;--gd:rgba(34,197,94,.08);--gl:rgba(34,197,94,.22);--r:#EF4444;--rd:rgba(239,68,68,.08);--b:#3B82F6;--bg:#ffffff;--s:#f7f8f5;--b1:#dde3d8;--t:#1a1a1a;--m:#5a6454;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);-webkit-font-smoothing:antialiased;}
+.hdr{background:#6DBE4F;border-bottom:1px solid var(--b1);padding:13px 20px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;}
+.brand{font-size:13px;font-weight:800;}.brand em{color:var(--y);font-style:normal;}
+.hero{max-width:960px;margin:0 auto;padding:36px 24px 24px;}
+.eye{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--y);margin-bottom:8px;}
+.h1{font-size:clamp(24px,4vw,40px);font-weight:900;letter-spacing:-1px;margin-bottom:8px;}
+.h1 em{color:var(--y);font-style:normal;}
+.sub{font-size:13px;color:#888;line-height:1.75;max-width:640px;margin-bottom:24px;}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px 60px;}
+.stages{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px;}
+@media(max-width:640px){.stages{grid-template-columns:1fr 1fr;}}
+.stage-card{background:#ffffff;border:1px solid #dde3d8;border-radius:11px;padding:14px;}
+.stage-eye{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;}
+.stage-pct{font-size:26px;font-weight:900;letter-spacing:-1px;line-height:1;}
+.stage-lbl{font-size:11px;color:var(--m);margin-top:3px;line-height:1.5;}
+.add-bar{background:#ffffff;border:1px solid #dde3d8;border-radius:12px;padding:16px 20px;margin-bottom:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;}
+.field{display:flex;flex-direction:column;gap:5px;flex:1;min-width:140px;}
+.field-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--m);}
+.field input,.field select{background:#f7f8f5;border:1px solid #dde3d8;border-radius:7px;color:var(--t);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;padding:9px 12px;width:100%;outline:none;transition:border-color .15s;}
+.field input:focus,.field select:focus{border-color:var(--y);}
+.add-btn{padding:10px 20px;background:var(--y);border:none;border-radius:7px;color:#000;font-family:'Inter',sans-serif;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap;flex-shrink:0;}
+.add-btn:hover{background:#e6bc00;}
+.deals-table{width:100%;border-collapse:collapse;margin-bottom:20px;}
+.deals-table th{padding:10px 14px;text-align:left;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--m);border-bottom:1px solid var(--b1);}
+.deals-table td{padding:12px 14px;font-size:13px;border-bottom:1px solid #1a1a1a;color:#aaa;vertical-align:middle;}
+.deals-table td strong{color:var(--t);}
+.deals-table tr:last-child td{border-bottom:none;}
+.del-btn{background:transparent;border:none;color:#333;cursor:pointer;font-size:16px;padding:2px 6px;border-radius:4px;}
+.del-btn:hover{color:var(--r);}
+.stage-pill{font-size:9px;font-weight:700;padding:3px 8px;border-radius:8px;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px;}
+@media(max-width:500px){.summary{grid-template-columns:1fr;}}
+.sum-card{background:#ffffff;border:1px solid #dde3d8;border-radius:12px;padding:18px;}
+.sum-n{font-size:28px;font-weight:900;letter-spacing:-1px;line-height:1;margin-bottom:4px;}
+.sum-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--m);}
+.insight{background:#f7f8f5;border:1px solid #dde3d8;border-radius:12px;padding:16px 20px;font-size:13px;color:#888;line-height:1.75;}
+.insight strong{color:var(--t);}
+.empty{text-align:center;padding:40px;color:var(--m);font-size:13px;}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="brand"><em>Too Good</em> To Go · Pipeline Forecast</div>
+  <div style="font-size:11px;color:var(--m);">Rep self-assessment · weighted by stage</div>
+</div>
+<div class="hero">
+  <div class="eye">Forecast tool · weighted pipeline</div>
+  <div class="h1">What the pipeline is <em>actually</em> worth.</div>
+  <div class="sub">Reps enter their own high-likelihood deals. The tool applies a stage weighting that reflects historical conversion reality — not rep optimism. The weighted total is what you forecast to Chelsea. It gets more accurate as deal outcomes are tracked over time.</div>
+</div>
+<div class="wrap">
+
+  <div class="stages">
+    <div class="stage-card">
+      <div class="stage-eye" style="color:#888">Prospect</div>
+      <div class="stage-pct" style="color:#555">50%</div>
+      <div class="stage-lbl">First contact made. Interest not yet confirmed.</div>
+    </div>
+    <div class="stage-card">
+      <div class="stage-eye" style="color:var(--b)">Pitched</div>
+      <div class="stage-pct" style="color:var(--b)">65%</div>
+      <div class="stage-lbl">Pitch delivered. Operator engaged. No commitment yet.</div>
+    </div>
+    <div class="stage-card">
+      <div class="stage-eye" style="color:var(--y)">Offer agreed</div>
+      <div class="stage-pct" style="color:var(--y)">80%</div>
+      <div class="stage-lbl">Offer window agreed. Agreement being reviewed.</div>
+    </div>
+    <div class="stage-card">
+      <div class="stage-eye" style="color:var(--g)">Verbal yes</div>
+      <div class="stage-pct" style="color:var(--g)">90%</div>
+      <div class="stage-lbl">Verbal commitment. Paperwork in progress.</div>
+    </div>
+  </div>
+
+  <div class="add-bar">
+    <div class="field">
+      <div class="field-lbl">Venue name</div>
+      <input id="f-name" type="text" placeholder="e.g. The Good Egg">
+    </div>
+    <div class="field">
+      <div class="field-lbl">Rep</div>
+      <input id="f-rep" type="text" placeholder="e.g. J. Smith">
+    </div>
+    <div class="field">
+      <div class="field-lbl">Stage</div>
+      <select id="f-stage">
+        <option value="">Select stage</option>
+        <option value="prospect">Prospect — 50%</option>
+        <option value="pitched">Pitched — 65%</option>
+        <option value="offer">Offer agreed — 80%</option>
+        <option value="verbal">Verbal yes — 90%</option>
+      </select>
+    </div>
+    <div class="field">
+      <div class="field-lbl">Days in stage</div>
+      <input id="f-days" type="number" placeholder="e.g. 5" min="0">
+    </div>
+    <div class="field">
+      <div class="field-lbl">Est. monthly value (£)</div>
+      <input id="f-value" type="number" placeholder="e.g. 800" min="0">
+    </div>
+    <button class="add-btn" onclick="addDeal()">+ Add deal</button>
+  </div>
+
+  <div id="summary" style="display:none;" class="summary">
+    <div class="sum-card">
+      <div class="sum-n" id="s-raw" style="color:var(--m)">£0</div>
+      <div class="sum-lbl">Total pipeline (rep view)</div>
+    </div>
+    <div class="sum-card" style="border-color:var(--yl);background:var(--yd);">
+      <div class="sum-n" id="s-weighted" style="color:var(--y)">£0</div>
+      <div class="sum-lbl">Weighted forecast</div>
+    </div>
+    <div class="sum-card">
+      <div class="sum-n" id="s-gap" style="color:var(--r)">£0</div>
+      <div class="sum-lbl">Optimism gap</div>
+    </div>
+  </div>
+
+  <table class="deals-table" id="deals-tbl">
+    <thead>
+      <tr>
+        <th>Venue</th>
+        <th>Rep</th>
+        <th>Stage</th>
+        <th>Days in stage</th>
+        <th>Monthly value</th>
+        <th>Weight</th>
+        <th>Weighted value</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="deals-body">
+      <tr><td colspan="8" class="empty">No deals added yet. Add your high-likelihood pipeline above.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight" id="insight" style="display:none;"></div>
+</div>
+
+<script>
+var STAGES = { prospect:{pct:50,col:'#555',lbl:'Prospect'}, pitched:{pct:65,col:'#3B82F6',lbl:'Pitched'}, offer:{pct:80,col:'#6DBE4F',lbl:'Offer agreed'}, verbal:{pct:90,col:'#22C55E',lbl:'Verbal yes'} };
+var deals = [];
+
+function addDeal(){
+  var name=document.getElementById('f-name').value.trim();
+  var rep=document.getElementById('f-rep').value.trim();
+  var stage=document.getElementById('f-stage').value;
+  var days=parseInt(document.getElementById('f-days').value)||0;
+  var val=parseFloat(document.getElementById('f-value').value)||0;
+  if(!name||!stage||!val) return;
+  var s=STAGES[stage];
+  var penalty=0;
+  if(stage==='prospect'&&days>14) penalty=10;
+  if(stage==='pitched'&&days>10) penalty=10;
+  if(stage==='offer'&&days>7) penalty=10;
+  if(stage==='verbal'&&days>5) penalty=5;
+  var effective=Math.max(s.pct-penalty,10);
+  deals.push({id:Date.now(),name:name,rep:rep,stage:stage,days:days,val:val,effective:effective,col:s.col,lbl:s.lbl,penalty:penalty});
+  ['f-name','f-rep','f-days','f-value'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('f-stage').value='';
+  render();
+}
+
+function removeDeal(id){
+  deals=deals.filter(function(d){return d.id!==id;});
+  render();
+}
+
+function fmt(n){return'£'+Math.round(n).toLocaleString();}
+
+function render(){
+  var body=document.getElementById('deals-body');
+  if(!deals.length){
+    body.innerHTML='<tr><td colspan="8" class="empty">No deals added yet. Add your high-likelihood pipeline above.</td></tr>';
+    document.getElementById('summary').style.display='none';
+    document.getElementById('insight').style.display='none';
+    return;
+  }
+  var rows='';
+  var raw=0,weighted=0;
+  deals.forEach(function(d){
+    raw+=d.val;
+    var w=d.val*(d.effective/100);
+    weighted+=w;
+    var penNote=d.penalty>0?' <span style="color:#EF4444;font-size:10px;">-'+d.penalty+'% stale</span>':'';
+    rows+='<tr>';
+    rows+='<td><strong>'+d.name+'</strong></td>';
+    rows+='<td>'+d.rep+'</td>';
+    rows+='<td><span class="stage-pill" style="background:'+d.col+'22;color:'+d.col+';border:1px solid '+d.col+'44;">'+d.lbl+'</span></td>';
+    rows+='<td>'+d.days+' days</td>';
+    rows+='<td>'+fmt(d.val)+'</td>';
+    rows+='<td style="color:'+d.col+';font-weight:700;">'+d.effective+'%'+penNote+'</td>';
+    rows+='<td style="font-weight:700;color:var(--t);">'+fmt(w)+'</td>';
+    rows+='<td><button class="del-btn" onclick="removeDeal('+d.id+')">✕</button></td>';
+    rows+='</tr>';
+  });
+  body.innerHTML=rows;
+  var gap=raw-weighted;
+  document.getElementById('s-raw').textContent=fmt(raw);
+  document.getElementById('s-weighted').textContent=fmt(weighted);
+  document.getElementById('s-gap').textContent=fmt(gap);
+  document.getElementById('summary').style.display='grid';
+  var ins=document.getElementById('insight');
+  ins.style.display='block';
+  var pct=raw>0?Math.round((weighted/raw)*100):0;
+  var stale=deals.filter(function(d){return d.penalty>0;});
+  var msg='The weighted forecast of <strong>'+fmt(weighted)+'</strong> represents <strong>'+pct+'%</strong> of the rep-reported pipeline of '+fmt(raw)+'. The optimism gap of '+fmt(gap)+' is the number to manage — it reflects the difference between what reps believe will close and what historical conversion rates suggest will actually land.';
+  if(stale.length) msg+=' <strong>'+stale.length+' deal'+(stale.length>1?'s':'')+' flagged as stale</strong> — sitting in stage longer than expected and weighted down accordingly. These need a conversation this week.';
+  var verbal=deals.filter(function(d){return d.stage==='verbal';});
+  if(verbal.length) msg+=' <strong>'+verbal.length+' verbal close'+(verbal.length>1?'s':'')+' in the pipeline</strong> — highest confidence. If these are not signed within 7 days, re-examine the hold-up.';
+  ins.innerHTML=msg;
+}
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>
