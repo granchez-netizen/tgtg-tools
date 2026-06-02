@@ -18,11 +18,11 @@
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;min-height:100vh;}
 
 /* NAV */
-.topbar{background:#6DBE4F;border-bottom:1px solid var(--border);padding:12px 24px 12px 60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
-.brand{font-size:13px;font-weight:800;letter-spacing:-.3px;}.brand em{color:var(--tgtg);font-style:normal;}
+.topbar{background:#6DBE4F;border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.brand{font-size:13px;font-weight:800;letter-spacing:-.3px;color:#fff;}.brand em{color:rgba(255,255,255,.85);font-style:normal;}
 .topbar-r{display:flex;align-items:center;gap:12px;}
-.topbar-pill{font-size:10px;font-weight:700;padding:4px 10px;border-radius:6px;background:var(--tgtgd);border:1px solid var(--tgtgl);color:var(--tgtg);}
-.topbar-date{font-size:11px;color:var(--muted);}
+.topbar-pill{font-size:10px;font-weight:700;padding:4px 10px;border-radius:6px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);color:#fff;}
+.topbar-date{font-size:11px;color:rgba(255,255,255,.75);}
 
 /* MAIN LAYOUT */
 .layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 46px);}
@@ -162,7 +162,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 
 /* DAY/WEEK VIEW */
 .week-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px;}
-@media(max-width:800px){.week-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:800px){.week-grid{grid-template-columns:1fr 1fr;} @media(max-width:480px){.week-grid{grid-template-columns:1fr;}}}
 .day-col{background:#ffffff;border:1px solid #dde3d8;border-radius:12px;overflow:hidden;}
 .day-header{padding:10px 12px;border-bottom:1px solid var(--border2);}
 .day-name{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--tgtg);}
@@ -229,6 +229,33 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 .hero-item{font-size:11px;color:#bbb;padding:5px 0;border-bottom:1px solid var(--border);line-height:1.6;}
 .hero-item:last-child{border-bottom:none;}
 .hero-item strong{color:var(--text);}
+
+/* ── MOBILE NAV ── */
+.mobile-nav{display:none;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:10px 12px;gap:6px;background:#fff;border-bottom:1px solid var(--border);scrollbar-width:none;}
+.mobile-nav::-webkit-scrollbar{display:none;}
+.mobile-nav-pill{flex-shrink:0;padding:7px 14px;border-radius:20px;border:1px solid var(--border);background:#fff;color:var(--muted);font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all .15s;}
+.mobile-nav-pill.active{background:var(--tgtg);border-color:var(--tgtg);color:#fff;}
+@media(max-width:900px){
+  .sidebar{display:none;}
+  .mobile-nav{display:flex;}
+  .content{padding:16px 14px;}
+  .layout{grid-template-columns:1fr;}
+  .topbar-pill{display:none;}
+  .page-h1{font-size:20px;}
+  .cmd-strip{grid-template-columns:1fr 1fr;}
+  .cmd-n{font-size:20px;}
+}
+@media(max-width:480px){
+  .cmd-strip{grid-template-columns:1fr 1fr;}
+}
+
+
+@media(max-width:900px){
+  .ai-form-row{grid-template-columns:1fr !important;}
+  .ai-input{font-size:16px !important;}
+  .ai-textarea{font-size:16px !important;}
+}
+
 </style>
 </head>
 <body>
@@ -241,6 +268,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
   </div>
 </div>
 
+<div class="mobile-nav" id="mobile-nav">
+  <button class="mobile-nav-pill active" onclick="goPage('command',this)">📊 Overview</button>
+  <button class="mobile-nav-pill" onclick="goPage('ruby',this)">📋 Brief</button>
+  <button class="mobile-nav-pill" onclick="goPage('liquidity',this)">🏪 Market</button>
+  <button class="mobile-nav-pill" onclick="goPage('team1',this)">🎯 Acquisition</button>
+  <button class="mobile-nav-pill" onclick="goPage('team2',this)">🤝 Account Mgmt</button>
+  <button class="mobile-nav-pill" onclick="goPage('team3',this)">🚀 Growth</button>
+  <button class="mobile-nav-pill" onclick="goPage('training',this)">🎓 Training</button>
+  <button class="mobile-nav-pill" onclick="goPage('resilience',this)">💪 Resilience</button>
+  <button class="mobile-nav-pill" onclick="goPage('hero',this)">⭐ Hero Risk</button>
+  <button class="mobile-nav-pill" onclick="goPage('week',this)">📅 Week View</button>
+  <button class="mobile-nav-pill" onclick="goPage('ai',this)">✦ AI Tools</button>
+  <button class="mobile-nav-pill" onclick="goPage('comms',this)">📢 Comms</button>
+</div>
 <div class="layout">
   <!-- SIDEBAR NAV -->
   <div class="sidebar">
