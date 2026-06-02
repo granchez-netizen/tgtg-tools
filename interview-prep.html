@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap');
+:root{
+  --tgtg:#6DBE4F;--tgtgd:rgba(109,190,79,.09);--tgtgl:rgba(109,190,79,.25);
+  --teal:#6DBE4F;--teal-l:rgba(109,190,79,.09);--teal-ll:rgba(109,190,79,.06);
+  --bg:#ffffff;--bg2:#f7f8f5;--border:#e4e8de;--border2:#dde3d8;--cream:#f7f8f5;
+  --text:#1a1a1a;--muted:#5a6454;--muted2:#8a9484;--t:#1a1a1a;--t2:#5a6454;--m:#5a6454;
+  --b1:#e4e8de;--b2:#8a9484;
+  --danger:#EF4444;--dangerd:rgba(239,68,68,.07);--dangerl:rgba(239,68,68,.18);
+  --warn:#F59E0B;--warnd:rgba(245,158,11,.07);--warnl:rgba(245,158,11,.18);--yd:rgba(245,158,11,.07);--yl:rgba(245,158,11,.18);
+  --good:#22C55E;--goodd:rgba(34,197,94,.08);--goodl:rgba(34,197,94,.18);
+  --g:#22C55E;--gd:rgba(34,197,94,.08);--gl:rgba(34,197,94,.18);
+  --r:#EF4444;--rd:rgba(239,68,68,.07);--rl:rgba(239,68,68,.18);
+  --y:#6DBE4F;
+  --info:#60A5FA;--purple:#A78BFA;
+  --ink:#1a1a1a;--white:#ffffff;--soft:#2a2a2a;--rule:#e4e8de;
+  --gold:#6DBE4F;--gold-d:#4a9e32;--gold-pale:rgba(109,190,79,.09);--gold-mid:rgba(109,190,79,.22);
+  --amber:#6DBE4F;--amber-pale:rgba(109,190,79,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:#ffffff;color:#1a1a1a;-webkit-font-smoothing:antialiased;padding-bottom:80px;}
+@media(max-width:600px){input,select,textarea{font-size:16px !important;}}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TGTG · Interview Prep</title>
+<style>
+.page{max-width:860px;margin:0 auto;padding:36px 24px 80px 72px;}
+.eyebrow{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:3px;color:var(--teal);margin-bottom:8px;}
+.h1{font-size:30px;font-weight:900;letter-spacing:-1px;line-height:1.1;margin-bottom:6px;}
+.h1 em{color:var(--teal);font-style:normal;}
+.sub{font-size:13px;color:var(--m);line-height:1.7;margin-bottom:32px;}
+
+/* Tab nav */
+.tabs{display:flex;gap:4px;margin-bottom:28px;flex-wrap:wrap;}
+.tab{padding:8px 18px;border-radius:20px;border:1.5px solid #dde3d8;background:transparent;color:var(--m);font-size:11px;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;white-space:nowrap;}
+.tab.on{background:var(--teal);border-color:var(--teal);color:#1a1a1a;}
+.tab:hover:not(.on){border-color:var(--teal);color:var(--teal);}
+
+.panel{display:none;}
+.panel.on{display:block;}
+
+/* JD match cards */
+.match-card{background:#fff;border:1.5px solid #dde3d8;border-radius:14px;padding:20px 22px;margin-bottom:12px;box-shadow:var(--shadow);}
+.mc-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;}
+.mc-rag{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.mc-rag.g{background:var(--g);}
+.mc-rag.a{background:var(--y);}
+.mc-rag.r{background:var(--r);}
+.mc-jd{flex:1;}
+.mc-jd-lbl{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--teal);margin-bottom:3px;}
+.mc-jd-text{font-size:13px;font-weight:700;color:var(--t);line-height:1.5;}
+.mc-match{background:var(--teal-ll);border-radius:10px;padding:12px 14px;font-size:12px;color:var(--t2);line-height:1.7;}
+.mc-match strong{color:var(--teal);font-weight:800;}
+.mc-gap{background:var(--yd);border-radius:10px;padding:12px 14px;margin-top:8px;font-size:12px;color:var(--t2);line-height:1.7;}
+.mc-gap strong{color:var(--y);font-weight:800;}
+
+/* Q&A */
+.qa-card{background:#fff;border:1.5px solid #dde3d8;border-radius:14px;overflow:hidden;margin-bottom:12px;box-shadow:var(--shadow);}
+.qa-q{padding:16px 20px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:background .15s;user-select:none;}
+.qa-q:hover{background:var(--teal-ll);}
+.qa-q-num{font-size:10px;font-weight:800;color:var(--teal);background:var(--teal-l);padding:3px 9px;border-radius:4px;flex-shrink:0;}
+.qa-q-text{font-size:13px;font-weight:800;flex:1;color:var(--t);}
+.qa-q-arr{font-size:14px;color:var(--b2);flex-shrink:0;transition:transform .2s;}
+.qa-card.open .qa-q-arr{transform:rotate(90deg);}
+.qa-card.open .qa-q{background:var(--teal-ll);}
+.qa-a{display:none;padding:0 20px 20px;border-top:1px solid var(--b1);}
+.qa-card.open .qa-a{display:block;}
+.qa-tag{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--teal);margin:14px 0 8px;}
+.qa-answer{font-size:13px;color:var(--t2);line-height:1.8;}
+.qa-answer strong{color:var(--t);font-weight:800;}
+.qa-note{background:var(--teal-ll);border-radius:8px;padding:10px 14px;margin-top:12px;font-size:11px;color:var(--teal);line-height:1.6;}
+.qa-note strong{font-weight:800;}
+.qa-warn{background:var(--yd);border-radius:8px;padding:10px 14px;margin-top:12px;font-size:11px;color:#8a6500;line-height:1.6;}
+
+/* Gap handler */
+.gap-card{background:#fff;border:1.5px solid var(--yl);border-radius:14px;padding:20px 22px;margin-bottom:12px;box-shadow:var(--shadow);}
+.gap-card-hdr{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.gap-badge{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;padding:3px 10px;border-radius:4px;background:var(--yd);border:1px solid var(--yl);color:#8a6500;}
+.gap-title{font-size:14px;font-weight:800;}
+.gap-reframe{background:var(--teal-ll);border-radius:10px;padding:14px 16px;font-size:13px;color:var(--t2);line-height:1.75;}
+.gap-reframe strong{color:var(--teal);font-weight:800;}
+
+/* Language guide */
+.lang-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+@media(max-width:580px){.lang-grid{grid-template-columns:1fr;}}
+.lang-col{background:#fff;border-radius:12px;padding:16px 18px;border:1.5px solid #dde3d8;box-shadow:var(--shadow);}
+.lang-col-hdr{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;}
+.lang-col.use .lang-col-hdr{color:var(--g);}
+.lang-col.avoid .lang-col-hdr{color:var(--r);}
+.lang-item{font-size:12px;padding:6px 0;border-bottom:1px solid var(--b1);color:var(--t2);}
+.lang-item:last-child{border-bottom:none;}
+.lang-item strong{color:var(--t);font-weight:700;}
+
+/* Questions to ask */
+.ask-card{background:#fff;border:1.5px solid #dde3d8;border-radius:12px;padding:16px 20px;margin-bottom:10px;box-shadow:var(--shadow);}
+.ask-num{font-size:10px;font-weight:800;color:var(--teal);margin-bottom:6px;}
+.ask-q{font-size:14px;font-weight:800;margin-bottom:6px;}
+.ask-why{font-size:12px;color:var(--m);line-height:1.65;}
+
+/* Sec header */
+.sec-hdr{display:flex;align-items:center;gap:10px;margin:0 0 16px;}
+.sec-num{font-size:10px;font-weight:800;color:var(--teal);background:var(--teal-l);border:1px solid rgba(78,154,143,.3);padding:3px 9px;border-radius:4px;}
+.sec-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--m);}
+.gap28{height:28px;}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="eyebrow">Too Good To Go · UK & Ireland</div>
+  <div class="h1">Head of <em>Independent Partners</em><br>Interview Preparation.</div>
+  <div class="sub">JD matched to CV. Every likely question answered with Grant's real stories. Gaps pre-handled. Language guide. Five sharp questions to ask them.</div>
+
+  <div class="tabs">
+    <button class="tab on" onclick="showPanel('match',this)">JD Match</button>
+    <button class="tab" onclick="showPanel('qa',this)">Q&A</button>
+    <button class="tab" onclick="showPanel('gaps',this)">Gap Handler</button>
+    <button class="tab" onclick="showPanel('lang',this)">Language Guide</button>
+    <button class="tab" onclick="showPanel('ask',this)">Questions to Ask</button>
+    <button class="tab" onclick="showPanel('mission',this)">Mission Angle</button>
+  </div>
+
+  <!-- ── JD MATCH ── -->
+  <div class="panel on" id="panel-match">
+    <div class="sec-hdr"><span class="sec-num">01</span><span class="sec-title">JD requirement → CV evidence</span></div>
+
+    <div class="match-card">
+      <div class="mc-head"><div class="mc-rag g"></div><div class="mc-jd"><div class="mc-jd-lbl">Team Leadership · 26 FTE · 3 Team Leads</div><div class="mc-jd-text">"Lead, develop and inspire a team of 3 Team Leads and their Sales/Account Representatives (approx. 26 FTE total)"</div></div></div>
+      <div class="mc-match"><strong>OYO Hotels (2018–2021):</strong> Built and led a phone sales organisation of 5 Team Leads and 40+ phone reps across UK & Ireland. Recruited 60+ sales hires in under six months. Designed onboarding that reduced time-to-first-deal by 50%. TGTG's 26 FTE is a smaller, more structured version of what Grant has already run at scale.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="mc-head"><div class="mc-rag g"></div><div class="mc-jd"><div class="mc-jd-lbl">Phone-based SMB Acquisition</div><div class="mc-jd-text">"Acquiring and growing SMB partners through phone-based outreach"</div></div></div>
+      <div class="mc-match"><strong>Amazon (2013–2015):</strong> Set up inside sales teams covering Scotland and North England — phone-first acquisition at volume. Launched Amazon Local and Amazon Tickets via phone-based acquisition — £20M revenue from standing start. Won Top Sales Team Award 2013 and 2014. <strong>Bookitbee (2015–2017):</strong> 6 sales + 2 AMs, increased cold call-to-meeting conversion by 20% across the team.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="mc-head"><div class="mc-rag g"></div><div class="mc-jd"><div class="mc-jd-lbl">Restaurant/Food Retail Accounts</div><div class="mc-jd-text">"Strong track record in acquiring and growing preferably Restaurant/Food Retail accounts in the UK market"</div></div></div>
+      <div class="mc-match"><strong>Amazon Local:</strong> Commercial negotiations with Pret a Manger, itsu, Wasabi — food operator accounts at volume. <strong>Too Good To Go (current):</strong> Building the sales operating system for a food-tech marketplace — direct restaurant acquisition and account management. Deep understanding of how food operators think about margin, quiet periods, and platform risk.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="mc-head"><div class="mc-rag g"></div><div class="mc-jd"><div class="mc-jd-lbl">Global Marketplace / Platform</div><div class="mc-jd-text">"Deep experience in leading and scaling high-performing Sales/Commercial teams ideally within a fast-paced, KPI-driven global marketplace or platform business"</div></div></div>
+      <div class="mc-match"><strong>Booking.com (2017–2018):</strong> Country Manager UK & Ireland. €50M ARR. Launched new verticals across 6 of Booking.com's top 10 global markets. Conversion rates 20% above global average. Developed the 'City Landscape' framework — a data-driven market-readiness model later adopted globally. This is exactly the global platform environment TGTG operates in.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="mc-head"><div class="mc-rag g"></div><div class="mc-jd"><div class="mc-jd-lbl">UK & Ireland Scope</div><div class="mc-jd-text">"UK & Ireland" repeatedly referenced</div></div></div>
+      <div class="mc-match"><strong>Booking.com:</strong> Country Manager UK & Ireland — London, Manchester, Dublin, Belfast. <strong>OYO:</strong> UK & Ireland — Edinburgh, London, London, Dublin, Belfast. Grant has run this exact geography at senior level twice. He knows the market differences between England, Scotland, and Ireland and has stakeholder relationships in all four cities.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="mc-head"><div class="mc-rag g"></div><div class="mc-jd"><div class="mc-jd-lbl">KPIs, Metrics, Data-driven</div><div class="mc-jd-text">"Performance-driven, metrics-based sales culture" / "Work with KPIs to measure outcomes"</div></div></div>
+      <div class="mc-match"><strong>Booking.com:</strong> Revenue forecasting, conversion tracking, global benchmarking. <strong>OYO:</strong> KPIs and incentive schemes for 40+ phone reps. <strong>Bookitbee:</strong> Salesforce for forecasting and pipeline management. Built the Too Good To Go Sales OS — 31 tools including call scoring, rep health tracking, pipeline forecast, and leaderboards. This is not theoretical — Grant builds the systems himself.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="mc-head"><div class="mc-rag g"></div><div class="mc-jd"><div class="mc-jd-lbl">Salesforce</div><div class="mc-jd-text">"Experienced in sales tools – ideally Salesforce"</div></div></div>
+      <div class="mc-match"><strong>Amazon:</strong> National sales team using Salesforce for pipeline and reporting. <strong>Bookitbee:</strong> Implemented Salesforce for forecasting and pipeline management across the commercial team. Also proficient in Salesforce and Salesforce. TGTG's Salesforce environment will be immediately familiar.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="mc-head"><div class="mc-rag g"></div><div class="mc-jd"><div class="mc-jd-lbl">Scalable Sales Model / Process</div><div class="mc-jd-text">"Evolve existing successful teams into a scalable, results-oriented Commercial organisation"</div></div></div>
+      <div class="mc-match"><strong>OYO:</strong> Built onboarding and market segmentation frameworks later adopted globally. <strong>Booking.com:</strong> City Landscape framework adopted globally. <strong>Bookitbee:</strong> Scaled ARR from £1.5M to £2.2M with 6 sales + 2 AMs, 120% of partner signing target. Grant's pattern is taking existing teams and building the infrastructure that makes them scalable — not just managing what's there.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="mc-head"><div class="mc-rag a"></div><div class="mc-jd"><div class="mc-jd-lbl">Retention + Growth of Existing Indies</div><div class="mc-jd-text">"Accountable for the retention, growth and commercial output of existing Indies accounts"</div></div></div>
+      <div class="mc-match"><strong>Booking.com:</strong> Ongoing partner growth — not just acquisition. <strong>Cannabis consultancy:</strong> 3+ year staff and partner retention, account development. <strong>Too Good To Go:</strong> Building the AM Dashboard and Partner Health tools specifically for retention. <strong>Note:</strong> This is the dual-motion (acquire + retain) that TGTG specifically emphasises — worth addressing directly.</div>
+      <div class="mc-gap"><strong>Honest note:</strong> Grant's primary strength is acquisition and team building. The AM/retention function is present but less prominent in the CV. Frame as: "I've always run acquisition and account teams in parallel — the best way to grow a partner base is to keep what you win. I build the infrastructure for both simultaneously."</div>
+    </div>
+  </div>
+
+  <!-- ── Q&A ── -->
+  <div class="panel" id="panel-qa">
+    <div class="sec-hdr"><span class="sec-num">02</span><span class="sec-title">12 likely questions · full answers</span></div>
+
+    <div class="qa-card" onclick="toggleQA(this)">
+      <div class="qa-q"><span class="qa-q-num">Q1</span><span class="qa-q-text">Tell me about yourself and why Too Good To Go.</span><span class="qa-q-arr">›</span></div>
+      <div class="qa-a">
+        <div class="qa-tag">Your answer</div>
+        <div class="qa-answer">I'm a commercial leader with 15 years building and scaling sales teams across platforms and marketplaces — Booking.com, OYO, Amazon, through to what I'm doing now with Too Good To Go in the UK. The common thread is phone-based SMB acquisition at volume, building the coaching infrastructure behind it, and then scaling the team without losing quality.<br><br>Why TGTG specifically? <strong>Two reasons.</strong> First, the business model is genuinely interesting to me — you're solving a problem that operators already feel. Every restaurant owner knows they throw food away at end of day. That's an easy conversation to start because the problem is real and the cost of doing nothing is visible. Second, and honestly more important — the mission isn't a footnote here. 103 million meals saved is a number that changes how the team feels about Monday morning. I've worked in marketplaces where the product was fine and the targets were met and nobody particularly cared. This is different. I want to be part of something where the team can see the impact of what they do beyond a conversion rate.</div>
+        <div class="qa-note"><strong>Tip:</strong> Make the mission answer genuine and specific. Mention the 103 million meals figure. Don't say "I'm passionate about sustainability" — say what specifically about TGTG's model makes commercial sense AND has impact.</div>
+      </div>
+    </div>
+
+    <div class="qa-card" onclick="toggleQA(this)">
+      <div class="qa-q"><span class="qa-q-num">Q2</span><span class="qa-q-text">How would you run a 26-person phone sales team differently from what's already there?</span><span class="qa-q-arr">›</span></div>
+      <div class="qa-a">
+        <div class="qa-tag">Your answer</div>
+        <div class="qa-answer">I'd start by listening, not changing. You've said this is a motivated, high-performing team — the worst thing I could do is arrive with a playbook from somewhere else and start rewriting processes that are already working. <strong>Week one is observation.</strong> I sit with each Team Lead, listen to calls, read the Salesforce data, understand where the conversion drop-offs are, and understand the team's own sense of what's blocking them.<br><br>Then I'd focus on two things. <strong>First, the Team Leads.</strong> A team of 26 is really a team of 3. If I develop the three Team Leads well, the 23 reps will follow. I'd run weekly 1:1s with each TL focused on their team's conversion metrics, their coaching habits — not just results. Are they listening to calls? Are they running structured debriefs? Are they developing their reps or just managing them?<br><br><strong>Second, the funnel.</strong> In phone-based acquisition the problem is almost always at one stage — either not enough dials, connect rate is low, pitch quality is inconsistent, or the close is weak. I'd map every rep's conversion at each stage and the coaching becomes very specific. Not "you need to do better" — "your connect rate is fine, your pitch-to-commitment conversion is 40% below team average, here's what's happening in that part of the call."</div>
+        <div class="qa-note"><strong>Tip:</strong> Lead with listening. They want someone who will develop what's there, not replace it. Show you understand the 3 TL leverage point.</div>
+      </div>
+    </div>
+
+    <div class="qa-card" onclick="toggleQA(this)">
+      <div class="qa-q"><span class="qa-q-num">Q3</span><span class="qa-q-text">Give me an example of building a scalable sales team from scratch or significantly restructuring one.</span><span class="qa-q-arr">›</span></div>
+      <div class="qa-a">
+        <div class="qa-tag">STAR — OYO Hotels, UK & Ireland</div>
+        <div class="qa-answer"><strong>Situation:</strong> OYO launched in the UK in late 2018 with no sales organisation, no brand recognition, and an aggressive target to sign hotel supply across London, Manchester, London, Dublin, and Belfast within 12 months.<br><br><strong>Task:</strong> Build and lead the entire commercial function — recruit, onboard, structure, and drive a team to hit supply targets in a highly fragmented, relationship-led market.<br><br><strong>Action:</strong> I hired 60+ sales people in under six months. But the key decision wasn't the volume — it was the structure. I built five city teams each with a dedicated Team Lead, clear geographic ownership, and a tiered KPI structure (dials, meetings, signed properties). I also built a segmented approach: OYO Country for budget properties, Capital O for mid-market, OYO Townhouse for boutique. Different pitch, different economics, different conversion metrics. And I designed an onboarding programme that got new hires to their first deal 50% faster than the original model.<br><br><strong>Result:</strong> 150% of personal sales target while leading the team. Closed the first UK franchise agreements in Edinburgh, London, London, Dublin, and Belfast. The onboarding and segmentation frameworks were later adopted by OYO globally.</div>
+        <div class="qa-note"><strong>Why this works for TGTG:</strong> Shows scale (60+ hires), structure (Team Leads, geography, segmentation), and the global adoption of frameworks — which maps directly to TGTG's "localise global best practices" requirement.</div>
+      </div>
+    </div>
+
+    <div class="qa-card" onclick="toggleQA(this)">
+      <div class="qa-q"><span class="qa-q-num">Q4</span><span class="qa-q-text">How do you develop Team Leads, not just manage them?</span><span class="qa-q-arr">›</span></div>
+      <div class="qa-a">
+        <div class="qa-tag">Your answer</div>
+        <div class="qa-answer">The distinction is important and most managers get it wrong. Managing a Team Lead means reviewing their team's numbers. Developing a Team Lead means building their ability to coach, to diagnose problems, and to have difficult conversations.<br><br>I do three things with Team Leads that I don't do with reps. <strong>First, I run their 1:1 differently.</strong> We don't spend the majority of time on their team's pipeline — we spend it on their leadership decisions. What did they coach this week? What was the outcome? What would they do differently? I want them developing a coaching habit, not just a reporting habit.<br><br><strong>Second, I involve them in the strategic layer.</strong> At OYO, my Team Leads sat in on the commercial planning sessions. They understood the market-level targets, not just their team target. That context changes how they lead — they can explain the why, not just the what.<br><br><strong>Third, I give them real ownership with real accountability.</strong> Their team's conversion rate is theirs to own. I'll support, I'll coach, I'll identify the problem with them — but I won't solve it for them. The moment a manager solves problems for their Team Lead, the TL stops growing.</div>
+      </div>
+    </div>
+
+    <div class="qa-card" onclick="toggleQA(this)">
+      <div class="qa-q"><span class="qa-q-num">Q5</span><span class="qa-q-text">How do you balance new partner acquisition with retaining and growing existing ones?</span><span class="qa-q-arr">›</span></div>
+      <div class="qa-a">
+        <div class="qa-tag">Your answer</div>
+        <div class="qa-answer">They're not competing priorities — they're complementary if you structure them correctly. The mistake is letting the acquisition team and the account team operate in silos with different KPIs and no shared accountability.<br><br>At Booking.com I managed this dual motion across 6 markets simultaneously. The acquisition team brought partners in. The account team drove their first transaction, their first repeat, their habit of updating availability. But the acquisition team's KPI wasn't just "signed" — it was "signed and active within 14 days." That one change made acquisition reps care about partner quality, not just volume. They stopped signing deals that weren't going to work.<br><br>For TGTG specifically, I'd think about this differently to most food platforms. A partner that uploads surplus consistently for 12 weeks is worth 10x a partner that signs and then goes quiet. So the account team's job isn't just retention — it's <strong>habit formation.</strong> Getting partners to the point where uploading their surplus on TGTG is as automatic as locking up at night. That takes structured onboarding, a check-in at day 7 and day 30, and a clear escalation when upload frequency drops.</div>
+      </div>
+    </div>
+
+    <div class="qa-card" onclick="toggleQA(this)">
+      <div class="qa-q"><span class="qa-q-num">Q6</span><span class="qa-q-text">Tell me about a time you localised a global best practice for the UK market.</span><span class="qa-q-arr">›</span></div>
+      <div class="qa-a">
+        <div class="qa-tag">STAR — Booking.com City Landscape Framework</div>
+        <div class="qa-answer"><strong>Situation:</strong> Booking.com was expanding into new verticals — Experiences, Transport, Restaurants — globally. The global team had one model: launch everywhere simultaneously. The problem was that some cities had supply but no demand infrastructure. Some had app penetration but no supply. The approach was generating waste — launches that failed in month two because the fundamentals weren't there.<br><br><strong>Task:</strong> I was Country Manager for UK & Ireland, but the problem was a global one. I was asked to find a better approach.<br><br><strong>Action:</strong> I built the City Landscape Framework — a market readiness scoring model. Before any new vertical or territory growth, you scored the market across five dimensions: existing partner density, app download penetration, local competitor presence, price sensitivity, and regulatory environment. A city below a threshold score didn't get launched — it got a 90-day preparation plan first. I piloted it in Edinburgh and Dublin before the London rollout.<br><br><strong>Result:</strong> The framework was adopted globally by Booking.com's expansion team. It's now the standard model for new market entry across the business. The Edinburgh launch using the framework had 40% better month-3 retention than the previous London launch that didn't use it.<br><br>For TGTG, this maps directly. I'd apply the same thinking to new territory growthes — what's the minimum partner density before we turn on paid acquisition? What's the app download threshold before we expect organic partner demand?</div>
+        <div class="qa-note"><strong>Why this is the best answer:</strong> It's specific, it has a global outcome, and it maps directly to TGTG's "localise global best practices" language.</div>
+      </div>
+    </div>
+
+    <div class="qa-card" onclick="toggleQA(this)">
+      <div class="qa-q"><span class="qa-q-num">Q7</span><span class="qa-q-text">How do you drive a metrics-based culture without killing team morale?</span><span class="qa-q-arr">›</span></div>
+      <div class="qa-a">
+        <div class="qa-tag">Your answer</div>
+        <div class="qa-answer">Metrics kill morale when they're used to punish people without context. They build culture when they're used to diagnose problems and give people a clear picture of where they are.<br><br>The shift I made at OYO — and it made a significant difference — was making the metrics transparent and directional, not retrospective and judgemental. Every rep could see their own conversion funnel every morning. Not as a comparison with others, but as a question: where is my drop-off? That turned a metric from a number someone uses to tell you off into a tool you use to understand your own performance.<br><br>I also separate lagging from leading indicators. Deals signed is a lagging indicator — by the time you see it, you can't change it this week. Dials and connect rates are leading indicators — you can change them today. Teams that only track deals signed feel out of control. Teams that track dials and conversion feel like they have agency. That agency is what creates a positive metrics culture.</div>
+      </div>
+    </div>
+
+    <div class="qa-card" onclick="toggleQA(this)">
+      <div class="qa-q"><span class="qa-q-num">Q8</span><span class="qa-q-text">What's your approach to underperformance?</span><span class="qa-q-arr">›</span></div>
+      <div class="qa-a">
+        <div class="qa-tag">Your answer</div>
+        <div class="qa-answer">Early, specific, and diagnostic — not punitive. The worst thing you can do with an underperforming rep is wait until it becomes a formal conversation. By then you've wasted their time, the team's time, and the company's money.<br><br>My approach has three stages. <strong>First, diagnose before you judge.</strong> Is this a skill gap, a will gap, or a circumstance? A rep who was performing and has stopped is a different problem to a rep who has never performed. The intervention is completely different.<br><br><strong>Second, be specific and early.</strong> "Your numbers are low" is not a coaching conversation. "Your connect rate is fine but you're losing 60% of calls at the pitch stage — specifically when the partner raises the time commitment objection" is a coaching conversation. That specificity can only happen if you're listening to calls.<br><br><strong>Third, give genuine support before formal process.</strong> Formal performance management should feel like a last resort, not a first response. If someone isn't performing after genuine, specific, structured support — then you move to formal process quickly and cleanly. But you earn the right to do that by having done the work first.</div>
+      </div>
+    </div>
+
+    <div class="qa-card" onclick="toggleQA(this)">
+      <div class="qa-q"><span class="qa-q-num">Q9</span><span class="qa-q-text">How do you coach phone sales specifically — what do you listen for?</span><span class="qa-q-arr">›</span></div>
+      <div class="qa-a">
+        <div class="qa-tag">Your answer</div>
+        <div class="qa-answer">Phone sales coaching is almost entirely about the first 30 seconds and the moment the partner raises their first objection. Everything else tends to be fine if those two points work.<br><br>In the opening, I listen for three things: did they name the specific problem the partner has (surplus going to waste, end-of-day food thrown away), did they earn the right to keep talking, and did they sound like they were reading a script or having a conversation. The TGTG pitch is actually easier to open than most — the problem is universally understood and the mission gives you a natural hook that most sales calls don't have.<br><br>At the first objection, I listen for whether the rep panics and capitulates, holds their frame, or gets defensive. The right response is none of those — it's curious. "That's interesting — can you tell me more about that concern?" Most objections in TGTG acquisition are about time, about brand, or about whether it's worth the effort. All of those are addressable if the rep stays curious and doesn't rush to solve.<br><br>I also listen for silence. The best phone salespeople are comfortable with silence. They ask a question and they wait. Most reps fill the silence and answer their own question. That's the coaching moment.</div>
+      </div>
+    </div>
+
+    <div class="qa-card" onclick="toggleQA(this)">
+      <div class="qa-q"><span class="qa-q-num">Q10</span><span class="qa-q-text">What would your first 90 days look like?</span><span class="qa-q-arr">›</span></div>
+      <div class="qa-a">
+        <div class="qa-tag">Your answer</div>
+        <div class="qa-answer"><strong>Month 1 — Listen and map.</strong> No decisions. Sit with each Team Lead for a full day. Listen to 10 calls per rep. Read every Salesforce report I can access. Meet the global team counterparts. Understand the UK market's specific objection patterns — they will be different from other markets. Understand the current KPI structure and where the gaps are. By end of month 1 I have a clear picture of: where the funnel is leaking, which Team Leads need development vs which need support, and what the top 3 things are that would move the needle.<br><br><strong>Month 2 — Build the infrastructure.</strong> Structured 1:1 cadence with each Team Lead. Call scoring framework — so coaching is specific not generic. Onboarding review — are new reps getting to first call fast enough? First retention metric — what does a healthy partner look like at 30 days vs 90 days? I'd also make one visible win — something the team can see changing that tells them this is different to before.<br><br><strong>Month 3 — Hold to account.</strong> By now the Team Leads understand what good looks like. The metrics are in place. The coaching cadence is running. Month 3 is about holding the structure and starting to push performance — now that the foundation is right, there's no excuse not to be hitting targets.</div>
+        <div class="qa-note"><strong>Tip:</strong> The "listen first" framing is important. They've said this is a high-performing team. Walking in with a pre-built playbook signals you're going to disrupt something that works.</div>
+      </div>
+    </div>
+
+    <div class="qa-card" onclick="toggleQA(this)">
+      <div class="qa-q"><span class="qa-q-num">Q11</span><span class="qa-q-text">You've been based in Thailand for the last few years. Why now, why UK, why this role?</span><span class="qa-q-arr">›</span></div>
+      <div class="qa-a">
+        <div class="qa-tag">Your answer — address it directly</div>
+        <div class="qa-answer">Honest answer: I went to Thailand for a specific purpose — to build something in an emerging regulated market from scratch, which I did. Six retail stores, launched and exited. Distribution networks built without intermediaries. A team of 20+ managed across a completely different cultural and regulatory environment. It was the most entrepreneurially demanding thing I've done and I learned things about building from nothing that I couldn't have learned anywhere else.<br><br>But I've always known I'd come back to what I do best, which is building and leading large commercial teams in the UK market. The Thailand chapter made me a better leader — more patient, more culturally attuned, more resourceful. But my core is UK & Ireland commercial leadership and that's where I want to be.<br><br>Why now? Too Good To Go gave me the reason to come back to London. And this role is the reason to stay. The scale, the mission, the team structure — this is the exact type of role I built my career for.</div>
+        <div class="qa-warn"><strong>Pre-handle this:</strong> They will ask. Don't wait for it — reference it briefly in the "tell me about yourself" answer. Shows self-awareness and pre-empts scepticism.</div>
+      </div>
+    </div>
+
+    <div class="qa-card" onclick="toggleQA(this)">
+      <div class="qa-q"><span class="qa-q-num">Q12</span><span class="qa-q-text">How do you contribute at senior leadership level beyond your function?</span><span class="qa-q-arr">›</span></div>
+      <div class="qa-a">
+        <div class="qa-tag">Your answer</div>
+        <div class="qa-answer">At Booking.com I was Country Manager, not just a sales leader. That meant sitting on the local management team and contributing to decisions about marketing budgets, product localisation, and regulatory strategy — none of which were directly my function. The City Landscape Framework started as a sales tool and ended up being adopted as a company-wide market entry standard. That happened because I took the commercial data out of the sales silo and made it available to the whole management team.<br><br>At TGTG I'd bring the same approach. The commercial team has more real-time insight into partner behaviour than any other function — what objections are rising, which cities are showing genuine demand before we've invested in supply, where the retention curve breaks. That intelligence should be feeding into the Country Director's strategy, into product decisions, into marketing spend allocation. My job isn't just to hit the number — it's to make sure the number we're targeting is the right one based on what the team is actually seeing on the phones every day.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── GAP HANDLER ── -->
+  <div class="panel" id="panel-gaps">
+    <div class="sec-hdr"><span class="sec-num">03</span><span class="sec-title">Three gaps · pre-handled reframes</span></div>
+
+    <div class="gap-card">
+      <div class="gap-card-hdr"><span class="gap-badge">Gap 01</span><span class="gap-title">Inside sales only — 100% phone-based</span></div>
+      <div class="gap-reframe">TGTG is 100% phone. Grant's strongest roles (OYO, Too Good To Go) involved field work. The reframe:<br><br><strong>"My OYO and Too Good To Go experience was field-led because the product required it — you can't sign a hotel franchise by phone. But my Amazon and Bookitbee experience was entirely phone-based acquisition of SMBs at volume, and I've always run hybrid teams where the coaching principles are identical. The fundamentals of phone acquisition — opening hook, handling objections early, creating urgency — are exactly what I built coaching frameworks around at Amazon. The product changed. The sales motion is the same."</strong><br><br>Also: the 40+ person sales team at OYO used phone exclusively for qualification and closing. Inside sales at high volume is the core competency.</div>
+    </div>
+
+    <div class="gap-card">
+      <div class="gap-card-hdr"><span class="gap-badge">Gap 02</span><span class="gap-title">Thailand period 2022–2025</span></div>
+      <div class="gap-reframe">Three years away from UK corporate sales leadership. The reframe:<br><br><strong>"Thailand wasn't a career break — it was the most operationally demanding period of my career. I launched and exited six retail businesses, built distribution from nothing, managed 20+ staff across a regulatory environment that changed every six months, and consulted for global travel tech and SaaS businesses simultaneously. The skills I used every day — recruiting, coaching, building sales systems, managing partners — are identical to what this role requires. I came back to London because this is where the scale of team and mission matches what I want to build."</strong><br><br>Pre-handle this in the opening answer, not in response to a question.</div>
+    </div>
+
+    <div class="gap-card">
+      <div class="gap-card-hdr"><span class="gap-badge">Gap 03</span><span class="gap-title">Salesforce vs Salesforce primary</span></div>
+      <div class="gap-reframe">TGTG specifically mention Salesforce. Grant's recent experience is Salesforce-primary. The reframe:<br><br><strong>"I implemented Salesforce at both Amazon and Bookitbee — it's not new territory. My recent work has been Salesforce because that's what the businesses I've been working with use. The CRM philosophy is identical — pipeline stages, conversion tracking, forecasting, activity logging. Salesforce is a tool, not a skill. I'll be in TGTG's Salesforce environment productively in the first week."</strong><br><br>Don't over-explain. One clear sentence and move on.</div>
+    </div>
+  </div>
+
+  <!-- ── LANGUAGE ── -->
+  <div class="panel" id="panel-lang">
+    <div class="sec-hdr"><span class="sec-num">04</span><span class="sec-title">Their language · use it precisely</span></div>
+    <div class="lang-grid">
+      <div class="lang-col use">
+        <div class="lang-col-hdr">✓ Use these words</div>
+        <div class="lang-item"><strong>Independent Partners / Indies</strong> — not "restaurants" or "venues"</div>
+        <div class="lang-item"><strong>Surprise Bag</strong> — their product name, use it</div>
+        <div class="lang-item"><strong>Surplus</strong> — not "leftover food" or "waste"</div>
+        <div class="lang-item"><strong>Partner network</strong> — not "customer base"</div>
+        <div class="lang-item"><strong>Acquisition + Growth</strong> — both functions, both matter</div>
+        <div class="lang-item"><strong>Mission</strong> — not "the cause" or "sustainability angle"</div>
+        <div class="lang-item"><strong>Meals saved</strong> — the primary impact metric</div>
+        <div class="lang-item"><strong>Country Director</strong> — not "my CEO" or "my boss"</div>
+        <div class="lang-item"><strong>Team Leads</strong> — not "managers" or "team leaders"</div>
+        <div class="lang-item"><strong>Scalable</strong> — use their word back to them</div>
+        <div class="lang-item"><strong>Global best practices localised</strong> — reference this frame</div>
+        <div class="lang-item"><strong>UK & Ireland</strong> — always both, always together</div>
+      </div>
+      <div class="lang-col avoid">
+        <div class="lang-col-hdr">✗ Avoid these</div>
+        <div class="lang-item"><strong>"Restaurants"</strong> — too narrow, they work with all food SMBs</div>
+        <div class="lang-item"><strong>"Customers"</strong> — partners are partners, not customers</div>
+        <div class="lang-item"><strong>"Passionate about food waste"</strong> — too vague, too common</div>
+        <div class="lang-item"><strong>"I would implement a new playbook"</strong> — signals disruption</div>
+        <div class="lang-item"><strong>"Inside sales experience"</strong> — lead with phone-first, high-volume inside sales</div>
+        <div class="lang-item"><strong>"I'm a people person"</strong> — meaningless</div>
+        <div class="lang-item"><strong>"I drove revenue"</strong> — be specific with numbers</div>
+        <div class="lang-item"><strong>"KPI culture"</strong> — they use this phrase, don't echo it flatly</div>
+        <div class="lang-item"><strong>"Hit the ground running"</strong> — cliché</div>
+        <div class="lang-item"><strong>Any cannabis reference unprompted</strong> — let them ask</div>
+        <div class="lang-item"><strong>"This is exactly like what I did at..."</strong> — show, don't claim</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── QUESTIONS TO ASK ── -->
+  <div class="panel" id="panel-ask">
+    <div class="sec-hdr"><span class="sec-num">05</span><span class="sec-title">5 sharp questions to ask them</span></div>
+
+    <div class="ask-card">
+      <div class="ask-num">Question 1 — Ask early</div>
+      <div class="ask-q">"You've described this as a motivated, high-performing team. What does the team think is holding them back from the next level of performance?"</div>
+      <div class="ask-why">Shows you've read the JD carefully, signals you're thinking about development not replacement, and gets you real intelligence about what's actually going on. Their answer will tell you more about the organisation than any other question.</div>
+    </div>
+
+    <div class="ask-card">
+      <div class="ask-num">Question 2 — Commercial</div>
+      <div class="ask-q">"What does a healthy indie partner look like at 90 days versus a partner who's going to churn? Is that profile well defined in the team currently?"</div>
+      <div class="ask-why">Demonstrates you're already thinking about the retention function, not just acquisition. Shows commercial maturity. Their answer tells you whether the AM team has a structured methodology or is reactive.</div>
+    </div>
+
+    <div class="ask-card">
+      <div class="ask-num">Question 3 — Global structure</div>
+      <div class="ask-q">"How much of the commercial strategy is set globally versus owned locally? And where does the Country Director have the most autonomy to diverge from the global playbook?"</div>
+      <div class="ask-why">Critical for understanding how much Grant will actually own. TGTG is global — the local autonomy question is real and matters. Shows strategic thinking and experience with matrix organisations (Booking.com reference is natural here).</div>
+    </div>
+
+    <div class="ask-card">
+      <div class="ask-num">Question 4 — Mission integration</div>
+      <div class="ask-q">"How does the team currently connect their daily call metrics to the mission impact — meals saved per partner signed? Is that part of how you run standups and team culture?"</div>
+      <div class="ask-why">Differentiating question. Most candidates don't ask about mission integration at the operational level. Shows Grant is thinking about culture-building, not just metrics. Demonstrates genuine mission interest rather than just saying "I care about food waste."</div>
+    </div>
+
+    <div class="ask-card">
+      <div class="ask-num">Question 5 — Ask last</div>
+      <div class="ask-q">"What would make you confident at the end of month 3 that you'd made the right hire?"</div>
+      <div class="ask-why">Forces them to articulate their success criteria, which tells Grant exactly what to deliver. Also signals confidence — only someone who believes they'll get the job asks what success looks like. Ask this last, and take notes when they answer.</div>
+    </div>
+  </div>
+
+  <!-- ── MISSION ── -->
+  <div class="panel" id="panel-mission">
+    <div class="sec-hdr"><span class="sec-num">06</span><span class="sec-title">The mission angle · make it genuine</span></div>
+
+    <div class="match-card">
+      <div class="mc-head"><div class="mc-rag g"></div><div class="mc-jd"><div class="mc-jd-lbl">The brief</div><div class="mc-jd-text">TGTG will probe mission alignment. "You deeply align with our mission, live and breathe sustainability" is in the JD. This cannot be generic.</div></div></div>
+      <div class="mc-match">
+        <strong>The honest angle for Grant:</strong><br><br>
+        Grant has run food businesses — restaurants, cannabis retail, hospitality. He understands surplus. He knows that every restaurant closes with food that didn't sell. He knows that operators feel guilty about it, they factor it into their economics, and they have no good solution for it before TGTG.<br><br>
+        The mission angle isn't "I care about the planet" — it's "I understand this problem from the operator's side. I've stood in a kitchen at 9pm and watched good food go in the bin because the booking never showed up. That's money, that's waste, and it's a problem with an obvious solution that nobody made easy to access until TGTG."<br><br>
+        <strong>The line to use:</strong> "I've worked in enough food businesses to know that surplus is one of the most frustrating parts of the economics. Operators hate wasting food — not just because of the cost, but because they cooked it with care. TGTG turns that frustration into a transaction. That's not a hard pitch — it's solving a problem operators already want solved."<br><br>
+        <strong>The number to know:</strong> 1 in 3 meals produced globally is wasted. TGTG has saved 350 million+ meals since founding. In the UK specifically, £20 billion of food is wasted annually. Know these numbers. Use one in the interview. Don't recite all of them.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showPanel(id, btn){
+  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('on'); });
+  document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('on'); });
+  document.getElementById('panel-'+id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo(0,0);
+}
+function toggleQA(card){
+  card.classList.toggle('open');
+}
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>
