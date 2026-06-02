@@ -195,7 +195,7 @@
       <div class="form-body">
         <div class="field-row fr-2">
           <div class="field-group"><label class="fl">Venue Name</label>
-            <input type="text" id="f-name" placeholder="e.g. Gamba Restaurant"></div>
+            <input type="text" id="f-name" placeholder="e.g. The Good Egg"></div>
           <div class="field-group"><label class="fl">City / Territory</label>
             <input type="text" id="f-city" placeholder="e.g. London E1"></div>
         </div>
@@ -231,7 +231,7 @@
             <input type="number" id="f-cap" placeholder="8"></div>
         </div>
         <div class="field-group" style="margin-bottom:14px;"><label class="fl">Offer Days / Time Window</label>
-          <input type="text" id="f-slot" placeholder="e.g. Tuesday–Thursday 5:30–7:30pm"></div>
+          <input type="text" id="f-slot" placeholder="e.g. Monday–Wednesday 2–3pm"></div>
         <button class="submit-btn" onclick="addVenue()">Start First Forty Programme →</button>
         <button class="cancel-btn" onclick="switchTab('dashboard',null)">Cancel</button>
       </div>
@@ -262,16 +262,16 @@ let venues = [];
 let currentVenueIdx = null;
 
 const MILESTONES = [
-  {day:0,  title:'Venue signed — brief handed to AM',      desc:'rep passes Call Brief, offer structure, contact, and go-live date to AM. First Forty programme starts today.',    owner:'sales',  key:'signed'},
-  {day:1,  title:'Portal set up & offer configured',        desc:'AM confirms venue is live on the platform with the correct offer, time window, and cover cap.',                    owner:'am',     key:'portal'},
-  {day:2,  title:'WhatsApp intro sent to operator',         desc:'AM sends a personal WhatsApp introducing themselves and confirming what to expect in the first week.',             owner:'am',     key:'whatsapp'},
-  {day:3,  title:'Leave-behinds confirmed live in venue',   desc:'QR table-tent and £10 off coupons confirmed in venue. rep checks on next pass or AM confirms via operator.',       owner:'both',   key:'leavebehind'},
-  {day:7,  title:'Day 7 — First redemption check',          desc:'Has the venue had at least one redemption? If not: is the offer live? Is the time window right? Intervene now.',   owner:'am',     key:'day7'},
-  {day:14, title:'Day 14 — Team Lead review',           desc:'Team Lead reviews activation data. Is the offer generating covers in genuinely quiet periods? Reprogram if needed.', owner:'sales',key:'day14'},
-  {day:21, title:'Day 21 — Offer optimisation',             desc:'AM reviews offer performance. Adjust time window, depth, or cap if cover volume is below threshold.',              owner:'am',     key:'day21'},
-  {day:30, title:'Day 30 — Activation milestone',           desc:'Target: minimum 4 incremental covers across at least 2 different offer windows. If not reached: escalate to HoI.', owner:'both',  key:'day30'},
-  {day:35, title:'Day 35 — Repeat customer check',             desc:'Is the venue generating repeat reservationors? Review customer return rate data. Flag to marketing if consumer side needs support.', owner:'am', key:'day35'},
-  {day:40, title:'Day 40 — First Forty complete',           desc:'Venue graduates to ongoing partner health monitoring. AM continues quarterly reviews. Partner Health scoring begins.', owner:'am',  key:'day40'},
+  {day:0,  title:'Venue signed — brief handed to AM',      desc:'Rep sends warm handover to AM: partner name, surplus type, Surprise Bag details, first bag live. AM calls within 24 hours.',    owner:'sales',  key:'signed'},
+  {day:1,  title:'Portal set up & offer configured',        desc:'AM confirms the Surprise Bag is live, collection window is correct, and bag count is set appropriately.',                    owner:'am',     key:'portal'},
+  {day:2,  title:'WhatsApp intro sent to operator',         desc:'AM sends a personal WhatsApp: name, what to expect this week, and confirmation of the first bag details.',             owner:'am',     key:'whatsapp'},
+  {day:3,  title:'Leave-behinds confirmed live in venue',   desc:'AM checks first bag was reserved and collected. If not: is the listing visible? Is the window right? Act now.',       owner:'both',   key:'leavebehind'},
+  {day:7,  title:'Day 7 — First redemption check',          desc:'Has the partner had at least one Surprise Bag reserved and collected? If not — call today. Do not wait.',   owner:'am',     key:'day7'},
+  {day:14, title:'Day 14 — Team Lead review',           desc:'TL reviews activation: is the Surprise Bag selling? Is the collection window matched to actual surplus? Adjust if needed.', owner:'sales',key:'day14'},
+  {day:21, title:'Day 21 — Offer optimisation',             desc:'AM reviews performance: bag sell rate, partner engagement, any issues with the collection window or bag count.',              owner:'am',     key:'day21'},
+  {day:30, title:'Day 30 — Activation milestone',           desc:'Target: minimum 4 Surprise Bags sold across at least 2 collection days. If not reached: AM calls HoI same day.', owner:'both',  key:'day30'},
+  {day:35, title:'Day 35 — Repeat customer check',             desc:'Is the partner consistently uploading bags? Are bags selling out? Any issues with the partner going quiet?', owner:'am', key:'day35'},
+  {day:40, title:'Day 40 — First Forty complete',           desc:'Partner graduates to ongoing health monitoring. AM holds monthly check-ins. Partner Health dashboard tracking begins.', owner:'am',  key:'day40'},
 ];
 
 const OWNER_LABELS = {sales:'Sales / rep', am:'AM Team', both:'Sales + AM'};
