@@ -395,7 +395,7 @@ const HS_PULL_RESULTS=[
 
 function days(d){return Math.floor((new Date()-new Date(d))/86400000);}
 function pct(n){return Math.min(100,Math.round(Math.max(0,n)/84*100));}
-function gateStatus(bdm,gate){
+function gateStatus(rep,gate){
   const age=days(rep.startDate),due=gate.week*7;
   const done=(rep.completed[gate.key]||[]).length,total=gate.targets.length;
   if(done>=total)return'done';
@@ -428,10 +428,10 @@ function renderGrid(){
   document.getElementById('st-int').textContent=REPS.filter(b=>b.status==='intervention').length;
   document.getElementById('st-grad').textContent=REPS.filter(b=>b.status==='graduated').length;
 
-  list.forEach(bdm=>{
+  list.forEach(rep=>{
     const age=days(rep.startDate),p=pct(age),dc=dayColour(rep.status);
     const chips=GATES.map(g=>{
-      const st=gateStatus(bdm,g);
+      const st=gateStatus(rep,g);
       if(st==='future')return'';
       const cls=st==='done'?'chip-done':st==='late'?'chip-late':'chip-due';
       const icon=st==='done'?'✓ ':st==='late'?'⚠ ':'→ ';
@@ -469,7 +469,7 @@ function showDetail(id){
   const age=days(rep.startDate),dc=dayColour(rep.status);
 
   const gatesHTML=GATES.map(g=>{
-    const st=gateStatus(bdm,g);
+    const st=gateStatus(rep,g);
     const done=rep.completed[g.key]||[];
     const icons={done:'✓',due:'→',late:'!',future:'○'};
     const cls={done:'gi-done',due:'gi-due',late:'gi-late',future:'gi-future'};
@@ -585,7 +585,7 @@ async function pullFromSalesforce(){
     setStatus('Pulling deal data...');
 
     
-    const bdmResults = await Promise.all(contacts.map(async (c) => {
+    const repResults = await Promise.all(contacts.map(async (c) => {
       const props = c.properties || {};
       const name = [props.firstname, props.lastname].filter(Boolean).join(' ') || 'Unknown';
       const startDate = props.createdate ? props.createdate.slice(0,10) : fromDate;
@@ -626,7 +626,7 @@ async function pullFromSalesforce(){
     setStatus('Building import list...');
 
     
-    const filtered = bdmResults.filter(r => !fromDate || r.startDate >= fromDate);
+    const filtered = repResults.filter(r => !fromDate || r.startDate >= fromDate);
 
     document.getElementById('pull-loading').style.display='none';
     document.getElementById('pull-btn').disabled=false;
