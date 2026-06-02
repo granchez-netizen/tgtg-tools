@@ -112,12 +112,12 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
     <div class="screen-sub">Fill this in leaving the venue — while it is fresh.</div>
 
     <label class="fl">rep</label>
-    <select class="fi" id="s1-bdm" onchange="if(this.value==='__custom'){this.style.display='none';document.getElementById('s1-bdm-custom').style.display='block';document.getElementById('s1-bdm-custom').focus();}">
+    <select class="fi" id="s1-rep" onchange="if(this.value==='__custom'){this.style.display='none';document.getElementById('s1-bdm-custom').style.display='block';document.getElementById('s1-bdm-custom').focus();}">
       <option value="" disabled selected>Select rep...</option>
     </select>
-    <input class="fi" id="s1-bdm-custom" type="text" placeholder="Type Rep name..." style="display:none;" autocomplete="off">
+    <input class="fi" id="s1-rep-custom" type="text" placeholder="Type Rep name..." style="display:none;" autocomplete="off">
 
-    <label class="fl">Venue visited</label>
+    <label class="fl">Venue called</label>
     <input class="fi" id="s1-venue" type="text" placeholder="e.g. Meze & More, Bethnal Green E2" autocomplete="off">
 
     <label class="fl">Visit type</label>
@@ -125,7 +125,7 @@ textarea.fi{resize:vertical;min-height:80px;line-height:1.6;}
       <option value="" disabled selected>Select type...</option>
       <option>Cold dial</option>
       <option>Warm intro</option>
-      <option>Follow-up — second visit</option>
+      <option>Follow-up — second call</option>
       <option>Objection handling</option>
       <option>Close attempt</option>
     </select>
@@ -385,7 +385,7 @@ function populateDropdown(names) {
   sel.appendChild(o);
 }
 
-function getBDMName(){
+function getRepName(){
   var sel = document.getElementById('s1-bdm');
   var custom = document.getElementById('s1-bdm-custom');
   if(sel.value === '__custom' || sel.style.display === 'none'){
@@ -470,7 +470,7 @@ function buildScoreSummary() {
 
 function submit() {
   var payload = {
-    bdm:         getBDMName(),
+    bdm:         getRepName(),
     venue:       g('s1-venue').value,
     visitType:   g('s1-type').value,
     outcome:     g('s1-outcome').value,
