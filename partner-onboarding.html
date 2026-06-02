@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Too Good To Go · First Forty · Venue Onboarding</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap');
+:root{
+  --tgtg:#6DBE4F;--tgtgd:rgba(109,190,79,.09);--tgtgl:rgba(109,190,79,.25);
+  --bg:#ffffff;--bg2:#f7f8f5;--border:#e4e8de;--border2:#dde3d8;
+  --text:#1a1a1a;--muted:#5a6454;--muted2:#8a9484;
+  --danger:#EF4444;--dangerd:rgba(239,68,68,.07);--dangerl:rgba(239,68,68,.18);
+  --warn:#F59E0B;--warnd:rgba(245,158,11,.07);--warnl:rgba(245,158,11,.18);
+  --good:#22C55E;--goodd:rgba(34,197,94,.08);--goodl:rgba(34,197,94,.18);
+  --info:#60A5FA;--infod:rgba(96,165,250,.08);--infol:rgba(96,165,250,.18);
+  --purple:#A78BFA;--purpled:rgba(167,139,250,.08);--purplel:rgba(167,139,250,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;padding-bottom:80px;}
+  
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+  -webkit-font-smoothing: antialiased;font-family:'DM Sans',sans-serif;background:#f0f2ed;color:#1a1a1a;min-height:100vh;padding-bottom:20px;}
+
+  
+  .header{background:var(--tgtg);padding:16px 20px 0;}
+  .header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+  .brand{color:var(--text);font-size:13px;font-weight:700;letter-spacing:.5px;}
+  .brand span{color:#6DBE4F;}
+  .tab-bar{display:flex;gap:0;}
+  .tab{padding:10px 18px;font-size:12px;font-weight:700;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;transition:all .2s;}
+  .tab.active{color:#6DBE4F;border-bottom-color:#6DBE4F;}
+
+  
+  .view{display:none;max-width:720px;margin:0 auto;padding:20px 16px;}
+  .view.active{display:block;}
+
+  
+  .dash-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+  .dash-title{font-size:18px;font-weight:800;}
+  .new-btn{background:#6DBE4F;color:#000;border:none;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;}
+
+  .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;}
+  .stat-card{background:var(--bg);border-radius:10px;padding:14px;border:1px solid var(--border);text-align:center;}
+  .stat-num{font-size:24px;font-weight:800;line-height:1;}
+  .stat-label{font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-top:4px;}
+  .stat-num.green{color:#22C55E;}
+  .stat-num.amber{color:#6DBE4F;}
+  .stat-num.red{color:#EF4444;}
+  .stat-num.gold{color:#6DBE4F;}
+
+  .venue-list{display:flex;flex-direction:column;gap:10px;}
+  .venue-card{background:var(--bg);border-radius:10px;border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:transform .15s;}
+  .venue-card:hover{transform:translateY(-1px);}
+  .venue-card-head{padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start;}
+  .venue-card-left{}
+  .venue-name-row{display:flex;align-items:center;gap:8px;margin-bottom:3px;}
+  .venue-nm{font-size:15px;font-weight:700;}
+  .health-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+  .hd-green{background:#6DBE4F;}
+  .hd-amber{background:#6DBE4F;}
+  .hd-red{background:#EF4444;}
+  .venue-meta{font-size:11px;color:var(--muted);}
+  .venue-card-right{text-align:right;}
+  .day-badge{font-size:20px;font-weight:800;line-height:1;}
+  .day-label{font-size:10px;color:var(--muted);font-weight:600;}
+
+  .progress-track{padding:0 16px 14px;}
+  .prog-labels{display:flex;justify-content:space-between;font-size:9px;color:var(--muted);margin-bottom:4px;font-weight:600;}
+  .prog-bar-wrap{height:6px;background:#f0ede8;border-radius:3px;overflow:hidden;}
+  .prog-bar-fill{height:100%;border-radius:3px;transition:width .4s;}
+  .fill-green{background:#6DBE4F;}
+  .fill-amber{background:#6DBE4F;}
+  .fill-red{background:#EF4444;}
+
+  .milestone-chips{display:flex;gap:4px;flex-wrap:wrap;padding:0 16px 14px;}
+  .chip{font-size:10px;padding:3px 8px;border-radius:10px;font-weight:600;}
+  .chip-done{background:rgba(34,197,94,.1);color:#22C55E;}
+  .chip-due{background:#FEF3E2;color:#6DBE4F;}
+  .chip-late{background:#FDECEA;color:#EF4444;}
+  .chip-todo{background:#f0ede8;color:var(--muted);}
+
+  .empty-state{text-align:center;padding:48px 20px;color:var(--muted);}
+  .empty-icon{font-size:40px;margin-bottom:12px;}
+  .empty-title{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:6px;}
+
+  
+  .form-card{background:var(--bg);border-radius:12px;border:1px solid var(--border);overflow:hidden;margin-bottom:16px;}
+  .form-head{background:#f7f8f5;padding:14px 18px;}
+  .form-head-num{font-size:9px;font-family:'DM Sans',sans-serif;color:#6DBE4F;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;}
+  .form-head-title{font-size:15px;font-weight:700;color:#1a1a1a;}
+  .form-body{
+  -webkit-font-smoothing: antialiased;padding:16px 18px;}
+  .field-row{display:grid;gap:10px;margin-bottom:12px;}
+  .fr-2{grid-template-columns:1fr 1fr;}
+  .fr-3{grid-template-columns:1fr 1fr 1fr;}
+  .field-group{}
+  label.fl{display:block;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;}
+  input,select,textarea{width:100%;padding:10px 12px;border:1.5px solid #2a2a2a;border-radius:8px;font-size:14px;font-family:inherit;color:#1a1a1a;background:var(--bg);appearance:none;-webkit-appearance:none;}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:#6DBE4F;}
+  textarea{resize:vertical;min-height:60px;}
+  select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px;}
+  .submit-btn{width:100%;padding:14px;background:#6DBE4F;color:#000;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;margin-top:4px;}
+  .cancel-btn{width:100%;padding:12px;background:#f0f2ed;color:var(--muted);border:1.5px solid #2a2a2a;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;margin-top:8px;}
+
+  
+  .back-btn{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;margin-bottom:16px;}
+  .venue-detail-head{background:var(--tgtg);border-radius:12px;padding:20px;margin-bottom:16px;}
+  .vdh-name{font-size:22px;font-weight:800;color:#1a1a1a;margin-bottom:4px;}
+  .vdh-meta{font-size:12px;color:#aaa;margin-bottom:16px;}
+  .vdh-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .vdh-stat{background:rgba(255,255,255,0.07);border-radius:8px;padding:10px;text-align:center;}
+  .vdh-stat-num{font-size:18px;font-weight:800;color:#1a1a1a;}
+  .vdh-stat-label{font-size:9px;color:#777;text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+
+  .milestone-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+  .milestone-item{background:var(--bg);border-radius:10px;border:1px solid var(--border);padding:14px 16px;display:flex;align-items:flex-start;gap:12px;cursor:pointer;}
+  .ms-status{width:28px;height:28px;border-radius:50%;border:2px solid #e5e7eb;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;transition:all .2s;}
+  .ms-done .ms-status{border-color:#22C55E;background:#6DBE4F;color:#000;}
+  .ms-late .ms-status{border-color:#EF4444;background:#FDECEA;color:#EF4444;}
+  .ms-due .ms-status{border-color:#6DBE4F;background:#FEF3E2;color:#6DBE4F;}
+  .ms-content{flex:1;}
+  .ms-day{font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;}
+  .ms-title{font-size:14px;font-weight:700;color:#1a1a1a;margin-bottom:3px;}
+  .ms-desc{font-size:12px;color:var(--muted);line-height:1.4;}
+  .ms-owner{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;display:inline-block;margin-top:4px;}
+  .owner-sales{background:#FDF5E4;color:#6DBE4F;}
+  .owner-am{background:rgba(34,197,94,.1);color:#22C55E;}
+  .owner-both{background:rgba(168,85,247,.1);color:#6DBE4F;}
+  .ms-done .ms-title{text-decoration:line-through;color:var(--muted);}
+  .ms-right{flex-shrink:0;text-align:right;}
+  .ms-date-tag{font-size:10px;color:var(--muted);}
+
+  .notes-card{background:var(--bg);border-radius:10px;border:1px solid var(--border);overflow:hidden;margin-bottom:16px;}
+  .notes-head{background:#f7f8f5;padding:10px 16px;font-size:10px;font-weight:700;color:#6DBE4F;letter-spacing:2px;text-transform:uppercase;}
+  .notes-body{
+  -webkit-font-smoothing: antialiased;padding:14px 16px;}
+  .note-item{padding:8px 0;border-bottom:1px solid #e5e7eb;font-size:12px;color:#1a1a1a;}
+  .note-item:last-child{border-bottom:none;}
+  .note-meta{font-size:10px;color:var(--muted);margin-top:2px;}
+  .add-note-row{display:flex;gap:8px;margin-top:10px;}
+  .add-note-input{flex:1;padding:8px 12px;border:1.5px solid #2a2a2a;border-radius:8px;font-size:13px;font-family:inherit;}
+  .add-note-btn{padding:8px 14px;background:var(--bg);color:var(--text);border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;}
+
+  @media(max-width:480px){
+    .stats-row{grid-template-columns:1fr 1fr;}
+    .fr-3{grid-template-columns:1fr;}
+    .fr-2{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="brand">Eat<span>Club</span> · First Forty</div>
+    <button class="new-btn" onclick="showAddForm()">+ New Venue</button>
+  </div>
+  <div class="tab-bar">
+    <div class="tab active" onclick="switchTab('dashboard',this)">Active Venues</div>
+    <div class="tab" onclick="switchTab('add',this)">Onboard Venue</div>
+  </div>
+</div>
+
+<div class="view active" id="view-dashboard">
+  <div class="dash-header" style="margin-top:20px;">
+    <div class="dash-title">Onboarding Pipeline</div>
+    <div style="font-size:11px;color:var(--muted);font-family:'DM Sans',sans-serif;" id="dash-date"></div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-num gold" id="stat-active">0</div>
+      <div class="stat-label">Active</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num green" id="stat-on-track">0</div>
+      <div class="stat-label">On Track</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num amber" id="stat-at-risk">0</div>
+      <div class="stat-label">At Risk</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num red" id="stat-late">0</div>
+      <div class="stat-label">Overdue</div>
+    </div>
+  </div>
+
+  <div class="venue-list" id="venue-list">
+    <div class="empty-state" id="empty-state">
+      <div class="empty-icon">🍽️</div>
+      <div class="empty-title">No venues onboarding yet</div>
+      <div style="font-size:13px;">Tap + New Venue to start the First Forty programme for a signed venue.</div>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="view-add">
+  <div style="margin-top:20px;">
+    <div class="form-card">
+      <div class="form-head">
+        <div class="form-head-num">First Forty · New Venue</div>
+        <div class="form-head-title">Start the onboarding programme</div>
+      </div>
+      <div class="form-body">
+        <div class="field-row fr-2">
+          <div class="field-group"><label class="fl">Venue Name</label>
+            <input type="text" id="f-name" placeholder="e.g. The Good Egg"></div>
+          <div class="field-group"><label class="fl">City / Territory</label>
+            <input type="text" id="f-city" placeholder="e.g. London E1"></div>
+        </div>
+        <div class="field-row fr-2">
+          <div class="field-group"><label class="fl">Rep Who Closed It</label>
+            <input type="text" id="f-rep" placeholder="Name"></div>
+          <div class="field-group"><label class="fl">AM Owner</label>
+            <input type="text" id="f-am" placeholder="Name"></div>
+        </div>
+        <div class="field-row fr-2">
+          <div class="field-group"><label class="fl">Contact Name</label>
+            <input type="text" id="f-contact" placeholder="Venue contact"></div>
+          <div class="field-group"><label class="fl">Contact WhatsApp</label>
+            <input type="text" id="f-phone" placeholder="+44..."></div>
+        </div>
+        <div class="field-row fr-3">
+          <div class="field-group"><label class="fl">Sign Date</label>
+            <input type="date" id="f-signdate"></div>
+          <div class="field-group"><label class="fl">Go-Live Date</label>
+            <input type="date" id="f-livedate"></div>
+          <div class="field-group"><label class="fl">AOV (£)</label>
+            <input type="number" id="f-aov" placeholder="62"></div>
+        </div>
+        <div class="field-row fr-3">
+          <div class="field-group"><label class="fl">Offer Type</label>
+            <select id="f-offertype">
+              <option>Morning surplus</option><option>Lunchtime surplus</option>
+              <option>End of day surplus</option><option>Multiple windows</option>
+            </select></div>
+          <div class="field-group"><label class="fl">Discount (%)</label>
+            <input type="number" id="f-discount" placeholder="25"></div>
+          <div class="field-group"><label class="fl">Cover Cap</label>
+            <input type="number" id="f-cap" placeholder="8"></div>
+        </div>
+        <div class="field-group" style="margin-bottom:14px;"><label class="fl">Offer Days / Time Window</label>
+          <input type="text" id="f-slot" placeholder="e.g. Monday–Wednesday 2–3pm"></div>
+        <button class="submit-btn" onclick="addVenue()">Start First Forty Programme →</button>
+        <button class="cancel-btn" onclick="switchTab('dashboard',null)">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="view-detail">
+  <div style="margin-top:20px;">
+    <div class="back-btn" onclick="switchTab('dashboard',null)">← All venues</div>
+    <div class="venue-detail-head" id="detail-head"></div>
+    <div class="milestone-list" id="detail-milestones"></div>
+    <div class="notes-card">
+      <div class="notes-head">Notes & Updates</div>
+      <div class="notes-body">
+        <div id="detail-notes"></div>
+        <div class="add-note-row">
+          <input class="add-note-input" id="note-input" placeholder="Add a note...">
+          <button class="add-note-btn" onclick="addNote()">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let venues = [];
+let currentVenueIdx = null;
+
+const MILESTONES = [
+  {day:0,  title:'Venue signed — brief handed to AM',      desc:'Rep sends warm handover to AM: partner name, surplus type, Surprise Bag details, first bag live. AM calls within 24 hours.',    owner:'sales',  key:'signed'},
+  {day:1,  title:'Portal set up & offer configured',        desc:'AM confirms the Surprise Bag is live, collection window is correct, and bag count is set appropriately.',                    owner:'am',     key:'portal'},
+  {day:2,  title:'WhatsApp intro sent to operator',         desc:'AM sends a personal WhatsApp: name, what to expect this week, and confirmation of the first bag details.',             owner:'am',     key:'whatsapp'},
+  {day:3,  title:'Leave-behinds confirmed live in venue',   desc:'AM checks first bag was reserved and collected. If not: is the listing visible? Is the window right? Act now.',       owner:'both',   key:'leavebehind'},
+  {day:7,  title:'Day 7 — First redemption check',          desc:'Has the partner had at least one Surprise Bag reserved and collected? If not — call today. Do not wait.',   owner:'am',     key:'day7'},
+  {day:14, title:'Day 14 — Team Lead review',           desc:'TL reviews activation: is the Surprise Bag selling? Is the collection window matched to actual surplus? Adjust if needed.', owner:'sales',key:'day14'},
+  {day:21, title:'Day 21 — Offer optimisation',             desc:'AM reviews performance: bag sell rate, partner engagement, any issues with the collection window or bag count.',              owner:'am',     key:'day21'},
+  {day:30, title:'Day 30 — Activation milestone',           desc:'Target: minimum 4 Surprise Bags sold across at least 2 collection days. If not reached: AM calls HoI same day.', owner:'both',  key:'day30'},
+  {day:35, title:'Day 35 — Repeat customer check',             desc:'Is the partner consistently uploading bags? Are bags selling out? Any issues with the partner going quiet?', owner:'am', key:'day35'},
+  {day:40, title:'Day 40 — First Forty complete',           desc:'Partner graduates to ongoing health monitoring. AM holds monthly check-ins. Partner Health dashboard tracking begins.', owner:'am',  key:'day40'},
+];
+
+const OWNER_LABELS = {sales:'Sales / rep', am:'AM Team', both:'Sales + AM'};
+const OWNER_CLASS  = {sales:'owner-sales', am:'owner-am', both:'owner-both'};
+
+function daysSince(dateStr){
+  const d = new Date(dateStr);
+  const now = new Date();
+  return Math.floor((now-d)/(1000*60*60*24));
+}
+
+function getMilestoneStatus(venue, ms){
+  if(venue.completed && venue.completed[ms.key]) return 'done';
+  const age = daysSince(venue.signDate);
+  if(age > ms.day + 3) return 'late';
+  if(age >= ms.day - 1) return 'due';
+  return 'todo';
+}
+
+function getVenueHealth(venue){
+  const age = daysSince(venue.signDate);
+  let late=0, due=0;
+  MILESTONES.forEach(ms=>{
+    const st = getMilestoneStatus(venue,ms);
+    if(st==='late') late++;
+    if(st==='due') due++;
+  });
+  if(late>0) return 'red';
+  if(due>1) return 'amber';
+  return 'green';
+}
+
+function getDayInProgramme(venue){
+  return Math.min(40, Math.max(0, daysSince(venue.signDate)));
+}
+
+function getMilestoneChips(venue){
+  return MILESTONES.filter(ms=>['done','due','late'].includes(getMilestoneStatus(venue,ms))).slice(0,4);
+}
+
+function renderDashboard(){
+  const list = document.getElementById('venue-list');
+  const empty = document.getElementById('empty-state');
+  empty.style.display = venues.length===0?'block':'none';
+
+  
+  list.querySelectorAll('.venue-card').forEach(c=>c.remove());
+
+  let active=0,onTrack=0,atRisk=0,late=0;
+  venues.forEach((v,i)=>{
+    active++;
+    const health=getVenueHealth(v);
+    if(health==='green') onTrack++;
+    else if(health==='amber') atRisk++;
+    else late++;
+
+    const dayNum=getDayInProgramme(v);
+    const pct=Math.round(dayNum/40*100);
+    const fillClass=health==='red'?'fill-red':health==='amber'?'fill-amber':'fill-green';
+    const hdClass=health==='red'?'hd-red':health==='amber'?'hd-amber':'hd-green';
+
+    const chips=getMilestoneChips(v).map(ms=>{
+      const st=getMilestoneStatus(v,ms);
+      const cls=st==='done'?'chip-done':st==='late'?'chip-late':st==='due'?'chip-due':'chip-todo';
+      return `<span class="chip ${cls}">${st==='done'?'✓ ':st==='late'?'⚠ ':st==='due'?'→ ':''}${ms.title.split('—')[0].trim()}</span>`;
+    }).join('');
+
+    const card=document.createElement('div');
+    card.className='venue-card';
+    card.onclick=()=>showDetail(i);
+    card.innerHTML=`
+      <div class="venue-card-head">
+        <div class="venue-card-left">
+          <div class="venue-name-row">
+            <div class="health-dot ${hdClass}"></div>
+            <div class="venue-nm">${v.name}</div>
+          </div>
+          <div class="venue-meta">${v.city} · rep: ${v.rep} · AM: ${v.am}</div>
+        </div>
+        <div class="venue-card-right">
+          <div class="day-badge" style="color:${health==='red'?'#EF4444':health==='amber'?'#6DBE4F':'#22C55E'}">${dayNum}</div>
+          <div class="day-label">of 40 days</div>
+        </div>
+      </div>
+      <div class="progress-track">
+        <div class="prog-labels"><span>Sign</span><span>Day 7</span><span>Day 14</span><span>Day 30</span><span>Day 40</span></div>
+        <div class="prog-bar-wrap"><div class="prog-bar-fill ${fillClass}" style="width:${pct}%"></div></div>
+      </div>
+      <div class="milestone-chips">${chips||'<span class="chip chip-todo">No milestones due yet</span>'}</div>`;
+    list.appendChild(card);
+  });
+
+  document.getElementById('stat-active').textContent=active;
+  document.getElementById('stat-on-track').textContent=onTrack;
+  document.getElementById('stat-at-risk').textContent=atRisk;
+  document.getElementById('stat-late').textContent=late;
+}
+
+function showDetail(i){
+  currentVenueIdx=i;
+  const v=venues[i];
+  const age=getDayInProgramme(v);
+  const health=getVenueHealth(v);
+  const healthColour=health==='red'?'#EF4444':health==='amber'?'#6DBE4F':'#22C55E';
+
+  document.getElementById('detail-head').innerHTML=`
+    <div class="vdh-name">${v.name}</div>
+    <div class="vdh-meta">${v.city} · Signed ${v.signDate} · Offer: ${v.offerType}, ${v.discount}% off, ${v.slot}</div>
+    <div class="vdh-stats">
+      <div class="vdh-stat"><div class="vdh-stat-num" style="color:${healthColour}">${age}</div><div class="vdh-stat-label">Days in</div></div>
+      <div class="vdh-stat"><div class="vdh-stat-num" style="color:${healthColour}">${40-age}</div><div class="vdh-stat-label">Days left</div></div>
+      <div class="vdh-stat"><div class="vdh-stat-num">£${v.aov||'—'}</div><div class="vdh-stat-label">AOV</div></div>
+    </div>`;
+
+  const msList=document.getElementById('detail-milestones');
+  msList.innerHTML='';
+  MILESTONES.forEach(ms=>{
+    const st=getMilestoneStatus(v,ms);
+    if(st==='todo') return;
+    const item=document.createElement('div');
+    item.className=`milestone-item ms-${st}`;
+    item.innerHTML=`
+      <div class="ms-status">${st==='done'?'✓':st==='late'?'!':'→'}</div>
+      <div class="ms-content">
+        <div class="ms-day">Day ${ms.day}</div>
+        <div class="ms-title">${ms.title}</div>
+        <div class="ms-desc">${ms.desc}</div>
+        <span class="ms-owner ${OWNER_CLASS[ms.owner]}">${OWNER_LABELS[ms.owner]}</span>
+      </div>
+      <div class="ms-right">
+        <div class="ms-date-tag">${st==='done'?'Complete':st==='late'?'Overdue':'Due now'}</div>
+      </div>`;
+    item.onclick=()=>toggleMilestone(ms.key);
+    msList.appendChild(item);
+  });
+
+  
+  const notesEl=document.getElementById('detail-notes');
+  notesEl.innerHTML=(v.notes&&v.notes.length>0)
+    ?v.notes.map(n=>`<div class="note-item">${n.text}<div class="note-meta">${n.date}</div></div>`).join('')
+    :'<div style="font-size:12px;color:var(--muted);padding:8px 0;">No notes yet.</div>';
+
+  switchTab('detail',null);
+}
+
+function toggleMilestone(key){
+  const v=venues[currentVenueIdx];
+  if(!v.completed) v.completed={};
+  v.completed[key]=!v.completed[key];
+  showDetail(currentVenueIdx);
+  renderDashboard();
+}
+
+function addNote(){
+  const input=document.getElementById('note-input');
+  const text=input.value.trim();
+  if(!text) return;
+  const v=venues[currentVenueIdx];
+  if(!v.notes) v.notes=[];
+  v.notes.unshift({text,date:new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})});
+  input.value='';
+  showDetail(currentVenueIdx);
+}
+
+function addVenue(){
+  const name=document.getElementById('f-name').value.trim();
+  if(!name){alert('Please enter a venue name.');return;}
+  const v={
+    name,
+    city:document.getElementById('f-city').value||'Unknown',
+    rep:document.getElementById('f-rep').value||'—',
+    am:document.getElementById('f-am').value||'—',
+    contact:document.getElementById('f-contact').value||'—',
+    phone:document.getElementById('f-phone').value||'—',
+    signDate:document.getElementById('f-signdate').value||new Date().toISOString().slice(0,10),
+    liveDate:document.getElementById('f-livedate').value||'',
+    aov:document.getElementById('f-aov').value||'',
+    offerType:document.getElementById('f-offertype').value,
+    discount:document.getElementById('f-discount').value||'25',
+    cap:document.getElementById('f-cap').value||'8',
+    slot:document.getElementById('f-slot').value||'—',
+    completed:{signed:true},
+    notes:[{text:'First Forty programme started. Offer configured and go-live scheduled.',date:new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}]
+  };
+  venues.unshift(v);
+  renderDashboard();
+  switchTab('dashboard',null);
+  
+  ['f-name','f-city','f-rep','f-am','f-contact','f-phone','f-signdate','f-livedate','f-aov','f-discount','f-cap','f-slot'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.value='';
+  });
+}
+
+function switchTab(tab, tabEl){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('view-'+tab).classList.add('active');
+  if(tabEl) tabEl.classList.add('active');
+  if(tab==='dashboard') renderDashboard();
+}
+
+function showAddForm(){
+  switchTab('add', document.querySelectorAll('.tab')[1]);
+}
+
+document.getElementById('f-signdate').valueAsDate=new Date();
+const d=new Date();
+d.setDate(d.getDate()+3);
+document.getElementById('f-livedate').valueAsDate=d;
+document.getElementById('dash-date').textContent=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
+
+const demo=[
+  {name:'Meze & More Bethnal Green',city:'London E2',rep:'Marco R',am:'Sophie L',contact:'Ahmed Hassan',phone:'+44 7700 900123',signDate:offsetDate(-8),liveDate:offsetDate(-6),aov:'72',offerType:'Morning surplus',discount:'25',cap:'8',slot:'Tue–Thu 5:30–7:30pm',completed:{signed:true,portal:true,whatsapp:true,leavebehind:true,day7:true},notes:[{text:'First redemption hit day 6 — owner texted to say it went well.',date:'3 days ago'},{text:'QR tent confirmed in window by rep on pass.',date:'5 days ago'}]},
+  {name:'Meze & More',city:'London E2',rep:'Marco R',am:'Sophie L',contact:'Imran Khan',phone:'+44 7700 900456',signDate:offsetDate(-15),liveDate:offsetDate(-13),aov:'58',offerType:'Lunchtime surplus',discount:'20',cap:'10',slot:'Mon–Wed 6–8pm',completed:{signed:true,portal:true,whatsapp:true,leavebehind:true,day7:true,day14:true},notes:[{text:'Day 14 review done. Offer performing well on Wednesday. Monday still thin.',date:'1 day ago'}]},
+  {name:'The Good Egg',city:'London EC2',rep:'Sarah C',am:'Tom B',contact:'Alan Rusk',phone:'+44 7700 900789',signDate:offsetDate(-3),liveDate:offsetDate(-1),aov:'68',offerType:'End of day surplus',discount:'25',cap:'6',slot:'Wed–Fri 9–10:30pm',completed:{signed:true,portal:true},notes:[{text:'Portal live. WhatsApp intro sent. Awaiting first redemption.',date:'1 day ago'}]},
+];
+function offsetDate(days){const d=new Date();d.setDate(d.getDate()+days);return d.toISOString().slice(0,10);}
+venues=demo;
+renderDashboard();
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>
