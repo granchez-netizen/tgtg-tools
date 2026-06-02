@@ -488,7 +488,7 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.7;}
     </div>
 
     <div class="output-box" id="out-call-analysis">
-      <div class="output-eye">Call Analysis — 10 Criteria · Sales Process · Evidence · Coaching Plan · TL Debrief</div>
+      <div class="output-eye">Call Analysis — 10 Criteria · Full Sales Process · Evidence · Coaching · TL Script</div>
       <div class="output-content" id="out-call-analysis-content"></div>
       <div class="copy-strip">
         <button class="copy-btn" onclick="copyOut('out-call-analysis-content',this)">Copy full analysis</button>
@@ -823,89 +823,96 @@ function runCallAnalysis() {
     return;
   }
 
-  var prompt = `You are analysing a sales call made by ${rep} on the ${team} team at Too Good To Go UK & Ireland.
-
-Too Good To Go is a food waste reduction platform. Partners create Surprise Bags of surplus food/stock that customers reserve and collect via the TGTG app. The rep's job is to phone prospective partners, discover their surplus, explain the Surprise Bag model, handle objections, and close an agreed Surprise Bag window on the call itself — then onboard the partner live (same day).
-
-Additional context: ${context || 'None provided'}
-
-CALL TRANSCRIPT:
-${transcript}
-
-Score this call across these 7 criteria. For each: give a score out of 100, quote the specific line from the transcript that supports the score (or note its absence), and write one coaching action.
-
-CRITERIA:
-1. OPENING (10%) — Did the rep lead with the partner's surplus problem, not with TGTG? Did they avoid opening with credentials or platform stats?
-2. SURPLUS DISCOVERY (20%) — Did the rep ask about surplus before pitching? Did they follow the owner's answers to understand type, volume, and timing?
-3. WASTE-TO-REVENUE FRAME (20%) — Did the rep frame the Surprise Bag as found revenue from inventory that was heading for the bin? Did they walk through the financial logic?
-4. OBJECTION HANDLING (15%) — Did the rep handle objections without backing off? Did they hold the waste-to-revenue frame through resistance?
-5. SURPRISE BAG CLOSE (20%) — Did the rep close a specific Surprise Bag window (day, time, quantity, price) on this call? Or did they leave it open?
-6. ONBOARDING MOMENTUM (10%) — Did the rep attempt to set up the listing live, or at minimum book a specific time to do it same day?
-7. NEXT STEP CLARITY (5%) — Did the call end with a concrete next action, owner commitment, and a specific date/time?
-
-OUTPUT FORMAT — use exactly this structure:
-
-CALL ANALYSIS — ${rep} — ${team} Team
-
-OVERALL SCORE: [weighted total]/100
-[One sentence summary of the call]
-
----
-
-CRITERION SCORES
-
-1. Opening — [score]/100
-Evidence: "[direct quote or 'not present in transcript']"
-Gap: [what was missing or what they did well]
-
-2. Surplus Discovery — [score]/100
-Evidence: "[direct quote or 'not present']"
-Gap: [specific coaching point]
-
-3. Waste-to-Revenue Frame — [score]/100
-Evidence: "[direct quote or 'not present']"
-Gap: [specific coaching point]
-
-4. Objection Handling — [score]/100
-Evidence: "[direct quote or 'not present']"
-Gap: [specific coaching point]
-
-5. Surprise Bag Close — [score]/100
-Evidence: "[direct quote or 'not present']"
-Gap: [specific coaching point]
-
-6. Onboarding Momentum — [score]/100
-Evidence: "[direct quote or 'not present']"
-Gap: [specific coaching point]
-
-7. Next Step Clarity — [score]/100
-Evidence: "[direct quote or 'not present']"
-Gap: [specific coaching point]
-
----
-
-COACHING PLAN — THIS WEEK
-
-Priority skill to develop: [one specific skill — not a category, the exact behaviour]
-The moment it went wrong: [timestamp or quote — the precise line where the call lost momentum]
-What to say instead: "[write the exact replacement line the rep should use next time]"
-Practice method: [specific — role-play, live listening session, AI re-run — with a named scenario]
-
----
-
-TL DEBRIEF SCRIPT
-
-Use this in the 1:1 or immediately after the call:
-
-"[Rep name], I listened to your call with [partner name if mentioned, otherwise 'the owner']. 
-
-At [timestamp/moment], you said [quote from transcript]. The effect was [what happened — owner disengaged, call stalled, etc.].
-
-What I want you to try instead is: [exact replacement line].
-
-On your next call, when [specific trigger], your line is: [specific script].
-
-One thing you did really well: [genuine specific positive — always end here]."`;
+  var prompt = 'You are analysing a sales call made by ' + rep + ' on the ' + team + ' team at Too Good To Go UK & Ireland.\n\n' +
+    'Too Good To Go is a food waste reduction platform. Partners (restaurants, cafes, bakeries, supermarkets, hotels, etc.) create Surprise Bags of surplus food or stock that customers reserve and collect via the TGTG app. The sales motion is 100% phone-based inside sales — no field visits, ever.\n\n' +
+    'The correct TGTG sales process on every call:\n' +
+    '1. Confirm decision maker — are they speaking to the owner or the person who can say yes?\n' +
+    '2. Intro — clear, brief, purpose stated in one sentence\n' +
+    '3. Fact-find — understand the business, its trading pattern, quiet periods, surplus type before pitching anything\n' +
+    '4. Surplus discovery — specifically what surplus, when, how much\n' +
+    '5. Waste-to-revenue frame — food already cost money, without TGTG it earns nothing, with TGTG it earns revenue\n' +
+    '6. Objection handling — hold the frame, address directly, do not back off\n' +
+    '7. Surprise Bag close — specific day, time, bag count, price agreed on this call\n' +
+    '8. Onboarding — first bag listed in the partner app before the call ends\n' +
+    '9. CRM — logged in Salesforce within 30 minutes\n\n' +
+    'Additional context: ' + (context || 'None provided') + '\n\n' +
+    'CALL TRANSCRIPT:\n' + transcript + '\n\n' +
+    'Score this call across ALL 10 criteria below. For each: give a score out of 100, quote the EXACT line from the transcript (or state not evidenced), and write one specific coaching action.\n\n' +
+    'CRITERIA:\n\n' +
+    '1. DECISION MAKER CONFIRMED (10%)\n' +
+    'Did the rep confirm they were speaking to the owner or decision maker BEFORE pitching? Did they ask directly — "Are you the owner?" or "Is it yourself who makes decisions about the business?" If they pitched without confirming — score 0. If they got through to a staff member who said they would pass a message — score 0. Confirm first, pitch second.\n\n' +
+    '2. INTRO AND CREDIBILITY (5%)\n' +
+    'Did the rep introduce themselves and Too Good To Go clearly and briefly — purpose of the call in one sentence? Not a two-minute company history. Not leading with how many customers TGTG has. One line: who they are, what TGTG does, why they are calling this specific business.\n\n' +
+    '3. FACT-FIND — BUSINESS UNDERSTANDING (15%)\n' +
+    'Did the rep ask questions about the business BEFORE pitching? This is the most important step and most commonly skipped entirely. Did they ask about: trading days and hours, busy vs quiet periods, what type of food or stock they produce, how many they serve on a typical day, whether they currently discard or donate surplus? A rep who pitches without a fact-find is guessing. A rep who fact-finds is solving. Score 0 if no fact-find questions were asked.\n\n' +
+    '4. SURPLUS DISCOVERY (15%)\n' +
+    'Specifically: did the rep identify what surplus exists, when it occurs, and roughly how much? Did they ask "What do you typically have left at the end of a Tuesday?" or equivalent — and listen to the answer before proposing anything? Did they connect the Surprise Bag proposal directly to the specific surplus the owner described?\n\n' +
+    '5. WASTE-TO-REVENUE FRAME (15%)\n' +
+    'Did the rep explain that the food already cost money to produce — and without TGTG it earns £0? Did they make the financial case: bag price minus TGTG commission = found revenue that did not exist before? Did they avoid leading with platform size or customer numbers instead of the financial logic?\n\n' +
+    '6. OBJECTION HANDLING (10%)\n' +
+    'When the owner pushed back — on brand, commission, time, effort, or anything else — did the rep hold the frame and address it directly? Did they avoid backing off, agreeing partially, or changing subject? Key objections: "we do not really have waste," "I do not want to discount," "what is in the bag," "I need to speak to my partner," "we already donate to a food bank."\n\n' +
+    '7. SURPRISE BAG CLOSE (15%)\n' +
+    'Did the rep close a specific Surprise Bag on this call — agreed day, collection time window, bag count, price — before ending the call? Or did they leave it open: "I will send more information" / "have a think and I will call back." The standard is: close the window on this call. Score 0 if no close was attempted.\n\n' +
+    '8. ONBOARDING MOMENTUM (10%)\n' +
+    'Did the rep walk the partner through the TGTG partner app live on this call and get the first Surprise Bag listed before hanging up? If not live: did they book a specific time same day? The standard is bag listed before call ends or within the same business day.\n\n' +
+    '9. CRM AND NEXT STEP (3%)\n' +
+    'Did the call end with a concrete named next action and specific date/time? Did the rep commit to logging in Salesforce within 30 minutes?\n\n' +
+    '10. OVERALL CALL CONTROL (2%)\n' +
+    'Did the rep lead the call or follow it? Did they let conversation drift or steer it back? Did they speak with confidence — not apologetically or hesitantly?\n\n' +
+    'OUTPUT FORMAT — use exactly this structure:\n\n' +
+    'CALL ANALYSIS — ' + rep + ' — ' + team + ' Team\n' +
+    'OVERALL SCORE: [weighted total]/100\n' +
+    '[One honest sentence: what was the dominant pattern on this call]\n\n' +
+    '---\n\n' +
+    'SALES PROCESS CHECK\n\n' +
+    '1. Decision Maker Confirmed — [score]/100\n' +
+    'Evidence: "[exact quote or: not evidenced in transcript]"\n' +
+    'Gap: [specific coaching point]\n\n' +
+    '2. Intro and Credibility — [score]/100\n' +
+    'Evidence: "[exact quote]"\n' +
+    'Gap: [coaching point]\n\n' +
+    '3. Fact-Find — Business Understanding — [score]/100\n' +
+    'Evidence: "[exact quotes of questions asked — or: no fact-find questions evidenced]"\n' +
+    'Gap: [which specific questions were missing and what they would have uncovered]\n\n' +
+    '4. Surplus Discovery — [score]/100\n' +
+    'Evidence: "[exact quote]"\n' +
+    'Gap: [coaching point]\n\n' +
+    '5. Waste-to-Revenue Frame — [score]/100\n' +
+    'Evidence: "[exact quote]"\n' +
+    'Gap: [coaching point]\n\n' +
+    '6. Objection Handling — [score]/100\n' +
+    'Evidence: "[exact quote of objection and rep response]"\n' +
+    'Gap: [coaching point]\n\n' +
+    '7. Surprise Bag Close — [score]/100\n' +
+    'Evidence: "[exact quote of close attempt — or: no close attempted]"\n' +
+    'Gap: [coaching point]\n\n' +
+    '8. Onboarding Momentum — [score]/100\n' +
+    'Evidence: "[exact quote]"\n' +
+    'Gap: [coaching point]\n\n' +
+    '9. CRM and Next Step — [score]/100\n' +
+    'Evidence: "[exact quote]"\n' +
+    'Gap: [coaching point]\n\n' +
+    '10. Overall Call Control — [score]/100\n' +
+    'Evidence: "[observation on call dynamics]"\n' +
+    'Gap: [coaching point]\n\n' +
+    '---\n\n' +
+    'WHERE THE SALES PROCESS BROKE DOWN\n\n' +
+    'Stage: [Opening / Decision maker check / Fact-find / Surplus discovery / Pitch / Objection handling / Close / Onboarding]\n' +
+    'The moment: "[timestamp or exact quote — be precise]"\n' +
+    'What should have happened: "[describe the correct sales behaviour at this point]"\n' +
+    'Replacement line: "[write the exact words the rep should use next time — word for word]"\n\n' +
+    '---\n\n' +
+    'COACHING PLAN — THIS WEEK\n\n' +
+    'Priority skill: [one specific behaviour — not a category]\n' +
+    'Practice method: [specific scenario — e.g. Role-play the fact-find with TL using a restaurant scenario. Rep leads. TL plays owner who says they are too busy to talk. Three attempts before tomorrows calls.]\n\n' +
+    '---\n\n' +
+    'TL DEBRIEF SCRIPT\n\n' +
+    'Use this verbatim in the 1:1 or within 60 minutes of the call:\n\n' +
+    '"' + rep + ', I listened to your call.\n\n' +
+    '[If decision maker not confirmed — say this]: Before I go into the call itself — I noticed you went straight into the pitch without confirming you were speaking to the owner. That is the single biggest reason calls fail before they start. On your next call: after your intro, the first question is: Are you the owner, or the person who makes decisions about the business? One question. Five seconds. Everything after that is more likely to land.\n\n' +
+    '[If fact-find was skipped — say this]: The part I want to focus on is the fact-find. You moved to the pitch at [timestamp]. At that point you did not yet know [what surplus they have / when their quiet periods are / what type of business they run day to day]. When you do not know those things, you are guessing at the pitch. The fact-find is not a delay — it is what makes the pitch personal. Next call: ask at least three questions about the business before you mention Too Good To Go.\n\n' +
+    'The moment the call could have changed: at [timestamp], when [what the owner said], your line was [exact quote from rep]. What I want you to say instead: [exact replacement line].\n\n' +
+    'One thing you did well: [genuine specific positive from the transcript]."';
 
   callClaude(SYSTEM_BASE, prompt, 'btn-call-analysis', 'out-call-analysis', 'out-call-analysis-content');
 }
