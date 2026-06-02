@@ -164,7 +164,7 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.7;}
       </select>
       <label class="form-label">Dials per day (average)</label>
       <input class="form-input" id="c-dials" placeholder="e.g. 42" type="number">
-      <label class="form-label">Meaningful conversations per 50 dials</label>
+      <label class="form-label">Meaningful conversations per 80 dials</label>
       <input class="form-input" id="c-convs" placeholder="e.g. 8" type="number">
       <label class="form-label">Surprise Bags agreed per week</label>
       <input class="form-input" id="c-bags" placeholder="e.g. 3" type="number">
@@ -203,7 +203,7 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.7;}
         </div>
       </div>
       <label class="form-label">Current performance (specific numbers)</label>
-      <textarea class="form-input" id="p-perf" placeholder="e.g. 28 dials/day vs 50 target. 3 meaningful conversations per 50 dials vs team average of 9. 0 Surprise Bags agreed in last 3 weeks."></textarea>
+      <textarea class="form-input" id="p-perf" placeholder="e.g. 52 dials/day vs 80 target. 3 meaningful conversations per 80 dials vs team average of 9. 0 Surprise Bags agreed in last 3 weeks."></textarea>
       <label class="form-label">Coaching already provided</label>
       <textarea class="form-input" id="p-coaching" placeholder="e.g. Three call-alongs in last 4 weeks. Weekly 1:1 with specific technique coaching. Paired with Q1 rep for two sessions. No sustained improvement."></textarea>
       <label class="form-label">Root cause assessment</label>
@@ -215,7 +215,7 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.7;}
         <option>Personal circumstances affecting performance</option>
       </select>
       <label class="form-label">Target to hit (specific and measurable)</label>
-      <input class="form-input" id="p-target" placeholder="e.g. 45+ dials/day, 7+ meaningful conversations per 50 dials, 2+ bags agreed per week — sustained for 3 consecutive weeks.">
+      <input class="form-input" id="p-target" placeholder="e.g. 80 dials/day, 7+ meaningful conversations per 80 dials, 2+ bags agreed per week — sustained for 3 consecutive weeks.">
       <label class="form-label">Review timeline</label>
       <input class="form-input" id="p-timeline" placeholder="e.g. 4 weeks — review on [DATE]">
       <button class="ai-btn" id="btn-pip" onclick="runPIP()">
@@ -548,9 +548,9 @@ async function callClaude(systemPrompt, userPrompt, btnId, outputBoxId, outputCo
 
 var SYSTEM_BASE = `You are an expert sales operations assistant for Too Good To Go UK & Ireland. 
 Too Good To Go is a food waste reduction platform. Partners (restaurants, cafes, bakeries, supermarkets, flower shops, etc.) create Surprise Bags of surplus food/stock that customers reserve and collect through the TGTG app.
-The sales team is phone-based only — no field visits. Three teams: Acquisition (new partners), Account Management (retention & growth), Growth (multi-site & non-food segments).
+The sales team is inside sales only — phone-based, office-based. No field visits, ever. Three teams: Acquisition (new partners), Account Management (retention & growth), Growth (multi-site & non-food segments).
 Reporting structure: Reps → Team Leads → Head of Independent Partners → Chelsea Kerr (Country Director) → Global.
-Always use "Surprise Bag" not "Surprise Bag". Always use "phone rep" not "BDM" or "field rep". Always use "Team Lead" not "Sales Manager".
+Always use "Surprise Bag". Always use "phone rep". Always use "Team Lead". Inside sales only — no field visits ever.
 Be direct, specific, and practical. No corporate fluff. Write in a professional but human tone.
 Output plain text only — no markdown headers with ##, no bullet symbols that won't render, use dashes for lists, use CAPS for section headers.`;
 
@@ -599,7 +599,7 @@ function runCoaching() {
 
 Current performance:
 - Dials per day: ${dials || 'unknown'}
-- Meaningful conversations per 50 dials: ${convs || 'unknown'}
+- Meaningful conversations per 80 dials: ${convs || 'unknown'}
 - Surprise Bags agreed per week: ${bags || 'unknown'}
 
 Observed behaviour:
@@ -823,7 +823,7 @@ function runCallAnalysis() {
 
   var prompt = `You are analysing a sales call made by ${rep} on the ${team} team at Too Good To Go UK & Ireland.
 
-Too Good To Go is a food waste reduction platform. Partners create Surprise Bags of surplus food/stock that customers reserve and collect via the TGTG app. The rep's job is to phone prospective partners, discover their surplus, explain the Surprise Bag model, handle objections, and close an agreed Surprise Bag window on the call itself — then onboard the partner live (within 2 hours).
+Too Good To Go is a food waste reduction platform. Partners create Surprise Bags of surplus food/stock that customers reserve and collect via the TGTG app. The rep's job is to phone prospective partners, discover their surplus, explain the Surprise Bag model, handle objections, and close an agreed Surprise Bag window on the call itself — then onboard the partner live (same day).
 
 Additional context: ${context || 'None provided'}
 
@@ -838,7 +838,7 @@ CRITERIA:
 3. WASTE-TO-REVENUE FRAME (20%) — Did the rep frame the Surprise Bag as found revenue from inventory that was heading for the bin? Did they walk through the financial logic?
 4. OBJECTION HANDLING (15%) — Did the rep handle objections without backing off? Did they hold the waste-to-revenue frame through resistance?
 5. SURPRISE BAG CLOSE (20%) — Did the rep close a specific Surprise Bag window (day, time, quantity, price) on this call? Or did they leave it open?
-6. ONBOARDING MOMENTUM (10%) — Did the rep attempt to set up the listing live, or at minimum book a specific time to do it within 2 hours?
+6. ONBOARDING MOMENTUM (10%) — Did the rep attempt to set up the listing live, or at minimum book a specific time to do it same day?
 7. NEXT STEP CLARITY (5%) — Did the call end with a concrete next action, owner commitment, and a specific date/time?
 
 OUTPUT FORMAT — use exactly this structure:
