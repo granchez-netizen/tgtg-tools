@@ -34,11 +34,11 @@ body{
 .ftab{padding:8px 14px;border-radius:20px;border:1px solid #333;background:transparent;color:#555;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;}
 .ftab.active{border-color:#6DBE4F;background:rgba(109,190,79,.15);color:#6DBE4F;}
 
-.bdm-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-@media(max-width:600px){.bdm-grid{grid-template-columns:1fr;}}
+.rep-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.rep-grid{grid-template-columns:1fr;}}
 
-.bdm-card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;overflow:hidden;cursor:pointer;transition:transform .15s,border-color .15s;}
-.bdm-card:hover{transform:translateY(-2px);border-color:#333;}
+.rep-card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;overflow:hidden;cursor:pointer;transition:transform .15s,border-color .15s;}
+.rep-card:hover{transform:translateY(-2px);border-color:#333;}
 
 .bdc-head{padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start;}
 .bdc-name-row{display:flex;align-items:center;gap:8px;margin-bottom:3px;}
@@ -228,7 +228,7 @@ body{
     <div class="ftab" onclick="filter('intervention',this)">Intervention</div>
     <div class="ftab" onclick="filter('graduated',this)">Graduated</div>
   </div>
-  <div id="dashboard"><div class="bdm-grid" id="bdm-grid"></div></div>
+  <div id="dashboard"><div class="rep-grid" id="bdm-grid"></div></div>
   <div id="detail-view">
     <div class="back-btn" onclick="showDash()">← All phone reps</div>
     <div id="detail-content"></div>
@@ -258,7 +258,7 @@ body{
     <div class="source-card">
       <div class="sc-icon">📁</div>
       <div class="sc-name">Google Drive</div>
-      <div class="sc-fields" style="color:#aaa;">Visit brief upload timestamps · CRM compliance cross-check · Leave-behind confirmation</div>
+      <div class="sc-fields" style="color:#aaa;">Call log timestamps · CRM compliance cross-check · Leave-behind confirmation</div>
       <span class="sc-badge badge-auto">Auto-syncs daily at 06:00</span>
     </div>
     <div class="source-card">
@@ -287,10 +287,10 @@ body{
         <select class="ma-input" id="city-filter">
           <option value="">All cities</option>
           <option>London</option>
-          <option>Manchester</option>
-          <option>Bristol</option>
-          <option>Leeds</option>
-          <option>Liverpool</option>
+          <option>London</option>
+          <option>North</option>
+          <option>Midlands</option>
+          <option>South East</option>
         </select>
       </div>
     </div>
@@ -335,8 +335,8 @@ body{
 <script>
 
 const GATES=[
-  {week:2,key:'w2',title:'Territory foundations',desc:'First visits booked, CRM live, territory map submitted.',
-   targets:[{k:'first_visit',l:'First visit logged'},{k:'crm_setup',l:'CRM set up'},{k:'territory_map',l:'Territory map submitted'}]},
+  {week:2,key:'w2',title:'Call foundations',desc:'First calls booked, CRM live, territory map submitted.',
+   targets:[{k:'first_call',l:'First call logged'},{k:'crm_setup',l:'CRM set up'},{k:'pitch_pass',l:'Territory map submitted'}]},
   {week:4,key:'w4',title:'First deal signed',desc:'Quality-gated (≥4.0). Leave-behind installed. Offer confirmed against genuine quiet period.',
    targets:[{k:'deal1',l:'1 deal signed'},{k:'quality1',l:'≥4.0 review score'},{k:'lb1',l:'Leave-behind installed'}]},
   {week:6,key:'w6',title:'Building velocity',desc:'3+ deals. Deal score ≥40%. First partner live on platform.',
@@ -349,44 +349,44 @@ const GATES=[
 
 function daysAgo(n){const d=new Date();d.setDate(d.getDate()-n);return d.toISOString().slice(0,10);}
 
-let BDMS=[
+let REPS=[
   {id:1,name:'Sarah Chen',city:'London · E2',manager:'HoI',am:'Sophie L',startDate:daysAgo(62),status:'graduated',cohort:'Cohort 1',source:'hubspot',
    deals:9,dealScore:54,activationRate:78,crmCompliance:100,
-   completed:{w2:['first_visit','crm_setup','territory_map'],w4:['deal1','quality1','lb1'],w6:['deal3','score40','live1'],w8:['deal6','act1','crm100'],w12:['vel','score50','act70','sm']},
+   completed:{w2:['first_call','crm_setup','pitch_pass'],w4:['deal1','quality1','lb1'],w6:['deal3','score40','live1'],w8:['deal6','act1','crm100'],w12:['vel','score50','act70','sm']},
    notes:[{author:'HoI',date:'3 days ago',text:'Graduated at week 11. First deal day 11, deal score above 50% from week 5. Strongest Hackney corridor rep. Watch for TL potential.'},{author:'Sophie L',date:'8 days ago',text:'Activation rate best in class. Every signed venue had a pre-filled First Forty brief on handoff.'}]},
-  {id:2,name:'James Murphy',city:'Manchester · M1',manager:'Northern TL',am:'Tom B',startDate:daysAgo(35),status:'at-risk',cohort:'Cohort 1',source:'hubspot',
+  {id:2,name:'James Murphy',city:'London',manager:'Northern TL',am:'Tom B',startDate:daysAgo(35),status:'at-risk',cohort:'Cohort 1',source:'hubspot',
    deals:3,dealScore:38,activationRate:33,crmCompliance:82,
-   completed:{w2:['first_visit','crm_setup','territory_map'],w4:['deal1'],w6:[],w8:[],w12:[]},
-   notes:[{author:'Northern TL',date:'2 days ago',text:'Week 6 gate missed — 3 deals vs 6 target. Deal score 38%. Ride-along booked Thursday. Root cause: not proposing the offer — asking.'},{author:'HoI',date:'5 days ago',text:'Joined Northern standup. Skill gap on Challenger clear — Teach moment not landing. Coaching session Monday.'}]},
+   completed:{w2:['first_call','crm_setup','pitch_pass'],w4:['deal1'],w6:[],w8:[],w12:[]},
+   notes:[{author:'Northern TL',date:'2 days ago',text:'Week 6 gate missed — 3 deals vs 6 target. Deal score 38%. Call-along booked Thursday. Root cause: not proposing the offer — asking.'},{author:'HoI',date:'5 days ago',text:'Joined Northern standup. Skill gap on Challenger clear — Teach moment not landing. Coaching session Monday.'}]},
   {id:3,name:'Priya Patel',city:'London · SE15',manager:'HoI',am:'Sophie L',startDate:daysAgo(48),status:'on-track',cohort:'Cohort 1',source:'hubspot',
    deals:7,dealScore:51,activationRate:71,crmCompliance:100,
-   completed:{w2:['first_visit','crm_setup','territory_map'],w4:['deal1','quality1','lb1'],w6:['deal3','score40','live1'],w8:['deal6','act1','crm100'],w12:[]},
+   completed:{w2:['first_call','crm_setup','pitch_pass'],w4:['deal1','quality1','lb1'],w6:['deal3','score40','live1'],w8:['deal6','act1','crm100'],w12:[]},
    notes:[{author:'HoI',date:'1 day ago',text:'Week 12 gate in 2 weeks. Deal score crossed 50% this week. Three strong offer structure conversations in Peckham.'}]},
-  {id:4,name:'Marcus Johnson',city:'Bristol · BS1',manager:'Northern TL',am:'Tom B',startDate:daysAgo(14),status:'on-track',cohort:'Cohort 2',source:'hubspot',
+  {id:4,name:'Marcus Johnson',city:'London',manager:'Northern TL',am:'Tom B',startDate:daysAgo(14),status:'on-track',cohort:'Cohort 2',source:'hubspot',
    deals:1,dealScore:null,activationRate:null,crmCompliance:100,
-   completed:{w2:['first_visit','crm_setup','territory_map'],w4:['deal1','quality1','lb1'],w6:[],w8:[],w12:[]},
+   completed:{w2:['first_call','crm_setup','pitch_pass'],w4:['deal1','quality1','lb1'],w6:[],w8:[],w12:[]},
    notes:[{author:'Northern TL',date:'3 days ago',text:'First deal day 11 — Clifton independent, 4.4 stars, Tue–Thu Early Bird. Clean handoff. CRM excellent from day 1.'}]},
-  {id:5,name:'Emma Williams',city:'Leeds · LS1',manager:'Northern TL',am:'Tom B',startDate:daysAgo(5),status:'on-track',cohort:'Cohort 2',source:'hubspot',
+  {id:5,name:'Emma Williams',city:'London',manager:'Northern TL',am:'Tom B',startDate:daysAgo(5),status:'on-track',cohort:'Cohort 2',source:'hubspot',
    deals:0,dealScore:null,activationRate:null,crmCompliance:100,
    completed:{w2:[],w4:[],w6:[],w8:[],w12:[]},
    notes:[{author:'Northern TL',date:'4 days ago',text:'First week. Territory walk done. CRM live day 1. First prospect calls booked for tomorrow.'}]},
-  {id:6,name:'Tom Richards',city:'London · N1',manager:'HoI',am:'Sophie L',startDate:daysAgo(45),status:'intervention',cohort:'Cohort 1',source:'hubspot',
+  {id:6,name:'Tom Richards',city:'London',manager:'HoI',am:'Sophie L',startDate:daysAgo(45),status:'intervention',cohort:'Cohort 1',source:'hubspot',
    deals:2,dealScore:31,activationRate:0,crmCompliance:67,
-   completed:{w2:['first_visit','crm_setup'],w4:['deal1'],w6:[],w8:[],w12:[]},
+   completed:{w2:['first_call','crm_setup'],w4:['deal1'],w6:[],w8:[],w12:[]},
    notes:[{author:'HoI',date:'1 day ago',text:'PIP initiated. Week 8 gate missed — 2 deals vs 6, deal score 31%, CRM 67%. Will gap, not skill gap. 4-week plan with weekly call-alongs. Next review confirmed.'},{author:'Northern TL',date:'12 days ago',text:'AI pipeline review flagged same three Islington venues mentioned two weeks running with no movement. Escalated to Grant.'}]},
   {id:7,name:'Aisha Okonkwo',city:'London · SW9',manager:'HoI',am:'Sophie L',startDate:daysAgo(84),status:'graduated',cohort:'Cohort 1',source:'hubspot',
    deals:14,dealScore:58,activationRate:79,crmCompliance:100,
-   completed:{w2:['first_visit','crm_setup','territory_map'],w4:['deal1','quality1','lb1'],w6:['deal3','score40','live1'],w8:['deal6','act1','crm100'],w12:['vel','score50','act70','sm']},
+   completed:{w2:['first_call','crm_setup','pitch_pass'],w4:['deal1','quality1','lb1'],w6:['deal3','score40','live1'],w8:['deal6','act1','crm100'],w12:['vel','score50','act70','sm']},
    notes:[{author:'HoI',date:'12 days ago',text:'Graduated week 10 — two weeks ahead. Now mentoring James Murphy. Watching for TL potential.'}]},
 ];
 
 const HS_PULL_RESULTS=[
   {id:'hs-1',name:'Sarah Chen',city:'London · E2',manager:'HoI',startDate:daysAgo(62),deals:9,crmCompliance:100,source:'hubspot'},
-  {id:'hs-2',name:'James Murphy',city:'Manchester · M1',manager:'Northern TL',startDate:daysAgo(35),deals:3,crmCompliance:82,source:'hubspot'},
+  {id:'hs-2',name:'James Murphy',city:'London',manager:'Northern TL',startDate:daysAgo(35),deals:3,crmCompliance:82,source:'hubspot'},
   {id:'hs-3',name:'Priya Patel',city:'London · SE15',manager:'HoI',startDate:daysAgo(48),deals:7,crmCompliance:100,source:'hubspot'},
-  {id:'hs-4',name:'Marcus Johnson',city:'Bristol · BS1',manager:'Northern TL',startDate:daysAgo(14),deals:1,crmCompliance:100,source:'hubspot'},
-  {id:'hs-5',name:'Emma Williams',city:'Leeds · LS1',manager:'Northern TL',startDate:daysAgo(5),deals:0,crmCompliance:100,source:'hubspot'},
-  {id:'hs-6',name:'Tom Richards',city:'London · N1',manager:'HoI',startDate:daysAgo(45),deals:2,crmCompliance:67,source:'hubspot'},
+  {id:'hs-4',name:'Marcus Johnson',city:'London',manager:'Northern TL',startDate:daysAgo(14),deals:1,crmCompliance:100,source:'hubspot'},
+  {id:'hs-5',name:'Emma Williams',city:'London',manager:'Northern TL',startDate:daysAgo(5),deals:0,crmCompliance:100,source:'hubspot'},
+  {id:'hs-6',name:'Tom Richards',city:'London',manager:'HoI',startDate:daysAgo(45),deals:2,crmCompliance:67,source:'hubspot'},
   {id:'hs-7',name:'Aisha Okonkwo',city:'London · SW9',manager:'HoI',startDate:daysAgo(84),deals:14,crmCompliance:100,source:'hubspot'},
   {id:'hs-8',name:'Daniel Park',city:'London · E8',manager:'HoI',startDate:daysAgo(21),deals:4,crmCompliance:91,source:'hubspot'},
   {id:'hs-9',name:'Fatima Al-Hassan',city:'Manchester · M4',manager:'Northern TL',startDate:daysAgo(18),deals:2,crmCompliance:100,source:'hubspot'},
@@ -421,12 +421,12 @@ function filter(f,el){
 function renderGrid(){
   const grid=document.getElementById('bdm-grid');
   grid.innerHTML='';
-  const list=BDMS.filter(b=>currentFilter==='all'||b.status===currentFilter);
-  document.getElementById('st-total').textContent=BDMS.filter(b=>b.status!=='graduated').length;
-  document.getElementById('st-ok').textContent=BDMS.filter(b=>b.status==='on-track').length;
-  document.getElementById('st-risk').textContent=BDMS.filter(b=>b.status==='at-risk').length;
-  document.getElementById('st-int').textContent=BDMS.filter(b=>b.status==='intervention').length;
-  document.getElementById('st-grad').textContent=BDMS.filter(b=>b.status==='graduated').length;
+  const list=REPS.filter(b=>currentFilter==='all'||b.status===currentFilter);
+  document.getElementById('st-total').textContent=REPS.filter(b=>b.status!=='graduated').length;
+  document.getElementById('st-ok').textContent=REPS.filter(b=>b.status==='on-track').length;
+  document.getElementById('st-risk').textContent=REPS.filter(b=>b.status==='at-risk').length;
+  document.getElementById('st-int').textContent=REPS.filter(b=>b.status==='intervention').length;
+  document.getElementById('st-grad').textContent=REPS.filter(b=>b.status==='graduated').length;
 
   list.forEach(bdm=>{
     const age=days(bdm.startDate),p=pct(age),dc=dayColour(bdm.status);
