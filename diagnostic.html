@@ -357,7 +357,7 @@ async function runDiagnosis() {
         : ' Average ' + t2r + ' days to first redemption — this is improvable.')
     : '';
   if(t2r0 > 10) t2rCtx += ' ' + t2r0 + '% of signed venues have never had a single redemption. That is a deal quality issue, not an AM issue.';
-  set('p3-detail', 'The rep who signs a venue and agrees the first Surprise Bag before ending the call is the standard. Close on the call, live within 2 hours.on is building a different asset from the rep who signs and leaves setup to the venue. The segment strategy matters less than what is agreed before the handshake. The onboarding conversation is where weekday liquidity is either built in or left out.' + t2rCtx);
+  set('p3-detail', 'The rep who signs a venue and agrees the first Surprise Bag before ending the call is the standard. Close on the call, live before the call ends.on is building a different asset from the rep who signs and leaves setup to the venue. The segment strategy matters less than what is agreed before the handshake. The onboarding conversation is where weekday liquidity is either built in or left out.' + t2rCtx);
 
   
   var dsCtx = (100 - ds) > 50
@@ -378,7 +378,7 @@ async function runDiagnosis() {
   }
 
   
-  var amNote = ' Account Management owns the existing estate. Sales owns the next 90 days of new supply. The split is clean: AM visits the dormant venues in the current portfolio and does exactly what the rep should have done at signing — opens the dashboard, shifts the window, builds the habit. Sales ensures the next wave of venues is signed with the right structure already agreed. Both tracks run simultaneously.';
+  var amNote = ' Account Management owns the existing estate. Sales owns the next 90 days of new supply. The split is clean: AM calls the dormant accounts in the current portfolio and does exactly what the rep should have done at signing — opens the dashboard, shifts the window, builds the habit. Sales ensures the next wave of venues is signed with the right structure already agreed. Both tracks run simultaneously.';
   var p3d = document.getElementById('p3-detail');
   if(p3d) p3d.textContent += amNote;
 
