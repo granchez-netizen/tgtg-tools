@@ -4,20 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Too Good To Go · First Forty · Venue Onboarding</title>
-<link rel="stylesheet" href="/brand.css">
+
 <style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap');
+:root{
+  --tgtg:#6DBE4F;--tgtgd:rgba(109,190,79,.09);--tgtgl:rgba(109,190,79,.25);
+  --bg:#ffffff;--bg2:#f7f8f5;--border:#e4e8de;--border2:#dde3d8;
+  --text:#1a1a1a;--muted:#5a6454;--muted2:#8a9484;
+  --danger:#EF4444;--dangerd:rgba(239,68,68,.07);--dangerl:rgba(239,68,68,.18);
+  --warn:#F59E0B;--warnd:rgba(245,158,11,.07);--warnl:rgba(245,158,11,.18);
+  --good:#22C55E;--goodd:rgba(34,197,94,.08);--goodl:rgba(34,197,94,.18);
+  --info:#60A5FA;--infod:rgba(96,165,250,.08);--infol:rgba(96,165,250,.18);
+  --purple:#A78BFA;--purpled:rgba(167,139,250,.08);--purplel:rgba(167,139,250,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;padding-bottom:80px;}
   
   *{box-sizing:border-box;margin:0;padding:0;}
   body{
-  -webkit-font-smoothing: antialiased;font-family:'Inter',sans-serif;background:#f0f2ed;color:#1a1a1a;min-height:100vh;padding-bottom:20px;}
+  -webkit-font-smoothing: antialiased;font-family:'DM Sans',sans-serif;background:#f0f2ed;color:#1a1a1a;min-height:100vh;padding-bottom:20px;}
 
   
-  .header{background:#1A1A1A;padding:16px 20px 0;}
+  .header{background:var(--tgtg);padding:16px 20px 0;}
   .header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
-  .brand{color:#ffffff;font-size:13px;font-weight:700;letter-spacing:.5px;}
+  .brand{color:var(--text);font-size:13px;font-weight:700;letter-spacing:.5px;}
   .brand span{color:#6DBE4F;}
   .tab-bar{display:flex;gap:0;}
-  .tab{padding:10px 18px;font-size:12px;font-weight:700;cursor:pointer;color:#666;border-bottom:2px solid transparent;transition:all .2s;}
+  .tab{padding:10px 18px;font-size:12px;font-weight:700;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;transition:all .2s;}
   .tab.active{color:#6DBE4F;border-bottom-color:#6DBE4F;}
 
   
@@ -30,16 +43,16 @@
   .new-btn{background:#6DBE4F;color:#000;border:none;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;}
 
   .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;}
-  .stat-card{background:#1a1a1a;border-radius:10px;padding:14px;border:1px solid #2a2a2a;text-align:center;}
+  .stat-card{background:var(--bg);border-radius:10px;padding:14px;border:1px solid var(--border);text-align:center;}
   .stat-num{font-size:24px;font-weight:800;line-height:1;}
-  .stat-label{font-size:10px;color:#888888;font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-top:4px;}
+  .stat-label{font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-top:4px;}
   .stat-num.green{color:#22C55E;}
   .stat-num.amber{color:#6DBE4F;}
   .stat-num.red{color:#EF4444;}
   .stat-num.gold{color:#6DBE4F;}
 
   .venue-list{display:flex;flex-direction:column;gap:10px;}
-  .venue-card{background:#1a1a1a;border-radius:10px;border:1px solid #2a2a2a;overflow:hidden;cursor:pointer;transition:transform .15s;}
+  .venue-card{background:var(--bg);border-radius:10px;border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:transform .15s;}
   .venue-card:hover{transform:translateY(-1px);}
   .venue-card-head{padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start;}
   .venue-card-left{}
@@ -49,13 +62,13 @@
   .hd-green{background:#6DBE4F;}
   .hd-amber{background:#6DBE4F;}
   .hd-red{background:#EF4444;}
-  .venue-meta{font-size:11px;color:#888888;}
+  .venue-meta{font-size:11px;color:var(--muted);}
   .venue-card-right{text-align:right;}
   .day-badge{font-size:20px;font-weight:800;line-height:1;}
-  .day-label{font-size:10px;color:#888888;font-weight:600;}
+  .day-label{font-size:10px;color:var(--muted);font-weight:600;}
 
   .progress-track{padding:0 16px 14px;}
-  .prog-labels{display:flex;justify-content:space-between;font-size:9px;color:#888888;margin-bottom:4px;font-weight:600;}
+  .prog-labels{display:flex;justify-content:space-between;font-size:9px;color:var(--muted);margin-bottom:4px;font-weight:600;}
   .prog-bar-wrap{height:6px;background:#f0ede8;border-radius:3px;overflow:hidden;}
   .prog-bar-fill{height:100%;border-radius:3px;transition:width .4s;}
   .fill-green{background:#6DBE4F;}
@@ -67,16 +80,16 @@
   .chip-done{background:rgba(34,197,94,.1);color:#22C55E;}
   .chip-due{background:#FEF3E2;color:#6DBE4F;}
   .chip-late{background:#FDECEA;color:#EF4444;}
-  .chip-todo{background:#f0ede8;color:#888888;}
+  .chip-todo{background:#f0ede8;color:var(--muted);}
 
-  .empty-state{text-align:center;padding:48px 20px;color:#888888;}
+  .empty-state{text-align:center;padding:48px 20px;color:var(--muted);}
   .empty-icon{font-size:40px;margin-bottom:12px;}
   .empty-title{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:6px;}
 
   
-  .form-card{background:#1a1a1a;border-radius:12px;border:1px solid #2a2a2a;overflow:hidden;margin-bottom:16px;}
+  .form-card{background:var(--bg);border-radius:12px;border:1px solid var(--border);overflow:hidden;margin-bottom:16px;}
   .form-head{background:#f7f8f5;padding:14px 18px;}
-  .form-head-num{font-size:9px;font-family:'Inter',sans-serif;color:#6DBE4F;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;}
+  .form-head-num{font-size:9px;font-family:'DM Sans',sans-serif;color:#6DBE4F;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;}
   .form-head-title{font-size:15px;font-weight:700;color:#1a1a1a;}
   .form-body{
   -webkit-font-smoothing: antialiased;padding:16px 18px;}
@@ -84,17 +97,17 @@
   .fr-2{grid-template-columns:1fr 1fr;}
   .fr-3{grid-template-columns:1fr 1fr 1fr;}
   .field-group{}
-  label.fl{display:block;font-size:11px;font-weight:700;color:#888888;text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;}
-  input,select,textarea{width:100%;padding:10px 12px;border:1.5px solid #2a2a2a;border-radius:8px;font-size:14px;font-family:inherit;color:#1a1a1a;background:#1a1a1a;appearance:none;-webkit-appearance:none;}
+  label.fl{display:block;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;}
+  input,select,textarea{width:100%;padding:10px 12px;border:1.5px solid #2a2a2a;border-radius:8px;font-size:14px;font-family:inherit;color:#1a1a1a;background:var(--bg);appearance:none;-webkit-appearance:none;}
   input:focus,select:focus,textarea:focus{outline:none;border-color:#6DBE4F;}
   textarea{resize:vertical;min-height:60px;}
   select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px;}
   .submit-btn{width:100%;padding:14px;background:#6DBE4F;color:#000;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;margin-top:4px;}
-  .cancel-btn{width:100%;padding:12px;background:#f0f2ed;color:#888888;border:1.5px solid #2a2a2a;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;margin-top:8px;}
+  .cancel-btn{width:100%;padding:12px;background:#f0f2ed;color:var(--muted);border:1.5px solid #2a2a2a;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;margin-top:8px;}
 
   
-  .back-btn{display:flex;align-items:center;gap:6px;color:#888888;font-size:13px;font-weight:600;cursor:pointer;margin-bottom:16px;}
-  .venue-detail-head{background:#1A1A1A;border-radius:12px;padding:20px;margin-bottom:16px;}
+  .back-btn{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;margin-bottom:16px;}
+  .venue-detail-head{background:var(--tgtg);border-radius:12px;padding:20px;margin-bottom:16px;}
   .vdh-name{font-size:22px;font-weight:800;color:#1a1a1a;margin-bottom:4px;}
   .vdh-meta{font-size:12px;color:#aaa;margin-bottom:16px;}
   .vdh-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
@@ -103,33 +116,33 @@
   .vdh-stat-label{font-size:9px;color:#777;text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
 
   .milestone-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
-  .milestone-item{background:#1a1a1a;border-radius:10px;border:1px solid #2a2a2a;padding:14px 16px;display:flex;align-items:flex-start;gap:12px;cursor:pointer;}
+  .milestone-item{background:var(--bg);border-radius:10px;border:1px solid var(--border);padding:14px 16px;display:flex;align-items:flex-start;gap:12px;cursor:pointer;}
   .ms-status{width:28px;height:28px;border-radius:50%;border:2px solid #e5e7eb;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;transition:all .2s;}
   .ms-done .ms-status{border-color:#22C55E;background:#6DBE4F;color:#000;}
   .ms-late .ms-status{border-color:#EF4444;background:#FDECEA;color:#EF4444;}
   .ms-due .ms-status{border-color:#6DBE4F;background:#FEF3E2;color:#6DBE4F;}
   .ms-content{flex:1;}
-  .ms-day{font-size:9px;font-weight:700;color:#888888;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;}
+  .ms-day{font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;}
   .ms-title{font-size:14px;font-weight:700;color:#1a1a1a;margin-bottom:3px;}
-  .ms-desc{font-size:12px;color:#888888;line-height:1.4;}
+  .ms-desc{font-size:12px;color:var(--muted);line-height:1.4;}
   .ms-owner{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;display:inline-block;margin-top:4px;}
   .owner-sales{background:#FDF5E4;color:#6DBE4F;}
   .owner-am{background:rgba(34,197,94,.1);color:#22C55E;}
   .owner-both{background:rgba(168,85,247,.1);color:#6DBE4F;}
-  .ms-done .ms-title{text-decoration:line-through;color:#888888;}
+  .ms-done .ms-title{text-decoration:line-through;color:var(--muted);}
   .ms-right{flex-shrink:0;text-align:right;}
-  .ms-date-tag{font-size:10px;color:#888888;}
+  .ms-date-tag{font-size:10px;color:var(--muted);}
 
-  .notes-card{background:#1a1a1a;border-radius:10px;border:1px solid #2a2a2a;overflow:hidden;margin-bottom:16px;}
+  .notes-card{background:var(--bg);border-radius:10px;border:1px solid var(--border);overflow:hidden;margin-bottom:16px;}
   .notes-head{background:#f7f8f5;padding:10px 16px;font-size:10px;font-weight:700;color:#6DBE4F;letter-spacing:2px;text-transform:uppercase;}
   .notes-body{
   -webkit-font-smoothing: antialiased;padding:14px 16px;}
   .note-item{padding:8px 0;border-bottom:1px solid #e5e7eb;font-size:12px;color:#1a1a1a;}
   .note-item:last-child{border-bottom:none;}
-  .note-meta{font-size:10px;color:#888888;margin-top:2px;}
+  .note-meta{font-size:10px;color:var(--muted);margin-top:2px;}
   .add-note-row{display:flex;gap:8px;margin-top:10px;}
   .add-note-input{flex:1;padding:8px 12px;border:1.5px solid #2a2a2a;border-radius:8px;font-size:13px;font-family:inherit;}
-  .add-note-btn{padding:8px 14px;background:#f7f8f5;color:#1a1a1a;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;}
+  .add-note-btn{padding:8px 14px;background:var(--bg);color:var(--text);border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;}
 
   @media(max-width:480px){
     .stats-row{grid-template-columns:1fr 1fr;}
@@ -154,7 +167,7 @@
 <div class="view active" id="view-dashboard">
   <div class="dash-header" style="margin-top:20px;">
     <div class="dash-title">Onboarding Pipeline</div>
-    <div style="font-size:11px;color:#888888;font-family:'Inter',sans-serif;" id="dash-date"></div>
+    <div style="font-size:11px;color:var(--muted);font-family:'DM Sans',sans-serif;" id="dash-date"></div>
   </div>
 
   <div class="stats-row">
@@ -412,7 +425,7 @@ function showDetail(i){
   const notesEl=document.getElementById('detail-notes');
   notesEl.innerHTML=(v.notes&&v.notes.length>0)
     ?v.notes.map(n=>`<div class="note-item">${n.text}<div class="note-meta">${n.date}</div></div>`).join('')
-    :'<div style="font-size:12px;color:#888888;padding:8px 0;">No notes yet.</div>';
+    :'<div style="font-size:12px;color:var(--muted);padding:8px 0;">No notes yet.</div>';
 
   switchTab('detail',null);
 }
