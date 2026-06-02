@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Too Good To Go · TL 1:1</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap');
+:root{
+  --tgtg:#6DBE4F;--tgtgd:rgba(109,190,79,.09);--tgtgl:rgba(109,190,79,.25);
+  --bg:#ffffff;--bg2:#f7f8f5;--border:#e4e8de;--border2:#dde3d8;
+  --text:#1a1a1a;--muted:#5a6454;--muted2:#8a9484;
+  --danger:#EF4444;--dangerd:rgba(239,68,68,.07);--dangerl:rgba(239,68,68,.18);
+  --warn:#F59E0B;--warnd:rgba(245,158,11,.07);--warnl:rgba(245,158,11,.18);
+  --good:#22C55E;--goodd:rgba(34,197,94,.08);--goodl:rgba(34,197,94,.18);
+  --info:#60A5FA;--infod:rgba(96,165,250,.08);--infol:rgba(96,165,250,.18);
+  --purple:#A78BFA;--purpled:rgba(167,139,250,.08);--purplel:rgba(167,139,250,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;padding-bottom:80px;}
+.hdr{background:var(--tgtg);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+.brand{font-size:13px;font-weight:800;color:#fff;}
+.hdr-sub{font-size:11px;color:rgba(255,255,255,.75);}
+.wrap{max-width:900px;margin:0 auto;padding:24px 20px;}
+
+/* TL SELECTOR */
+.tl-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;}
+.tl-tab{padding:9px 20px;border-radius:9px;border:1.5px solid var(--border);background:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--muted);transition:all .15s;}
+.tl-tab.active{background:var(--tgtg);border-color:var(--tgtg);color:#fff;}
+.tl-sheet{display:none;}.tl-sheet.active{display:block;}
+
+/* META BAR */
+.meta-bar{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:20px;display:flex;gap:20px;flex-wrap:wrap;align-items:flex-end;}
+.mf{display:flex;flex-direction:column;gap:5px;}
+.ml{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--muted2);font-family:'DM Mono',monospace;}
+.mi{background:#fff;border:1.5px solid var(--border);border-radius:7px;padding:7px 12px;font-size:13px;font-weight:600;color:var(--text);font-family:'DM Sans',sans-serif;width:160px;outline:none;transition:border-color .15s;}
+.mi:focus{border-color:var(--tgtg);}
+.mi::placeholder{color:var(--muted2);font-weight:400;}
+
+/* SECTION HEADERS */
+.sec{margin-bottom:20px;}
+.sec-eye{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--tgtg);margin-bottom:10px;font-family:'DM Mono',monospace;}
+.sec-title{font-size:16px;font-weight:800;letter-spacing:-.3px;margin-bottom:6px;}
+.sec-sub{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:14px;}
+
+/* SCORE STRIP */
+.score-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:20px;}
+.sc{background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:14px 10px;text-align:center;}
+.sc-inp{background:transparent;border:none;font-family:'DM Sans',sans-serif;font-size:26px;font-weight:900;color:var(--tgtg);text-align:center;width:100%;outline:none;}
+.sc-inp::placeholder{color:var(--border2);}
+.sc-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted2);margin-top:4px;font-family:'DM Mono',monospace;}
+
+/* RAG BUTTONS */
+.rag-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);}
+.rag-row:last-child{border-bottom:none;}
+.rag-label{flex:1;font-size:13px;color:var(--text);}
+.rag-btns{display:flex;gap:5px;}
+.rb{padding:4px 11px;border-radius:6px;border:1.5px solid var(--border);background:transparent;font-size:9px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--muted);transition:all .15s;text-transform:uppercase;letter-spacing:.5px;}
+.rb.g.on{background:var(--goodd);border-color:var(--goodl);color:var(--good);}
+.rb.a.on{background:var(--warnd);border-color:var(--warnl);color:var(--warn);}
+.rb.r.on{background:var(--dangerd);border-color:var(--dangerl);color:var(--danger);}
+
+/* CARDS */
+.card{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:12px;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.two{grid-template-columns:1fr;}}
+.fl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted2);margin-bottom:6px;display:block;font-family:'DM Mono',monospace;}
+textarea.fi,input.fi,select.fi{width:100%;background:var(--bg2);border:1.5px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;padding:9px 12px;outline:none;transition:border-color .15s;line-height:1.65;margin-bottom:10px;}
+textarea.fi{resize:vertical;min-height:72px;}
+textarea.fi:focus,input.fi:focus,select.fi:focus{border-color:var(--tgtg);}
+textarea.fi::placeholder,input.fi::placeholder{color:var(--muted2);}
+
+/* REP DEEP DIVE */
+.rep-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
+@media(max-width:700px){.rep-grid{grid-template-columns:1fr;}}
+.rep-card{background:#fff;border:1.5px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .2s;}
+.rep-card.q1{border-left:4px solid var(--good);}
+.rep-card.q2{border-left:4px solid var(--tgtg);}
+.rep-card.q3{border-left:4px solid var(--warn);}
+.rep-card.q4{border-left:4px solid var(--danger);}
+.rc-head{padding:12px 14px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.rc-name{font-size:13px;font-weight:800;}
+.rc-q{font-size:9px;font-weight:700;padding:2px 8px;border-radius:6px;font-family:'DM Mono',monospace;text-transform:uppercase;}
+.q1-badge{background:var(--goodd);color:var(--good);border:1px solid var(--goodl);}
+.q2-badge{background:var(--tgtgd);color:var(--tgtg);border:1px solid var(--tgtgl);}
+.q3-badge{background:var(--warnd);color:var(--warn);border:1px solid var(--warnl);}
+.q4-badge{background:var(--dangerd);color:var(--danger);border:1px solid var(--dangerl);}
+.rc-body{padding:12px 14px;}
+.rc-metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px;}
+.rc-metric{text-align:center;}
+.rc-metric input{width:100%;border:none;border-bottom:1.5px solid var(--border);background:transparent;font-size:18px;font-weight:900;color:var(--tgtg);text-align:center;font-family:'DM Sans',sans-serif;outline:none;padding:2px 0;}
+.rc-metric input:focus{border-bottom-color:var(--tgtg);}
+.rc-metric input::placeholder{color:var(--border2);}
+.rc-metric-lbl{font-size:8px;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:1px;margin-top:3px;font-family:'DM Mono',monospace;}
+.rc-field{margin-bottom:8px;}
+.rc-field label{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted2);display:block;margin-bottom:3px;font-family:'DM Mono',monospace;}
+.rc-field textarea,.rc-field input,.rc-field select{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:6px;font-size:11px;color:var(--text);font-family:'DM Sans',sans-serif;padding:6px 9px;outline:none;resize:none;line-height:1.6;}
+.rc-field textarea:focus,.rc-field input:focus,.rc-field select:focus{border-color:var(--tgtg);}
+.add-rep-btn{width:100%;padding:11px;background:transparent;border:1.5px dashed var(--border);border-radius:12px;color:var(--muted2);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;margin-bottom:12px;}
+.add-rep-btn:hover{border-color:var(--tgtg);color:var(--tgtg);}
+
+/* RECOGNITION */
+.win-box{background:var(--tgtgd);border:1.5px solid var(--tgtgl);border-radius:12px;padding:18px 20px;margin-bottom:12px;}
+.win-eye{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--tgtg);margin-bottom:10px;font-family:'DM Mono',monospace;}
+.win-fields{display:flex;flex-direction:column;gap:8px;}
+.win-fields label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tgtg);display:block;margin-bottom:3px;font-family:'DM Mono',monospace;}
+.win-fields input,.win-fields textarea{width:100%;background:#fff;border:1px solid var(--tgtgl);border-radius:7px;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;padding:8px 12px;outline:none;resize:none;line-height:1.65;}
+.win-fields input:focus,.win-fields textarea:focus{border-color:var(--tgtg);}
+.win-preview{margin-top:12px;padding:12px 14px;background:#fff;border-radius:8px;border:1px solid var(--tgtgl);font-size:12px;color:var(--muted);line-height:1.85;white-space:pre-wrap;font-family:'DM Mono',monospace;display:none;}
+
+/* ASK BOX */
+.ask-box{background:var(--purpled);border:1.5px solid var(--purplel);border-radius:10px;padding:14px 16px;}
+.ask-eye{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--purple);margin-bottom:8px;font-family:'DM Mono',monospace;}
+.ask-inp{width:100%;background:transparent;border:none;outline:none;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);resize:vertical;min-height:52px;line-height:1.65;}
+.ask-inp::placeholder{color:var(--muted2);}
+
+/* COPY BUTTONS */
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;}
+.cbtn{padding:12px;border-radius:9px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:800;cursor:pointer;transition:all .15s;}
+.cbtn.primary{background:var(--tgtg);color:#fff;border:none;}
+.cbtn.primary:hover{opacity:.88;}
+.cbtn.sec{background:transparent;border:1.5px solid var(--border);color:var(--muted);}
+.cbtn.sec:hover{border-color:var(--tgtg);color:var(--tgtg);}
+.cbtn.copied{background:var(--good);color:#fff;}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="brand">Too Good To Go · UK &amp; Ireland</div>
+  <div class="hdr-sub">Head of Independent Partners · Team Lead 1:1</div>
+</div>
+<div class="wrap">
+
+  <div style="margin-bottom:20px;">
+    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--tgtg);margin-bottom:8px;font-family:'DM Mono',monospace;">Weekly · Head of Indies → Team Lead</div>
+    <div style="font-size:22px;font-weight:900;letter-spacing:-.5px;margin-bottom:6px;">Team Lead <span style="color:var(--tgtg);">1:1.</span></div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.75;max-width:640px;">This is a leader conversation — not a pipeline review. Team performance, rep-by-rep deep dive (up to 12 reps), coaching quality, blockers, and the one ask. Win Wire generated at the end. Runs weekly with each of the 3 TLs.</div>
+  </div>
+
+  <!-- TL SELECTOR -->
+  <div class="tl-tabs">
+    <button class="tl-tab active" onclick="setTL('acq',this)">🎯 TL · Acquisition</button>
+    <button class="tl-tab" onclick="setTL('am',this)">🤝 TL · Account Management</button>
+    <button class="tl-tab" onclick="setTL('growth',this)">🚀 TL · Growth</button>
+  </div>
+
+  <!-- ═══ EACH TL SHEET ═══ -->
+  <div id="sheet-acq" class="tl-sheet active"><div id="body-acq"></div></div>
+  <div id="sheet-am" class="tl-sheet"><div id="body-am"></div></div>
+  <div id="sheet-growth" class="tl-sheet"><div id="body-growth"></div></div>
+
+</div>
+
+<script>
+var TEAMS = {
+  acq:   {label:'Acquisition',  time:'09:00', focus:'New partner closures · Surprise Bag windows agreed · Dials-to-meaningful-conversation ratio'},
+  am:    {label:'Account Management', time:'09:30', focus:'Partner retention rate · At-risk accounts contacted · Upsells closed'},
+  growth:{label:'Growth', time:'10:00', focus:'Multi-site pipeline · Non-food segment progress · Average deal value'}
+};
+
+var state = {acq:{reps:[]}, am:{reps:[]}, growth:{reps:[]}};
+var currentTL = 'acq';
+
+function setTL(id, btn){
+  currentTL = id;
+  document.querySelectorAll('.tl-tab').forEach(function(t){t.classList.remove('active');});
+  btn.classList.add('active');
+  document.querySelectorAll('.tl-sheet').forEach(function(s){s.classList.remove('active');});
+  document.getElementById('sheet-'+id).classList.add('active');
+}
+
+function buildSheet(tlid){
+  var t = TEAMS[tlid];
+  var h = '';
+
+  // META
+  h += '<div class="meta-bar">' +
+    mf('Team Lead name','','Enter TL name') +
+    mf('Team','Team '+t.label,'') +
+    mf('Week commencing','','Mon DD/MM') +
+    mf('Team size','','e.g. 10 reps') +
+    mf('Standup time',t.time,'') +
+  '</div>';
+
+  // TEAM METRICS
+  h += '<div class="sec"><div class="sec-eye">Team Performance This Week</div>';
+  h += '<div class="score-strip">' +
+    sc('Dials/day avg','d-'+tlid,'80') +
+    sc('Bags agreed','ba-'+tlid,'—') +
+    sc('Meaningful convs/80','mc-'+tlid,'—') +
+    sc('Close rate %','cr-'+tlid,'—') +
+    sc('Partners live (total)','pl-'+tlid,'—') +
+    sc('Churn risk open','ch-'+tlid,'—') +
+  '</div></div>';
+
+  // TL COACHING QUALITY
+  h += '<div class="sec"><div class="sec-eye">TL Coaching Quality</div><div class="card">';
+  h += ragRow('Coaching from call data — not just activity numbers');
+  h += ragRow('Can name the specific technique they coached this week');
+  h += ragRow('Rep scores showing week-on-week trajectory');
+  h += ragRow('All Q3/Q4 reps have an active coaching plan');
+  h += ragRow('Recognition given — specific, named, public this week');
+  h += '</div></div>';
+
+  // TL DEV
+  h += '<div class="sec"><div class="sec-eye">TL Development</div><div class="card two">';
+  h += field('What\'s going well for this TL right now?','textarea','','e.g. Running a strong standup. Using AI call data in 1:1s. Q2 reps showing trajectory.');
+  h += field('Development area this week','textarea','','e.g. Q4 rep conversation — giving general feedback not specific replacement lines.');
+  h += '</div></div>';
+
+  // REP DEEP DIVE
+  h += '<div class="sec"><div class="sec-eye">Rep Deep Dive — Up to 12 Reps</div>';
+  h += '<div class="sec-sub" style="font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:14px;">Review every rep on the team. Quartile assigned, metrics entered, coaching focus and development note for each. This is the core of the 1:1.</div>';
+  h += '<div class="rep-grid" id="repgrid-'+tlid+'"></div>';
+  h += '<button class="add-rep-btn" onclick="addRep(\''+tlid+'\')">+ Add rep</button>';
+  h += '</div>';
+
+  // BLOCKERS
+  h += '<div class="sec"><div class="sec-eye">Blockers &amp; Escalations</div><div class="card">' +
+    fld('What is blocking a rep right now — specifically?','textarea','e.g. Marco\'s call quality has dropped since changing territory lists. Worth reviewing the list quality not just his technique.') +
+    fld('What do you need from me this week?','textarea','e.g. Approval to move a stale deal. Input on Q4 rep conversation timing. Cover for Wednesday standup.') +
+  '</div></div>';
+
+  // PIPELINE
+  h += '<div class="sec"><div class="sec-eye">Pipeline Snapshot</div><div class="card two">' +
+    field('Open deals — any without a next step or date?','textarea','','e.g. 3 deals stalled at Stage 2 — reactivation calls booked for Monday.') +
+    field('Stale deals to kill or reactivate (>5 days no contact)','input','','e.g. 2 deals — closing both today') +
+  '</div></div>';
+
+  // WIN WIRE
+  h += '<div class="sec"><div class="sec-eye">Win Wire — Recognition</div>';
+  h += '<div class="win-box" id="winbox-'+tlid+'">' +
+    '<div class="win-eye">🟢 Win Wire · Generate &amp; Copy</div>' +
+    '<div class="win-fields">' +
+      wf('Rep name','ww-rep-'+tlid,'text','e.g. Sarah') +
+      wf('Business name &amp; area','ww-biz-'+tlid,'text','e.g. Meze &amp; More, Bethnal Green E2') +
+      wf('Category','ww-cat-'+tlid,'text','e.g. Turkish Restaurant') +
+      wf('What they did specifically (the technique — exact words if possible)','ww-act-'+tlid,'textarea','e.g. Asked "what does your Tuesday look like at 2pm?" before mentioning TGTG. Owner described quiet period unprompted. Closed 5-bag window in 8 minutes. Bag live before call ended.') +
+      wf('Result','ww-result-'+tlid,'text','e.g. 5 bags/week · 20 meals saved every week · £22.50 found revenue per week') +
+    '</div>' +
+    '<button onclick="generateWW(\''+tlid+'\')" style="margin-top:10px;padding:9px 18px;background:var(--tgtg);color:#fff;border:none;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;font-family:\'DM Sans\',sans-serif;">Generate Win Wire</button>' +
+    '<div class="win-preview" id="ww-preview-'+tlid+'"></div>' +
+    '<button onclick="copyWW(\''+tlid+'\')" style="display:none;margin-top:8px;padding:8px 16px;background:transparent;border:1px solid var(--tgtgl);border-radius:7px;font-size:11px;font-weight:700;color:var(--tgtg);cursor:pointer;font-family:\'DM Sans\',sans-serif;" id="ww-copy-'+tlid+'">Copy Win Wire</button>' +
+  '</div></div>';
+
+  // ONE ASK
+  h += '<div class="sec"><div class="sec-eye">One Ask From You</div>' +
+    '<div class="ask-box"><div class="ask-eye">What do you need from the Head of Indies this week?</div>' +
+    '<textarea class="ask-inp" id="ask-'+tlid+'" placeholder="One specific ask — not a general update. e.g. \'I need a decision on the Q4 rep by Wednesday. I can\'t run another week without clarity on the timeline.\'"></textarea>' +
+    '</div></div>';
+
+  // COPY BUTTONS
+  h += '<div class="btn-row">' +
+    '<button class="cbtn primary" onclick="copyFull(\''+tlid+'\')">Copy full 1:1 summary</button>' +
+    '<button class="cbtn sec" onclick="copyChelseaSnippet(\''+tlid+'\')">Copy Chelsea snippet</button>' +
+  '</div>';
+
+  document.getElementById('body-'+tlid).innerHTML = h;
+
+  // Add default 5 reps
+  state[tlid].reps = [];
+  for(var i=0;i<5;i++) addRep(tlid);
+}
+
+function mf(label, val, ph){
+  return '<div class="mf"><div class="ml">'+label+'</div><input class="mi" value="'+val+'" placeholder="'+ph+'"></div>';
+}
+function sc(label, id, ph){
+  return '<div class="sc"><input class="sc-inp" id="'+id+'" placeholder="'+ph+'"><div class="sc-lbl">'+label+'</div></div>';
+}
+function ragRow(label){
+  return '<div class="rag-row"><div class="rag-label">'+label+'</div><div class="rag-btns">'+
+    '<button class="rb g" onclick="rag(this)">Green</button>'+
+    '<button class="rb a" onclick="rag(this)">Amber</button>'+
+    '<button class="rb r" onclick="rag(this)">Red</button>'+
+  '</div></div>';
+}
+function rag(btn){
+  var row = btn.closest('.rag-btns');
+  row.querySelectorAll('.rb').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+}
+function field(label, type, id, ph){
+  var el = type==='textarea'
+    ? '<textarea class="fi" placeholder="'+ph+'"'+(id?' id="'+id+'"':'')+' rows="3"></textarea>'
+    : '<input class="fi" type="text" placeholder="'+ph+'"'+(id?' id="'+id+'"':'')+' >';
+  return '<div><label class="fl">'+label+'</label>'+el+'</div>';
+}
+function fld(label, type, ph){
+  var el = type==='textarea'
+    ? '<textarea class="fi" placeholder="'+ph+'" rows="3"></textarea>'
+    : '<input class="fi" type="text" placeholder="'+ph+'">';
+  return '<div class="field"><label class="fl">'+label+'</label>'+el+'</div>';
+}
+function wf(label, id, type, ph){
+  var el = type==='textarea'
+    ? '<textarea id="'+id+'" rows="3" placeholder="'+ph+'"></textarea>'
+    : '<input id="'+id+'" type="text" placeholder="'+ph+'">';
+  return '<div><label>'+label+'</label>'+el+'</div>';
+}
+
+function addRep(tlid){
+  var grid = document.getElementById('repgrid-'+tlid);
+  if(!grid) return;
+  var repCount = grid.querySelectorAll('.rep-card').length;
+  if(repCount >= 12){ alert('Maximum 12 reps per team.'); return; }
+  var idx = repCount;
+  var card = document.createElement('div');
+  card.className = 'rep-card q2';
+  card.innerHTML =
+    '<div class="rc-head">' +
+      '<input style="background:transparent;border:none;font-size:13px;font-weight:800;color:var(--text);font-family:DM Sans,sans-serif;outline:none;flex:1;" placeholder="Rep name" oninput="this.parentElement.nextElementSibling.querySelector(\'.rc-name-lbl\').textContent=this.value||\'Rep\'">'+
+      '<select class="rc-q" onchange="setQ(this)" style="background:transparent;border:none;font-size:9px;font-weight:700;cursor:pointer;font-family:DM Mono,sans-serif;outline:none;">'+
+        '<option value="q1">Q1</option><option value="q2" selected>Q2</option><option value="q3">Q3</option><option value="q4">Q4</option>'+
+      '</select>'+
+    '</div>'+
+    '<div class="rc-body">'+
+      '<div style="font-size:9px;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:1px;font-family:DM Mono,monospace;display:none;" class="rc-name-lbl">Rep</div>'+
+      '<div class="rc-metrics">'+
+        rcm('Dials/day','','80') +
+        rcm('Bags/wk','','—') +
+        rcm('Conv/80','','—') +
+      '</div>'+
+      '<div class="rc-field"><label>Quartile — why?</label><textarea rows="2" placeholder="e.g. Consistent 80+ dials. Closes 4-5 bags per week. Surplus discovery before every pitch."></textarea></div>'+
+      '<div class="rc-field"><label>Coaching focus this week</label><textarea rows="2" placeholder="e.g. Close the Surprise Bag window on the call — not following up tomorrow. Role-play the close in today\'s 1:1."></textarea></div>'+
+      '<div class="rc-field"><label>Development / recognition</label><textarea rows="2" placeholder="e.g. Named for Call of the Week — Tuesday call with Pho Street. Technique documented in Gold Standard."></textarea></div>'+
+      '<div class="rc-field"><label>Risk flag (if any)</label><input type="text" placeholder="e.g. None / Missed target 2 weeks running — conversation needed / PIP track flagged to HoI"></div>'+
+    '</div>';
+  grid.appendChild(card);
+}
+
+function rcm(label, id, ph){
+  return '<div class="rc-metric"><input type="text" placeholder="'+ph+'" '+(id?'id="'+id+'"':'')+' ><div class="rc-metric-lbl">'+label+'</div></div>';
+}
+
+function setQ(sel){
+  var card = sel.closest('.rep-card');
+  card.className = 'rep-card '+sel.value;
+  var badge = sel;
+  var map = {q1:'q1-badge',q2:'q2-badge',q3:'q3-badge',q4:'q4-badge'};
+  badge.className = 'rc-q '+map[sel.value];
+}
+
+function generateWW(tlid){
+  var rep = val('ww-rep-'+tlid);
+  var biz = val('ww-biz-'+tlid);
+  var cat = val('ww-cat-'+tlid);
+  var act = val('ww-act-'+tlid);
+  var result = val('ww-result-'+tlid);
+  if(!rep||!act){ alert('Rep name and what they did are required.'); return; }
+  var d = new Date(); var ds = d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
+  var text = '🟢 Win Wire — '+ds+'\n\n'+
+    rep+(biz?' — '+biz:'')+(cat?' ('+cat+')':'')+'\n\n'+
+    act+'\n\n'+
+    (result?'Result: '+result+'\n\n':'')+
+    'That\'s what this team looks like when it\'s in flow.\n\n'+
+    '— '+TEAMS[tlid].label+' Team · Too Good To Go UK';
+  var preview = document.getElementById('ww-preview-'+tlid);
+  preview.textContent = text;
+  preview.style.display = 'block';
+  document.getElementById('ww-copy-'+tlid).style.display = 'inline-block';
+}
+
+function copyWW(tlid){
+  var text = document.getElementById('ww-preview-'+tlid).textContent;
+  copy(text, document.getElementById('ww-copy-'+tlid), 'Copied ✓');
+}
+
+function val(id){ var el=document.getElementById(id); return el?el.value.trim():''; }
+
+function getReps(tlid){
+  var grid = document.getElementById('repgrid-'+tlid);
+  if(!grid) return [];
+  var cards = grid.querySelectorAll('.rep-card');
+  var reps = [];
+  cards.forEach(function(card){
+    var name = card.querySelector('input[placeholder="Rep name"]').value||'—';
+    var q = card.querySelector('select').value.toUpperCase();
+    var dials = card.querySelectorAll('.rc-metric input')[0].value||'—';
+    var bags = card.querySelectorAll('.rc-metric input')[1].value||'—';
+    var conv = card.querySelectorAll('.rc-metric input')[2].value||'—';
+    var texts = card.querySelectorAll('textarea');
+    var why = texts[0]?texts[0].value:'';
+    var coaching = texts[1]?texts[1].value:'';
+    var dev = texts[2]?texts[2].value:'';
+    var risk = card.querySelector('input[placeholder*="Risk"]');
+    var riskVal = risk?risk.value:'';
+    reps.push({name,q,dials,bags,conv,why,coaching,dev,risk:riskVal});
+  });
+  return reps;
+}
+
+function copyFull(tlid){
+  var t = TEAMS[tlid];
+  var d = new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  var reps = getReps(tlid);
+  var repLines = reps.map(function(r){
+    return '  '+r.name+' ('+r.q+') — Dials: '+r.dials+' · Bags: '+r.bags+' · Convs/80: '+r.conv+
+      (r.coaching?'\n    Coaching: '+r.coaching:'') +
+      (r.dev?'\n    Recognition: '+r.dev:'') +
+      (r.risk&&r.risk!=='None'?'\n    ⚠ Risk: '+r.risk:'');
+  }).join('\n\n');
+  var ask = val('ask-'+tlid);
+  var text = 'TOO GOOD TO GO — TL 1:1 SUMMARY\n'+
+    t.label+' Team · '+d+'\n\n'+
+    'TEAM METRICS\n'+
+    'Avg dials/day: '+(document.getElementById('d-'+tlid)?document.getElementById('d-'+tlid).value:'—')+
+    ' · Bags agreed: '+(document.getElementById('ba-'+tlid)?document.getElementById('ba-'+tlid).value:'—')+
+    ' · Close rate: '+(document.getElementById('cr-'+tlid)?document.getElementById('cr-'+tlid).value:'—')+'%'+
+    ' · Partners live: '+(document.getElementById('pl-'+tlid)?document.getElementById('pl-'+tlid).value:'—')+
+    ' · Churn risk open: '+(document.getElementById('ch-'+tlid)?document.getElementById('ch-'+tlid).value:'—')+
+    '\n\nREP DEEP DIVE\n'+repLines+
+    (ask?'\n\nONE ASK\n'+ask:'')+
+    '\n\n—';
+  copy(text, event.target, 'Copied ✓');
+}
+
+function copyChelseaSnippet(tlid){
+  var t = TEAMS[tlid];
+  var reps = getReps(tlid);
+  var q4s = reps.filter(function(r){return r.q==='Q4';});
+  var q1s = reps.filter(function(r){return r.q==='Q1';});
+  var bags = document.getElementById('ba-'+tlid)?document.getElementById('ba-'+tlid).value:'—';
+  var ask = val('ask-'+tlid);
+  var text = t.label+' team — '+new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long'})+'\n'+
+    'Bags agreed: '+bags+
+    (q1s.length?' · Top performer: '+q1s[0].name:'')+
+    (q4s.length?' · Q4 watch: '+q4s.map(function(r){return r.name;}).join(', '):'')+
+    (ask?' · Ask: '+ask:'');
+  copy(text, event.target, 'Copied ✓');
+}
+
+function copy(text, btn, label){
+  navigator.clipboard.writeText(text).then(function(){
+    var orig = btn.textContent;
+    btn.textContent = label;
+    btn.classList.add('copied');
+    setTimeout(function(){btn.textContent=orig;btn.classList.remove('copied');},2000);
+  });
+}
+
+// Build all three sheets on load
+['acq','am','growth'].forEach(buildSheet);
+</script>
+</body>
+</html>
