@@ -4,62 +4,62 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Too Good To Go · Daily Standup</title>
-<link rel="stylesheet" href="/brand_tgt.css">
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{--tgtg:#6DBE4F;--tgtgd:rgba(109,190,79,.09);--tgtgl:rgba(109,190,79,.22);--green:#22C55E;--red:#EF4444;--warn:#F59E0B;--bg:#ffffff;--s:#f7f8f5;--b:#e4e8de;--b2:#262626;}
-body{-webkit-font-smoothing:antialiased;font-family:'Inter',sans-serif;background:var(--bg);color:#1a1a1a;min-height:100vh;padding-bottom:60px;}
+body{-webkit-font-smoothing:antialiased;font-family:'DM Sans',sans-serif;background:var(--bg);color:#1a1a1a;min-height:100vh;padding-bottom:60px;}
 .wrap{max-width:680px;margin:0 auto;padding:0 18px;}
-.hdr{padding:22px 0 18px;border-bottom:1px solid var(--b2);margin-bottom:22px;}
-.brand{font-size:13px;font-weight:800;margin-bottom:4px;}.brand em{color:var(--tgtg);font-style:normal;}
+.hdr{padding:22px 0 18px;border-bottom:1px solid var(--muted2);margin-bottom:22px;}
+.brand{font-size:13px;font-weight:800;color:#fff;}.brand em{color:rgba(255,255,255,.85);font-style:normal;}
 .hdr-title{font-size:26px;font-weight:900;line-height:1.2;}.hdr-title em{color:var(--tgtg);font-style:normal;}
 .hdr-meta{font-size:10px;color:#2a2a2a;margin-top:4px;}
-.section{background:#ffffff;border:1px solid var(--b2);border-radius:13px;padding:18px;margin-bottom:12px;}
+.section{background:#ffffff;border:1px solid var(--muted2);border-radius:13px;padding:18px;margin-bottom:12px;}
 .sec-lbl{font-size:9px;color:var(--tgtg);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;font-weight:700;}
 /* Team selector */
 .team-tabs{display:flex;gap:6px;margin-bottom:14px;}
-.team-tab{padding:7px 14px;border-radius:7px;border:1px solid var(--b2);background:transparent;color:#555;font-size:11px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;}
+.team-tab{padding:7px 14px;border-radius:7px;border:1px solid var(--muted2);background:transparent;color:var(--muted);font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;}
 .team-tab.on{background:var(--tgtgd);border-color:var(--tgtgl);color:var(--tgtg);}
 /* Rep cards */
 .rep-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
-.rep-card{background:#f7f8f5;border:1.5px solid var(--b2);border-radius:10px;padding:12px;}
+.rep-card{background:#f7f8f5;border:1.5px solid var(--muted2);border-radius:10px;padding:12px;}
 .rep-card.leader{border-color:rgba(109,190,79,.35);background:rgba(109,190,79,.04);}
 .rep-name{font-size:13px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
 .rep-crown{font-size:12px;}
 .stat-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
-.stat-lbl{font-size:10px;color:#555;}
-.stat-inp{width:64px;padding:5px 8px;background:#f7f8f5;border:1.5px solid var(--b2);border-radius:6px;font-size:13px;font-weight:700;color:#1a1a1a;text-align:center;font-family:'Inter',sans-serif;}
+.stat-lbl{font-size:10px;color:var(--muted);}
+.stat-inp{width:64px;padding:5px 8px;background:#f7f8f5;border:1.5px solid var(--muted2);border-radius:6px;font-size:13px;font-weight:700;color:#1a1a1a;text-align:center;font-family:'DM Sans',sans-serif;}
 .stat-inp:focus{outline:none;border-color:var(--tgtg);}
 .flag{display:flex;align-items:center;gap:6px;margin-top:8px;}
-.flag-lbl{font-size:10px;color:#555;flex:1;}
+.flag-lbl{font-size:10px;color:var(--muted);flex:1;}
 .flag-check{width:15px;height:15px;accent-color:var(--tgtg);cursor:pointer;}
-.add-rep-btn{width:100%;padding:10px;background:transparent;border:1.5px dashed var(--b2);border-radius:9px;color:#333;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;cursor:pointer;margin-bottom:8px;transition:all .15s;}
+.add-rep-btn{width:100%;padding:10px;background:transparent;border:1.5px dashed var(--muted2);border-radius:9px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;cursor:pointer;margin-bottom:8px;transition:all .15s;}
 .add-rep-btn:hover{border-color:var(--tgtg);color:var(--tgtg);}
 /* Totals bar */
 .totals-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:#f7f8f5;border-radius:10px;padding:12px;margin-bottom:14px;}
 .total-cell{text-align:center;}
 .total-n{font-size:20px;font-weight:900;color:var(--tgtg);line-height:1;}
-.total-l{font-size:9px;color:#444;margin-top:3px;font-weight:600;text-transform:uppercase;}
+.total-l{font-size:9px;color:var(--muted2);margin-top:3px;font-weight:600;text-transform:uppercase;}
 /* Leaderboard */
-.lb-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #141414;font-size:12px;}
+.lb-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px;}
 .lb-row:last-child{border-bottom:none;}
 .lb-pos{width:22px;font-size:11px;font-weight:800;color:var(--tgtg);text-align:center;flex-shrink:0;}
 .lb-name{flex:1;font-weight:600;}
 .lb-dials{width:40px;text-align:right;font-weight:800;}
-.lb-convs{width:48px;text-align:right;font-size:10px;color:#888;}
+.lb-convs{width:48px;text-align:right;font-size:10px;color:var(--muted);}
 .lb-signed{width:40px;text-align:right;font-weight:800;color:var(--tgtg);}
-.lb-bar-wrap{width:80px;height:4px;background:#1a1a1a;border-radius:2px;flex-shrink:0;}
+.lb-bar-wrap{width:80px;height:4px;background:var(--bg);border-radius:2px;flex-shrink:0;}
 .lb-bar{height:100%;border-radius:2px;background:var(--tgtg);transition:width .4s;}
 /* Metric rows */
 .metric-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--b);}
 .metric-row:last-child{border-bottom:none;}
-.metric-lbl{font-size:13px;color:#555;}
+.metric-lbl{font-size:13px;color:var(--muted);}
 .metric-val{font-size:14px;font-weight:700;color:#1a1a1a;}
-.metric-inp{width:80px;padding:6px 10px;background:#f7f8f5;border:1.5px solid var(--b2);border-radius:7px;font-size:13px;font-weight:700;color:#1a1a1a;text-align:right;font-family:'Inter',sans-serif;}
+.metric-inp{width:80px;padding:6px 10px;background:#f7f8f5;border:1.5px solid var(--muted2);border-radius:7px;font-size:13px;font-weight:700;color:#1a1a1a;text-align:right;font-family:'DM Sans',sans-serif;}
 .metric-inp:focus{outline:none;border-color:var(--tgtg);}
 /* Focus and motivation */
-.ta{width:100%;padding:11px 13px;background:#f7f8f5;border:1.5px solid var(--b2);border-radius:9px;font-size:13px;color:#1a1a1a;font-family:'Inter',sans-serif;line-height:1.7;resize:vertical;transition:border-color .15s;min-height:60px;}
+.ta{width:100%;padding:11px 13px;background:#f7f8f5;border:1.5px solid var(--muted2);border-radius:9px;font-size:13px;color:#1a1a1a;font-family:'DM Sans',sans-serif;line-height:1.7;resize:vertical;transition:border-color .15s;min-height:60px;}
 .ta:focus{outline:none;border-color:var(--tgtg);}
 .ta::placeholder{color:#222;}
 .focus-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--b);}
@@ -70,7 +70,7 @@ body{-webkit-font-smoothing:antialiased;font-family:'Inter',sans-serif;backgroun
 .motivation-strip strong{color:var(--tgtg);}
 /* Buttons */
 .btn-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px;}
-.btn{padding:11px;border-radius:9px;border:1.5px solid var(--b2);background:transparent;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:#444;cursor:pointer;transition:all .15s;}
+.btn{padding:11px;border-radius:9px;border:1.5px solid var(--muted2);background:transparent;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;color:var(--muted2);cursor:pointer;transition:all .15s;}
 .btn:hover{border-color:var(--tgtg);color:var(--tgtg);}
 .btn.primary{background:var(--tgtg);color:#000;border-color:var(--tgtg);}
 .btn.primary:hover{opacity:.85;}
@@ -79,7 +79,7 @@ body{-webkit-font-smoothing:antialiased;font-family:'Inter',sans-serif;backgroun
 .goal-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
 .goal-lbl{font-size:10px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;}
 .goal-pct{font-size:14px;font-weight:900;color:var(--tgtg);}
-.goal-track{height:6px;background:#1a1a1a;border-radius:3px;overflow:hidden;}
+.goal-track{height:6px;background:var(--bg);border-radius:3px;overflow:hidden;}
 .goal-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--tgtg),#a3e635);transition:width .5s;}
 </style>
 </head>
@@ -116,28 +116,28 @@ body{-webkit-font-smoothing:antialiased;font-family:'Inter',sans-serif;backgroun
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
       <div>
-        <div style="font-size:9px;color:#555;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Team Dials Target</div>
+        <div style="font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Team Dials Target</div>
         <input class="metric-inp" style="width:100%;" type="number" id="team-dials-target" placeholder="350" oninput="updateGoal()">
       </div>
       <div>
-        <div style="font-size:9px;color:#555;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Dials So Far</div>
+        <div style="font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Dials So Far</div>
         <input class="metric-inp" style="width:100%;color:var(--tgtg);" type="number" id="team-dials-actual" placeholder="0" oninput="updateGoal()">
       </div>
       <div>
-        <div style="font-size:9px;color:#555;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Bags Agreed Today</div>
+        <div style="font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Bags Agreed Today</div>
         <input class="metric-inp" style="width:100%;color:var(--tgtg);" type="number" id="team-bags-today" placeholder="0">
       </div>
     </div>
-    <div style="font-size:10px;color:#333;margin-top:8px;line-height:1.6;"><strong style="color:#555;">No sandbagging.</strong> Every rep contributes to this number. One rep who holds back a deal to carry it to next week hurts the whole team's trajectory. The goal is ours — not mine.</div>
+    <div style="font-size:10px;color:var(--text);margin-top:8px;line-height:1.6;"><strong style="color:var(--muted);">No sandbagging.</strong> Every rep contributes to this number. One rep who holds back a deal to carry it to next week hurts the whole team's trajectory. The goal is ours — not mine.</div>
   </div>
 
   <!-- REP ACTIVITY -->
   <div class="section">
     <div class="sec-lbl">Rep Activity — Today</div>
-    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:1px;background:var(--b2);border-radius:8px;overflow:hidden;margin-bottom:10px;">
-      <div style="padding:6px 10px;font-size:9px;font-weight:700;color:#555;text-transform:uppercase;background:#ffffff;">Rep</div>
-      <div style="padding:6px 8px;font-size:9px;font-weight:700;color:#555;text-align:center;background:#ffffff;">Dials</div>
-      <div style="padding:6px 8px;font-size:9px;font-weight:700;color:#555;text-align:center;background:#ffffff;">Convs</div>
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:1px;background:var(--muted2);border-radius:8px;overflow:hidden;margin-bottom:10px;">
+      <div style="padding:6px 10px;font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;background:#ffffff;">Rep</div>
+      <div style="padding:6px 8px;font-size:9px;font-weight:700;color:var(--muted);text-align:center;background:#ffffff;">Dials</div>
+      <div style="padding:6px 8px;font-size:9px;font-weight:700;color:var(--muted);text-align:center;background:#ffffff;">Convs</div>
       <div style="padding:6px 8px;font-size:9px;font-weight:700;color:var(--tgtg);text-align:center;background:#ffffff;">Bags ✓</div>
     </div>
     <div id="rep-rows"></div>
@@ -240,7 +240,7 @@ function setTeam(t, btn) {
 function renderReps() {
   var html = '';
   reps.forEach(function(r,i) {
-    html += '<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:1px;background:var(--b2);border-radius:6px;overflow:hidden;margin-bottom:6px;">' +
+    html += '<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:1px;background:var(--muted2);border-radius:6px;overflow:hidden;margin-bottom:6px;">' +
       '<div style="padding:8px 10px;background:' + (r.bags > 0 ? 'rgba(109,190,79,.06)' : '#111') + ';display:flex;align-items:center;gap:6px;">' +
         (r.bags > 0 ? '<span style="font-size:10px;">🏆</span>' : '') +
         '<input style="background:transparent;border:none;color:#1a1a1a;font-family:Inter,sans-serif;font-size:13px;font-weight:700;width:100%;outline:none;" placeholder="Rep name" value="' + r.name + '" oninput="reps[' + i + '].name=this.value;renderLeaderboard()">' +
@@ -274,7 +274,7 @@ function renderLeaderboard() {
       '<div class="lb-bar-wrap"><div class="lb-bar" style="width:' + barW + '%"></div></div>' +
     '</div>';
   });
-  document.getElementById('leaderboard').innerHTML = html || '<div style="color:#333;font-size:12px;padding:10px 0;">Enter dials above to see the leaderboard</div>';
+  document.getElementById('leaderboard').innerHTML = html || '<div style="color:var(--text);font-size:12px;padding:10px 0;">Enter dials above to see the leaderboard</div>';
 }
 
 function updateGoal() {
