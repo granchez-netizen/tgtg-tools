@@ -10,7 +10,7 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{--y:#6DBE4F;--yd:rgba(109,190,79,.10);--yl:rgba(109,190,79,.22);--g:#22C55E;--gd:rgba(34,197,94,.08);--gl:rgba(34,197,94,.22);--r:#EF4444;--rd:rgba(239,68,68,.08);--rl:rgba(239,68,68,.22);--bg:#ffffff;--s:#f7f8f5;--b1:#dde3d8;--t:#1a1a1a;--m:#5a6454;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;}
-.hdr{background:#f7f8f5;border-bottom:1px solid var(--border);padding:13px 20px;position:sticky;top:0;z-index:100;display:flex;align-items:center;}
+.hdr{background:#6DBE4F;padding:13px 20px;position:sticky;top:0;z-index:100;display:flex;align-items:center;}
 .brand{font-size:13px;font-weight:800;}.brand em{color:var(--tgtg);font-style:normal;}
 .hero{max-width:880px;margin:0 auto;padding:36px 24px 20px;}
 .eye{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--tgtg);margin-bottom:8px;}
@@ -37,7 +37,7 @@ select.score-sel{background:#f7f8f5;border:1px solid #333;border-radius:7px;colo
 </style>
 </head>
 <body>
-<div class="hdr"><div class="brand"><em>Too Good</em> To Go · Call Review Scorecard</div></div>
+<div class="hdr"><div class="brand" style="color:#fff;font-weight:800;font-size:13px;"><span style="color:rgba(255,255,255,.85);">Too Good</span> To Go · Call Review Scorecard</div></div>
 <div class="hero">
   <div class="eye">Live or recorded calls · weighted scoring</div>
   <div class="h1">Score the call.<br><em>Coach what matters.</em></div>
@@ -46,11 +46,11 @@ select.score-sel{background:#f7f8f5;border:1px solid #333;border-radius:7px;colo
 <div class="wrap" id="wrap"></div>
 <script>
 var DATA = [
-  {id:"cr1",cat:"Opening",w:10,label:"Led with the venue situation",desc:"Did the rep open by referencing the venue's quiet periods or cover challenge — not by pitching TGTG?",good:"Started with: I was looking at your Google reviews —'re quiet on Tuesday evenings — is that a pattern?",bad:"Started with: Hi, I'm calling from TGTG, we help restaurants fill tables"},
-  {id:"cr2",cat:"Discovery",w:15,label:"Found the specific quiet period",desc:"Did the rep identify which sessions are genuinely empty and confirm this before pitching?",good:"Asked about surplus pattern: 'What do you typically have left at the end of a Tuesday?'",bad:"Moved straight to pitch without confirming the quiet period"},
+  {id:"cr1",cat:"Opening",w:10,label:"Led with the partner's surplus situation",desc:"Did the rep open by referencing the venue's quiet periods or cover challenge — not by pitching TGTG?",good:"Started with: I was looking at your Google reviews —'re quiet on Tuesday evenings — is that a pattern?",bad:"Started with: Hi, I'm calling from TGTG, we help businesses turn surplus into revenue"},
+  {id:"cr2",cat:"Discovery",w:15,label:"Discovered surplus type and timing",desc:"Did the rep ask about the partner's surplus — what, when, how much — before proposing a Surprise Bag?",good:"Asked about surplus pattern: 'What do you typically have left at the end of a Tuesday?'",bad:"Moved straight to pitch without confirming the quiet period"},
   {id:"cr3",cat:"Pitch",w:15,label:"Waste-to-revenue frame landed",desc:"Did the rep frame the Surprise Bag as found revenue — food that already exists and would go to waste — now turned into found revenue. Without TGTG: £0. With TGTG: paid, reserved, collected.?",good:"Articulated clearly that fixed costs are already paid and TGTG revenue is found money",bad:"Led with platform features or customer base size without anchoring on the economics"},
   {id:"cr4",cat:"Brand objection",w:15,label:"Handled brand objection without hesitation",desc:"When the operator raised brand damage or training customers to wait, was it handled directly?",good:"Held the frame: 'The Surprise Bag only shows in the collection window — your regular customers never see it'",bad:"Deflected, agreed partially, or moved on without resolving it"},
-  {id:"cr5",cat:"Onboarding",w:10,label:"Walked partner through app live on the call",desc:"Did the rep attempt to set up the Surprise Bag listing together with the partner while still on the phone — not leaving it to follow-up? offer type and depth based on cover patterns?",good:"Walked the partner through the TGTG partner app live on the call's phone",bad:"Described the Surprise Bag listing without walking through the app live"},
+  {id:"cr5",cat:"Onboarding",w:10,label:"Walked partner through app live on the call",desc:"Did the rep attempt to set up the Surprise Bag listing together with the partner while still on the phone — not leaving it to follow-up? ",good:"Walked the partner through the TGTG partner app live on the call",bad:"Described the Surprise Bag listing without walking through the app live"},
   {id:"cr6",cat:"Offer window",w:20,label:"Agreed a specific offer window before ending",desc:"Was a specific day, time, and session committed before the call ended?",good:"Confirmed: Let's set up your first Surprise Bag now while we're on the call — takes 8 minutes",bad:"Closed without a committed window — left setup to AM or to the venue"},
   {id:"cr7",cat:"Close",w:15,label:"Clear next step with a specific time",desc:"Did the call end with a named next action, a specific time, and clear ownership?",good:"Ended with: Your first bag is live. Your account manager will call you tomorrow to see how it went.",bad:"Ended with I'll follow up or left the next step undefined"}
 ];
