@@ -1,332 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Too Good To Go · Marketplace Diagnostic</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap');
 :root{
   --tgtg:#6DBE4F;--tgtgd:rgba(109,190,79,.09);--tgtgl:rgba(109,190,79,.25);
-  --teal:#6DBE4F;--teal-l:rgba(109,190,79,.09);--teal-ll:rgba(109,190,79,.06);
-  --bg:#ffffff;--bg2:#f7f8f5;--border:#e4e8de;--border2:#dde3d8;--cream:#f7f8f5;
-  --text:#1a1a1a;--muted:#5a6454;--muted2:#8a9484;--t:#1a1a1a;--t2:#5a6454;--m:#5a6454;
-  --b1:#e4e8de;--b2:#8a9484;
+  --bg:#ffffff;--bg2:#f7f8f5;--border:#e4e8de;--border2:#dde3d8;
+  --text:#1a1a1a;--muted:#5a6454;--muted2:#8a9484;
   --danger:#EF4444;--dangerd:rgba(239,68,68,.07);--dangerl:rgba(239,68,68,.18);
-  --warn:#F59E0B;--warnd:rgba(245,158,11,.07);--warnl:rgba(245,158,11,.18);--yd:rgba(245,158,11,.07);--yl:rgba(245,158,11,.18);
+  --warn:#F59E0B;--warnd:rgba(245,158,11,.07);--warnl:rgba(245,158,11,.18);
   --good:#22C55E;--goodd:rgba(34,197,94,.08);--goodl:rgba(34,197,94,.18);
-  --g:#22C55E;--gd:rgba(34,197,94,.08);--gl:rgba(34,197,94,.18);
-  --r:#EF4444;--rd:rgba(239,68,68,.07);--rl:rgba(239,68,68,.18);
-  --y:#6DBE4F;
-  --info:#60A5FA;--purple:#A78BFA;
-  --ink:#1a1a1a;--white:#ffffff;--soft:#2a2a2a;--rule:#e4e8de;
-  --gold:#6DBE4F;--gold-d:#4a9e32;--gold-pale:rgba(109,190,79,.09);--gold-mid:rgba(109,190,79,.22);
-  --amber:#6DBE4F;--amber-pale:rgba(109,190,79,.09);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'DM Sans',sans-serif;background:#ffffff;color:#1a1a1a;-webkit-font-smoothing:antialiased;padding-bottom:80px;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;padding-bottom:80px;}
 @media(max-width:600px){input,select,textarea{font-size:16px !important;}}
-</style>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Too Good To Go · Marketplace Diagnostic Engine</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0;}
-body{
-  -webkit-font-smoothing: antialiased;font-family:'Inter',sans-serif;background:#f7f8f5;color:#1a1a1a;min-height:100vh;}
-.shell{max-width:960px;margin:0 auto;padding:20px 16px 60px;}
 
-.hdr{padding:20px 0 18px;border-bottom:1px solid #222;margin-bottom:24px;display:flex;justify-content:space-between;align-items:flex-end;}
-.brand{font-size:13px;font-weight:800;color:#ffffff;}
-.brand em{color:#6DBE4F;font-style:normal;}
-.hdr-title{font-size:26px;font-weight:800;color:#1a1a1a;margin-top:8px;}
-.hdr-title em{color:#6DBE4F;font-style:normal;}
-.hdr-sub{font-size:13px;color:#555;margin-top:5px;}
-.hdr-tag{font-size:10px;font-family:'Inter',sans-serif;font-weight:700;color:#6DBE4F;padding:4px 10px;border:1px solid #333;border-radius:4px;}
+/* HEADER */
+.hdr{background:var(--tgtg);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.brand{font-size:13px;font-weight:800;color:#fff;}
+.hdr-sub{font-size:11px;color:rgba(255,255,255,.75);}
 
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px;}
-@media(max-width:640px){.cols{grid-template-columns:1fr;}}
+/* LAYOUT */
+.wrap{max-width:960px;margin:0 auto;padding:24px 16px 80px;}
+.hero-eye{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--tgtg);margin-bottom:8px;font-family:'DM Mono',monospace;}
+.hero-h1{font-size:clamp(22px,4vw,34px);font-weight:900;letter-spacing:-1px;line-height:1.1;margin-bottom:8px;}
+.hero-h1 em{color:var(--tgtg);font-style:normal;}
+.hero-sub{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:24px;max-width:600px;}
 
-.panel{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;}
-.ph{padding:13px 18px;border-bottom:1px solid #222;}
-.ph-num{font-size:9px;font-family:'Inter',sans-serif;font-weight:700;color:#6DBE4F;letter-spacing:2px;margin-bottom:3px;}
-.ph-title{font-size:14px;font-weight:700;color:#1a1a1a;}
-.ph-hint{font-size:11px;color:#555;margin-top:3px;font-style:italic;}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+@media(max-width:680px){.cols{grid-template-columns:1fr;}}
+
+/* PANEL */
+.panel{background:#fff;border:1.5px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04);}
+.ph{padding:13px 18px;background:var(--bg2);border-bottom:1px solid var(--border);}
+.ph-eye{font-size:9px;font-weight:700;color:var(--tgtg);letter-spacing:2px;text-transform:uppercase;font-family:'DM Mono',monospace;margin-bottom:3px;}
+.ph-title{font-size:14px;font-weight:800;color:var(--text);}
+.ph-hint{font-size:11px;color:var(--muted);margin-top:3px;}
 .pb{padding:16px 18px;}
 
-.metric-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #2a2a2a;}
+/* METRIC INPUTS */
+.metric-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);}
 .metric-row:last-child{border-bottom:none;}
-.ml{font-size:12px;color:#888;font-weight:600;}
-.mi{display:flex;align-items:center;gap:4px;}
-.mi input{width:80px;padding:6px 10px;background:#f7f8f5;border:1.5px solid #2a2a2a;border-radius:6px;font-size:13px;font-weight:700;color:#1a1a1a;text-align:right;font-family:inherit;}
-.mi input:focus{outline:none;border-color:#6DBE4F;}
-.mu{font-size:11px;color:#444;width:20px;}
-.city-input{width:100%;padding:9px 12px;background:#f7f8f5;border:1.5px solid #2a2a2a;border-radius:8px;font-size:13px;color:#1a1a1a;font-family:inherit;margin-bottom:12px;}
-.city-input:focus{outline:none;border-color:#6DBE4F;}
+.ml{font-size:12px;color:var(--muted);font-weight:500;flex:1;padding-right:10px;}
+.mi{display:flex;align-items:center;gap:5px;flex-shrink:0;}
+.mi input{width:72px;padding:6px 9px;background:var(--bg2);border:1.5px solid var(--border);border-radius:7px;font-size:13px;font-weight:700;color:var(--text);text-align:right;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .15s;}
+.mi input:focus{border-color:var(--tgtg);}
+.mi input[type="text"]{width:110px;text-align:left;}
+.mu{font-size:11px;color:var(--muted2);width:18px;}
+.city-input{width:100%;padding:9px 12px;background:var(--bg2);border:1.5px solid var(--border);border-radius:8px;font-size:14px;color:var(--text);font-family:'DM Sans',sans-serif;margin-bottom:14px;outline:none;transition:border-color .15s;}
+.city-input:focus{border-color:var(--tgtg);}
+.metric-section-hdr{font-size:9px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:2px;margin:14px 0 10px;padding-top:10px;border-top:1px solid var(--border);font-family:'DM Mono',monospace;}
 
-.run-btn{width:100%;padding:14px;background:#6DBE4F;color:#000;border:none;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;margin-top:14px;transition:background .2s;}
-.run-btn:hover{background:rgba(109,190,79,.80);}
-.run-btn:disabled{background:#2a2a2a;color:#555;cursor:not-allowed;}
+/* RUN BUTTON */
+.run-btn{width:100%;padding:13px;background:var(--tgtg);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;margin-top:14px;transition:opacity .15s;font-family:'DM Sans',sans-serif;}
+.run-btn:hover{opacity:.88;}
+.run-btn:disabled{opacity:.5;cursor:not-allowed;}
 
-.step-item{display:flex;gap:10px;margin-bottom:12px;align-items:flex-start;}
-.step-item:last-child{margin-bottom:0;}
-.step-n{width:22px;height:22px;border-radius:50%;background:#6DBE4F;color:#000;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.step-t{font-size:13px;color:#aaa;line-height:1.5;}
-.prompt-box{background:#f7f8f5;border:1px solid #222;border-radius:8px;padding:12px;margin-top:12px;font-family:monospace;font-size:11px;color:#666;line-height:1.7;}
-.prompt-box .kw{color:#6DBE4F;font-weight:700;}
+/* HOW IT WORKS */
+.step-item{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start;}
+.step-n{width:24px;height:24px;border-radius:50%;background:var(--tgtg);color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.step-n.alt{background:var(--muted2);}
+.step-t{font-size:12px;color:var(--muted);line-height:1.65;}
+.prompt-box{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-top:14px;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.75;}
+.prompt-box .kw{color:var(--tgtg);font-weight:700;}
 
-.output-panel{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;}
-.op-head{padding:12px 18px;border-bottom:1px solid #222;display:flex;justify-content:space-between;align-items:center;}
-.op-title{font-size:14px;font-weight:700;color:#1a1a1a;}
-.badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;}
-.badge-wait{background:#222;color:#555;border:1px solid #333;}
-.badge-live{background:rgba(76,175,130,.15);color:#22C55E;border:1px solid rgba(76,175,130,.3);}
-.op-body{
-  -webkit-font-smoothing: antialiased;padding:20px;}
+/* OUTPUT PANEL */
+.output-panel{background:#fff;border:1.5px solid var(--border);border-radius:12px;overflow:hidden;}
+.op-head{padding:13px 18px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.op-title{font-size:14px;font-weight:800;color:var(--text);}
+.badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;font-family:'DM Mono',monospace;}
+.badge-wait{background:var(--bg2);color:var(--muted2);border:1px solid var(--border);}
+.badge-live{background:var(--goodd);color:var(--good);border:1px solid var(--goodl);}
+.op-body{padding:20px;}
 
+/* STATES */
 .loading-state{display:none;text-align:center;padding:40px 20px;}
-.spin{width:34px;height:34px;border:3px solid #2a2a2a;border-top-color:#6DBE4F;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 14px;}
+.spin{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--tgtg);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 14px;}
 @keyframes spin{to{transform:rotate(360deg);}}
-.loading-msg{font-size:12px;color:#555;font-family:monospace;}
-
+.loading-msg{font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;}
 .empty-state{text-align:center;padding:48px 20px;}
 .es-icon{font-size:36px;margin-bottom:12px;}
-.es-title{font-size:15px;font-weight:700;color:#444;margin-bottom:6px;}
-.es-sub{font-size:12px;color:#333;}
+.es-title{font-size:14px;font-weight:700;color:var(--muted);margin-bottom:6px;}
+.es-sub{font-size:12px;color:var(--muted2);}
 
+/* DIAGNOSIS CARDS */
 .diag-content{display:none;}
-.section-hdr{font-size:9px;font-weight:700;color:#6DBE4F;letter-spacing:2px;text-transform:uppercase;font-family:'Inter',sans-serif;padding-bottom:8px;border-bottom:1px solid #222;margin-bottom:12px;}
-.diag-section{margin-bottom:22px;}
-
-.problem-card{background:#f7f8f5;border:1px solid #2a2a2a;border-radius:10px;padding:14px;margin-bottom:8px;}
+.diag-section{margin-bottom:24px;}
+.section-hdr{font-size:9px;font-weight:700;color:var(--tgtg);letter-spacing:2px;text-transform:uppercase;font-family:'DM Mono',monospace;padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:12px;}
+.problem-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
 .problem-card:last-child{margin-bottom:0;}
 .pc-top{display:flex;gap:10px;align-items:flex-start;margin-bottom:6px;}
-.pc-rank{width:24px;height:24px;border-radius:50%;background:#6DBE4F;color:#000;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.pc-title{font-size:14px;font-weight:700;color:#1a1a1a;}
-.pc-root{font-size:11px;color:#6DBE4F;font-weight:700;margin-left:34px;margin-bottom:4px;}
-.pc-detail{font-size:12px;color:#888;margin-left:34px;line-height:1.6;}
-
-.team-card{background:#f7f8f5;border:1px solid #2a2a2a;border-radius:10px;padding:14px;font-size:13px;color:#aaa;line-height:1.7;}
-
-.move-card{background:rgba(26,92,58,.12);border:1px solid rgba(26,92,58,.3);border-radius:10px;padding:16px;}
-.move-metric{font-size:18px;font-weight:800;color:#22C55E;margin-bottom:4px;}
-.move-range{font-size:12px;color:#666;margin-bottom:10px;}
-.move-how{font-size:13px;color:#aaa;line-height:1.7;margin-bottom:8px;}
-.move-owner{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:#6DBE4F;background:rgba(109,190,79,.12);padding:4px 10px;border-radius:20px;border:1px solid rgba(109,190,79,.25);}
-
-.pushback-card{background:#f0f2ed;border:1px solid rgba(26,92,58,.3);border-radius:10px;padding:16px;}
-.pushback-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #1a1a1a;align-items:flex-start;}
-.pushback-item:last-child{border-bottom:none;}
-.pb-dot{width:20px;height:20px;border-radius:50%;flex-shrink:0;margin-top:1px;}
-.pb-agree{background:rgba(76,175,130,.2);border:2px solid #22C55E;}
-.pb-disagree{background:rgba(229,115,115,.15);border:2px solid #E57373;}
-.pb-text{font-size:12px;color:#aaa;line-height:1.6;}
+.pc-rank{width:26px;height:26px;border-radius:50%;background:var(--tgtg);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.pc-title{font-size:14px;font-weight:800;color:var(--text);line-height:1.3;}
+.pc-root{font-size:11px;color:var(--tgtg);font-weight:700;margin-left:36px;margin-bottom:5px;font-family:'DM Mono',monospace;}
+.pc-detail{font-size:12px;color:var(--muted);margin-left:36px;line-height:1.7;}
+.team-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;font-size:13px;color:var(--text);line-height:1.75;}
+.move-card{background:var(--goodd);border:1.5px solid var(--goodl);border-radius:10px;padding:18px;}
+.move-metric{font-size:17px;font-weight:800;color:var(--good);margin-bottom:4px;}
+.move-range{font-size:11px;color:var(--muted);margin-bottom:10px;font-family:'DM Mono',monospace;}
+.move-how{font-size:13px;color:var(--text);line-height:1.75;margin-bottom:10px;}
+.move-owner{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--good);background:#fff;padding:5px 12px;border-radius:20px;border:1px solid var(--goodl);}
+.pushback-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;}
+.pushback-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);align-items:flex-start;}
+.pushback-item:last-child{border-bottom:none;padding-bottom:0;}
+.pb-dot{width:18px;height:18px;border-radius:50%;flex-shrink:0;margin-top:2px;}
+.pb-agree{background:var(--goodd);border:2px solid var(--good);}
+.pb-flag{background:var(--warnd);border:2px solid var(--warn);}
+.pb-text{font-size:12px;color:var(--text);line-height:1.7;}
 </style>
 </head>
 <body>
-<div class="shell">
 
 <div class="hdr">
-  <div>
-    <div class="brand"><em>Too Good</em> To Go</div>
-    <div class="hdr-title">Marketplace <em>Diagnostic Engine</em></div>
-    <div class="hdr-sub">Paste any city's metrics. Get a ranked operator diagnosis in seconds. Then push back on it.</div>
-  </div>
-  <div class="hdr-tag">Section 4 · Live</div>
+  <div class="brand">Too Good To Go · UK &amp; Ireland</div>
+  <div class="hdr-sub">Head of Independent Partners · Marketplace Diagnostic</div>
 </div>
 
-<div class="cols">
-  
-  <div class="panel">
-    <div class="ph">
-      <div class="ph-num">01 · Input</div>
-      <div class="ph-title">City Metrics</div>
-      <div class="ph-hint">Pre-loaded with Section 2 data — edit any value</div>
+<div class="wrap">
+  <div class="hero-eye">AI-Powered · Partner Market Intelligence</div>
+  <div class="hero-h1">Diagnose the market.<br><em>Fix the right thing first.</em></div>
+  <div class="hero-sub">Enter your territory's metrics. The engine identifies the three biggest problems ranked by severity — with root cause, what the team is probably doing wrong, and the single metric to move in 30 days.</div>
+
+  <div class="cols">
+
+    <!-- INPUT PANEL -->
+    <div class="panel">
+      <div class="ph">
+        <div class="ph-eye">Input</div>
+        <div class="ph-title">Territory Metrics</div>
+        <div class="ph-hint">Edit any value — defaults are illustrative</div>
+      </div>
+      <div class="pb">
+        <input class="city-input" id="city" value="London" placeholder="Territory / city name">
+
+        <div class="metric-row"><span class="ml">Live partners</span><div class="mi"><input id="m-live" type="number" value="614"><span class="mu"></span></div></div>
+        <div class="metric-row"><span class="ml">Weekly transacting (%)</span><div class="mi"><input id="m-trans" type="number" value="59"><span class="mu">%</span></div></div>
+        <div class="metric-row"><span class="ml">Median weekly revenue (£)</span><div class="mi"><input id="m-med" type="number" value="94"><span class="mu">£</span></div></div>
+        <div class="metric-row"><span class="ml">Average bag value (£)</span><div class="mi"><input id="m-aov" type="number" value="4"><span class="mu">£</span></div></div>
+        <div class="metric-row"><span class="ml">Fri/Sat redemption share (%)</span><div class="mi"><input id="m-fs" type="number" value="71"><span class="mu">%</span></div></div>
+        <div class="metric-row"><span class="ml">Mon–Wed redemption share (%)</span><div class="mi"><input id="m-mw" type="number" value="11"><span class="mu">%</span></div></div>
+        <div class="metric-row"><span class="ml">90-day partner churn (%)</span><div class="mi"><input id="m-churn" type="number" value="17"><span class="mu">%</span></div></div>
+        <div class="metric-row"><span class="ml">Customer MoM growth (%)</span><div class="mi"><input id="m-con" type="number" value="22"><span class="mu">%</span></div></div>
+        <div class="metric-row"><span class="ml">Repeat reservation rate 90d (%)</span><div class="mi"><input id="m-rep" type="number" value="19"><span class="mu">%</span></div></div>
+        <div class="metric-row"><span class="ml">New partners signed 90d</span><div class="mi"><input id="m-new" type="number" value="186"><span class="mu"></span></div></div>
+        <div class="metric-row"><span class="ml">Bags agreed/week (rep avg)</span><div class="mi"><input id="m-bags" type="number" value="4"><span class="mu"></span></div></div>
+
+        <div class="metric-section-hdr">Collection Window Distribution</div>
+        <div class="metric-row"><span class="ml">Morning windows live (7–11am)</span><div class="mi"><input id="m-bfast" type="number" placeholder="—"><span class="mu"></span></div></div>
+        <div class="metric-row"><span class="ml">Lunchtime windows live (11am–3pm)</span><div class="mi"><input id="m-lunch" type="number" placeholder="—"><span class="mu"></span></div></div>
+        <div class="metric-row"><span class="ml">Evening windows live (5–8pm)</span><div class="mi"><input id="m-dinner" type="number" placeholder="—"><span class="mu"></span></div></div>
+        <div class="metric-row"><span class="ml">Late windows live (8–11pm)</span><div class="mi"><input id="m-late" type="number" placeholder="—"><span class="mu"></span></div></div>
+
+        <div class="metric-section-hdr">Activation</div>
+        <div class="metric-row"><span class="ml">Avg days signed → first Surprise Bag reserved</span><div class="mi"><input id="m-t2r" type="number" placeholder="e.g. 18"><span class="mu">days</span></div></div>
+        <div class="metric-row"><span class="ml">Activated within 7 days (%)</span><div class="mi"><input id="m-t2r7" type="number" placeholder="e.g. 22"><span class="mu">%</span></div></div>
+        <div class="metric-row"><span class="ml">Never activated — 0 reservations (%)</span><div class="mi"><input id="m-t2r0" type="number" placeholder="e.g. 15"><span class="mu">%</span></div></div>
+
+        <div class="metric-section-hdr">Rep Performance</div>
+        <div class="metric-row"><span class="ml">Q1 rep close rate (%)</span><div class="mi"><input id="m-tq" type="number" placeholder="e.g. 34"><span class="mu">%</span></div></div>
+        <div class="metric-row"><span class="ml">Q4 rep close rate (%)</span><div class="mi"><input id="m-bq" type="number" placeholder="e.g. 8"><span class="mu">%</span></div></div>
+
+        <div class="metric-section-hdr">Partner Engagement</div>
+        <div class="metric-row"><span class="ml">Logged in to partner app last 14d (%)</span><div class="mi"><input id="m-l14" type="number" placeholder="e.g. 45"><span class="mu">%</span></div></div>
+        <div class="metric-row"><span class="ml">Not logged in 30+ days (%)</span><div class="mi"><input id="m-l30" type="number" placeholder="e.g. 35"><span class="mu">%</span></div></div>
+        <div class="metric-row"><span class="ml">Never logged in post-signup (%)</span><div class="mi"><input id="m-l0" type="number" placeholder="e.g. 12"><span class="mu">%</span></div></div>
+
+        <button class="run-btn" id="run-btn" onclick="runDiagnosis()">Run Diagnosis →</button>
+      </div>
     </div>
-    <div class="pb">
-      <input class="city-input" id="city" value="London" placeholder="City name">
-      <div class="metric-row"><span class="ml">Live venues</span><div class="mi"><input id="m-live" type="number" value="614"><span class="mu"></span></div></div>
-      <div class="metric-row"><span class="ml">Weekly transacting (%)</span><div class="mi"><input id="m-trans" type="number" value="59"><span class="mu">%</span></div></div>
-      <div class="metric-row"><span class="ml">Median weekly revenue (£)</span><div class="mi"><input id="m-med" type="number" value="94"><span class="mu">£</span></div></div>
-      <div class="metric-row"><span class="ml">Average order value (£)</span><div class="mi"><input id="m-aov" type="number" value="62"><span class="mu">£</span></div></div>
-      <div class="metric-row"><span class="ml">Fri/Sat share (%)</span><div class="mi"><input id="m-fs" type="number" value="71"><span class="mu">%</span></div></div>
-      <div class="metric-row"><span class="ml">Mon–Wed share (%)</span><div class="mi"><input id="m-mw" type="number" value="11"><span class="mu">%</span></div></div>
-      <div class="metric-row"><span class="ml">Breakfast offers live (7–11am)</span><div class="mi"><input id="m-bfast" type="number" placeholder="—"><span class="mu"></span></div></div>
-      <div class="metric-row"><span class="ml">Lunch offers live (11am–3pm)</span><div class="mi"><input id="m-lunch" type="number" placeholder="—"><span class="mu"></span></div></div>
-      <div class="metric-row"><span class="ml">Dinner offers live (5–8pm)</span><div class="mi"><input id="m-dinner" type="number" placeholder="—"><span class="mu"></span></div></div>
-      <div class="metric-row"><span class="ml">Late evening offers live (8–11pm)</span><div class="mi"><input id="m-late" type="number" placeholder="—"><span class="mu"></span></div></div>
-      <div class="metric-row"><span class="ml">90-day churn (%)</span><div class="mi"><input id="m-churn" type="number" value="17"><span class="mu">%</span></div></div>
-      <div class="metric-row"><span class="ml">Consumer MoM growth (%)</span><div class="mi"><input id="m-con" type="number" value="22"><span class="mu">%</span></div></div>
-      <div class="metric-row"><span class="ml">Repeat rate 90d (%)</span><div class="mi"><input id="m-rep" type="number" value="19"><span class="mu">%</span></div></div>
-      <div class="metric-row"><span class="ml">New venues 90d</span><div class="mi"><input id="m-new" type="number" value="186"><span class="mu"></span></div></div>
-      <div class="metric-row"><span class="ml">Bags agreed per week</span><div class="mi"><input id="m-bags" type="number" value="38"><span class="mu">%</span></div></div>
-      <div class="metric-row"><span class="ml">Avg discount depth (%)</span><div class="mi"><input id="m-disc" type="number" value="24"><span class="mu">%</span></div></div>
-      
-      <div style="padding:10px 0 6px;border-top:1px solid #2a2a2a;margin-top:8px;">
-        <div style="font-size:9px;font-weight:700;color:#6DBE4F;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Time to first redemption</div>
-        <div class="metric-row"><span class="ml">Avg days signed → first redemption</span><div class="mi"><input id="m-t2r" type="number" placeholder="e.g. 18" min="0"><span class="mu">days</span></div></div>
-        <div class="metric-row"><span class="ml">% activated within 7 days</span><div class="mi"><input id="m-t2r7" type="number" placeholder="e.g. 22" min="0" max="100"><span class="mu">%</span></div></div>
-        <div class="metric-row"><span class="ml">% never activated (0 redemptions)</span><div class="mi"><input id="m-t2r0" type="number" placeholder="e.g. 15" min="0" max="100"><span class="mu">%</span></div></div>
-      </div>
 
-      
-      <div style="padding:10px 0 6px;border-top:1px solid #2a2a2a;margin-top:8px;">
-        <div style="font-size:9px;font-weight:700;color:#6DBE4F;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Rep consistency</div>
-        <div class="metric-row"><span class="ml">Top quartile conversion rate (%)</span><div class="mi"><input id="m-tq" type="number" placeholder="e.g. 34" min="0" max="100"><span class="mu">%</span></div></div>
-        <div class="metric-row"><span class="ml">Bottom quartile conversion rate (%)</span><div class="mi"><input id="m-bq" type="number" placeholder="e.g. 8" min="0" max="100"><span class="mu">%</span></div></div>
+    <!-- HOW IT WORKS -->
+    <div class="panel">
+      <div class="ph">
+        <div class="ph-eye">How It Works</div>
+        <div class="ph-title">What the engine returns</div>
       </div>
-
-      
-      <div style="padding:10px 0 6px;border-top:1px solid #2a2a2a;margin-top:8px;">
-        <div style="font-size:9px;font-weight:700;color:#6DBE4F;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Venue tier split</div>
-        <div class="metric-row"><span class="ml">Premium anchor (Michelin / notable)</span><div class="mi"><input id="m-vt-p" type="number" placeholder="e.g. 8" min="0" max="100"><span class="mu">%</span></div></div>
-        <div class="metric-row"><span class="ml">Mid-market</span><div class="mi"><input id="m-vt-m" type="number" placeholder="e.g. 45" min="0" max="100"><span class="mu">%</span></div></div>
-        <div class="metric-row"><span class="ml">Casual / independent</span><div class="mi"><input id="m-vt-c" type="number" placeholder="e.g. 47" min="0" max="100"><span class="mu">%</span></div></div>
+      <div class="pb">
+        <div class="step-item">
+          <div class="step-n">1</div>
+          <div class="step-t"><strong>Three biggest problems ranked by severity</strong> — root cause underneath each one, not symptom statements</div>
+        </div>
+        <div class="step-item">
+          <div class="step-n">2</div>
+          <div class="step-t"><strong>What the sales team is doing wrong</strong> — the uncomfortable layer underneath the numbers</div>
+        </div>
+        <div class="step-item">
+          <div class="step-n">3</div>
+          <div class="step-t"><strong>The single metric to move in 30 days</strong> — specific, named owner, exact action</div>
+        </div>
+        <div class="step-item">
+          <div class="step-n alt">↩</div>
+          <div class="step-t"><strong>Where the diagnosis is right and where to push back on it</strong> — the context that changes the read</div>
+        </div>
+        <div class="prompt-box">
+          <span class="kw">System:</span> You are an experienced marketplace operator. Analyse these TGTG territory metrics and return a structured diagnosis. Three problems ranked with root cause (not symptom), what the sales team is doing wrong, the single metric to move in 30 days and exactly how. Sound like an operator. No framework language.<br><br>
+          <span class="kw">Input:</span> Territory metrics<br>
+          <span class="kw">Output:</span> Diagnosis + operator challenge
+        </div>
       </div>
-
-      
-      <div style="padding:10px 0 6px;border-top:1px solid #2a2a2a;margin-top:8px;">
-        <div style="font-size:9px;font-weight:700;color:#6DBE4F;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Venue platform login frequency</div>
-        <div class="metric-row"><span class="ml">Logged in last 14 days (%)</span><div class="mi"><input id="m-l14" type="number" placeholder="e.g. 45" min="0" max="100"><span class="mu">%</span></div></div>
-        <div class="metric-row"><span class="ml">Not logged in 30+ days (%)</span><div class="mi"><input id="m-l30" type="number" placeholder="e.g. 35" min="0" max="100"><span class="mu">%</span></div></div>
-        <div class="metric-row"><span class="ml">Never logged in post-signup (%)</span><div class="mi"><input id="m-l0" type="number" placeholder="e.g. 12" min="0" max="100"><span class="mu">%</span></div></div>
-      </div>
-
-      
-      <div style="padding:10px 0 6px;border-top:1px solid #2a2a2a;margin-top:8px;">
-        <div style="font-size:9px;font-weight:700;color:#6DBE4F;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Cuisine diversity — top 3 types by % of portfolio</div>
-        <div class="metric-row"><span class="ml">Top cuisine type (%)</span><div class="mi"><input id="m-c1" type="number" placeholder="e.g. 28" min="0" max="100"><span class="mu">%</span></div></div>
-        <div class="metric-row"><span class="ml">Top cuisine type name</span><div class="mi" style="flex:none;width:auto;"><input id="m-c1n" type="text" placeholder="e.g. Indian" style="width:120px;"></div></div>
-        <div class="metric-row"><span class="ml">2nd cuisine type (%)</span><div class="mi"><input id="m-c2" type="number" placeholder="e.g. 18" min="0" max="100"><span class="mu">%</span></div></div>
-        <div class="metric-row"><span class="ml">Distinct cuisine types</span><div class="mi"><input id="m-ctypes" type="number" placeholder="e.g. 12" min="0" max="50"><span class="mu"></span></div></div>
-      </div>
-
-      <button class="run-btn" id="run-btn" onclick="runDiagnosis()">Run Diagnosis →</button>
     </div>
   </div>
 
-  
-  <div class="panel">
-    <div class="ph">
-      <div class="ph-num">02 · How It Works</div>
-      <div class="ph-title">What the engine returns</div>
+  <!-- OUTPUT -->
+  <div class="output-panel">
+    <div class="op-head">
+      <div class="op-title">Diagnosis</div>
+      <div class="badge badge-wait" id="badge">Waiting for input</div>
     </div>
-    <div class="pb">
-      <div class="step-item"><div class="step-n">1</div><div class="step-t">Three biggest problems ranked by severity — with root cause underneath each one, not symptom statements</div></div>
-      <div class="step-item"><div class="step-n">2</div><div class="step-t">What the sales team is probably doing wrong — the uncomfortable layer underneath the numbers</div></div>
-      <div class="step-n-wrap" style="display:flex;gap:10px;margin-bottom:12px;align-items:flex-start;"><div class="step-n" style="background:#22C55E;">3</div><div class="step-t">The single metric to move in 30 days — specific, named owner, with exact action</div></div>
-      <div class="step-item"><div class="step-n" style="background:#444;">↩</div><div class="step-t">Grant's read — where the diagnosis is right and where he would push back on it</div></div>
-      <div class="prompt-box">
-        <span class="kw">System:</span> You are an experienced marketplace operator. Analyse these TGTG city metrics and return a structured diagnosis. Three problems ranked with root cause (not symptom), what the sales team is doing wrong, the single metric to move in 30 days and exactly how. Sound like an operator. No framework language.<br><br>
-        <span class="kw">Input:</span> City metrics JSON<br>
-        <span class="kw">Output:</span> Structured diagnosis + operator pushback
+    <div class="op-body" id="op-body">
+
+      <div class="loading-state" id="loading">
+        <div class="spin"></div>
+        <div class="loading-msg" id="loading-msg">Reading territory metrics...</div>
+      </div>
+
+      <div class="empty-state" id="empty">
+        <div class="es-icon">📊</div>
+        <div class="es-title">Enter territory metrics and run the diagnosis</div>
+        <div class="es-sub">Edit the defaults above and hit Run Diagnosis.</div>
+      </div>
+
+      <div class="diag-content" id="diag">
+        <div class="diag-section">
+          <div class="section-hdr" id="city-label">Three Biggest Problems</div>
+          <div class="problem-card"><div class="pc-top"><div class="pc-rank">1</div><div class="pc-title" id="p1-title"></div></div><div class="pc-root" id="p1-root"></div><div class="pc-detail" id="p1-detail"></div></div>
+          <div class="problem-card"><div class="pc-top"><div class="pc-rank">2</div><div class="pc-title" id="p2-title"></div></div><div class="pc-root" id="p2-root"></div><div class="pc-detail" id="p2-detail"></div></div>
+          <div class="problem-card"><div class="pc-top"><div class="pc-rank">3</div><div class="pc-title" id="p3-title"></div></div><div class="pc-root" id="p3-root"></div><div class="pc-detail" id="p3-detail"></div></div>
+        </div>
+        <div class="diag-section">
+          <div class="section-hdr">What the Sales Team is Doing Wrong</div>
+          <div class="team-card" id="team-diag"></div>
+        </div>
+        <div class="diag-section">
+          <div class="section-hdr">The 30-Day Move</div>
+          <div class="move-card"><div class="move-metric" id="move-metric"></div><div class="move-range" id="move-range"></div><div class="move-how" id="move-how"></div><div class="move-owner" id="move-owner"></div></div>
+        </div>
+        <div class="diag-section">
+          <div class="section-hdr">Where This Is Right — and Where to Challenge It</div>
+          <div class="pushback-card" id="pushback-card"></div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="output-panel">
-  <div class="op-head">
-    <div class="op-title">Diagnosis</div>
-    <div class="badge badge-wait" id="badge">Waiting for input</div>
-  </div>
-  <div class="op-body" id="op-body">
-
-    <div class="loading-state" id="loading">
-      <div class="spin"></div>
-      <div class="loading-msg" id="loading-msg">Reading city metrics...</div>
-    </div>
-
-    <div class="empty-state" id="empty">
-      <div class="es-icon">📊</div>
-      <div class="es-title">Enter city metrics and run the diagnosis</div>
-      <div class="es-sub">The Section 2 data is pre-loaded. Edit any value and hit Run Diagnosis.</div>
-    </div>
-
-    <div class="diag-content" id="diag">
-      
-      <div class="diag-section">
-        <div class="section-hdr" id="city-label">Three Biggest Problems</div>
-        <div class="problem-card">
-          <div class="pc-top"><div class="pc-rank">1</div><div class="pc-title" id="p1-title"></div></div>
-          <div class="pc-root" id="p1-root"></div>
-          <div class="pc-detail" id="p1-detail"></div>
-        </div>
-        <div class="problem-card">
-          <div class="pc-top"><div class="pc-rank">2</div><div class="pc-title" id="p2-title"></div></div>
-          <div class="pc-root" id="p2-root"></div>
-          <div class="pc-detail" id="p2-detail"></div>
-        </div>
-        <div class="problem-card">
-          <div class="pc-top"><div class="pc-rank">3</div><div class="pc-title" id="p3-title"></div></div>
-          <div class="pc-root" id="p3-root"></div>
-          <div class="pc-detail" id="p3-detail"></div>
-        </div>
-      </div>
-
-      
-      <div class="diag-section">
-        <div class="section-hdr">What the Sales Team is Doing Wrong</div>
-        <div class="team-card" id="team-diag"></div>
-      </div>
-
-      
-      <div class="diag-section">
-        <div class="section-hdr">The 30-Day Move</div>
-        <div class="move-card">
-          <div class="move-metric" id="move-metric"></div>
-          <div class="move-range" id="move-range"></div>
-          <div class="move-how" id="move-how"></div>
-          <div class="move-owner" id="move-owner"></div>
-        </div>
-      </div>
-
-      
-      <div class="diag-section">
-        <div class="section-hdr">Grant's Read — Where I Agree and Where I'd Push Back</div>
-        <div class="pushback-card" id="pushback-card"></div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
 </div>
 
 <script>
 function v(id){ return document.getElementById(id); }
 function set(id, val){ var el = v(id); if(el) el.textContent = val; }
 function setHTML(id, val){ var el = v(id); if(el) el.innerHTML = val; }
+function n(id){ return parseFloat(v(id) ? v(id).value : 0) || 0; }
 
-async function runDiagnosis() {
-  
-  var city  = v('city').value || 'Unknown City';
-  var live  = parseFloat(v('m-live').value) || 614;
-  var trans = parseFloat(v('m-trans').value) || 59;
-  var med   = parseFloat(v('m-med').value) || 94;
-  var aov   = parseFloat(v('m-aov').value) || 62;
-  var fs    = parseFloat(v('m-fs').value) || 71;
-  var mw    = parseFloat(v('m-mw').value) || 11;
-  var churn = parseFloat(v('m-churn').value) || 17;
-  var t2r   = parseFloat(v('m-t2r').value)  || 0;
-  var t2r7  = parseFloat(v('m-t2r7').value) || 0;
-  var t2r0  = parseFloat(v('m-t2r0').value) || 0;
-  var tq    = parseFloat(v('m-tq').value)   || 0;
-  var bq    = parseFloat(v('m-bq').value)   || 0;
-  var vtP   = parseFloat(v('m-vt-p').value) || 0;
-  var vtM   = parseFloat(v('m-vt-m').value) || 0;
-  var vtC   = parseFloat(v('m-vt-c').value) || 0;
-  var con   = parseFloat(v('m-con').value) || 22;
-  var rep   = parseFloat(v('m-rep').value) || 19;
-  var newV  = parseFloat(v('m-new').value) || 186;
-  var ds    = parseFloat(v('m-bags').value) || 38;
-  var disc  = parseFloat(v('m-disc').value) || 24;
-  var l14   = parseFloat(v('m-l14').value)  || 0;
-  var l30   = parseFloat(v('m-l30').value)  || 0;
-  var l0    = parseFloat(v('m-l0').value)   || 0;
-  var c1    = parseFloat(v('m-c1').value)   || 0;
-  var c1n   = v('m-c1n') ? (v('m-c1n').value || '') : '';
-  var c2    = parseFloat(v('m-c2').value)   || 0;
-  var ctypes = parseFloat(v('m-ctypes').value) || 0;
+async function runDiagnosis(){
+  var city  = v('city').value || 'London';
+  var live  = n('m-live') || 614;
+  var trans = n('m-trans') || 59;
+  var med   = n('m-med') || 94;
+  var aov   = n('m-aov') || 4;
+  var fs    = n('m-fs') || 71;
+  var mw    = n('m-mw') || 11;
+  var churn = n('m-churn') || 17;
+  var con   = n('m-con') || 22;
+  var rep   = n('m-rep') || 19;
+  var newV  = n('m-new') || 186;
+  var bags  = n('m-bags') || 4;
+  var t2r   = n('m-t2r');
+  var t2r7  = n('m-t2r7');
+  var t2r0  = n('m-t2r0');
+  var tq    = n('m-tq');
+  var bq    = n('m-bq');
+  var l14   = n('m-l14');
+  var l30   = n('m-l30');
+  var l0    = n('m-l0');
 
-  
   v('run-btn').disabled = true;
   v('run-btn').textContent = 'Running...';
   v('empty').style.display = 'none';
@@ -335,108 +283,72 @@ async function runDiagnosis() {
   v('badge').className = 'badge badge-wait';
   v('badge').textContent = 'Running...';
 
-  
-  var msgs = ['Reading city metrics...','Analysing supply-demand dynamics...','Diagnosing root causes...','Building recommendations...'];
+  var msgs = ['Reading territory metrics...','Analysing partner activity...','Diagnosing root causes...','Building recommendations...'];
   var mi = 0;
-  var timer = setInterval(function(){
-    if(mi < msgs.length){ set('loading-msg', msgs[mi]); mi++; }
-  }, 680);
-
-  
+  var timer = setInterval(function(){ if(mi < msgs.length){ set('loading-msg', msgs[mi]); mi++; } }, 700);
   await new Promise(function(r){ setTimeout(r, 2800); });
   clearInterval(timer);
 
-  
-  var covers = (med / aov).toFixed(1);
-  var growthRate = Math.round(newV / live * 100);
-  var discount = disc;
+  var bagsPerWeek = (med / aov).toFixed(0);
+  var growthRate  = Math.round(newV / live * 100);
 
-  
   set('city-label', 'Three Biggest Problems — ' + city);
 
-  
-  set('p1-title', 'The offer window problem — not the venue quality problem');
-  var tierCtx = vtP > 0
-    ? ' Split by tier: ' + vtP + '% premium anchors, ' + vtM + '% mid-market, ' + vtC + '% casual. Premium venues may legitimately show lower frequency by design — apply the median within tiers, not across the whole portfolio.'
-    : '';
-  var loginCtx = l30 > 20
-    ? ' ' + l30 + '% of venues have not logged in for 30+ days. Before diagnosing offer structure, identify which venues are disengaged entirely — they need an AM call this week before anything else changes.'
-    : '';
-  set('p1-root', 'Root cause: £' + med + ' median weekly revenue ÷ £' + aov + ' AOV = ' + covers + ' covers per week per venue. The offer is live on the wrong nights.' + tierCtx + loginCtx);
-  set('p1-detail', 'The venue signed up and set a weekend offer. A few redemptions came in on Friday — covers the venue would have sold at full price anyway. They read the commission statement and concluded TGTG costs money. It did. Because the offer was in the wrong window. The same venue with a Tuesday at 6pm offer is a completely different financial outcome. The product works. The offer window does not.');
+  // PROBLEM 1 — Window distribution
+  set('p1-title', 'Surprise Bags listed in the wrong collection windows');
+  var loginCtx = l30 > 20 ? ' ' + l30 + '% of partners have not logged into the partner app for 30+ days. Before fixing window distribution, AM needs to re-engage these accounts — the window conversation is irrelevant if the partner has disengaged.' : '';
+  set('p1-root', 'Root cause: ' + fs + '% of reservations on Friday and Saturday. ' + mw + '% Monday to Wednesday. Partners signed up and listed a weekend Surprise Bag. The window is live on the nights their food was already selling.' + loginCtx);
+  set('p1-detail', 'The Surprise Bag agreed at point of signing determines everything that follows. A partner who lists a Friday evening bag is selling food they would have sold anyway — TGTG earns them commission on top of a busy service and the partner concludes it was not worth it. The same partner with a Tuesday lunchtime bag is selling food that was going in the bin. Completely different economics. The window conversation has to happen at point of signing, before the rep ends the call.');
 
-  
-  set('p2-title', 'Weekday demand exists. Weekday supply does not.');
-  set('p2-root', 'Root cause: ' + fs + '% of redemptions on Friday and Saturday. ' + mw + '% on Monday to Wednesday. A customer opens the app on a Tuesday evening and finds almost nothing. Consumer growth at +' + con + '% MoM means the demand problem is getting worse, not better.');
-  set('p2-detail', 'The ' + rep + '% repeat reservation rate is the demand-side signal that the marketplace is not delivering on its core promise. Customers come once, find thin weekday supply, and do not come back. The fix is not a consumer campaign. It is weekday supply. Get the offer windows right on the existing venue base and the repeat rate moves without spending a pound on acquisition.');
+  // PROBLEM 2 — Repeat rate / demand side
+  set('p2-title', 'Customers are not coming back — weekday supply is the reason');
+  set('p2-root', 'Root cause: ' + rep + '% repeat reservation rate in 90 days. Customer MoM growth at +' + con + '%. A customer opens the app on a Tuesday evening, finds almost nothing listed, and does not return. The demand is there. The supply is not.');
+  set('p2-detail', 'Repeat reservation rate is the demand-side signal that the marketplace is not working. Customers who find a Surprise Bag on their first visit and get a good experience do come back — the ' + rep + '% repeat rate tells you most are not getting that first experience on a weekday. The fix is not marketing. It is listing the right Surprise Bag in the right window on the right day. Get the weekday window right across the existing partner base and the repeat rate moves without spending a pound on customer acquisition.');
 
-  
-  set('p3-title', 'The signing conversation is where this gets fixed or does not');
-  set('p3-root', 'Root cause: ' + newV + ' new venues signed in 90 days — ' + growthRate + '% gross expansion — but the offer window conversation is not happening at point of signing. Net weekday liquidity is roughly flat because new supply enters with the same window problem as the existing estate.');
-  var t2rCtx = t2r > 0
-    ? (t2r > 21
-        ? ' Average ' + t2r + ' days to first redemption — venues are going live and sitting dark. The rep-to-AM handover needs restructuring. Target: under 10 days.'
-        : ' Average ' + t2r + ' days to first redemption — this is improvable.')
-    : '';
-  if(t2r0 > 10) t2rCtx += ' ' + t2r0 + '% of signed venues have never had a single redemption. That is a deal quality issue, not an AM issue.';
-  set('p3-detail', 'The rep who signs a venue and agrees the first Surprise Bag before ending the call is the standard. Close on the call, live before the call ends.on is building a different asset from the rep who signs and leaves setup to the venue. The segment strategy matters less than what is agreed before the handshake. The onboarding conversation is where weekday liquidity is either built in or left out.' + t2rCtx);
+  // PROBLEM 3 — Signing quality
+  set('p3-title', 'New partners are being signed without the window conversation');
+  var t2rCtx = t2r > 0 ? (t2r > 21 ? ' Average ' + t2r + ' days to first Surprise Bag reserved — partners are going live and sitting dark. The rep-to-AM handover needs restructuring. Target: under 10 days.' : ' ' + t2r + ' days average to first reservation — improvable but not critical.') : '';
+  if(t2r0 > 10) t2rCtx += ' ' + t2r0 + '% of signed partners have never had a single Surprise Bag reserved. That is a signing quality issue — the partner was not set up for success on the call.';
+  set('p3-root', 'Root cause: ' + newV + ' new partners signed in 90 days — ' + growthRate + '% gross expansion — but new supply enters with the same window problem as the existing estate. Volume without quality compounds the problem.' + t2rCtx);
+  set('p3-detail', 'The standard is: close the Surprise Bag window on the call. Day, time, bag count, price — agreed before hanging up. Walk the partner through the partner app together. First bag listed before the call ends. A rep who does this is building a different asset from a rep who signs and leaves setup to the AM. Both count as a close. One builds the marketplace. Account Management owns fixing the existing estate. Sales owns the next 90 days of new supply. Both tracks have to run simultaneously.');
 
-  
-  var dsCtx = (100 - ds) > 50
-    ? (100 - ds) + '% of deals below a bag close rate of 3 per week. The offer structure conversation is being skipped — not occasionally, habitually. '
-    : ds + '% of deals at or above a score of 50. The offer structure conversation is happening on the majority of deals. The problem is in the minority pulling the median down. ';
-  set('team-diag', dsCtx + 'The rep who closes a venue with a committed Tuesday and Wednesday offer window already in the dashboard is doing a different job from the rep who closes a venue blank. Both count as a close. One builds the marketplace. The coaching question is: what is being agreed before the handshake, and is it consistent across the team?');
-
-  
+  // TEAM DIAGNOSIS
+  var dsMsg = bags < 3
+    ? 'Average bags agreed per rep per week is ' + bags + ' — below the standard of 3+ per week. The close conversation is being skipped. Not occasionally — habitually. Reps are agreeing to sign the partner but not agreeing the Surprise Bag window, collection time, bag count, and price before ending the call. The coaching question for every TL: what was agreed before the handshake?'
+    : 'Bags agreed per week is at ' + bags + ' — at or above standard on volume. The quality question is what is being agreed inside each close: is the window weekday-primary, is the bag count realistic, is the price set to sell? A high close rate with poor window quality is building volume in the wrong direction.';
   if(tq > 0 && bq > 0){
     var gap = tq - bq;
-    var repMsg = gap > 25
-      ? ' Rep consistency: ' + gap + 'pp spread from top to bottom quartile. That gap does not close without direct management intervention — named conversations, live listening sessions, and a standard that is enforced rather than hoped for.'
+    dsMsg += gap > 25
+      ? ' Q1-to-Q4 close rate spread is ' + gap + 'pp — ' + tq + '% vs ' + bq + '%. That gap does not close without direct management intervention: named conversations, live listening sessions, and an enforced standard on what the window conversation looks like.'
       : gap > 10
-      ? ' Rep consistency: ' + gap + 'pp spread. Manageable with a structured coaching cadence — weekly live listening sessions and a clear standard on what the offer window conversation looks like.'
-      : ' Rep consistency: ' + gap + 'pp spread — tight. If performance is still uneven, look at territory and territory allocation before drawing conclusions about individuals.';
-    var existing = document.getElementById('team-diag');
-    if(existing) existing.textContent += repMsg;
+      ? ' ' + gap + 'pp spread between Q1 and Q4. Manageable with a structured coaching cadence — weekly live listening sessions and a clear standard on the window conversation.'
+      : ' Q1-to-Q4 spread of ' + gap + 'pp — tight. If performance is still uneven, look at territory allocation before drawing conclusions about individuals.';
   }
+  set('team-diag', dsMsg);
 
-  
-  var amNote = ' Account Management owns the existing estate. Sales owns the next 90 days of new supply. The split is clean: AM calls the dormant accounts in the current portfolio and does exactly what the rep should have done at signing — opens the dashboard, shifts the window, builds the habit. Sales ensures the next wave of venues is signed with the right structure already agreed. Both tracks run simultaneously.';
-  var p3d = document.getElementById('p3-detail');
-  if(p3d) p3d.textContent += amNote;
+  // 30-DAY MOVE
+  var sprintTarget = Math.min(mw + 12, 28);
+  set('move-metric', 'Weekday Surprise Bag redemption share — Mon to Thu sprint cohort');
+  set('move-range', 'Current territory: ' + mw + '% Mon–Wed → Sprint target: ' + sprintTarget + '% Mon–Thu in 30 days');
+  set('move-how', 'Sales and AM identify 20–30 highest-potential partners transacting exclusively on weekends. Named rep and AM assigned to each. One joint call per partner. One ask: open the partner app together, add a Tuesday–Thursday collection window, first bag listed before the call ends. Daily standup tracking on the sprint. Weekly number to Chelsea. The territory-wide metric moves when the sprint cohort moves.');
+  set('move-owner', '📋 Named sprint lead — Sales and AM co-own · Daily standup · Weekly readout to HoI');
 
-  
-  var sprintTarget = Math.min(mw + 10, 25);
-  set('move-metric', 'Weekday redemption share on the sprint cohort — Mon to Thu');
-  set('move-range', 'Current city-wide: ' + mw + '% Mon–Wed → Sprint cohort target: ' + sprintTarget + '% Mon–Thu within 30 days');
-  set('move-how', 'Sales and AM jointly identify the 20–30 highest-potential venues that are transacting exclusively or predominantly on weekends. Named rep and named AM assigned to each. One joint call per venue. One ask: open the dashboard together, shift the offer window to Tuesday–Thursday 5:30–7:30pm, do it on their phone before you leave. The habit is built in the room — not explained in a follow-up email. Daily standup on the sprint. Weekly number to Chelsea. The city-wide metric moves when the sprint cohort moves.');
-  set('move-owner', 'Named sprint lead — Sales and AM co-own. Daily standup. Weekly readout to HoI.');
-
-  
-  var cuisineNote = '';
-  if(c1 > 25 && c1n) cuisineNote = c1n + ' venues represent ' + c1 + '% of the portfolio — above the 25% single-cuisine ceiling. Check whether phone reps are over-indexing on a familiar network. Variety drives consumer virality. A monocultural feed stops word of mouth.';
-
-  
+  // PUSHBACK / CHALLENGE
   var pbHTML = '';
   var agrees = [
-    'The offer window conversation is where the quality of the deal is set. But the goal at signing is not just to agree one window — it is to get the operator genuinely invested. Show them all the features, build out a complete offer set across their opening times if they will let you, and hand over to AM with full notes on the restaurant, the owner, and the pain points discussed. The AM should dialto a warm relationship, not a cold file. That is what separates a signed venue from a live one.',
-    'The median revenue split by venue tier is the right anchor. A Michelin venue at £' + med + '/week may be delivering social proof and consumer credibility that no revenue number captures. Apply the median within tiers. Premium anchors are not the problem.',
-    'Account Management and Sales need to be running parallel tracks — AM fixing the existing estate, Sales fixing the next 90 days of acquisition. If only one track is running, the problem compounds faster than it is being solved.'
+    'The window conversation at point of signing is where quality is set — but the goal is not just agreeing one window. It is getting the partner genuinely set up: walking through the app together, listing the first bag live, and handing to AM with full notes on the partner, their surplus pattern, and any concerns raised. AM should be calling into a warm relationship, not a cold file.',
+    'The repeat reservation rate is the right metric to anchor on. But before pulling the customer acquisition lever, confirm the weekday supply fix is in progress. Consumer campaigns into thin weekday supply waste the budget.',
+    'Account Management and Sales have to run parallel tracks — AM fixing the existing estate window by window, Sales fixing the next 90 days of new partner quality. If only one track is running, the problem compounds faster than it is being solved.'
   ];
-  var pushbacks = [
-    'The ' + fs + '% Fri/Sat figure is a city-level aggregate. Before it becomes an action it needs a per-venue breakdown — some Friday covers are genuinely incremental for venues that have never run a 5:30pm offer before. The aggregate does not tell you which venues those are.',
-    'Consumer growth at +' + con + '% MoM is not a problem yet — it becomes one when weekday supply fails to meet demand. Prioritise supply-side fix first. Do not slow consumer acquisition to manage a supply gap.',
-    cuisineNote || 'Platform login frequency is the leading indicator before offer inactivity. If venues have not logged in for 30+ days, the offer window conversation is irrelevant — they need an AM contact call first to re-establish engagement.'
-  ].filter(function(p){ return p.length > 0; });
-
-  agrees.forEach(function(a){
-    pbHTML += '<div class="pushback-item"><div class="pb-dot pb-agree"></div><div class="pb-text">' + a + '</div></div>';
-  });
-  pushbacks.forEach(function(p){
-    pbHTML += '<div class="pushback-item"><div class="pb-dot pb-disagree"></div><div class="pb-text">' + p + '</div></div>';
-  });
+  var flags = [
+    fs + '% Fri/Sat is a territory-level aggregate. Before it becomes an action it needs a per-partner breakdown — some weekend bags are genuinely incremental for partners who have no other revenue in that slot. The aggregate does not tell you which partners those are.',
+    l30 > 20 ? l30 + '% of partners not logged in for 30+ days. Platform login is the leading indicator before bag inactivity — these partners need an AM call before the window conversation is even relevant.' : 'Customer growth at +' + con + '% MoM is not yet a problem — it becomes one when weekday supply fails to meet demand. Fix supply first. Do not slow customer acquisition to manage a supply gap.',
+    'The 30-day sprint metric is the right focus — but measure it at the sprint cohort level, not the territory aggregate. The territory number moves slowly. The sprint cohort tells you faster whether the intervention is working.'
+  ];
+  agrees.forEach(function(a){ pbHTML += '<div class="pushback-item"><div class="pb-dot pb-agree"></div><div class="pb-text">' + a + '</div></div>'; });
+  flags.forEach(function(f){ pbHTML += '<div class="pushback-item"><div class="pb-dot pb-flag"></div><div class="pb-text">' + f + '</div></div>'; });
   setHTML('pushback-card', pbHTML);
 
-  
   v('loading').style.display = 'none';
   v('diag').style.display = 'block';
   v('run-btn').disabled = false;
@@ -445,6 +357,5 @@ async function runDiagnosis() {
   v('badge').textContent = '● Live';
 }
 </script>
-<script src="/nav.js"></script>
 </body>
 </html>
