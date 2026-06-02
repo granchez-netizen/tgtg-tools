@@ -4,8 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Too Good To Go · Coaching & 1:1 Templates</title>
-<link rel="stylesheet" href="/brand.css">
+
 <style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap');
+:root{
+  --tgtg:#6DBE4F;--tgtgd:rgba(109,190,79,.09);--tgtgl:rgba(109,190,79,.25);
+  --bg:#ffffff;--bg2:#f7f8f5;--border:#e4e8de;--border2:#dde3d8;
+  --text:#1a1a1a;--muted:#5a6454;--muted2:#8a9484;
+  --danger:#EF4444;--dangerd:rgba(239,68,68,.07);--dangerl:rgba(239,68,68,.18);
+  --warn:#F59E0B;--warnd:rgba(245,158,11,.07);--warnl:rgba(245,158,11,.18);
+  --good:#22C55E;--goodd:rgba(34,197,94,.08);--goodl:rgba(34,197,94,.18);
+  --info:#60A5FA;--infod:rgba(96,165,250,.08);--infol:rgba(96,165,250,.18);
+  --purple:#A78BFA;--purpled:rgba(167,139,250,.08);--purplel:rgba(167,139,250,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;padding-bottom:80px;}
 
 :root {
   --ink: #0f0f0f;
@@ -32,39 +45,39 @@
 
 body {
   -webkit-font-smoothing: antialiased;
-  font-family: 'Inter', sans-serif;
+  font-family:'DM Sans',sans-serif;
   background: var(--bg);
-  color: var(--ink);
+  color: var(--text);
   font-size: 14px;
   line-height: 1.6;
 }
 
 .nav {
-  background: var(--ink);
+  background: var(--text);
   padding: 0;
   position: sticky;
   top: 0;
   z-index: 100;
   display: flex;
   align-items: stretch;
-  border-bottom: 2px solid var(--gold);
+  border-bottom: 2px solid var(--tgtg);
 }
 .nav-logo {
-  font-family: 'Inter', serif;
+  font-family:'DM Sans',sans-serif;
   font-size: 18px;
-  color: var(--white);
+  color:#fff;
   padding: 14px 24px;
   border-right: 1px solid rgba(255,255,255,.12);
   white-space: nowrap;
 }
-.nav-logo span { color: var(--gold); }
+.nav-logo span { color: var(--tgtg); }
 .nav-tabs {
   display: flex;
   flex: 1;
   overflow-x: auto;
 }
 .nav-tab {
-  font-family: 'Inter', sans-serif;
+  font-family:'DM Sans',sans-serif;
   font-size: 10px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -80,29 +93,29 @@ body {
   align-items: center;
 }
 .nav-tab:hover { color: rgba(255,255,255,.85); }
-.nav-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+.nav-tab.active { color: var(--tgtg); border-bottom-color: var(--tgtg); }
 
 .print-btn {
-  font-family: 'Inter', sans-serif;
+  font-family:'DM Sans',sans-serif;
   font-size: 10px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  background: var(--gold);
-  color: var(--white);
+  background: var(--tgtg);
+  color:#fff;
   border: none;
   padding: 0 20px;
   cursor: pointer;
   transition: background .2s;
   white-space: nowrap;
 }
-.print-btn:hover { background: var(--gold-d); }
+.print-btn:hover { background: #4a9e32; }
 
 .sheet { display: none; max-width: 900px; margin: 0 auto; padding: 40px 32px 80px; }
 .sheet.active { display: block; }
 
 .tmpl-header {
-  background: var(--ink);
-  color: var(--white);
+  background: var(--text);
+  color:#fff;
   padding: 36px 40px 28px;
   margin: 0 -32px 36px;
   position: relative;
@@ -114,26 +127,26 @@ body {
   right: -60px; top: -60px;
   width: 200px; height: 200px;
   border-radius: 50%;
-  background: var(--gold);
+  background: var(--tgtg);
   opacity: .06;
 }
 .tmpl-tag {
-  font-family: 'Inter', sans-serif;
+  font-family:'DM Sans',sans-serif;
   font-size: 9px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--tgtg);
   margin-bottom: 8px;
   display: block;
 }
 .tmpl-title {
-  font-family: 'Inter', serif;
+  font-family:'DM Sans',sans-serif;
   font-size: 32px;
   font-weight: 400;
   line-height: 1.1;
   margin-bottom: 10px;
 }
-.tmpl-title em { font-style: italic; color: var(--gold); }
+.tmpl-title em { font-style: italic; color: var(--tgtg); }
 .tmpl-sub {
   font-size: 13px;
   color: rgba(255,255,255,.55);
@@ -150,7 +163,7 @@ body {
 }
 .meta-item { }
 .meta-l {
-  font-family: 'Inter', sans-serif;
+  font-family:'DM Sans',sans-serif;
   font-size: 8px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -161,8 +174,8 @@ body {
   background: none;
   border: none;
   border-bottom: 1px solid rgba(255,255,255,.25);
-  color: var(--white);
-  font-family: 'Inter', sans-serif;
+  color:#fff;
+  font-family:'DM Sans',sans-serif;
   font-size: 13px;
   font-weight: 500;
   width: 160px;
@@ -170,7 +183,7 @@ body {
   outline: none;
 }
 .meta-input::placeholder { color: rgba(255,255,255,.25); }
-.meta-input:focus { border-bottom-color: var(--gold); }
+.meta-input:focus { border-bottom-color: var(--tgtg); }
 
 .section {
   margin-bottom: 28px;
@@ -182,14 +195,14 @@ body {
   margin-bottom: 14px;
 }
 .section-num {
-  font-family: 'Inter', sans-serif;
+  font-family:'DM Sans',sans-serif;
   font-size: 11px;
   font-weight: 500;
-  color: var(--gold-d);
+  color: #4a9e32;
   min-width: 24px;
 }
 .section-title {
-  font-family: 'Inter', sans-serif;
+  font-family:'DM Sans',sans-serif;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 1.5px;
@@ -197,10 +210,10 @@ body {
   color: var(--muted);
 }
 .section-title-large {
-  font-family: 'Inter', serif;
+  font-family:'DM Sans',sans-serif;
   font-size: 18px;
   font-weight: 400;
-  color: var(--ink);
+  color: var(--text);
 }
 
 .obs-grid {
@@ -210,15 +223,15 @@ body {
   margin-bottom: 16px;
 }
 .obs-card {
-  border: 1px solid var(--rule);
+  border: 1px solid var(--border);
   border-radius: 0;
   background: var(--white);
   overflow: hidden;
 }
 .obs-card-head {
-  background: var(--ink);
-  color: var(--white);
-  font-family: 'Inter', sans-serif;
+  background: var(--text);
+  color:#fff;
+  font-family:'DM Sans',sans-serif;
   font-size: 9px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -232,7 +245,7 @@ body {
   align-items: center;
   gap: 10px;
   padding: 8px 0;
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid var(--border);
 }
 .rating-row:last-child { border-bottom: none; }
 .rating-label {
@@ -248,14 +261,14 @@ body {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 1.5px solid var(--rule);
+  border: 1.5px solid var(--border);
   cursor: pointer;
   transition: all .15s;
   position: relative;
 }
-.dot:hover { border-color: var(--gold); background: var(--gold-pale); }
+.dot:hover { border-color: var(--tgtg); background: var(--tgtgd); }
 .dot-label {
-  font-family: 'Inter', sans-serif;
+  font-family:'DM Sans',sans-serif;
   font-size: 9px;
   color: var(--muted);
   margin-left: 4px;
@@ -266,18 +279,18 @@ body {
   align-items: center;
   gap: 10px;
   padding: 10px 0;
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid var(--border);
 }
 .tl-row:last-child { border-bottom: none; }
 .tl-label { flex: 1; font-size: 13px; color: var(--soft); }
 .tl-btns { display: flex; gap: 6px; }
 .tl-btn {
-  font-family: 'Inter', sans-serif;
+  font-family:'DM Sans',sans-serif;
   font-size: 9px;
   letter-spacing: 1px;
   text-transform: uppercase;
   padding: 4px 10px;
-  border: 1.5px solid var(--rule);
+  border: 1.5px solid var(--border);
   cursor: pointer;
   background: none;
   transition: all .15s;
@@ -293,7 +306,7 @@ body {
   margin-bottom: 16px;
 }
 .field-label {
-  font-family: 'Inter', sans-serif;
+  font-family:'DM Sans',sans-serif;
   font-size: 9px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -305,18 +318,18 @@ body {
 }
 .field-label span {
   font-size: 9px;
-  color: var(--rule);
+  color: var(--border);
   font-style: italic;
   letter-spacing: 0;
   text-transform: none;
 }
 textarea {
   width: 100%;
-  border: 1.5px solid var(--rule);
+  border: 1.5px solid var(--border);
   background: var(--white);
-  font-family: 'Inter', sans-serif;
+  font-family:'DM Sans',sans-serif;
   font-size: 13.5px;
-  color: var(--ink);
+  color: var(--text);
   padding: 12px 14px;
   resize: vertical;
   outline: none;
@@ -324,35 +337,35 @@ textarea {
   transition: border-color .15s;
   min-height: 80px;
 }
-textarea:focus { border-color: var(--gold); }
+textarea:focus { border-color: var(--tgtg); }
 textarea::placeholder { color: rgba(0,0,0,.25); }
 input[type="text"], input[type="date"] {
   width: 100%;
-  border: 1.5px solid var(--rule);
+  border: 1.5px solid var(--border);
   background: var(--white);
-  font-family: 'Inter', sans-serif;
+  font-family:'DM Sans',sans-serif;
   font-size: 13.5px;
-  color: var(--ink);
+  color: var(--text);
   padding: 10px 14px;
   outline: none;
   transition: border-color .15s;
 }
-input[type="text"]:focus, input[type="date"]:focus { border-color: var(--gold); }
+input[type="text"]:focus, input[type="date"]:focus { border-color: var(--tgtg); }
 input::placeholder { color: rgba(0,0,0,.25); }
 
 .callout {
-  background: var(--gold-pale);
-  border-left: 3px solid var(--gold);
+  background: var(--tgtgd);
+  border-left: 3px solid var(--tgtg);
   padding: 14px 16px;
   margin-bottom: 16px;
   font-size: 13px;
   color: var(--soft);
   line-height: 1.55;
 }
-.callout strong { color: var(--ink); }
+.callout strong { color: var(--text); }
 
 .call-block {
-  border: 1.5px solid var(--rule);
+  border: 1.5px solid var(--border);
   background: var(--white);
   margin-bottom: 16px;
   overflow: hidden;
@@ -363,25 +376,25 @@ input::placeholder { color: rgba(0,0,0,.25); }
   display: flex;
   align-items: center;
   gap: 16px;
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid var(--border);
 }
 .venue-num {
-  font-family: 'Inter', sans-serif;
+  font-family:'DM Sans',sans-serif;
   font-size: 11px;
   font-weight: 500;
   color: var(--muted);
   background: var(--white);
   padding: 3px 10px;
-  border: 1px solid var(--rule);
+  border: 1px solid var(--border);
 }
 .call-name-input {
   flex: 1;
   border: none;
   background: transparent;
-  font-family: 'Inter', sans-serif;
+  font-family:'DM Sans',sans-serif;
   font-size: 13px;
   font-weight: 600;
-  color: var(--ink);
+  color: var(--text);
   outline: none;
 }
 .call-name-input::placeholder { color: rgba(0,0,0,.3); font-weight: 400; }
@@ -390,18 +403,18 @@ input::placeholder { color: rgba(0,0,0,.25); }
   gap: 6px;
 }
 .outcome-btn {
-  font-family: 'Inter', sans-serif;
+  font-family:'DM Sans',sans-serif;
   font-size: 8px;
   letter-spacing: 1px;
   text-transform: uppercase;
   padding: 4px 10px;
-  border: 1.5px solid var(--rule);
+  border: 1.5px solid var(--border);
   cursor: pointer;
   background: none;
   color: var(--muted);
   transition: all .15s;
 }
-.outcome-btn:hover { border-color: var(--ink); color: var(--ink); }
+.outcome-btn:hover { border-color: var(--text); color: var(--text); }
 .call-block-body {
   -webkit-font-smoothing: antialiased;
   padding: 16px;
@@ -412,24 +425,24 @@ input::placeholder { color: rgba(0,0,0,.25); }
 
 .pipeline-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
 .pipeline-table th {
-  font-family: 'Inter', sans-serif;
+  font-family:'DM Sans',sans-serif;
   font-size: 9px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--muted);
   padding: 8px 12px;
   text-align: left;
-  border-bottom: 2px solid var(--ink);
+  border-bottom: 2px solid var(--text);
   background: var(--bg);
 }
 .pipeline-table td {
   padding: 0;
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid var(--border);
   vertical-align: top;
 }
 .pipeline-table td input[type="text"] {
   border: none;
-  border-right: 1px solid var(--rule);
+  border-right: 1px solid var(--border);
   font-size: 13px;
   padding: 10px 12px;
   height: 100%;
@@ -437,7 +450,7 @@ input::placeholder { color: rgba(0,0,0,.25); }
 }
 .pipeline-table td:last-child input[type="text"] { border-right: none; }
 .pipeline-table tr:last-child td { border-bottom: none; }
-.pipeline-table td input[type="text"]:focus { background: var(--gold-pale); border-color: var(--gold); z-index: 1; position: relative; }
+.pipeline-table td input[type="text"]:focus { background: var(--tgtgd); border-color: var(--tgtg); z-index: 1; position: relative; }
 
 .score-row {
   display: grid;
@@ -447,12 +460,12 @@ input::placeholder { color: rgba(0,0,0,.25); }
 }
 .score-card {
   background: var(--white);
-  border: 1px solid var(--rule);
+  border: 1px solid var(--border);
   padding: 16px 14px;
   text-align: center;
 }
 .score-card-label {
-  font-family: 'Inter', sans-serif;
+  font-family:'DM Sans',sans-serif;
   font-size: 9px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -460,9 +473,9 @@ input::placeholder { color: rgba(0,0,0,.25); }
   margin-bottom: 8px;
 }
 .score-card-input {
-  font-family: 'Inter', serif;
+  font-family:'DM Sans',sans-serif;
   font-size: 28px;
-  color: var(--ink);
+  color: var(--text);
   border: none;
   background: none;
   text-align: center;
@@ -481,9 +494,9 @@ input::placeholder { color: rgba(0,0,0,.25); }
   gap: 16px;
   margin: 28px 0;
 }
-.divider-line { flex: 1; height: 1px; background: var(--rule); }
+.divider-line { flex: 1; height: 1px; background: var(--border); }
 .divider-text {
-  font-family: 'Inter', sans-serif;
+  font-family:'DM Sans',sans-serif;
   font-size: 9px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -491,8 +504,8 @@ input::placeholder { color: rgba(0,0,0,.25); }
 }
 
 .signoff {
-  background: var(--ink);
-  color: var(--white);
+  background: var(--text);
+  color:#fff;
   padding: 24px 28px;
   margin-top: 32px;
   display: grid;
@@ -501,7 +514,7 @@ input::placeholder { color: rgba(0,0,0,.25); }
 }
 .signoff-item { }
 .signoff-label {
-  font-family: 'Inter', sans-serif;
+  font-family:'DM Sans',sans-serif;
   font-size: 9px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -512,20 +525,20 @@ input::placeholder { color: rgba(0,0,0,.25); }
   background: none;
   border: none;
   border-bottom: 1px solid rgba(255,255,255,.2);
-  color: var(--white);
-  font-family: 'Inter', sans-serif;
+  color:#fff;
+  font-family:'DM Sans',sans-serif;
   font-size: 13px;
   width: 100%;
   padding: 4px 0;
   outline: none;
 }
-.signoff-input:focus { border-bottom-color: var(--gold); }
+.signoff-input:focus { border-bottom-color: var(--tgtg); }
 
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
 
 .rep-card {
-  border: 1.5px solid var(--rule);
+  border: 1.5px solid var(--border);
   background: var(--white);
   padding: 14px 16px;
   margin-bottom: 8px;
@@ -539,9 +552,9 @@ input::placeholder { color: rgba(0,0,0,.25); }
 .rep-name {
   font-size: 13px;
   font-weight: 600;
-  color: var(--ink);
+  color: var(--text);
 }
-.rep-name input { border: none; background: none; font-size: 13px; font-weight: 600; color: var(--ink); outline: none; width: 200px; }
+.rep-name input { border: none; background: none; font-size: 13px; font-weight: 600; color: var(--text); outline: none; width: 200px; }
 
 .check-list { list-style: none; padding: 0; }
 .check-list li {
@@ -549,7 +562,7 @@ input::placeholder { color: rgba(0,0,0,.25); }
   align-items: flex-start;
   gap: 10px;
   padding: 8px 0;
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid var(--border);
   font-size: 13px;
   color: var(--soft);
 }
@@ -559,7 +572,7 @@ input::placeholder { color: rgba(0,0,0,.25); }
   height: 16px;
   margin-top: 2px;
   flex-shrink: 0;
-  accent-color: var(--gold);
+  accent-color: var(--tgtg);
   cursor: pointer;
 }
 
@@ -576,16 +589,10 @@ input::placeholder { color: rgba(0,0,0,.25); }
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-logo">Eat<span>Club</span></div>
-  <div class="nav-tabs">
-    <button class="nav-tab active" onclick="show('call-along')">01 · Call-Along</button>
-    <button class="nav-tab" onclick="show('call')">02 · Cold Call Observation</button>
-    <button class="nav-tab" onclick="show('rep')">03 · Rep Weekly 1:1</button>
-    <button class="nav-tab" onclick="show('sm')">04 · Team Lead 1:1</button>
-  </div>
-  <button class="print-btn" onclick="window.print()">Print / PDF</button>
-</nav>
+<div style="background:#6DBE4F;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;">
+  <div style="font-size:13px;font-weight:800;color:#fff;">Too Good To Go · UK &amp; Ireland</div>
+  <div style="font-size:11px;color:rgba(255,255,255,.75);">Head of Independent Partners · 1:1 Templates</div>
+</div>
 
 <div class="sheet active" id="sheet-call-along">
 
@@ -1362,7 +1369,7 @@ input::placeholder { color: rgba(0,0,0,.25); }
     </div>
 
     <div id="rep-cards"></div>
-    <button onclick="addRepCard()" style="width:100%;padding:12px;margin-top:8px;margin-bottom:16px;background:transparent;border:1.5px dashed #2a2a2a;border-radius:10px;color:#555;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;" onmouseover="this.style.borderColor='#6DBE4F';this.style.color='#6DBE4F'" onmouseout="this.style.borderColor='#2a2a2a';this.style.color='#555'">+ Add Rep</button>
+    <button onclick="addRepCard()" style="width:100%;padding:12px;margin-top:8px;margin-bottom:16px;background:transparent;border:1.5px dashed #2a2a2a;border-radius:10px;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;" onmouseover="this.style.borderColor='#6DBE4F';this.style.color='#6DBE4F'" onmouseout="this.style.borderColor='#2a2a2a';this.style.color='#555'">+ Add Rep</button>
   </div>
 
   
@@ -1509,7 +1516,7 @@ function addRepCard(name){
     '<button class="tl-btn amber" onclick="toggleTL(this)">At risk</button>' +
     '<button class="tl-btn red" onclick="toggleTL(this)">Below floor</button>' +
     '</div>' +
-    '<button onclick="this.closest(\'.rep-card\').remove()" style="background:none;border:none;color:#333;cursor:pointer;font-size:14px;padding:4px 8px;" title="Remove">&times;</button>' +
+    '<button onclick="this.closest(\'.rep-card\').remove()" style="background:none;border:none;color:var(--text);cursor:pointer;font-size:14px;padding:4px 8px;" title="Remove">&times;</button>' +
     '</div>' +
     '<div class="field-group" style="margin:0;">' +
     '<textarea rows="2" placeholder="MTD deals / pipeline quality / key observation this week / any intervention in motion"></textarea>' +
