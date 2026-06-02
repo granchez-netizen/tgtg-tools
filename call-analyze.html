@@ -3,375 +3,762 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Too Good To Go · Call Intelligence</title>
-<link rel="stylesheet" href="/brand.css">
+<title>Too Good To Go · AI Time-Saver</title>
 <style>
-:root{--y:#6DBE4F;--g:#22C55E;--r:#EF4444;--b:#3B82F6;--p:#A855F7;--bg:#ffffff;--s:#f7f8f5;--b1:#dde3d8;--t:#1a1a1a;--m:#5a6454;}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap');
+:root{
+  --tgtg:#6DBE4F;--tgtgd:rgba(109,190,79,.09);--tgtgl:rgba(109,190,79,.25);
+  --bg:#ffffff;--bg2:#f7f8f5;--border:#e4e8de;--border2:#dde3d8;
+  --text:#1a1a1a;--muted:#5a6454;--muted2:#8a9484;
+  --danger:#EF4444;--dangerd:rgba(239,68,68,.07);--dangerl:rgba(239,68,68,.18);
+  --warn:#F59E0B;--warnd:rgba(245,158,11,.07);--warnl:rgba(245,158,11,.18);
+  --good:#22C55E;--goodd:rgba(34,197,94,.08);--goodl:rgba(34,197,94,.18);
+  --info:#60A5FA;--infod:rgba(96,165,250,.08);--infol:rgba(96,165,250,.18);
+  --purple:#A78BFA;--purpled:rgba(167,139,250,.08);--purplel:rgba(167,139,250,.18);
+}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);-webkit-font-smoothing:antialiased;}
-.hdr{background:#f7f8f5;border-bottom:1px solid var(--b1);padding:13px 24px 13px 60px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;}
-.brand{font-size:13px;font-weight:800;letter-spacing:-.3px;}.brand em{color:var(--y);font-style:normal;}
-.hdr-r{font-size:11px;color:var(--m);}
-.wrap{max-width:900px;margin:0 auto;padding:20px 24px 60px;}
-.eye{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--y);margin-bottom:4px;}
-.h1{font-size:26px;font-weight:900;letter-spacing:-.5px;line-height:1.15;margin-bottom:4px;}
-.h1 span{color:var(--m);font-weight:400;font-size:18px;}
-.hsub{font-size:13px;color:var(--m);line-height:1.6;margin-bottom:18px;}
-.nav-days{display:flex;gap:6px;margin-bottom:18px;}
-.nav-day{padding:7px 16px;border-radius:20px;border:1px solid #dde3d8;background:transparent;color:#555;font-size:11px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;}
-.nav-day.on{border-color:rgba(109,190,79,.3);background:rgba(109,190,79,.08);color:var(--y);}
-.nav-day:hover:not(.on){border-color:#444;color:#999;}
-.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px;}
-@media(max-width:600px){.stats{grid-template-columns:repeat(3,1fr);}}
-.stat{background:#ffffff;border:1px solid #dde3d8;border-radius:10px;padding:14px 16px;text-align:center;}
-.stat-n{font-size:22px;font-weight:900;letter-spacing:-1px;line-height:1;}
-.stat-l{font-size:9px;color:var(--m);margin-top:4px;font-weight:600;text-transform:uppercase;letter-spacing:1px;}
-.stat-d{font-size:9px;margin-top:2px;font-weight:700;}
-.top-rep{background:#f7f8f5;border:1.5px solid rgba(34,197,94,.2);border-radius:12px;padding:18px 20px;margin-bottom:16px;}
-.top-eye{font-size:9px;font-weight:700;color:var(--g);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;}
-.top-body{font-size:13px;color:#bbb;line-height:1.8;}.top-body strong{color:var(--t);}
-.priorities{background:#f7f8f5;border:1.5px solid rgba(239,68,68,.2);border-radius:12px;padding:18px 20px;margin-bottom:20px;}
-.pri-eye{font-size:9px;font-weight:700;color:var(--r);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;}
-.pri-item{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid #1a1a1a;font-size:12px;color:#ccc;line-height:1.7;}
-.pri-item:last-child{border-bottom:none;}
-.pri-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:7px;}
-.trend{background:#ffffff;border:1px solid #dde3d8;border-radius:12px;padding:18px 20px;margin-bottom:20px;}
-.trend-eye{font-size:9px;font-weight:700;color:var(--b);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;}
-.trend-row{display:flex;align-items:center;gap:12px;padding:7px 0;border-bottom:1px solid #141414;font-size:12px;}
-.trend-row:last-child{border-bottom:none;}
-.trend-name{width:120px;font-weight:700;flex-shrink:0;}
-.trend-bars{flex:1;display:flex;gap:3px;align-items:center;}
-.trend-bar{height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;min-width:24px;}
-.trend-avg{width:40px;text-align:right;font-weight:800;font-size:13px;}
-.section-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--m);margin:20px 0 10px;}
-.call{background:#ffffff;border:1.5px solid #dde3d8;border-radius:12px;overflow:hidden;margin-bottom:10px;transition:border-color .2s;}
-.call:hover{border-color:#3a3a3a;}
-.call-top{display:flex;align-items:center;gap:14px;padding:14px 18px;cursor:pointer;}
-.call-score{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;flex-shrink:0;}
-.call-score.green{background:rgba(34,197,94,.12);color:var(--g);}
-.call-score.yellow{background:rgba(109,190,79,.12);color:var(--y);}
-.call-score.red{background:rgba(239,68,68,.12);color:var(--r);}
-.call-mid{flex:1;}.call-rep{font-size:14px;font-weight:800;letter-spacing:-.2px;}
-.call-venue{font-size:12px;color:var(--m);margin-top:1px;}
-.call-meta{font-size:10px;color:#555;margin-top:2px;}
-.call-tags{display:flex;gap:4px;flex-shrink:0;flex-wrap:wrap;}
-.tag{font-size:8px;font-weight:700;padding:2px 7px;border-radius:4px;}
-.tag-g{background:rgba(34,197,94,.1);color:var(--g);}
-.tag-r{background:rgba(239,68,68,.1);color:var(--r);}
-.arrow{color:#2a2a2a;font-size:10px;transition:transform .2s;flex-shrink:0;}
-.call.open .arrow{transform:rotate(180deg);}
-.call-detail{display:none;border-top:1px solid #1e1e1e;padding:16px 18px;}
-.call.open .call-detail{display:block;}
-.crit-row{display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:1px solid #141414;font-size:12px;}
-.crit-row:last-child{border-bottom:none;}
-.crit-bar-wrap{width:50px;height:4px;background:#1e1e1e;border-radius:3px;flex-shrink:0;}
-.crit-bar{height:100%;border-radius:3px;}
-.crit-label{flex:1;color:#aaa;font-size:11px;}
-.crit-score{width:28px;text-align:right;font-weight:800;font-size:11px;}
-.crit-evidence{font-size:11px;color:#555;padding:2px 0 2px 60px;line-height:1.5;font-style:italic;}
-.crit-coaching{font-size:11px;color:var(--y);padding:1px 0 6px 60px;line-height:1.5;}
-.coaching-box{background:#f7f8f5;border-left:3px solid var(--y);padding:12px 16px;margin-top:12px;border-radius:0 8px 8px 0;}
-.coaching-title{font-size:9px;font-weight:700;color:var(--y);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;}
-.coaching-items{font-size:12px;color:#999;line-height:1.8;}.coaching-items strong{color:var(--t);}
-.empty-state{text-align:center;padding:60px 20px;color:#333;font-size:14px;}
-.intv{background:#ffffff;border:1px solid #dde3d8;border-radius:12px;padding:18px 20px;margin-bottom:20px;}
-.intv-eye{font-size:9px;font-weight:700;color:var(--p);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;}
-.intv-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #1a1a1a;font-size:12px;line-height:1.7;}
-.intv-item:last-child{border-bottom:none;}
-.intv-badge{padding:3px 8px;border-radius:4px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1px;flex-shrink:0;height:fit-content;margin-top:2px;}
-.intv-badge.ride{background:rgba(109,190,79,.1);color:var(--y);}
-.intv-badge.slack{background:rgba(168,85,247,.1);color:var(--p);}
-.intv-badge.call1{background:rgba(59,130,246,.1);color:var(--b);}
-.intv-badge.phone{background:rgba(34,197,94,.1);color:var(--g);}
-.intv-badge.standup{background:rgba(109,190,79,.15);color:var(--y);}
-.intv-mid{flex:1;color:#bbb;}
-.intv-mid strong{color:var(--t);}
-.intv-outcome{font-size:11px;color:var(--g);margin-top:4px;padding-left:12px;border-left:2px solid rgba(34,197,94,.2);}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;padding-bottom:80px;}
+.hdr{background:var(--tgtg);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+.brand{font-size:13px;font-weight:800;color:#fff;}
+.hdr-sub{font-size:11px;color:rgba(255,255,255,.75);}
+.wrap{max-width:860px;margin:0 auto;padding:28px 20px;}
+
+.hero-eye{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--tgtg);margin-bottom:10px;font-family:'DM Mono',monospace;}
+.hero-h1{font-size:clamp(24px,4vw,38px);font-weight:900;letter-spacing:-1px;line-height:1.1;margin-bottom:10px;}
+.hero-h1 em{color:var(--tgtg);font-style:normal;}
+.hero-sub{font-size:13px;color:var(--muted);line-height:1.8;max-width:600px;margin-bottom:8px;}
+
+/* TOOL NAV */
+.tool-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px;border-bottom:1px solid var(--border);padding-bottom:16px;}
+.tnav{padding:8px 16px;border-radius:8px;border:1px solid var(--border);background:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--muted);transition:all .15s;display:flex;align-items:center;gap:6px;}
+.tnav:hover{border-color:var(--tgtg);color:var(--tgtg);}
+.tnav.active{background:var(--tgtg);border-color:var(--tgtg);color:#fff;}
+.tnav .badge{font-size:8px;font-weight:700;padding:1px 5px;border-radius:4px;background:rgba(255,255,255,.25);}
+
+/* TOOL PANELS */
+.tool-panel{display:none;}.tool-panel.active{display:block;}
+
+/* SHARED INPUT STYLES */
+.ai-form{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:16px;}
+.form-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:8px;font-family:'DM Mono',monospace;display:block;}
+.form-input{width:100%;padding:10px 14px;background:#fff;border:1.5px solid var(--border);border-radius:9px;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;transition:border-color .15s;margin-bottom:12px;}
+.form-input:focus{outline:none;border-color:var(--tgtg);}
+.form-input::placeholder{color:var(--muted2);}
+textarea.form-input{resize:vertical;min-height:80px;line-height:1.7;}
+.form-select{width:100%;padding:10px 14px;background:#fff;border:1.5px solid var(--border);border-radius:9px;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;margin-bottom:12px;cursor:pointer;}
+.form-select:focus{outline:none;border-color:var(--tgtg);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(max-width:580px){.form-row{grid-template-columns:1fr;}}
+
+/* AI BUTTON */
+.ai-btn{width:100%;padding:13px;background:var(--tgtg);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .15s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.ai-btn:hover{opacity:.88;}
+.ai-btn:disabled{opacity:.5;cursor:not-allowed;}
+.ai-btn .spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none;}
+.ai-btn.loading .spinner{display:block;}
+.ai-btn.loading .btn-text{opacity:.7;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* OUTPUT BOX */
+.output-box{background:#fff;border:1.5px solid var(--tgtgl);border-radius:14px;padding:20px;margin-top:16px;display:none;}
+.output-box.visible{display:block;}
+.output-eye{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--tgtg);margin-bottom:12px;font-family:'DM Mono',monospace;}
+.output-content{font-size:13px;color:#333;line-height:1.9;white-space:pre-wrap;}
+.output-content strong{color:var(--text);font-weight:700;}
+.copy-strip{display:flex;gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid var(--border);}
+.copy-btn{padding:8px 16px;background:var(--tgtg);color:#fff;border:none;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.copy-btn.sec{background:transparent;border:1px solid var(--border);color:var(--muted);}
+.copy-btn:hover{opacity:.85;}
+.copy-btn.copied{background:var(--good);}
+
+/* SECTION DESCRIPTION */
+.tool-intro{font-size:13px;color:var(--muted);line-height:1.75;padding:14px 16px;background:var(--bg2);border-radius:10px;margin-bottom:20px;border-left:3px solid var(--tgtg);}
+.tool-intro strong{color:var(--text);}
+
+/* TIME SAVED PILL */
+.time-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;background:var(--goodd);border:1px solid var(--goodl);border-radius:20px;font-size:10px;font-weight:700;color:var(--good);font-family:'DM Mono',monospace;margin-bottom:16px;}
 </style>
 </head>
 <body>
+
 <div class="hdr">
-  <div class="brand"><em>Too Good</em> To Go · Call Intelligence</div>
-  <div class="hdr-r">Auto-refreshed daily 06:30 · <span id="lastup">last updated 06:31 today</span></div>
+  <div class="brand">Too Good To Go · UK &amp; Ireland</div>
+  <div class="hdr-sub">Head of Independent Partners · AI Time-Saver</div>
 </div>
+
 <div class="wrap">
-  <div class="eye" id="brief-eye">Morning call brief</div>
-  <div class="h1" id="brief-h1"></div>
-  <div class="hsub" id="brief-sub"></div>
-  <div class="nav-days" id="nav"></div>
-  <div id="content"></div>
+  <div class="hero-eye">AI-Powered · Head of Indies Operating System</div>
+  <div class="hero-h1">Do in 60 seconds what<br>used to take <em>an hour.</em></div>
+  <div class="hero-sub">Seven AI tools built for the specific tasks that eat a Head of Indies' week — writing, planning, coaching prep, rep communications, Chelsea briefs, partner outreach, and onboarding. No call transcripts needed. Just context in, output out.</div>
+
+  <div class="tool-nav">
+    <button class="tnav active" onclick="setTool('brief',this)">📋 Chelsea Brief</button>
+    <button class="tnav" onclick="setTool('coaching',this)">🎯 Coaching Plan</button>
+    <button class="tnav" onclick="setTool('pip-letter',this)">⚠️ PIP Letter</button>
+    <button class="tnav" onclick="setTool('outreach',this)">📞 Partner Outreach</button>
+    <button class="tnav" onclick="setTool('revival',this)">🔄 Revival Script</button>
+    <button class="tnav" onclick="setTool('1on1',this)">💬 1:1 Prep</button>
+    <button class="tnav" onclick="setTool('standup-gen',this)">☀️ Standup Script</button>
+  </div>
+
+  <!-- ═══ CHELSEA BRIEF ═══ -->
+  <div class="tool-panel active" id="panel-brief">
+    <div class="time-pill">⏱ Saves ~45 min per week</div>
+    <div class="tool-intro"><strong>Chelsea Brief Generator.</strong> Paste in your week's numbers and observations. Get back a clean, professional Friday brief ready to send — in the format Chelsea expects. No more staring at a blank page on Friday afternoon.</div>
+    <div class="ai-form">
+      <label class="form-label">Bags agreed this week</label>
+      <input class="form-input" id="b-bags" placeholder="e.g. 23" type="number">
+      <label class="form-label">New partners live</label>
+      <input class="form-input" id="b-partners" placeholder="e.g. 8" type="number">
+      <label class="form-label">Partner churn rate (this month %)</label>
+      <input class="form-input" id="b-churn" placeholder="e.g. 9" type="number">
+      <label class="form-label">Pipeline value (£)</label>
+      <input class="form-input" id="b-pipeline" placeholder="e.g. 142000" type="number">
+      <label class="form-label">Three things you observed this week</label>
+      <textarea class="form-input" id="b-observations" placeholder="e.g. Acquisition TL coaching quality improving — using specific technique names not just numbers. Two Q4 reps showed movement. Partner revival campaign converted 3 of 5 at-risk accounts."></textarea>
+      <label class="form-label">One risk or flag for Chelsea</label>
+      <textarea class="form-input" id="b-risk" placeholder="e.g. One TL showing signs of burnout — carrying too many reps through a difficult patch. Will address in Monday 1:1 but flagging early."></textarea>
+      <label class="form-label">One thing you need from Chelsea</label>
+      <input class="form-input" id="b-ask" placeholder="e.g. Approval for Q2 ethnic food segment bonus structure — proposal attached.">
+      <button class="ai-btn" id="btn-brief" onclick="runBrief()">
+        <div class="spinner"></div>
+        <span class="btn-text">✦ Generate Chelsea Brief</span>
+      </button>
+    </div>
+    <div class="output-box" id="out-brief">
+      <div class="output-eye">Chelsea Brief — Ready to Send</div>
+      <div class="output-content" id="out-brief-content"></div>
+      <div class="copy-strip">
+        <button class="copy-btn" onclick="copyOut('out-brief-content',this)">Copy brief</button>
+        <button class="copy-btn sec" onclick="clearOut('out-brief')">Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ COACHING PLAN ═══ -->
+  <div class="tool-panel" id="panel-coaching">
+    <div class="time-pill">⏱ Saves ~30 min per rep</div>
+    <div class="tool-intro"><strong>Individual Coaching Plan Generator.</strong> Enter what you know about a rep's performance. Get back a specific, quartile-appropriate coaching plan with named techniques, a weekly cadence, and a 4-week review goal. No generic frameworks.</div>
+    <div class="ai-form">
+      <div class="form-row">
+        <div>
+          <label class="form-label">Rep name</label>
+          <input class="form-input" id="c-name" placeholder="e.g. Sarah">
+        </div>
+        <div>
+          <label class="form-label">Quartile</label>
+          <select class="form-select" id="c-quartile">
+            <option value="Q1">Q1 — Top performer</option>
+            <option value="Q2" selected>Q2 — Solid, needs close coaching</option>
+            <option value="Q3">Q3 — Below target, coachable</option>
+            <option value="Q4">Q4 — Underperforming, needs direct conversation</option>
+          </select>
+        </div>
+      </div>
+      <label class="form-label">Team</label>
+      <select class="form-select" id="c-team">
+        <option>Acquisition</option>
+        <option>Account Management</option>
+        <option>Growth</option>
+      </select>
+      <label class="form-label">Dials per day (average)</label>
+      <input class="form-input" id="c-dials" placeholder="e.g. 42" type="number">
+      <label class="form-label">Meaningful conversations per 50 dials</label>
+      <input class="form-input" id="c-convs" placeholder="e.g. 8" type="number">
+      <label class="form-label">Surprise Bags agreed per week</label>
+      <input class="form-input" id="c-bags" placeholder="e.g. 3" type="number">
+      <label class="form-label">What you've observed — specifically</label>
+      <textarea class="form-input" id="c-obs" placeholder="e.g. Great discovery opener — asks about surplus before pitching. Falls apart when owner says 'I'll think about it'. Backs off immediately instead of asking what they need to decide."></textarea>
+      <label class="form-label">What coaching has already been tried (if any)</label>
+      <textarea class="form-input" id="c-tried" placeholder="e.g. TL has done two call-alongs this month. Rep is aware of the issue but hasn't changed behaviour on live calls yet."></textarea>
+      <button class="ai-btn" id="btn-coaching" onclick="runCoaching()">
+        <div class="spinner"></div>
+        <span class="btn-text">✦ Generate Coaching Plan</span>
+      </button>
+    </div>
+    <div class="output-box" id="out-coaching">
+      <div class="output-eye">Coaching Plan — 4 Weeks</div>
+      <div class="output-content" id="out-coaching-content"></div>
+      <div class="copy-strip">
+        <button class="copy-btn" onclick="copyOut('out-coaching-content',this)">Copy plan</button>
+        <button class="copy-btn sec" onclick="clearOut('out-coaching')">Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PIP LETTER ═══ -->
+  <div class="tool-panel" id="panel-pip-letter">
+    <div class="time-pill">⏱ Saves ~60 min per PIP</div>
+    <div class="tool-intro"><strong>PIP Communication Generator.</strong> Formal, fair, and specific. Enter the rep's situation and get back a PIP conversation framework and written summary — ready to use in the meeting and document afterwards. HR-appropriate, human in tone.</div>
+    <div class="ai-form">
+      <div class="form-row">
+        <div>
+          <label class="form-label">Rep name</label>
+          <input class="form-input" id="p-name" placeholder="e.g. Tom">
+        </div>
+        <div>
+          <label class="form-label">Weeks in role</label>
+          <input class="form-input" id="p-weeks" placeholder="e.g. 14" type="number">
+        </div>
+      </div>
+      <label class="form-label">Current performance (specific numbers)</label>
+      <textarea class="form-input" id="p-perf" placeholder="e.g. 28 dials/day vs 50 target. 3 meaningful conversations per 50 dials vs team average of 9. 0 Surprise Bags agreed in last 3 weeks."></textarea>
+      <label class="form-label">Coaching already provided</label>
+      <textarea class="form-input" id="p-coaching" placeholder="e.g. Three call-alongs in last 4 weeks. Weekly 1:1 with specific technique coaching. Paired with Q1 rep for two sessions. No sustained improvement."></textarea>
+      <label class="form-label">Root cause assessment</label>
+      <select class="form-select" id="p-root">
+        <option>Skill gap — cannot do it despite coaching</option>
+        <option>Confidence gap — knows what to do but won't try it</option>
+        <option>Effort gap — not putting in the activity</option>
+        <option>Wrong role — misaligned with phone sales environment</option>
+        <option>Personal circumstances affecting performance</option>
+      </select>
+      <label class="form-label">Target to hit (specific and measurable)</label>
+      <input class="form-input" id="p-target" placeholder="e.g. 45+ dials/day, 7+ meaningful conversations per 50 dials, 2+ bags agreed per week — sustained for 3 consecutive weeks.">
+      <label class="form-label">Review timeline</label>
+      <input class="form-input" id="p-timeline" placeholder="e.g. 4 weeks — review on [DATE]">
+      <button class="ai-btn" id="btn-pip" onclick="runPIP()">
+        <div class="spinner"></div>
+        <span class="btn-text">✦ Generate PIP Framework</span>
+      </button>
+    </div>
+    <div class="output-box" id="out-pip">
+      <div class="output-eye">PIP Framework — Meeting Guide &amp; Written Summary</div>
+      <div class="output-content" id="out-pip-content"></div>
+      <div class="copy-strip">
+        <button class="copy-btn" onclick="copyOut('out-pip-content',this)">Copy framework</button>
+        <button class="copy-btn sec" onclick="clearOut('out-pip')">Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PARTNER OUTREACH ═══ -->
+  <div class="tool-panel" id="panel-outreach">
+    <div class="time-pill">⏱ Saves ~20 min per sequence</div>
+    <div class="tool-intro"><strong>Partner Outreach Sequence Generator.</strong> Enter a venue type, location, and what you know about their surplus. Get back a personalised call opener, follow-up email, and WhatsApp message — ready for the rep to use. Specific to the category, not generic.</div>
+    <div class="ai-form">
+      <div class="form-row">
+        <div>
+          <label class="form-label">Business category</label>
+          <select class="form-select" id="o-cat">
+            <option>Restaurant</option>
+            <option>Café</option>
+            <option>Bakery</option>
+            <option>Pastry Shop</option>
+            <option>Sushi Restaurant</option>
+            <option>Takeaway Restaurant</option>
+            <option>Buffet Restaurant</option>
+            <option>Hotel</option>
+            <option>Supermarket</option>
+            <option>Beverage Shop</option>
+            <option>Butcher Shop</option>
+            <option>Fruit &amp; Veg Store</option>
+            <option>Flower &amp; Plant Store</option>
+            <option>Flower &amp; Plant Stall</option>
+            <option>Pet Store</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Business name</label>
+          <input class="form-input" id="o-name" placeholder="e.g. Meze &amp; More">
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label class="form-label">Area / location</label>
+          <input class="form-input" id="o-area" placeholder="e.g. Bethnal Green E2">
+        </div>
+        <div>
+          <label class="form-label">Owner / contact name (if known)</label>
+          <input class="form-input" id="o-owner" placeholder="e.g. Ahmed — leave blank if unknown">
+        </div>
+      </div>
+      <label class="form-label">What you know about their surplus (if anything)</label>
+      <textarea class="form-input" id="o-surplus" placeholder="e.g. Turkish restaurant, quiet Monday-Wednesday lunchtimes based on Google reviews. Likely has mezze prep surplus. Open until 11pm."></textarea>
+      <label class="form-label">Any nearby TGTG partner to name-drop? (optional)</label>
+      <input class="form-input" id="o-neighbour" placeholder="e.g. Dishoom Shoreditch — 200m away">
+      <button class="ai-btn" id="btn-outreach" onclick="runOutreach()">
+        <div class="spinner"></div>
+        <span class="btn-text">✦ Generate Outreach Sequence</span>
+      </button>
+    </div>
+    <div class="output-box" id="out-outreach">
+      <div class="output-eye">Outreach Sequence — Call · Email · WhatsApp</div>
+      <div class="output-content" id="out-outreach-content"></div>
+      <div class="copy-strip">
+        <button class="copy-btn" onclick="copyOut('out-outreach-content',this)">Copy all</button>
+        <button class="copy-btn sec" onclick="clearOut('out-outreach')">Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ REVIVAL SCRIPT ═══ -->
+  <div class="tool-panel" id="panel-revival">
+    <div class="time-pill">⏱ Saves ~25 min per at-risk account</div>
+    <div class="tool-intro"><strong>Partner Revival Script Generator.</strong> Enter what you know about a partner who's gone quiet or is at risk of churning. Get back a specific re-engagement call script, email, and the three most likely root causes with a response for each.</div>
+    <div class="ai-form">
+      <div class="form-row">
+        <div>
+          <label class="form-label">Partner name</label>
+          <input class="form-input" id="r-name" placeholder="e.g. The Good Egg Café">
+        </div>
+        <div>
+          <label class="form-label">Category</label>
+          <select class="form-select" id="r-cat">
+            <option>Restaurant</option>
+            <option>Café</option>
+            <option>Bakery</option>
+            <option>Pastry Shop</option>
+            <option>Sushi Restaurant</option>
+            <option>Takeaway Restaurant</option>
+            <option>Hotel</option>
+            <option>Supermarket</option>
+            <option>Butcher Shop</option>
+            <option>Fruit &amp; Veg Store</option>
+            <option>Flower &amp; Plant Store</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <label class="form-label">Current status</label>
+      <select class="form-select" id="r-status">
+        <option>Active but booking volume down more than 30%</option>
+        <option>No Surprise Bags listed in last 7 days</option>
+        <option>No Surprise Bags listed in last 14+ days</option>
+        <option>Account active but bags consistently going uncollected</option>
+        <option>Partner has raised a complaint or issue</option>
+        <option>Partner said they want to pause or cancel</option>
+      </select>
+      <label class="form-label">What you know about why (if anything)</label>
+      <textarea class="form-input" id="r-why" placeholder="e.g. Last AM contact was 6 weeks ago. Reviews suggest they've been busy with a refurb. Their original window was Monday lunchtimes but that might have changed."></textarea>
+      <label class="form-label">How long have they been a partner?</label>
+      <input class="form-input" id="r-tenure" placeholder="e.g. 4 months">
+      <label class="form-label">AM rep who owns this account</label>
+      <input class="form-input" id="r-am" placeholder="e.g. Jade">
+      <button class="ai-btn" id="btn-revival" onclick="runRevival()">
+        <div class="spinner"></div>
+        <span class="btn-text">✦ Generate Revival Script</span>
+      </button>
+    </div>
+    <div class="output-box" id="out-revival">
+      <div class="output-eye">Partner Revival — Root Causes · Call Script · Email</div>
+      <div class="output-content" id="out-revival-content"></div>
+      <div class="copy-strip">
+        <button class="copy-btn" onclick="copyOut('out-revival-content',this)">Copy script</button>
+        <button class="copy-btn sec" onclick="clearOut('out-revival')">Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ 1:1 PREP ═══ -->
+  <div class="tool-panel" id="panel-1on1">
+    <div class="time-pill">⏱ Saves ~20 min per 1:1</div>
+    <div class="tool-intro"><strong>1:1 Prep Generator.</strong> Enter what you know about the TL or rep going into the meeting. Get back the right agenda, the sharpest questions to ask, the coaching focus, and the one commitment to ask them to make before they leave.</div>
+    <div class="ai-form">
+      <div class="form-row">
+        <div>
+          <label class="form-label">Who is this with?</label>
+          <input class="form-input" id="m-name" placeholder="e.g. Marco — Acquisition TL">
+        </div>
+        <div>
+          <label class="form-label">Role</label>
+          <select class="form-select" id="m-role">
+            <option>Team Lead</option>
+            <option>Phone Rep — Q1</option>
+            <option>Phone Rep — Q2</option>
+            <option>Phone Rep — Q3</option>
+            <option>Phone Rep — Q4</option>
+          </select>
+        </div>
+      </div>
+      <label class="form-label">Team</label>
+      <select class="form-select" id="m-team">
+        <option>Acquisition</option>
+        <option>Account Management</option>
+        <option>Growth</option>
+      </select>
+      <label class="form-label">What's going well for them right now?</label>
+      <textarea class="form-input" id="m-good" placeholder="e.g. Team hit target 3 weeks in a row. He's started using call data in his standup rather than just reporting numbers."></textarea>
+      <label class="form-label">What's the challenge or development area?</label>
+      <textarea class="form-input" id="m-challenge" placeholder="e.g. Two Q3 reps on his team haven't moved in 4 weeks. His coaching notes show he's giving general feedback rather than specific technique replacements."></textarea>
+      <label class="form-label">Anything specific to address this week?</label>
+      <textarea class="form-input" id="m-agenda" placeholder="e.g. Territory expansion conversation — want to gauge his interest in leading the South East growth. Also need to discuss the Q4 rep situation."></textarea>
+      <button class="ai-btn" id="btn-1on1" onclick="run1on1()">
+        <div class="spinner"></div>
+        <span class="btn-text">✦ Generate 1:1 Agenda &amp; Questions</span>
+      </button>
+    </div>
+    <div class="output-box" id="out-1on1">
+      <div class="output-eye">1:1 Prep — Agenda · Questions · Coaching Focus · Commitment Ask</div>
+      <div class="output-content" id="out-1on1-content"></div>
+      <div class="copy-strip">
+        <button class="copy-btn" onclick="copyOut('out-1on1-content',this)">Copy agenda</button>
+        <button class="copy-btn sec" onclick="clearOut('out-1on1')">Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ STANDUP SCRIPT ═══ -->
+  <div class="tool-panel" id="panel-standup-gen">
+    <div class="time-pill">⏱ Saves ~15 min per standup</div>
+    <div class="tool-intro"><strong>Standup Script Generator.</strong> Enter this week's numbers, the win, and the coaching focus. Get back a complete standup script — energising, specific, ready to run in 20 minutes. No more improvising on the day.</div>
+    <div class="ai-form">
+      <div class="form-row">
+        <div>
+          <label class="form-label">Team</label>
+          <select class="form-select" id="s-team">
+            <option>Acquisition — 09:00</option>
+            <option>Account Management — 09:30</option>
+            <option>Growth — 10:00</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Day of week</label>
+          <select class="form-select" id="s-day">
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wednesday</option>
+            <option>Thursday</option>
+            <option>Friday</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label class="form-label">Bags agreed so far this week</label>
+          <input class="form-input" id="s-bags" placeholder="e.g. 12" type="number">
+        </div>
+        <div>
+          <label class="form-label">Weekly team target</label>
+          <input class="form-input" id="s-target" placeholder="e.g. 28" type="number">
+        </div>
+      </div>
+      <label class="form-label">Win to open with — rep name and what they did</label>
+      <textarea class="form-input" id="s-win" placeholder="e.g. Sarah — called Meze &amp; More in Bethnal Green, asked about end-of-day surplus before mentioning TGTG, closed a 5-bag Tuesday window in 9 minutes."></textarea>
+      <label class="form-label">One coaching point for today's calls</label>
+      <textarea class="form-input" id="s-coach" placeholder="e.g. When the owner says 'I'll think about it' — don't back off. Ask: 'What specifically do you need to think through? I'd rather answer that now.' That's the line that keeps the deal alive."></textarea>
+      <label class="form-label">Anything specific happening today?</label>
+      <input class="form-input" id="s-context" placeholder="e.g. Blitz day — all deals at stage 2+ get a reactivation call before 3pm. Or: new rep Priya's first solo calling session.">
+      <button class="ai-btn" id="btn-standup" onclick="runStandup()">
+        <div class="spinner"></div>
+        <span class="btn-text">✦ Generate Standup Script</span>
+      </button>
+    </div>
+    <div class="output-box" id="out-standup-gen">
+      <div class="output-eye">Standup Script — Ready to Run</div>
+      <div class="output-content" id="out-standup-gen-content"></div>
+      <div class="copy-strip">
+        <button class="copy-btn" onclick="copyOut('out-standup-gen-content',this)">Copy script</button>
+        <button class="copy-btn sec" onclick="clearOut('out-standup-gen')">Clear</button>
+      </div>
+    </div>
+  </div>
+
 </div>
+
 <script>
-var DAYS = {
-  'mon':{label:'Mon 19',date:'Monday 19 May',calls:11,avg:48,greens:2,reds:5,
-    top:{rep:'Marco Riley',venue:'The Good Egg, Walthamstow',score:76,note:'Strong Challenger-style opening with Google reviews data. Agreed a Mon-Wed lunch window. Only miss was not showing the AI recommendation.'},
-    priorities:[
-      {col:'var(--r)',text:'<strong>Team-wide pattern:</strong> 7 of 11 calls opened with TGTG credentials before asking a single question about the venue. Feature-first, not discovery-first. This needs to be addressed at Tuesday standup.'},
-      {col:'var(--r)',text:'<strong>Alex Turner</strong> — two calls, combined score 31. No discovery in either call. Product presentation only. This is not an experience gap — it is a habit. Needs a call-along before Thursday.'},
-      {col:'var(--y)',text:'<strong>Priya Sharma</strong> — solid discovery but keeps leaving the offer window decision to the owner. Two calls, two open windows. She needs to close in the room.'}
-    ],
-    trend:[
-      {name:'Sarah Chen',scores:[68,72,76],avg:72,col:'var(--g)'},
-      {name:'Marco Riley',scores:[55,76],avg:66,col:'var(--y)'},
-      {name:'Priya Sharma',scores:[62,58],avg:60,col:'var(--y)'},
-      {name:'James Whittaker',scores:[52,48,44],avg:48,col:'var(--y)'},
-      {name:'Alex Turner',scores:[34,28],avg:31,col:'var(--r)'}
-    ],
-    calls:[
-      {rep:'Marco Riley',venue:'The Good Egg, Walthamstow',time:'10:15',dur:'7:20',score:76,grade:'green',summary:'Challenger-style opening using Google reviews. Identified Mon-Wed lunch gap. Economics clear. Offer window agreed.',
-        criteria:[{label:'Opening',score:100,w:10,ev:'Referenced Google reviews mentioning quiet weekday lunches',co:''},{label:'Discovery',score:100,w:15,ev:'Owner confirmed Mon-Wed lunch below 40% capacity',co:''},{label:'Pitch',score:100,w:15,ev:'Walked through cover economics at their price',co:''},{label:'Brand objection',score:50,w:15,ev:'Not raised by owner, not proactively addressed',co:'Raise proactively even when not challenged'},{label:'AI recommendation',score:0,w:10,ev:'Not shown',co:'Show the screen next time'},{label:'Offer window',score:100,w:20,ev:'Mon-Wed 12-2pm 20% agreed',co:''},{label:'Next step',score:100,w:15,ev:'AM intro booked for Wednesday',co:''}],
-        actions:['Share the Google reviews opening technique at standup','Coach on showing AI recommendation']},
-      {rep:'Sarah Chen',venue:'Macchina, Walthamstow',time:'11:30',dur:'5:45',score:72,grade:'yellow',summary:'Good discovery, clean pitch. Brand objection handled well. Offer window agreed but follow-up date was vague.',
-        criteria:[{label:'Opening',score:100,w:10,ev:'Led with Orford Road foot traffic observation',co:''},{label:'Discovery',score:100,w:15,ev:'Confirmed Tue-Wed dinner quiet from 5-7pm',co:''},{label:'Pitch',score:100,w:15,ev:'Clear economics walkthrough',co:''},{label:'Brand objection',score:100,w:15,ev:'Handled directly — midweek targeted demand framing',co:''},{label:'AI recommendation',score:0,w:10,ev:'Not shown',co:'Show it'},{label:'Offer window',score:100,w:20,ev:'Tue-Wed 5-7pm 25% agreed',co:''},{label:'Next step',score:50,w:15,ev:'Said would follow up but no specific date',co:'Book the AM call before leaving'}],
-        actions:['Coach on booking specific follow-up date','Consistent performer — development track candidate']},
-      {rep:'Alex Turner',venue:'Hoe Street Club',time:'13:40',dur:'3:10',score:34,grade:'red',summary:'Feature presentation only. No discovery. No offer window. Owner politely ended the call.',
-        criteria:[{label:'Opening',score:0,w:10,ev:'Opened with platform stats',co:'Lead with their situation'},{label:'Discovery',score:0,w:15,ev:'No questions asked',co:'Ask about quiet periods'},{label:'Pitch',score:50,w:15,ev:'Mentioned empty covers briefly',co:'Walk through the maths'},{label:'Brand objection',score:0,w:15,ev:'Not addressed',co:'Raise proactively'},{label:'AI recommendation',score:0,w:10,ev:'Not mentioned',co:'Show it'},{label:'Offer window',score:0,w:20,ev:'Not discussed',co:'Must agree a window'},{label:'Next step',score:50,w:15,ev:'Owner said to email info',co:'Email is not a next step'}],
-        actions:['Call-along required — pattern forming','Manager to sit in on next two calls']},
-      {rep:'Alex Turner',venue:'Ye Olde Rose and Crown',time:'15:20',dur:'2:55',score:28,grade:'red',summary:'Shortest call of the day. Feature dump. Owner disengaged after 90 seconds.',
-        criteria:[{label:'Opening',score:0,w:10,ev:'Started with TGTG description',co:'Lead with venue data'},{label:'Discovery',score:0,w:15,ev:'None',co:'Critical gap'},{label:'Pitch',score:50,w:15,ev:'Brief mention of economics',co:'Slow down and use their numbers'},{label:'Brand objection',score:0,w:15,ev:'Not addressed',co:''},{label:'AI recommendation',score:0,w:10,ev:'Not mentioned',co:''},{label:'Offer window',score:0,w:20,ev:'Not discussed',co:''},{label:'Next step',score:0,w:15,ev:'Call ended without next step',co:'Never end without a booked follow-up'}],
-        actions:['Escalate to call-along — two red calls same day','Coaching conversation with manager today']},
-      {rep:'Priya Sharma',venue:'NOUR Walthamstow',time:'14:00',dur:'6:30',score:62,grade:'yellow',summary:'Good rapport and discovery. Found the quiet brunch window. But left the offer decision to the owner again.',
-        criteria:[{label:'Opening',score:100,w:10,ev:'Commented on their brunch menu after checking Instagram',co:''},{label:'Discovery',score:100,w:15,ev:'Confirmed Sat-Sun brunch is strong but weekday brunch empty',co:''},{label:'Pitch',score:50,w:15,ev:'Mentioned economics but did not do full walkthrough',co:'Walk through the numbers'},{label:'Brand objection',score:50,w:15,ev:'Touched on it briefly',co:'Go deeper'},{label:'AI recommendation',score:0,w:10,ev:'Not shown',co:'Show it'},{label:'Offer window',score:0,w:20,ev:'Left to owner — said to think about what days work',co:'Close the window in the room'},{label:'Next step',score:50,w:15,ev:'Follow-up mentioned but not booked',co:'Book it'}],
-        actions:['Coach on closing the Surprise Bag window on the call — she has the discovery skills, needs the close. Pair with Sarah Chen for a joint call to see the close in action']}
-    ]
-  },
-  'tue':{label:'Tue 20',date:'Tuesday 20 May',calls:14,avg:52,greens:3,reds:4,
-    top:{rep:'Sarah Chen',venue:'Tonkotsu Walthamstow',score:82,note:'Opened with Popular Times showing their Tuesday 5pm gap. Got the owner to pull up their covers spreadsheet on the spot. Agreed a Tue-Wed 5-7pm window before leaving. <strong>This is the version of the pitch we should be teaching.</strong> Coaching reel queued for Friday standup.'},
-    priorities:[
-      {col:'var(--r)',text:'<strong>Alex Turner</strong> — three calls this week, zero discovery questions in any of them. Presenting TGTG features instead of diagnosing the venue problem. Call-along recommended within 48 hours.'},
-      {col:'var(--r)',text:'<strong>James Whittaker</strong> — brand objection avoidance across two calls. When the owner raises brand concerns, James pivots to commission instead of addressing it. Needs the Challenger reframe.'},
-      {col:'var(--y)',text:'<strong>Team-wide:</strong> only 4 of 14 calls included an agreed offer window before leaving. The other 10 left setup to the owner. Single highest-leverage coaching fix available.'}
-    ],
-    trend:[
-      {name:'Sarah Chen',scores:[68,72,76,82,75],avg:75,col:'var(--g)'},
-      {name:'Marco Riley',scores:[55,76,78],avg:70,col:'var(--g)'},
-      {name:'Priya Sharma',scores:[62,58,71],avg:64,col:'var(--y)'},
-      {name:'James Whittaker',scores:[52,48,44],avg:48,col:'var(--y)'},
-      {name:'Alex Turner',scores:[34,28,35,28],avg:31,col:'var(--r)'}
-    ],
-    calls:[
-      {rep:'Sarah Chen',venue:'Tonkotsu Walthamstow',time:'14:22',dur:'6:14',score:82,grade:'green',summary:'Strong discovery-led call. Opened with venue data, identified the Tuesday gap, agreed a specific offer window before leaving.',
-        criteria:[{label:'Opening',score:100,w:10,ev:'Opened with Popular Times showing Tuesday 5pm drop',co:''},{label:'Discovery',score:100,w:15,ev:'Got owner to confirm Tue-Wed 5-7pm consistently 40% empty',co:''},{label:'Pitch',score:100,w:15,ev:'Walked through economics using their actual cover price',co:''},{label:'Brand objection',score:50,w:15,ev:'Not raised, not proactively addressed',co:'Address proactively even when not challenged'},{label:'AI recommendation',score:50,w:10,ev:'Mentioned but did not show screen',co:'Show the screen in venue'},{label:'Offer window',score:100,w:20,ev:'Agreed Tue-Wed 5-7pm 25% off',co:''},{label:'Next step',score:100,w:15,ev:'AM call booked Thursday, WhatsApp sent',co:''}],
-        actions:['Share at Friday standup — coaching reel auto-generated','Coach on proactively raising brand positioning']},
-      {rep:'Alex Turner',venue:'MA/NA Mayfair',time:'11:42',dur:'4:38',score:35,grade:'red',summary:'Well-presented but zero discovery. Pitched features without identifying any venue pain point. Callback secured but Thursday follow-up has no anchor.',
-        criteria:[{label:'Opening',score:0,w:10,ev:'Opened with TGTG credentials — 900 venues, 3M customers',co:'Open with their situation, not ours'},{label:'Discovery',score:0,w:15,ev:'No discovery questions asked at all',co:'Ask: when is your quietest service?'},{label:'Pitch',score:100,w:15,ev:'Commission structure explained clearly',co:'Good — anchor it to their quiet period'},{label:'Brand objection',score:50,w:15,ev:'Reframed as demand generation but did not go deeper',co:'Use the Challenger reframe'},{label:'AI recommendation',score:0,w:10,ev:'Not mentioned',co:'Show it'},{label:'Offer window',score:0,w:20,ev:'Not discussed at all',co:'Never leave without an agreed window'},{label:'Next step',score:50,w:15,ev:'Callback Thu after 3pm, WhatsApp to be sent',co:'The callback has nothing to anchor to'}],
-        actions:['Call-along within 48 hours','Practice opening: lead with their Tuesday, not our 3 million customers']},
-      {rep:'Marco Riley',venue:'The Axe and Ember Smokehouse',time:'12:15',dur:'8:44',score:78,grade:'green',summary:'Strong all-round. Discovery-led, economics clear, offer window agreed. Only gap: AI recommendation not shown.',
-        criteria:[{label:'Opening',score:100,w:10,ev:'Referenced Google reviews mentioning weekday availability',co:''},{label:'Discovery',score:100,w:15,ev:'Confirmed Mon-Wed lunch and early dinner underbooked',co:''},{label:'Pitch',score:100,w:15,ev:'Four empty covers at 30% off — net positive contribution',co:''},{label:'Brand objection',score:100,w:15,ev:'Midweek-only framing for premium casual BBQ',co:''},{label:'AI recommendation',score:0,w:10,ev:'Not shown',co:'Show it — only gap'},{label:'Offer window',score:100,w:20,ev:'Mon-Wed 5-7pm 25% starting next week',co:''},{label:'Next step',score:100,w:15,ev:'AM intro Friday, WhatsApp group created',co:''}],
-        actions:['Show AI recommendation — only gap','Share WhatsApp group handoff approach with team']},
-      {rep:'Priya Sharma',venue:'Bargo Walthamstow',time:'15:10',dur:'7:22',score:71,grade:'yellow',summary:'Good discovery, strong rapport. Identified Wednesday gap but did not close with a specific offer window.',
-        criteria:[{label:'Opening',score:100,w:10,ev:'Referenced quiet Wednesday she noticed walking past at 6pm',co:''},{label:'Discovery',score:100,w:15,ev:'Wed-Thu evenings confirmed quiet, especially 6-8pm',co:''},{label:'Pitch',score:50,w:15,ev:'Mentioned concept but no specific economics',co:'Calculate their numbers'},{label:'Brand objection',score:100,w:15,ev:'Reframed as targeted midweek demand — excellent',co:''},{label:'AI recommendation',score:50,w:10,ev:'Mentioned but not demoed',co:'Show screen'},{label:'Offer window',score:0,w:20,ev:'Left decision to owner',co:'Close on Wed-Thu 6-8pm — she already confirmed it'},{label:'Next step',score:50,w:15,ev:'Follow up next week, no specific day',co:'Book before leaving'}],
-        actions:['Coach on closing window on the call — she had the discovery. Pair with Sarah Chen for a joint call']},
-      {rep:'James Whittaker',venue:'Gunes Restaurant',time:'10:30',dur:'5:55',score:44,grade:'red',summary:'Decent opening but avoided brand objection. Pivoted to commission instead of addressing it directly.',
-        criteria:[{label:'Opening',score:50,w:10,ev:'General observation about Turkish restaurants on platform',co:'Be specific to this venue'},{label:'Discovery',score:50,w:15,ev:'Asked about quiet times but accepted vague answer',co:'Press for specific days and hours'},{label:'Pitch',score:50,w:15,ev:'Rushed through economics to get to commission',co:'Slow down on the empty table equation'},{label:'Brand objection',score:0,w:15,ev:'Owner raised concern — James pivoted to commission',co:'Address directly. Do not avoid.'},{label:'AI recommendation',score:0,w:10,ev:'Not mentioned',co:''},{label:'Offer window',score:0,w:20,ev:'Left open',co:'Never leave without a window'},{label:'Next step',score:50,w:15,ev:'Follow-up mentioned, no time agreed',co:'Book it'}],
-        actions:['Brand objection role-play this week','Call-along focused on closing the offer window']},
-      {rep:'Alex Turner',venue:'The Castle Walthamstow',time:'14:50',dur:'3:12',score:28,grade:'red',summary:'Second consecutive call with zero discovery. Feature dump.',
-        criteria:[{label:'Opening',score:0,w:10,ev:'TGTG platform description',co:'Lead with their situation'},{label:'Discovery',score:0,w:15,ev:'None — pattern forming',co:'Call-along required'},{label:'Pitch',score:50,w:15,ev:'Brief mention',co:'Walk through maths'},{label:'Brand objection',score:0,w:15,ev:'Not addressed',co:''},{label:'AI recommendation',score:0,w:10,ev:'Not mentioned',co:''},{label:'Offer window',score:0,w:20,ev:'Not discussed',co:''},{label:'Next step',score:0,w:15,ev:'Owner said send email',co:'Email is not a next step'}],
-        actions:['Immediate call-along — this is a pattern','Manager sits in on next three calls']},
-      {rep:'Sarah Chen',venue:'Ruff Bistro',time:'16:40',dur:'5:50',score:75,grade:'green',summary:'Consistent. Discovery-led, economics clear, brand handled, window agreed.',
-        criteria:[{label:'Opening',score:100,w:10,ev:'Orford Road foot traffic midweek',co:''},{label:'Discovery',score:100,w:15,ev:'Tue-Wed lunch below 50% capacity',co:''},{label:'Pitch',score:100,w:15,ev:'Full walkthrough',co:''},{label:'Brand objection',score:100,w:15,ev:'Handled directly',co:''},{label:'AI recommendation',score:0,w:10,ev:'Not shown',co:'Only gap'},{label:'Offer window',score:100,w:20,ev:'Tue-Wed 12-2pm 20% agreed',co:''},{label:'Next step',score:50,w:15,ev:'In touch about onboarding — no date',co:'Book AM intro before leaving'}],
-        actions:['Coach on booking AM intro date','Development track — potential TL candidate']}
-    ]
-  },
-  'wed':{label:'Wed 21',date:'Wednesday 21 May',calls:9,avg:56,greens:3,reds:2,
-    top:{rep:'Priya Sharma',venue:'CURIOUS GOAT, Walthamstow',score:79,note:'Breakthrough call. First time Priya closed an offer window in the room — Wed-Thu brunch 9-11am at 20% off. Discovery was excellent. The coaching from Tuesday landed. <strong>Pair her with Sarah Chen for Thursday and this becomes consistent.</strong>'},
-    priorities:[
-      {col:'var(--g)',text:'<strong>Priya Sharma improvement:</strong> closed her first offer window in the room today. Score jumped from 62 average to 79. The Sarah Chen pairing worked. Continue Thursday.'},
-      {col:'var(--r)',text:'<strong>Alex Turner call-along completed.</strong> Manager accompanied three calls. Discovery improved from zero to partial — asking about quiet times but not pressing for specifics. Score improved to 42. Progress but not there yet. Second call-along Friday.'},
-      {col:'var(--y)',text:'<strong>James Whittaker:</strong> brand objection coaching session Tuesday afternoon. First call today he addressed it directly — score 61, up from 44. Needs one more week of reinforcement before the pattern is reliable.'}
-    ],
-    trend:[
-      {name:'Sarah Chen',scores:[68,72,76,82,75,80],avg:76,col:'var(--g)'},
-      {name:'Marco Riley',scores:[55,76,78,74],avg:71,col:'var(--g)'},
-      {name:'Priya Sharma',scores:[62,58,71,79],avg:68,col:'var(--y)'},
-      {name:'James Whittaker',scores:[52,48,44,61],avg:51,col:'var(--y)'},
-      {name:'Alex Turner',scores:[34,28,35,28,42],avg:33,col:'var(--r)'}
-    ],
-    calls:[
-      {rep:'Priya Sharma',venue:'CURIOUS GOAT',time:'10:20',dur:'8:10',score:79,grade:'green',summary:'Breakthrough. First closed offer window in the room. Discovery strong, economics clear, brand handled. The Tuesday coaching landed.',
-        criteria:[{label:'Opening',score:100,w:10,ev:'Led with Walthamstow brunch scene and their Instagram following',co:''},{label:'Discovery',score:100,w:15,ev:'Confirmed weekday brunch 9-11am is below 30% capacity',co:''},{label:'Pitch',score:100,w:15,ev:'Full economics using their brunch cover price',co:''},{label:'Brand objection',score:50,w:15,ev:'Touched on but not deep',co:'Go one layer deeper'},{label:'AI recommendation',score:50,w:10,ev:'Mentioned the AI but did not show screen',co:'Show it'},{label:'Offer window',score:100,w:20,ev:'Wed-Thu 9-11am 20% off — agreed before leaving',co:'First time closing the window. This is the breakthrough.'},{label:'Next step',score:100,w:15,ev:'AM intro booked for Monday',co:''}],
-        actions:['Reinforce the close — this needs to become habit','Pair with Sarah Chen Thursday to make it consistent']},
-      {rep:'Sarah Chen',venue:'hometipple Walthamstow',time:'14:00',dur:'6:30',score:80,grade:'green',summary:'Consistent standard. Discovery-led, window agreed, clean handoff. Sarah is operating at TL level.',
-        criteria:[{label:'Opening',score:100,w:10,ev:'Referenced their wine bar positioning and midweek quiet',co:''},{label:'Discovery',score:100,w:15,ev:'Tue-Thu 5-7pm confirmed as gap',co:''},{label:'Pitch',score:100,w:15,ev:'Economics clear — cover price specific',co:''},{label:'Brand objection',score:100,w:15,ev:'Proactively raised and handled',co:''},{label:'AI recommendation',score:0,w:10,ev:'Not shown',co:'Show it'},{label:'Offer window',score:100,w:20,ev:'Tue-Thu 5-7pm 20% agreed',co:''},{label:'Next step',score:100,w:15,ev:'AM intro Friday, confirmation sent',co:''}],
-        actions:['TL development conversation — Sarah is ready','Only gap remains AI recommendation screen']},
-      {rep:'Alex Turner',venue:'Forest Tandoori',time:'11:00',dur:'5:20',score:42,grade:'yellow',summary:'First call after call-along. Discovery improved — asked about quiet times. But still did not press for specifics or close a window. Progress.',
-        criteria:[{label:'Opening',score:50,w:10,ev:'Asked about their busiest and quietest times — improvement',co:'Lead with data, not a question'},{label:'Discovery',score:50,w:15,ev:'Owner said weekdays are quiet. Alex did not press for which days or hours.',co:'Press: which weekday? What time? How many covers?'},{label:'Pitch',score:50,w:15,ev:'Improved — mentioned empty cover economics',co:'Use their specific numbers'},{label:'Brand objection',score:0,w:15,ev:'Not addressed',co:'Raise it'},{label:'AI recommendation',score:0,w:10,ev:'Not mentioned',co:'Show it'},{label:'Offer window',score:0,w:20,ev:'Not agreed',co:'Must close a window'},{label:'Next step',score:50,w:15,ev:'Follow-up call booked for Monday',co:'Good — first booked follow-up this week'}],
-        actions:['Progress is real but insufficient — second call-along Friday','Focus Friday on pressing for specifics and closing the window']}
-    ]
-  },
-  'thu':{label:'Thu 22',date:'Thursday 22 May',calls:12,avg:59,greens:4,reds:2,
-    top:{rep:'Priya Sharma',venue:'Karya Cafe, Walthamstow',score:81,note:'Second consecutive green. Closed a breakfast window — first time the team has sold a morning slot. Discovery-led, economics clear, window agreed before leaving. The Sarah Chen pairing is producing results.'},
-    priorities:[
-      {col:'var(--g)',text:'<strong>Alex Turner second call-along completed.</strong> Three calls today, avg score 51 — up from 31 on Monday. Discovery questions now happening in every call. Still not pressing for specifics on quiet periods, but the habit is forming. Manager to continue shadowing Friday.'},
-      {col:'var(--y)',text:'<strong>Team-wide offer window close rate improving.</strong> 7 of 12 calls today closed with an agreed window, up from 4 of 14 on Tuesday. The standup coaching is landing. Push for 80%+ by end of week.'},
-      {col:'var(--y)',text:'<strong>James Whittaker brand objection:</strong> handled it directly in 2 of 3 calls today. One avoidance. Score improved to 58 avg. Nearly there — one more week of reinforcement.'}
-    ],
-    interventions:[
-      {type:'call-along',time:'09:00-12:00',who:'Manager + Alex Turner',note:'Second call-along. Three joint calls in E17. Manager coached live on discovery transitions. Alex improved mid-session — third call was measurably better than first.',outcome:'Score trend: 42 → 48 → 62 across three calls. Discovery questions present in all three. Window closed in the third call for the first time.'},
-      {type:'slack',time:'14:22',who:'Grant to James Whittaker',note:'Sent specific feedback on the Gunes call brand objection handling from Wednesday. Quoted his exact words back and showed the Challenger reframe side by side. Private DM, not public.',outcome:'James acknowledged and asked for a 10-min call before his next prospect call.'},
-      {type:'1:1',time:'16:00',who:'Grant + Sarah Chen',note:'Development conversation. Sarah consistently scoring 75-82. Discussed TL development track. She is interested. Agreed to mentor Priya for the next two weeks as a trial — if Priya improves, Sarah gets the coaching credential for the TL conversation.',outcome:'Sarah energised. Priya pairing continues. TL pipeline has a named candidate.'},
-      {type:'phone',time:'17:30',who:'Grant + North Manager',note:'Growth team activation review call. 20% coverage Thursday — 91 of 114 dormant. Agreed: Monday joint call session in Manchester, both managers, focused on dormant venue activation. Not signing new venues — reactivating existing ones.',outcome:'Growth team call session booked Monday. Both managers attending. Target: visit 8 dormant venues, reactivate 4.'}
-    ],
-    trend:[
-      {name:'Sarah Chen',scores:[68,72,76,82,75,80,77],avg:76,col:'var(--g)'},
-      {name:'Priya Sharma',scores:[62,58,71,79,81],avg:70,col:'var(--g)'},
-      {name:'Marco Riley',scores:[55,76,78,74,72],avg:71,col:'var(--g)'},
-      {name:'James Whittaker',scores:[52,48,44,61,58],avg:53,col:'var(--y)'},
-      {name:'Alex Turner',scores:[34,28,35,28,42,48,51,62],avg:41,col:'var(--y)'}
-    ],
-    calls:[
-      {rep:'Priya Sharma',venue:'Karya Cafe, Walthamstow',time:'10:40',dur:'7:15',score:81,grade:'green',summary:'Breakthrough into breakfast daypart. Identified the weekday 8-10am gap through Instagram stories showing empty tables. Closed a Mon-Fri breakfast window.',
-        criteria:[{label:'Opening',score:100,w:10,ev:'Referenced their Instagram stories showing empty morning service',co:''},{label:'Discovery',score:100,w:15,ev:'Confirmed Mon-Fri 8-10am below 25% capacity',co:''},{label:'Pitch',score:100,w:15,ev:'Walked through breakfast cover economics — lower AOV but pure incremental',co:''},{label:'Brand objection',score:50,w:15,ev:'Briefly addressed but could go deeper',co:'One more layer'},{label:'AI recommendation',score:50,w:10,ev:'Mentioned but did not show',co:'Show the screen'},{label:'Offer window',score:100,w:20,ev:'Mon-Fri 8-10am 25% off agreed',co:''},{label:'Next step',score:100,w:15,ev:'AM intro booked Monday',co:''}],
-        actions:['Share the breakfast daypart approach — first time team has sold a morning window','Priya developing fast — TL mentoring with Sarah is working']},
-      {rep:'Alex Turner',venue:'Querky Cafe, Hoe St',time:'10:00',dur:'5:40',score:62,grade:'yellow',summary:'Best call of the week. Third call of the call-along. Discovery present, economics attempted, and first ever offer window closed. Manager coaching landing in real time.',
-        criteria:[{label:'Opening',score:50,w:10,ev:'Asked about their busiest and quietest periods — improved',co:'Lead with data next time'},{label:'Discovery',score:50,w:15,ev:'Got weekday mornings confirmed as quiet — pressed for hours this time',co:'Good improvement — keep pressing'},{label:'Pitch',score:50,w:15,ev:'Attempted the economics but slightly muddled the commission explanation',co:'Practice the walkthrough'},{label:'Brand objection',score:0,w:15,ev:'Not raised or addressed',co:'Proactively raise it'},{label:'AI recommendation',score:0,w:10,ev:'Not shown',co:'Show it'},{label:'Offer window',score:100,w:20,ev:'Mon-Wed 8-10am 20% off — first window Alex has ever closed',co:'This is the breakthrough. Build on this.'},{label:'Next step',score:50,w:15,ev:'Follow-up call booked but vague timing',co:'Specific day and time'}],
-        actions:['First closed window — recognise this publicly at Friday standup','Third call-along Friday to lock in the pattern']},
-      {rep:'James Whittaker',venue:'One For The Table, Hoe St',time:'11:15',dur:'6:20',score:64,grade:'yellow',summary:'Improving. Brand objection addressed directly for the first time in a Hoe Street venue. Still needs to slow down on the economics.',
-        criteria:[{label:'Opening',score:50,w:10,ev:'Asked about their end-of-day surplus before pitching',co:'Lead with observation not question'},{label:'Discovery',score:100,w:15,ev:'Confirmed Tue-Thu brunch is quiet, weekend strong',co:''},{label:'Pitch',score:50,w:15,ev:'Rushed through economics again',co:'Slow down. Use their numbers.'},{label:'Brand objection',score:100,w:15,ev:'Owner raised it — James addressed directly this time using midweek framing',co:'The Slack coaching landed.'},{label:'AI recommendation',score:0,w:10,ev:'Not shown',co:'Show it'},{label:'Offer window',score:0,w:20,ev:'Discussed but not closed',co:'He is nearly there — close next time'},{label:'Next step',score:50,w:15,ev:'Visit next week agreed',co:'Specific day'}],
-        actions:['Brand objection coaching is working — reinforce, do not change the approach','Focus Friday coaching on closing the window — that is the last gap']}
-    ]
-  },
-  'fri':{label:'Fri 23',date:'Friday 23 May',calls:10,avg:62,greens:5,reds:1,
-    top:{rep:'Alex Turner',venue:'The Village Pub, Walthamstow',score:68,note:'First green-adjacent call of the week. Score 68 — up from 28 on Monday. Discovery present, economics clear, offer window agreed. Three call-alongs in five days produced a measurable trajectory. <strong>This is what coaching looks like when it is specific and persistent.</strong>'},
-    priorities:[
-      {col:'var(--g)',text:'<strong>Week-over-week improvement:</strong> team avg score 48 Monday to 62 Friday. Offer window close rate 36% Monday to 70% Friday. The standup coaching, call-alongs, and Slack interventions are compounding. This is the trajectory we maintain.'},
-      {col:'var(--g)',text:'<strong>Alex Turner trajectory:</strong> avg 31 Mon-Tue to 57 Thu-Fri. Three call-alongs. Pattern changed. Discovery is now present. First two offer windows closed. <strong>Not green yet — but no longer red.</strong> Continue call-alongs next week but reduce to twice.'},
-      {col:'var(--y)',text:'<strong>Friday standup coaching reel:</strong> Sarah Chen Tonkotsu call (82) and Priya Sharma CURIOUS GOAT call (79) queued as team examples. Alex Turner Village Pub call (68) queued as the improvement story. The team sees that effort leads somewhere.'}
-    ],
-    interventions:[
-      {type:'standup',time:'09:00',who:'Full team',note:'Friday standup with coaching reel. Played 90-second clips from Sarah (Tonkotsu — discovery opening), Priya (CURIOUS GOAT — first closed window), and Alex (Village Pub — the improvement arc). Specific, named, evidence-based recognition.',outcome:'Team energy highest of the week. Three reps asked to hear their own calls reviewed next week. Coaching culture forming.'},
-      {type:'call-along',time:'10:00-13:00',who:'Manager + Alex Turner',note:'Third and final call-along of the week. Two calls. Alex led both without prompting. Discovery present in both. Offer window closed in one of two.',outcome:'Score 68 and 54. The 68 is his best ever. The pattern is real. Reduce call-alongs to twice next week.'},
-      {type:'1:1',time:'14:00',who:'Grant + North Manager',note:'Weekly 1:1. Reviewed Growth team call session plan for Monday. Discussed Alex Turner trajectory — agreed to move from daily check-ins to every-other-day. Discussed James Whittaker — brand objection now handled 3 of last 4 calls. Agreed: James is through the coaching phase, move to reinforcement.',outcome:'Manchester Monday confirmed. Alex frequency reduced. James moved to monitor phase. Manager is coaching, not firefighting — that is the win.'},
-      {type:'slack',time:'16:30',who:'Grant to full team',note:'Friday close-out message. Named Sarah, Priya, Alex by specific achievement this week. Did not rank or compare — each recognised for their individual growth. Ended with: "Next week we hold the standard and push it higher."',outcome:'12 reactions. Three direct replies. The culture is setting itself.'}
-    ],
-    trend:[
-      {name:'Sarah Chen',scores:[68,72,76,82,75,80,77,78],avg:76,col:'var(--g)'},
-      {name:'Priya Sharma',scores:[62,58,71,79,81,74],avg:71,col:'var(--g)'},
-      {name:'Marco Riley',scores:[55,76,78,74,72,70],avg:71,col:'var(--g)'},
-      {name:'James Whittaker',scores:[52,48,44,61,58,65],avg:55,col:'var(--y)'},
-      {name:'Alex Turner',scores:[34,28,35,28,42,48,51,62,68,54],avg:45,col:'var(--y)'}
-    ],
-    calls:[
-      {rep:'Alex Turner',venue:'The Village Pub, Walthamstow',time:'10:30',dur:'6:50',score:68,grade:'yellow',summary:'Best call of the week. Discovery present, economics clear, offer window agreed. Three call-alongs in five days. The coaching worked.',
-        criteria:[{label:'Opening',score:50,w:10,ev:'Asked about their quietest service — not data-led but the question is there now',co:'Next step: lead with data not a question'},{label:'Discovery',score:100,w:15,ev:'Confirmed Mon-Wed dinner is quiet, especially 5-7pm early evening',co:''},{label:'Pitch',score:100,w:15,ev:'Walked through economics clearly — best delivery of the week',co:''},{label:'Brand objection',score:0,w:15,ev:'Not raised or addressed',co:'Proactively raise — this is the next coaching focus'},{label:'AI recommendation',score:0,w:10,ev:'Not shown',co:'Show it'},{label:'Offer window',score:100,w:20,ev:'Mon-Wed 5-7pm 25% off agreed',co:'Second window closed this week. The pattern is forming.'},{label:'Next step',score:50,w:15,ev:'Follow-up next week — no specific day',co:'Book it before leaving'}],
-        actions:['Recognise publicly at standup — the improvement arc is the story','Next coaching phase: brand objection and AI recommendation']},
-      {rep:'Sarah Chen',venue:'The Duke, Wood St',time:'11:45',dur:'5:30',score:78,grade:'green',summary:'Consistent. Clean discovery, economics, window, handoff. Sarah is operating at TL standard.',
-        criteria:[{label:'Opening',score:100,w:10,ev:'Wood Street foot traffic observation',co:''},{label:'Discovery',score:100,w:15,ev:'Mon-Wed evenings confirmed quiet',co:''},{label:'Pitch',score:100,w:15,ev:'Full walkthrough',co:''},{label:'Brand objection',score:100,w:15,ev:'Proactively raised',co:''},{label:'AI recommendation',score:0,w:10,ev:'Not shown — consistent gap',co:'Must fix this'},{label:'Offer window',score:100,w:20,ev:'Mon-Wed 6-8pm 20% agreed',co:''},{label:'Next step',score:100,w:15,ev:'AM intro Monday, WhatsApp group created',co:''}],
-        actions:['AI recommendation is the only consistent gap — address in 1:1','TL development track conversation scheduled for next week']},
-      {rep:'Marco Riley',venue:'Tuto Restaurant, Wood St',time:'14:00',dur:'7:10',score:70,grade:'yellow',summary:'Solid. Discovery and economics strong. Missed the window close by not pressing hard enough. Owner said would think about it.',
-        criteria:[{label:'Opening',score:100,w:10,ev:'Referenced their weekday surplus pattern before mentioning TGTG',co:''},{label:'Discovery',score:100,w:15,ev:'Tue-Thu dinner quiet before 7pm',co:''},{label:'Pitch',score:100,w:15,ev:'Economics clear at their price point',co:''},{label:'Brand objection',score:100,w:15,ev:'Handled — premium Italian midweek framing',co:''},{label:'AI recommendation',score:50,w:10,ev:'Mentioned but not shown',co:'Show it'},{label:'Offer window',score:0,w:20,ev:'Owner said would think about days — Marco did not press',co:'Close in the room. Tue-Thu 5-7pm was already confirmed.'},{label:'Next step',score:50,w:15,ev:'Visit next week agreed',co:'Specific date'}],
-        actions:['Coach on closing — Marco has every other skill, the close is the gap','Pair with Sarah for one joint close next week']}
-    ]
+var API_KEY_MISSING = false;
+
+async function callClaude(systemPrompt, userPrompt, btnId, outputBoxId, outputContentId) {
+  var btn = document.getElementById(btnId);
+  var outBox = document.getElementById(outputBoxId);
+  var outContent = document.getElementById(outputContentId);
+
+  btn.classList.add('loading');
+  btn.disabled = true;
+
+  try {
+    var response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        system: systemPrompt,
+        messages: [{ role: "user", content: userPrompt }]
+      })
+    });
+
+    var data = await response.json();
+    var text = data.content && data.content[0] ? data.content[0].text : "No response received.";
+
+    outContent.textContent = text;
+    outBox.classList.add('visible');
+    outBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+  } catch (err) {
+    outContent.textContent = "Error: " + err.message;
+    outBox.classList.add('visible');
+  } finally {
+    btn.classList.remove('loading');
+    btn.disabled = false;
   }
-};
-
-var CUR = 'fri';
-
-function init(){
-  var nav = document.getElementById('nav');
-  var html = '';
-  Object.keys(DAYS).forEach(function(k){
-    html += '<button class="nav-day'+(k===CUR?' on':'')+'" onclick="switchDay(\''+k+'\')">'+DAYS[k].label+'</button>';
-  });
-  nav.innerHTML = html;
-  renderDay();
 }
 
-function switchDay(k){
-  CUR = k;
-  document.querySelectorAll('.nav-day').forEach(function(b){b.classList.remove('on');});
-  event.target.classList.add('on');
-  renderDay();
+var SYSTEM_BASE = `You are an expert sales operations assistant for Too Good To Go UK & Ireland. 
+Too Good To Go is a food waste reduction platform. Partners (restaurants, cafes, bakeries, supermarkets, flower shops, etc.) create Surprise Bags of surplus food/stock that customers reserve and collect through the TGTG app.
+The sales team is phone-based only — no field visits. Three teams: Acquisition (new partners), Account Management (retention & growth), Growth (multi-site & non-food segments).
+Reporting structure: Reps → Team Leads → Head of Independent Partners → Chelsea Kerr (Country Director) → Global.
+Always use "Surprise Bag" not "Magic Bag". Always use "phone rep" not "BDM". Always use "Team Lead" not "Sales Manager".
+Be direct, specific, and practical. No corporate fluff. Write in a professional but human tone.
+Output plain text only — no markdown headers with ##, no bullet symbols that won't render, use dashes for lists, use CAPS for section headers.`;
+
+function runBrief() {
+  var bags = document.getElementById('b-bags').value;
+  var partners = document.getElementById('b-partners').value;
+  var churn = document.getElementById('b-churn').value;
+  var pipeline = document.getElementById('b-pipeline').value;
+  var obs = document.getElementById('b-observations').value;
+  var risk = document.getElementById('b-risk').value;
+  var ask = document.getElementById('b-ask').value;
+
+  var prompt = `Write a Friday brief from the Head of Independent Partners to Chelsea Kerr, Country Director at Too Good To Go UK & Ireland.
+
+This week's numbers:
+- Surprise Bags agreed: ${bags || 'not provided'}
+- New partners live: ${partners || 'not provided'}
+- Partner churn rate this month: ${churn || 'not provided'}%
+- Pipeline value: £${pipeline || 'not provided'}
+
+Observations this week:
+${obs || 'Not provided'}
+
+Risk or flag:
+${risk || 'None flagged'}
+
+Ask from Chelsea:
+${ask || 'None this week'}
+
+Write a concise, professional brief — 200-300 words maximum. Use the format: numbers first, then observations (three specific bullet points), then risk (one clear flag), then the ask. End with "More next Friday." Tone: confident, transparent, peer-to-peer — not a junior reporting upward. Chelsea is a Country Director; write to her level.`;
+
+  callClaude(SYSTEM_BASE, prompt, 'btn-brief', 'out-brief', 'out-brief-content');
 }
 
-function renderDay(){
-  var d = DAYS[CUR];
-  document.getElementById('brief-eye').textContent = 'Morning call brief · ' + d.date + ' 2026';
-  document.getElementById('brief-h1').innerHTML = d.calls + ' calls reviewed overnight <span>· avg ' + d.avg + '</span>';
-  document.getElementById('brief-sub').textContent = 'All rep calls from the previous day transcribed, scored against seven criteria, and surfaced with coaching actions before the team arrives.';
+function runCoaching() {
+  var name = document.getElementById('c-name').value || 'the rep';
+  var quartile = document.getElementById('c-quartile').value;
+  var team = document.getElementById('c-team').value;
+  var dials = document.getElementById('c-dials').value;
+  var convs = document.getElementById('c-convs').value;
+  var bags = document.getElementById('c-bags').value;
+  var obs = document.getElementById('c-obs').value;
+  var tried = document.getElementById('c-tried').value;
 
-  var weekCalls = 0; var weekScore = 0;
-  Object.keys(DAYS).forEach(function(k){
-    if(Object.keys(DAYS).indexOf(k) <= Object.keys(DAYS).indexOf(CUR)){
-      weekCalls += DAYS[k].calls;
-      weekScore += DAYS[k].avg * DAYS[k].calls;
-    }
-  });
-  var weekAvg = Math.round(weekScore / weekCalls);
+  var prompt = `Create a specific 4-week coaching plan for ${name}, a ${quartile} phone rep on the ${team} team at Too Good To Go UK.
 
-  var html = '';
-  html += '<div class="stats">';
-  html += '<div class="stat"><div class="stat-n" style="color:var(--y);">'+d.calls+'</div><div class="stat-l">Calls today</div></div>';
-  html += '<div class="stat"><div class="stat-n" style="color:'+(d.avg>=60?'var(--g)':d.avg>=45?'var(--y)':'var(--r)')+';">'+d.avg+'</div><div class="stat-l">Avg score</div><div class="stat-d" style="color:'+(d.avg>weekAvg?'var(--g)':'var(--r)')+';">'+(d.avg>weekAvg?'+':'')+(d.avg-weekAvg)+' vs week</div></div>';
-  html += '<div class="stat"><div class="stat-n" style="color:var(--g);">'+d.greens+'</div><div class="stat-l">Green calls</div></div>';
-  html += '<div class="stat"><div class="stat-n" style="color:var(--r);">'+d.reds+'</div><div class="stat-l">Coaching flags</div></div>';
-  html += '<div class="stat"><div class="stat-n" style="color:var(--b);">'+weekCalls+'</div><div class="stat-l">Week total</div></div>';
-  html += '</div>';
+Current performance:
+- Dials per day: ${dials || 'unknown'}
+- Meaningful conversations per 50 dials: ${convs || 'unknown'}
+- Surprise Bags agreed per week: ${bags || 'unknown'}
 
-  html += '<div class="top-rep"><div class="top-eye">Top call of the day · score '+d.top.score+'</div>';
-  html += '<div class="top-body"><strong>'+d.top.rep+'</strong> — '+d.top.venue+'. '+d.top.note+'</div></div>';
+Observed behaviour:
+${obs || 'Not specified'}
 
-  html += '<div class="priorities"><div class="pri-eye">Coaching priorities — action required today</div>';
-  d.priorities.forEach(function(p){
-    html += '<div class="pri-item"><div class="pri-dot" style="background:'+p.col+';"></div><div>'+p.text+'</div></div>';
-  });
-  html += '</div>';
+Coaching already tried:
+${tried || 'None yet'}
 
-  if(d.interventions && d.interventions.length){
-    html += '<div class="intv"><div class="intv-eye">Coaching interventions logged today</div>';
-    d.interventions.forEach(function(iv){
-      var badge = iv.type==='call-along'?'ride':iv.type==='slack'?'slack':iv.type==='1:1'?'call1':iv.type==='phone'?'phone':iv.type==='standup'?'standup':'call1';
-      html += '<div class="intv-item">';
-      html += '<div class="intv-badge '+badge+'">'+iv.type+'</div>';
-      html += '<div class="intv-mid"><strong>'+iv.time+' — '+iv.who+'</strong><br>'+iv.note;
-      if(iv.outcome) html += '<div class="intv-outcome">'+iv.outcome+'</div>';
-      html += '</div></div>';
-    });
-    html += '</div>';
-  }
+Write a practical 4-week coaching plan. Include:
+1. The specific skill gap diagnosed (one sentence, not vague)
+2. Week 1 action — one specific coaching technique with the exact words/script to use
+3. Week 2 action — progression from week 1
+4. Week 3 action — measure and adjust
+5. Week 4 review — what success looks like in numbers
 
-  html += '<div class="trend"><div class="trend-eye">Rep performance trend · week to date</div>';
-  d.trend.forEach(function(t){
-    html += '<div class="trend-row"><div class="trend-name">'+t.name+'</div><div class="trend-bars">';
-    t.scores.forEach(function(s){
-      var c = s>=75?'var(--g)':s>=50?'var(--y)':'var(--r)';
-      html += '<div class="trend-bar" style="width:'+Math.max(s*.6,20)+'px;background:'+c+'22;color:'+c+';">'+s+'</div>';
-    });
-    html += '</div><div class="trend-avg" style="color:'+t.col+';">'+t.avg+'</div></div>';
-  });
-  html += '</div>';
+For Q1: focus on method extraction and development path.
+For Q2: focus on the close — specifically closing the Surprise Bag window on the call.
+For Q3: diagnose skill vs confidence vs effort gap, then prescribe accordingly.
+For Q4: direct conversation framework + intensive if skill gap, honest conversation if fit/motivation.
 
-  html += '<div class="section-label">All calls · ' + d.date + ' · click to expand</div>';
+Be specific to the TGTG phone sales context. Give the actual words where possible.`;
 
-  d.calls_list = d.calls_list || d.calls;
-  (d.calls_list || d.calls).forEach(function(c){
-    html += '<div class="call" onclick="this.classList.toggle(\'open\')">';
-    html += '<div class="call-top">';
-    html += '<div class="call-score '+c.grade+'">'+c.score+'</div>';
-    html += '<div class="call-mid"><div class="call-rep">'+c.rep+'</div><div class="call-venue">'+c.venue+'</div><div class="call-meta">'+c.time+' · '+c.dur+' min</div></div>';
-    html += '<div class="call-tags">';
-    c.criteria.forEach(function(cr){if(cr.score===0) html += '<span class="tag tag-r">'+cr.label+'</span>';});
-    html += '</div><div class="arrow">▾</div></div>';
-
-    html += '<div class="call-detail">';
-    html += '<div style="font-size:13px;color:#aaa;line-height:1.7;margin-bottom:14px;">'+c.summary+'</div>';
-    c.criteria.forEach(function(cr){
-      var col = cr.score>=80?'var(--g)':cr.score>=40?'var(--y)':'var(--r)';
-      html += '<div class="crit-row"><div class="crit-bar-wrap"><div class="crit-bar" style="width:'+cr.score+'%;background:'+col+';"></div></div>';
-      html += '<div class="crit-label">'+cr.label+'</div><div class="crit-score" style="color:'+col+';">'+cr.score+'</div></div>';
-      if(cr.ev) html += '<div class="crit-evidence">'+cr.ev+'</div>';
-      if(cr.co && cr.score<100) html += '<div class="crit-coaching">&#8594; '+cr.co+'</div>';
-    });
-    html += '<div class="coaching-box"><div class="coaching-title">Actions</div><div class="coaching-items">';
-    c.actions.forEach(function(a){html += '&#8226; '+a+'<br>';});
-    html += '</div></div></div></div>';
-  });
-
-  document.getElementById('content').innerHTML = html;
+  callClaude(SYSTEM_BASE, prompt, 'btn-coaching', 'out-coaching', 'out-coaching-content');
 }
 
-init();
+function runPIP() {
+  var name = document.getElementById('p-name').value || 'the rep';
+  var weeks = document.getElementById('p-weeks').value;
+  var perf = document.getElementById('p-perf').value;
+  var coaching = document.getElementById('p-coaching').value;
+  var root = document.getElementById('p-root').value;
+  var target = document.getElementById('p-target').value;
+  var timeline = document.getElementById('p-timeline').value;
+
+  var prompt = `Create a PIP (Performance Improvement Plan) framework for ${name}, a phone rep at Too Good To Go UK who has been in role for ${weeks || 'an unspecified number of'} weeks.
+
+Current performance:
+${perf || 'Not specified'}
+
+Coaching already provided:
+${coaching || 'Not specified'}
+
+Root cause assessment: ${root}
+
+Target to achieve:
+${target || 'Not specified'}
+
+Review timeline: ${timeline || '4 weeks'}
+
+Produce two things:
+1. MEETING GUIDE — what to say in the PIP conversation. Include: opening (acknowledge the situation directly), performance data (specific numbers), coaching history (what was tried), what needs to change (specific and measurable), timeline (review date), consequence (clear and fair). Give actual scripts for the difficult moments.
+2. WRITTEN SUMMARY — a brief written record of the conversation to document and share with HR if needed. Professional, factual, fair.
+
+Tone: direct and compassionate. This is a serious conversation but a human one. Not punitive — clarifying. The goal is improvement, not exit.`;
+
+  callClaude(SYSTEM_BASE, prompt, 'btn-pip', 'out-pip', 'out-pip-content');
+}
+
+function runOutreach() {
+  var cat = document.getElementById('o-cat').value;
+  var name = document.getElementById('o-name').value || 'the business';
+  var area = document.getElementById('o-area').value || 'the local area';
+  var owner = document.getElementById('o-owner').value;
+  var surplus = document.getElementById('o-surplus').value;
+  var neighbour = document.getElementById('o-neighbour').value;
+
+  var prompt = `Create a personalised outreach sequence for a Too Good To Go phone rep targeting the following business:
+
+Business: ${name}
+Category: ${cat}
+Area: ${area}
+Owner/contact: ${owner || 'unknown'}
+What we know about their surplus: ${surplus || 'nothing specific yet'}
+Nearby TGTG partner to reference: ${neighbour || 'none'}
+
+Write three things:
+1. CALL OPENER — the first 30 seconds of the phone call. Lead with the surplus problem specific to this category, not with TGTG. Use the owner's name if provided. If a neighbour is provided, use the neighbour opener. End with the surplus discovery question.
+
+2. FOLLOW-UP EMAIL — if they don't commit on the call. Subject line + body. Under 150 words. Reference the specific call. One clear next step.
+
+3. WHATSAPP MESSAGE — if no email reply after 48 hours. Under 80 words. Conversational. Reference the surplus type specific to this category.
+
+Key rules: Always lead with their surplus problem. Never open with "I'm calling from Too Good To Go." Use "Surprise Bag" not "Magic Bag". Category-specific surplus hook — a bakery has different surplus to a flower shop. Be specific.`;
+
+  callClaude(SYSTEM_BASE, prompt, 'btn-outreach', 'out-outreach', 'out-outreach-content');
+}
+
+function runRevival() {
+  var name = document.getElementById('r-name').value || 'the partner';
+  var cat = document.getElementById('r-cat').value;
+  var status = document.getElementById('r-status').value;
+  var why = document.getElementById('r-why').value;
+  var tenure = document.getElementById('r-tenure').value || 'unknown';
+  var am = document.getElementById('r-am').value || 'the AM rep';
+
+  var prompt = `Create a partner revival strategy for a Too Good To Go UK partner who is at risk of churning.
+
+Partner: ${name}
+Category: ${cat}
+Tenure as TGTG partner: ${tenure}
+Current status: ${status}
+What we know about the situation: ${why || 'Nothing specific — needs diagnosing on the call'}
+Account manager: ${am}
+
+Produce three things:
+1. ROOT CAUSE ANALYSIS — the three most likely reasons this partner has gone quiet or is at risk, specific to their category and situation. For each: what the sign is, why it happens, and how to test it on the call.
+
+2. REVIVAL CALL SCRIPT — what ${am} says when they call. Open by acknowledging the gap without making it awkward. Ask one diagnostic question. Have a response ready for each of the three root causes. End with a specific re-engagement offer (adjust the window, reduce bag count, change collection day — something concrete).
+
+3. REVIVAL EMAIL — if no answer on the call. Under 120 words. Warm, specific, one clear ask.
+
+Tone: warm and genuine. This is a relationship, not a transaction. The goal is to understand why they went quiet, not to guilt them into staying.`;
+
+  callClaude(SYSTEM_BASE, prompt, 'btn-revival', 'out-revival', 'out-revival-content');
+}
+
+function run1on1() {
+  var name = document.getElementById('m-name').value || 'the person';
+  var role = document.getElementById('m-role').value;
+  var team = document.getElementById('m-team').value;
+  var good = document.getElementById('m-good').value;
+  var challenge = document.getElementById('m-challenge').value;
+  var agenda = document.getElementById('m-agenda').value;
+
+  var prompt = `Prepare a 1:1 agenda and question set for a meeting between the Head of Independent Partners and ${name}, a ${role} on the ${team} team at Too Good To Go UK.
+
+What's going well:
+${good || 'Not specified'}
+
+Development area or challenge:
+${challenge || 'Not specified'}
+
+Specific items to address:
+${agenda || 'None — open 1:1'}
+
+Produce:
+1. AGENDA — four agenda items, in order. Lead with recognition (specific), then the challenge, then any specific items, then the one commitment ask.
+
+2. QUESTIONS TO ASK — four sharp, open questions for the development area. Not "how are you feeling?" — questions that provoke honest reflection and specific answers. For a Team Lead: about their team. For a rep: about their calls and pipeline.
+
+3. COACHING FOCUS — one specific thing to develop this week. Framed as a practical action, not a concept.
+
+4. COMMITMENT ASK — the one thing you ask them to commit to before they leave this meeting. Written, specific, measurable. Something they can report back on in the next 1:1.
+
+Tone: direct, respectful, coaching-focused. This is a development conversation, not a performance review (unless it's a Q4 rep, in which case be direct about the stakes).`;
+
+  callClaude(SYSTEM_BASE, prompt, 'btn-1on1', 'out-1on1', 'out-1on1-content');
+}
+
+function runStandup() {
+  var team = document.getElementById('s-team').value;
+  var day = document.getElementById('s-day').value;
+  var bags = document.getElementById('s-bags').value;
+  var target = document.getElementById('s-target').value;
+  var win = document.getElementById('s-win').value;
+  var coach = document.getElementById('s-coach').value;
+  var context = document.getElementById('s-context').value;
+
+  var prompt = `Write a complete standup script for the ${team} team at Too Good To Go UK, for ${day} morning.
+
+Numbers:
+- Surprise Bags agreed so far this week: ${bags || '0'}
+- Weekly team target: ${target || 'not set'}
+- Days remaining in the week: varies
+
+Win to open with:
+${win || 'No specific win provided — find a general one from the team this week'}
+
+Coaching point for today's calls:
+${coach || 'Not specified'}
+
+Additional context:
+${context || 'Standard day'}
+
+Write a complete, speakable standup script — 250-350 words. Structure:
+1. Open with the win (name the rep, name the specific technique — 3 sentences max)
+2. The number (team target, where we are, what we need — 2 sentences, no drama)
+3. The coaching point (one technique, the exact words to use on today's calls — give the script)
+4. The commitment round (instruct the TL to go round the room — one specific commitment per rep, 15 seconds each)
+5. Close (mission reminder — one sentence about what every closed Surprise Bag means)
+
+Tone: energising but not performative. Direct. Mission-connected. The team should feel ready to pick up the phone the moment they leave the room.`;
+
+  callClaude(SYSTEM_BASE, prompt, 'btn-standup', 'out-standup-gen', 'out-standup-gen-content');
+}
+
+function setTool(id, btn) {
+  document.querySelectorAll('.tool-panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.tnav').forEach(function(t){t.classList.remove('active');});
+  document.getElementById('panel-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function copyOut(id, btn) {
+  var text = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(function(){
+    var orig = btn.textContent;
+    btn.textContent = 'Copied ✓';
+    btn.classList.add('copied');
+    setTimeout(function(){btn.textContent=orig;btn.classList.remove('copied');},2000);
+  });
+}
+
+function clearOut(id) {
+  var box = document.getElementById(id);
+  box.classList.remove('visible');
+  box.querySelector('.output-content').textContent = '';
+}
 </script>
-<script src="/nav.js"></script>
 </body>
 </html>
