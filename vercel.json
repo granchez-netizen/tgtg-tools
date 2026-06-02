@@ -1,4 +1,96 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/ride-along",
+      "destination": "/live-listening",
+      "permanent": true
+    },
+    {
+      "source": "/mgr-review",
+      "destination": "/interview-prep",
+      "permanent": true
+    },
+    {
+      "source": "/call-analyze",
+      "destination": "/ai-tools",
+      "permanent": true
+    },
+    {
+      "source": "/one-to-one",
+      "destination": "/rep-one-to-one",
+      "permanent": true
+    },
+    {
+      "source": "/team-lead-one-to-one",
+      "destination": "/tl-one-to-one",
+      "permanent": true
+    },
+    {
+      "source": "/cohort-engine",
+      "destination": "/team-performance",
+      "permanent": true
+    },
+    {
+      "source": "/pip",
+      "destination": "/performance-plan",
+      "permanent": true
+    },
+    {
+      "source": "/ramp",
+      "destination": "/rep-ramp",
+      "permanent": true
+    },
+    {
+      "source": "/first-forty",
+      "destination": "/partner-onboarding",
+      "permanent": true
+    },
+    {
+      "source": "/segment-intel",
+      "destination": "/segment-intelligence",
+      "permanent": true
+    },
+    {
+      "source": "/diagnostic",
+      "destination": "/marketplace-diagnostic",
+      "permanent": true
+    },
+    {
+      "source": "/call-coach",
+      "destination": "/call-scorecard",
+      "permanent": true
+    },
+    {
+      "source": "/forecast",
+      "destination": "/pipeline-forecast",
+      "permanent": true
+    },
+    {
+      "source": "/funnel-tracker",
+      "destination": "/acquisition-funnel",
+      "permanent": true
+    },
+    {
+      "source": "/90day",
+      "destination": "/90-day-plan",
+      "permanent": true
+    },
+    {
+      "source": "/standup",
+      "destination": "/daily-standup",
+      "permanent": true
+    },
+    {
+      "source": "/training",
+      "destination": "/training-hub",
+      "permanent": true
+    },
+    {
+      "source": "/week",
+      "destination": "/typical-week",
+      "permanent": true
+    }
+  ]
 }
