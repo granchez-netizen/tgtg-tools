@@ -4,128 +4,375 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Too Good To Go · First Monday</title>
-<link rel="stylesheet" href="/brand.css">
 <style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap');
 :root{
-  --y:#6DBE4F;--g:#22C55E;--r:#EF4444;--b:#3B82F6;--p:#A855F7;
-  --bg:#ffffff;--s:#f7f8f5;--b1:#dde3d8;--t:#1a1a1a;--m:#5a6454;
+  --tgtg:#6DBE4F;--tgtgd:rgba(109,190,79,.09);--tgtgl:rgba(109,190,79,.25);
+  --bg:#ffffff;--bg2:#f7f8f5;--border:#e4e8de;--border2:#dde3d8;
+  --text:#1a1a1a;--muted:#5a6454;--muted2:#8a9484;
+  --blue:#3B82F6;--blued:rgba(59,130,246,.08);--bluel:rgba(59,130,246,.2);
+  --purple:#A855F7;--purpled:rgba(168,85,247,.08);--purplel:rgba(168,85,247,.2);
+  --good:#22C55E;--goodd:rgba(34,197,94,.08);--goodl:rgba(34,197,94,.2);
+  --danger:#EF4444;--dangerd:rgba(239,68,68,.07);
+  --warn:#F59E0B;--warnd:rgba(245,158,11,.07);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);-webkit-font-smoothing:antialiased;}
-.hdr{background:#f7f8f5;border-bottom:1px solid var(--b1);padding:13px 24px 13px 60px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;}
-.brand{font-size:13px;font-weight:800;letter-spacing:-.3px;}
-.brand em{color:var(--y);font-style:normal;}
-.hdr-r{font-size:11px;color:var(--m);}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;padding-bottom:80px;}
 
-.hero{padding:28px 24px 10px;text-align:center;}
-.eye{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--y);margin-bottom:6px;}
-.h1{font-size:28px;font-weight:900;letter-spacing:-.5px;line-height:1.15;margin-bottom:8px;}
-.h-sub{font-size:13px;color:var(--m);line-height:1.75;max-width:520px;margin:0 auto;}
+.hdr{background:var(--tgtg);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+.brand{font-size:13px;font-weight:800;color:#fff;}
+.hdr-sub{font-size:11px;color:rgba(255,255,255,.75);}
 
-.quad{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:20px 24px;}
-@media(max-width:700px){.quad{grid-template-columns:1fr;}}
-.qbox{background:#ffffff;border-radius:13px;border:1.5px solid #dde3d8;overflow:hidden;}
-.qhdr{padding:14px 18px 10px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #1e1e1e;}
-.qicon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;flex-shrink:0;}
-.qlbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;}
-.qsub{font-size:10px;color:#555;margin-top:1px;}
-.qlist{padding:6px 18px 16px;}
-.qi{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #141414;}
+.hero{padding:36px 24px 24px;text-align:center;border-bottom:1px solid var(--border);}
+.eye{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--tgtg);margin-bottom:8px;font-family:'DM Mono',monospace;}
+.h1{font-size:clamp(24px,4vw,36px);font-weight:900;letter-spacing:-1px;line-height:1.12;margin-bottom:10px;}
+.h1 em{color:var(--tgtg);font-style:normal;}
+.h-sub{font-size:13px;color:var(--muted);line-height:1.8;max-width:540px;margin:0 auto;}
+
+.wrap{max-width:960px;margin:0 auto;padding:28px 20px;}
+
+.quad{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;}
+@media(max-width:720px){.quad{grid-template-columns:1fr;}}
+
+.qbox{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04);}
+.qhdr{padding:14px 18px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);background:var(--bg2);}
+.qicon{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0;}
+.qlbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;font-family:'DM Mono',monospace;}
+.qsub{font-size:10px;color:var(--muted2);margin-top:2px;}
+.qlist{padding:6px 16px 14px;}
+
+.qi{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);}
 .qi:last-child{border-bottom:none;}
 .qn{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;flex-shrink:0;margin-top:1px;}
 .qc{flex:1;}
-.qt{font-size:13px;font-weight:700;line-height:1.4;margin-bottom:2px;}
-.qd{font-size:11px;color:#888;line-height:1.6;}
-.qtime{font-size:9px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;margin-top:3px;flex-shrink:0;}
+.qt{font-size:13px;font-weight:700;line-height:1.4;margin-bottom:2px;color:var(--text);}
+.qd{font-size:11px;color:var(--muted);line-height:1.65;}
+.qtime{font-size:9px;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:1px;white-space:nowrap;margin-top:3px;flex-shrink:0;font-family:'DM Mono',monospace;}
 
-.close-section{padding:16px 24px 40px;}
-.close-box{background:#f7f8f5;border:2px solid var(--y);border-radius:14px;padding:24px 28px;text-align:center;}
-.close-eye{font-size:9px;font-weight:700;color:var(--y);text-transform:uppercase;letter-spacing:3px;margin-bottom:10px;}
-.close-text{font-size:14px;color:#999;line-height:1.85;max-width:580px;margin:0 auto;}
-.close-text strong{color:var(--t);}
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:0;margin-bottom:32px;}
+.tl-item{display:flex;gap:16px;position:relative;}
+.tl-time{width:60px;flex-shrink:0;text-align:right;padding-top:14px;}
+.tl-time-txt{font-size:11px;font-weight:700;color:var(--tgtg);font-family:'DM Mono',monospace;}
+.tl-line{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:20px;}
+.tl-dot{width:12px;height:12px;border-radius:50%;background:var(--tgtg);border:2px solid #fff;box-shadow:0 0 0 2px var(--tgtg);flex-shrink:0;margin-top:16px;}
+.tl-connector{flex:1;width:2px;background:var(--border2);margin:4px 0;}
+.tl-item:last-child .tl-connector{display:none;}
+.tl-card{flex:1;background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+.tl-who{font-size:13px;font-weight:800;color:var(--text);margin-bottom:3px;}
+.tl-why{font-size:12px;color:var(--muted);line-height:1.7;}
+.tl-goal{font-size:10px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1px;margin-top:8px;font-family:'DM Mono',monospace;}
+.tl-badge{display:inline-block;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:8px;vertical-align:middle;font-family:'DM Mono',monospace;}
+.b-tgtg{background:var(--tgtgd);color:var(--tgtg);border:1px solid var(--tgtgl);}
+.b-blue{background:var(--blued);color:var(--blue);border:1px solid var(--bluel);}
+.b-purple{background:var(--purpled);color:var(--purple);border:1px solid var(--purplel);}
+.b-good{background:var(--goodd);color:var(--good);border:1px solid var(--goodl);}
+
+/* CLOSE BOX */
+.close-box{background:var(--tgtgd);border:2px solid var(--tgtgl);border-radius:14px;padding:28px;text-align:center;margin-top:8px;}
+.close-eye{font-size:9px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:3px;margin-bottom:10px;font-family:'DM Mono',monospace;}
+.close-title{font-size:18px;font-weight:900;letter-spacing:-.4px;margin-bottom:12px;}
+.close-text{font-size:13px;color:var(--muted);line-height:1.85;max-width:560px;margin:0 auto;}
+.close-text strong{color:var(--text);}
+
+/* COPY BTN */
+.copy-btn{margin-top:20px;padding:11px 24px;background:var(--tgtg);color:#fff;border:none;border-radius:9px;font-size:12px;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .15s;}
+.copy-btn:hover{opacity:.85;}
+.copy-btn.copied{background:var(--good);}
+
+/* NOTE */
+.note{background:var(--bg2);border-left:3px solid var(--tgtg);border-radius:0 8px 8px 0;padding:12px 14px;font-size:12px;color:var(--muted);line-height:1.7;margin:16px 0;}
+.note strong{color:var(--text);}
 </style>
 </head>
 <body>
 
 <div class="hdr">
-  <div class="brand"><em>Too Good</em> To Go · First Monday</div>
-  <div class="hdr-r">Final question · ~5 minutes</div>
+  <div class="brand">Too Good To Go · UK &amp; Ireland</div>
+  <div class="hdr-sub">Head of Independent Partners · First Monday</div>
 </div>
 
 <div class="hero">
-  <div class="eye">Your first Monday as UK Head of Independent Partners</div>
-  <div class="h1">Five meetings. Five data points.<br>Five people. Five truths.</div>
-  <div class="h-sub">Names, numbers, and decisions. In front of me before the day ends.</div>
+  <div class="eye">Day One · Head of Independent Partners</div>
+  <div class="h1">Five meetings. Five data points.<br><em>Five truths before 5pm.</em></div>
+  <div class="h-sub">This is the day that sets every expectation the team will have about how you lead. Get the sequence right. Listen more than you speak. Know the numbers before anyone presents them to you.</div>
 </div>
 
-<div class="quad">
+<div class="wrap">
 
-  <div class="qbox">
-    <div class="qhdr">
-      <div class="qicon" style="background:rgba(109,190,79,.12);color:var(--y);">M</div>
-      <div><div class="qlbl" style="color:var(--y);">Five meetings</div><div class="qsub">Who I sit with and why, in order</div></div>
+  <!-- THE DAY TIMELINE -->
+  <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--tgtg);margin-bottom:16px;font-family:'DM Mono',monospace;">The Day — Minute by Minute</div>
+
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-time"><div class="tl-time-txt">07:00</div></div>
+      <div class="tl-line"><div class="tl-dot" style="background:var(--purple);box-shadow:0 0 0 2px var(--purple);"></div><div class="tl-connector"></div></div>
+      <div class="tl-card">
+        <div class="tl-who">Chelsea Kerr — Country Director <span class="tl-badge b-purple">Before the team</span></div>
+        <div class="tl-why">Call Chelsea before anyone else sees you. Her priorities, not yours, shape the first 30 days. Confirm the operating mandate, communication cadence, and one thing she needs from you by end of week one. This is not counted as a meeting — it is the brief before the day starts. The team never knows this happened before them.</div>
+        <div class="tl-goal">Output: Chelsea's definition of a successful day 30. Weekly brief format confirmed. One decision she needs from you this week.</div>
+      </div>
     </div>
-    <div class="qlist">
-      <div class="qi" style="border-bottom:1px solid #222;margin-bottom:4px;padding-bottom:12px;"><div class="qn" style="background:rgba(109,190,79,.06);color:#555;font-size:8px;">PRE</div><div class="qc"><div class="qt" style="color:#888;font-size:12px;">Chelsea Kerr — 07:00 London / 16:00 Melbourne</div><div class="qd">Before the working day. His priorities before anyone shapes my thinking. What 90 days looks like from his seat. Weekly cadence set. Not counted as a meeting — this is the brief before the day starts.</div></div><div class="qtime" style="color:#444;">07:00</div></div>
-      <div class="qi"><div class="qn" style="background:rgba(109,190,79,.12);color:var(--y);">1</div><div class="qc"><div class="qt">All-hands sales standup — full rep team</div><div class="qd">Every rep. Every city. 15 minutes. I introduce myself, say three things: I am here to make you better at your job, I will be on the phones with you this week, and I am listening before I change anything. Then I shut up and watch the energy. Who speaks. Who stays quiet. What the rhythm feels like. The team sees me on Day 1 and knows the kind of leader who just walked in.</div></div><div class="qtime">09:00</div></div>
-      <div class="qi"><div class="qn" style="background:rgba(109,190,79,.12);color:var(--y);">2</div><div class="qc"><div class="qt">Jade Okafor + top Account Managers</div><div class="qd">Walk in with the coverage data. London 44.5% dropping to 33% at dinner. Manchester 20% Thursday. Liverpool 40.5% with no launch. One question: what is the activation failure mode? Joint audit starts week two.</div></div><div class="qtime">09:30</div></div>
-      <div class="qi"><div class="qn" style="background:rgba(109,190,79,.12);color:var(--y);">3</div><div class="qc"><div class="qt">Top 3 phone reps — coffee then dialto a venue</div><div class="qd">Coffee first. Then dialto a live venue together. I watch the pitch, the offer window conversation, the objection handling. Debrief on the phone floor. Not described — observed.</div></div><div class="qtime">10:30</div></div>
-      <div class="qi"><div class="qn" style="background:rgba(109,190,79,.12);color:var(--y);">4</div><div class="qc"><div class="qt">Bottom quartile phone reps — coffee</div><div class="qd">Same setting, same respect. Everyone gets coffee on Day 1. No performance framing. One question: what would make this week easier? They feel the friction hardest and they will tell you if you ask without a manager in the room.</div></div><div class="qtime">12:30</div></div>
-      <div class="qi"><div class="qn" style="background:rgba(109,190,79,.12);color:var(--y);">5</div><div class="qc"><div class="qt">Joint dormant prospect call — AM and HoI together</div><div class="qd">Walk into a dormant venue with the AM who owns it. One ask: shift the offer window to Tuesday-Thursday 5:30-7:30pm. Do it on their phone before we leave. The activation sprint in miniature. Both Sales and AM see how I operate from day one.</div></div><div class="qtime">16:30</div></div>
+
+    <div class="tl-item">
+      <div class="tl-time"><div class="tl-time-txt">09:00</div></div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-connector"></div></div>
+      <div class="tl-card">
+        <div class="tl-who">Team Acquisition Standup <span class="tl-badge b-tgtg">09:00 sharp</span></div>
+        <div class="tl-why">You attend — you do not run it. The TL runs it. You observe. How does the TL open the room? Do reps engage or go through the motions? Who speaks first, who goes quiet, what gets celebrated, what gets ignored? The standup tells you more about this team's culture in 15 minutes than any briefing document.</div>
+        <div class="tl-goal">Watch for: energy level, who the natural leader in the room is, whether the TL coaches or just reports numbers.</div>
+      </div>
     </div>
+
+    <div class="tl-item">
+      <div class="tl-time"><div class="tl-time-txt">09:30</div></div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-connector"></div></div>
+      <div class="tl-card">
+        <div class="tl-who">Team Account Management Standup <span class="tl-badge b-tgtg">09:30 sharp</span></div>
+        <div class="tl-why">Same observation posture. What does the AM TL focus on — partner health metrics or just weekly call counts? Are at-risk accounts named specifically or tracked in aggregate? Is the team proactive or reactive in how they talk about their book?</div>
+        <div class="tl-goal">Watch for: whether churn risk is visible and discussed, or invisible and managed reactively.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time"><div class="tl-time-txt">10:00</div></div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-connector"></div></div>
+      <div class="tl-card">
+        <div class="tl-who">Team Growth Standup <span class="tl-badge b-tgtg">10:00 sharp</span></div>
+        <div class="tl-why">The Growth team operates differently — multi-site accounts, non-food segments, longer deal cycles. Does the standup reflect that? Or is it run the same way as the Acquisition standup? A Growth TL who coaches for volume rather than complexity is running the wrong playbook for their team.</div>
+        <div class="tl-goal">Watch for: whether the TL understands what makes a Growth deal different from an Acquisition dial.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time"><div class="tl-time-txt">10:30</div></div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-connector"></div></div>
+      <div class="tl-card">
+        <div class="tl-who">All Reps — Full Team Address <span class="tl-badge b-tgtg">15 minutes only</span></div>
+        <div class="tl-why">Not a speech. Four things: who you are, what you believe about sales teams, what they can expect from you, and what you expect from them. Then stop. The team needs to see calm authority — not a vision presentation. End with: "I'm here to listen this week. I'll be sitting with each of you. Tell me what's working and what's getting in your way."</div>
+        <div class="tl-goal">Signal: you are here to make them better, not to reorganise them. Standards will be high. You will be visible on the floor.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time"><div class="tl-time-txt">11:00</div></div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-connector"></div></div>
+      <div class="tl-card">
+        <div class="tl-who">Listen to live calls — phone floor <span class="tl-badge b-blue">Observe only</span></div>
+        <div class="tl-why">Sit on the floor. Listen to three or four live calls across different reps. No feedback today. No coaching today. You are building your own baseline picture of call quality — independent of any AI analysis or TL summary — before anyone has a chance to manage your perception. Your ears first, the data second.</div>
+        <div class="tl-goal">Score privately: does the rep lead with surplus discovery or jump to the pitch? Do they handle objections or back off? Do they close the Surprise Bag window on the call?</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time"><div class="tl-time-txt">13:00</div></div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-connector"></div></div>
+      <div class="tl-card">
+        <div class="tl-who">Three Team Leads — Together <span class="tl-badge b-purple">Group read first</span></div>
+        <div class="tl-why">Bring all three TLs into the same room before you meet them individually. Not for detail — for dynamic. Who speaks first? Who defers? Who challenges? The group interaction tells you where the real authority sits in the management layer. Ask one question and let them talk: "What's working well right now, and what's the one thing you'd fix if you could fix it tomorrow?"</div>
+        <div class="tl-goal">Output: first read on TL relationships, confidence levels, and where coaching investment is most needed.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time"><div class="tl-time-txt">14:30</div></div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-connector"></div></div>
+      <div class="tl-card">
+        <div class="tl-who">Pipeline review — with Acquisition TL <span class="tl-badge b-blue">Data</span></div>
+        <div class="tl-why">Pull the live pipeline before this meeting so you arrive with the numbers. Walk through the top 10 open deals together. For each one: what's the next concrete action, when, and who owns it? Any deal without a clear answer gets a 48-hour reactivation deadline or gets closed. This is the first signal to the TL that pipeline hygiene is non-negotiable.</div>
+        <div class="tl-goal">Output: your first read on pipeline quality and the TL's grip on their team's book.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time"><div class="tl-time-txt">16:00</div></div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-connector"></div></div>
+      <div class="tl-card">
+        <div class="tl-who">Bottom quartile rep — informal conversation <span class="tl-badge b-good">No manager present</span></div>
+        <div class="tl-why">Coffee or a quiet corner. No performance framing. One question: "What would make your week easier?" The rep who is struggling hardest will tell you the most about what the system is failing to provide — if you ask without a manager in the room and without agenda. This is diagnostic, not managerial.</div>
+        <div class="tl-goal">Listen for: skill gap vs motivation gap vs environment gap. The answer shapes what coaching looks like for this person.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time"><div class="tl-time-txt">17:00</div></div>
+      <div class="tl-line"><div class="tl-dot" style="background:var(--purple);box-shadow:0 0 0 2px var(--purple);"></div><div class="tl-connector"></div></div>
+      <div class="tl-card">
+        <div class="tl-who">Chelsea — end-of-day brief <span class="tl-badge b-purple">5 minutes</span></div>
+        <div class="tl-why">Short message or quick call. Not a full debrief — three sentences: what you observed, what you're going to look at more closely, and anything you need from her this week. She hears from you before the day ends. That cadence starts on day one and never breaks.</div>
+        <div class="tl-goal">Signal: Chelsea never has to chase you for an update. Ever.</div>
+      </div>
+    </div>
+
   </div>
 
-  <div class="qbox">
-    <div class="qhdr">
-      <div class="qicon" style="background:rgba(59,130,246,.12);color:var(--b);">D</div>
-      <div><div class="qlbl" style="color:var(--b);">Five data points</div><div class="qsub">Pulled before 8am, before anyone presents a narrative</div></div>
+  <!-- FOUR QUADS -->
+  <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--tgtg);margin-bottom:16px;font-family:'DM Mono',monospace;">What You Know Before You Walk In</div>
+
+  <div class="quad">
+
+    <div class="qbox">
+      <div class="qhdr">
+        <div class="qicon" style="background:var(--blued);color:var(--blue);">D</div>
+        <div><div class="qlbl" style="color:var(--blue);">Five data points</div><div class="qsub">Pull these before 8am. Before anyone shapes the narrative.</div></div>
+      </div>
+      <div class="qlist">
+        <div class="qi">
+          <div class="qn" style="background:var(--blued);color:var(--blue);">1</div>
+          <div class="qc"><div class="qt">Dials per rep — last 30 days, individual not average</div><div class="qd">The average hides everything. A 50-dial average could be one rep at 90 and one at 10. You need the distribution to know where effort is actually going.</div></div>
+        </div>
+        <div class="qi">
+          <div class="qn" style="background:var(--blued);color:var(--blue);">2</div>
+          <div class="qc"><div class="qt">Dial-to-meaningful-conversation ratio per rep</div><div class="qd">High volume, low meaningful conversations is a pitch quality problem. Low volume, high conversion is a confidence or activity problem. Each needs a different response.</div></div>
+        </div>
+        <div class="qi">
+          <div class="qn" style="background:var(--blued);color:var(--blue);">3</div>
+          <div class="qc"><div class="qt">Conversation-to-Surprise-Bag-agreed close rate per rep</div><div class="qd">This is the money metric. A rep who has 20 meaningful conversations and closes 2 has a different problem to one who has 8 and closes 4. Know the number for every rep before you sit with any of them.</div></div>
+        </div>
+        <div class="qi">
+          <div class="qn" style="background:var(--blued);color:var(--blue);">4</div>
+          <div class="qc"><div class="qt">Partner activation rate — first Surprise Bag live within 48 hours of sign-up</div><div class="qd">A signed partner who hasn't gone live within 48 hours is a churn risk. This number tells you whether the onboarding handover from Acquisition to AM is working.</div></div>
+        </div>
+        <div class="qi">
+          <div class="qn" style="background:var(--blued);color:var(--blue);">5</div>
+          <div class="qc"><div class="qt">Partner churn rate — last 90 days by team and by rep</div><div class="qd">Overall churn is a headline. Churn by rep and by TL tells you whether it's a systemic issue or a specific coaching failure. Pull both.</div></div>
+        </div>
+      </div>
     </div>
-    <div class="qlist">
-      <div class="qi"><div class="qn" style="background:rgba(59,130,246,.12);color:var(--b);">1</div><div class="qc"><div class="qt">Offer coverage by city by daypart</div><div class="qd">London 943 venues, 47.5% afternoon, 33% at peak dinner. Manchester 114 venues, 20% Thursday. Bristol 37%, Leeds 45%, Liverpool 40.5%. The time-of-day pattern is the diagnosis.</div></div></div>
-      <div class="qi"><div class="qn" style="background:rgba(59,130,246,.12);color:var(--b);">2</div><div class="qc"><div class="qt">Time-to-close per rep — individual, not average</div><div class="qd">A 4-day average is either very efficient or cutting corners on qualification. A 21-day average is either complex deals or a stuck pipeline. The individual distribution tells me where coaching goes before a single call-along.</div></div></div>
-      <div class="qi"><div class="qn" style="background:rgba(59,130,246,.12);color:var(--b);">3</div><div class="qc"><div class="qt">Venue activation rate — redemption in last 14 days, by city</div><div class="qd">A signed venue with no redemption is worse than no venue. It inflates the count and poisons diner trust. This is the number that tells me whether the rep motion is building real supply or adding logos.</div></div></div>
-      <div class="qi"><div class="qn" style="background:rgba(59,130,246,.12);color:var(--b);">4</div><div class="qc"><div class="qt">Visit-to-close ratio per rep</div><div class="qd">20 visits at 3% conversion is less productive than 12 visits at 18%. High volume, low conversion is a coaching problem disguised as a hustle metric. This surfaces the real quality problem.</div></div></div>
-      <div class="qi"><div class="qn" style="background:rgba(59,130,246,.12);color:var(--b);">5</div><div class="qc"><div class="qt">Weekday liquidity split — Mon-Thu share of redemptions</div><div class="qd">If 70% of redemptions are Friday-Saturday, venues are giving away margin on covers they would have filled anyway. That is not incremental revenue. This tells me whether the model is actually doing what it promises.</div></div></div>
+
+    <div class="qbox">
+      <div class="qhdr">
+        <div class="qicon" style="background:var(--purpled);color:var(--purple);">P</div>
+        <div><div class="qlbl" style="color:var(--purple);">Five people</div><div class="qsub">Who you need a read on by end of day one.</div></div>
+      </div>
+      <div class="qlist">
+        <div class="qi">
+          <div class="qn" style="background:var(--purpled);color:var(--purple);">1</div>
+          <div class="qc"><div class="qt">All three Team Leads — group first, individual this week</div><div class="qd">Group read on day one. Individual 1:1s in days 2, 3, and 4. Same question to each: what's working, what isn't, and who on your team would you back to step up?</div></div>
+        </div>
+        <div class="qi">
+          <div class="qn" style="background:var(--purpled);color:var(--purple);">2</div>
+          <div class="qc"><div class="qt">The highest close-rate rep in Acquisition</div><div class="qd">Not the highest dial count. The highest conversation-to-close rate. This person's method becomes the coaching standard. Listen to their calls before end of week one.</div></div>
+        </div>
+        <div class="qi">
+          <div class="qn" style="background:var(--purpled);color:var(--purple);">3</div>
+          <div class="qc"><div class="qt">The rep who has been here longest</div><div class="qd">Institutional knowledge and culture carrier. What do they think of the team? What's changed in the last six months? Ask them without a manager present.</div></div>
+        </div>
+        <div class="qi">
+          <div class="qn" style="background:var(--purpled);color:var(--purple);">4</div>
+          <div class="qc"><div class="qt">A rep who joined in the last 8 weeks</div><div class="qd">Is the onboarding working? What did they find hardest? What would have helped in week one that they didn't have? Their answer is your ramp curriculum audit.</div></div>
+        </div>
+        <div class="qi">
+          <div class="qn" style="background:var(--purpled);color:var(--purple);">5</div>
+          <div class="qc"><div class="qt">The bottom quartile rep</div><div class="qd">Speak to them without agenda and without a manager. "What would make your week easier?" The answer tells you whether it's a skill gap, a motivation gap, or a system failing them.</div></div>
+        </div>
+      </div>
     </div>
+
+    <div class="qbox">
+      <div class="qhdr">
+        <div class="qicon" style="background:var(--tgtgd);color:var(--tgtg);">M</div>
+        <div><div class="qlbl" style="color:var(--tgtg);">Five meetings</div><div class="qsub">Sequence matters. Chelsea before the team. TLs together before individually.</div></div>
+      </div>
+      <div class="qlist">
+        <div class="qi">
+          <div class="qn" style="background:var(--tgtgd);color:var(--tgtg);">Pre</div>
+          <div class="qc"><div class="qt">Chelsea Kerr — before the team arrives</div><div class="qd">Her priorities before anyone else shapes your thinking. Operating mandate confirmed. Cadence set. Not a meeting — the brief before the day.</div></div>
+          <div class="qtime">07:00</div>
+        </div>
+        <div class="qi">
+          <div class="qn" style="background:var(--tgtgd);color:var(--tgtg);">1</div>
+          <div class="qc"><div class="qt">All three standups — observe, do not run</div><div class="qd">09:00 Acquisition · 09:30 Account Management · 10:00 Growth. You are in the room. The TL runs it. You are reading the room.</div></div>
+          <div class="qtime">09:00</div>
+        </div>
+        <div class="qi">
+          <div class="qn" style="background:var(--tgtgd);color:var(--tgtg);">2</div>
+          <div class="qc"><div class="qt">Full team address — 15 minutes</div><div class="qd">Who you are, what you believe, what they can expect, what you expect. Then stop. Not a presentation — four sentences and questions.</div></div>
+          <div class="qtime">10:30</div>
+        </div>
+        <div class="qi">
+          <div class="qn" style="background:var(--tgtgd);color:var(--tgtg);">3</div>
+          <div class="qc"><div class="qt">All three TLs together</div><div class="qd">Group dynamic read. Who leads, who defers. One question: what would you fix tomorrow? Let them talk.</div></div>
+          <div class="qtime">13:00</div>
+        </div>
+        <div class="qi">
+          <div class="qn" style="background:var(--tgtgd);color:var(--tgtg);">4</div>
+          <div class="qc"><div class="qt">Pipeline review with Acquisition TL</div><div class="qd">Top 10 open deals. Next action, owner, date — for each. No action = 48-hour deadline or close the deal.</div></div>
+          <div class="qtime">14:30</div>
+        </div>
+        <div class="qi">
+          <div class="qn" style="background:var(--tgtgd);color:var(--tgtg);">5</div>
+          <div class="qc"><div class="qt">Chelsea — end-of-day brief</div><div class="qd">Three sentences. What you observed. What you'll look at more closely. What you need from her. She hears from you before the day ends.</div></div>
+          <div class="qtime">17:00</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qbox">
+      <div class="qhdr">
+        <div class="qicon" style="background:var(--goodd);color:var(--good);">T</div>
+        <div><div class="qlbl" style="color:var(--good);">Five truths</div><div class="qsub">What you know by 5pm that you didn't know at 8am.</div></div>
+      </div>
+      <div class="qlist">
+        <div class="qi">
+          <div class="qn" style="background:var(--goodd);color:var(--good);">1</div>
+          <div class="qc"><div class="qt">Whether the best rep's method is documented anywhere</div><div class="qd">If it lives only in their head, the team is one resignation away from losing its best asset. Finding this out on day one shapes week two's priority.</div></div>
+        </div>
+        <div class="qi">
+          <div class="qn" style="background:var(--goodd);color:var(--good);">2</div>
+          <div class="qc"><div class="qt">Whether the TLs coach or manage activity</div><div class="qd">Three standups tells you this. A TL who coaches names specific techniques. A TL who manages activity reads numbers. The difference determines the whole coaching programme.</div></div>
+        </div>
+        <div class="qi">
+          <div class="qn" style="background:var(--goodd);color:var(--good);">3</div>
+          <div class="qc"><div class="qt">Whether pipeline hygiene is a habit or aspirational</div><div class="qd">The pipeline review with the Acquisition TL answers this immediately. If they can't tell you the next action on every deal without looking it up, hygiene is aspirational.</div></div>
+        </div>
+        <div class="qi">
+          <div class="qn" style="background:var(--goodd);color:var(--good);">4</div>
+          <div class="qc"><div class="qt">What the team thinks of their current leadership</div><div class="qd">Not from the TLs — from the bottom quartile rep conversation and the new starter. Their answers are unfiltered in a way that no structured meeting produces.</div></div>
+        </div>
+        <div class="qi">
+          <div class="qn" style="background:var(--goodd);color:var(--good);">5</div>
+          <div class="qc"><div class="qt">What Chelsea actually needs from you in the first 30 days</div><div class="qd">Not what you assumed from the JD. What she said at 7am — in her words. Everything else organises around that.</div></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <div class="qbox">
-    <div class="qhdr">
-      <div class="qicon" style="background:rgba(168,85,247,.12);color:var(--p);">P</div>
-      <div><div class="qlbl" style="color:var(--p);">Five people</div><div class="qsub">Named roles, why each one specifically</div></div>
-    </div>
-    <div class="qlist">
-      <div class="qi"><div class="qn" style="background:rgba(168,85,247,.12);color:var(--p);">1</div><div class="qc"><div class="qt">Both frontline managers — individually</div><div class="qd">Not together. One at a time. Same question to each: what is working, what is not, and who on your team would you back to step up? If their answers align, I have a consistent team. If they diverge, I have two different management styles to work with. Both tell me something useful.</div></div></div>
-      <div class="qi"><div class="qn" style="background:rgba(168,85,247,.12);color:var(--p);">2</div><div class="qc"><div class="qt">Jade Okafor — Head of AM UK</div><div class="qd">The activation data is my opening. London dinner-window dormancy and Manchester collapse are joint Sales-AM problems. Mike and I build the shared plan on Day 1, not Day 30. This relationship is load-bearing.</div></div></div>
-      <div class="qi"><div class="qn" style="background:rgba(168,85,247,.12);color:var(--p);">3</div><div class="qc"><div class="qt">The highest visit-to-close rep in London</div><div class="qd">Not the highest volume. The highest conversion. I dialto a venue with this person and watch them work. Their pitch is the coaching standard I am going to set for 26 phone reps.</div></div></div>
-      <div class="qi"><div class="qn" style="background:rgba(168,85,247,.12);color:var(--p);">4</div><div class="qc"><div class="qt">A mid-tier rep — on the phone floor</div><div class="qd">The call-along that tells me more than any meeting. The mid-tier is where coaching leverage lives. Understanding exactly what separates this person from the top 3 is the playbook I build from.</div></div></div>
-      <div class="qi"><div class="qn" style="background:rgba(168,85,247,.12);color:var(--p);">5</div><div class="qc"><div class="qt">The North manager — four cities, one question</div><div class="qd">You are carrying Manchester, Liverpool, Leeds, and Bristol. Who on your team is operating above their level right now? Name them specifically. That person becomes the North Midlands Team Lead. This decision cannot wait past day 30.</div></div></div>
-    </div>
-  </div>
-
-  <div class="qbox">
-    <div class="qhdr">
-      <div class="qicon" style="background:rgba(34,197,94,.12);color:var(--g);">T</div>
-      <div><div class="qlbl" style="color:var(--g);">Five operational truths</div><div class="qsub">What I know by 5pm that I did not know at 8am</div></div>
-    </div>
-    <div class="qlist">
-      <div class="qi"><div class="qn" style="background:rgba(34,197,94,.12);color:var(--g);">1</div><div class="qc"><div class="qt">Whether the best practice is replicable or lives in one head</div><div class="qd">After coffee and a dial with the top 3, I know whether they share a language for the offer window conversation or whether the best version of this pitch is one person's instinct. That answer determines the entire coaching approach.</div></div></div>
-      <div class="qi"><div class="qn" style="background:rgba(34,197,94,.12);color:var(--g);">2</div><div class="qc"><div class="qt">Whether there is a hero-rep dependency in the North</div><div class="qd">One manager, four cities. If a single rep is carrying Manchester's number, that city is one resignation away from collapse. The bottom-quartile conversations and the city numbers tell me whether the North is genuinely a team or one person and a number.</div></div></div>
-      <div class="qi"><div class="qn" style="background:rgba(34,197,94,.12);color:var(--g);">3</div><div class="qc"><div class="qt">How easy it actually is to sign and activate a venue</div><div class="qd">Not how the deck describes it. What it actually takes from dial to first redemption, watched live. The call-along shows signing friction. The joint dormant visit shows activation friction. Both on Day 1.</div></div></div>
-      <div class="qi"><div class="qn" style="background:rgba(34,197,94,.12);color:var(--g);">4</div><div class="qc"><div class="qt">What the marketplace looks like from the diner side right now</div><div class="qd">Open the app at 6pm on a Tuesday in London. What does a real diner see? If the feed is thin on a Tuesday evening, the supply problem is real and urgent regardless of what the signed venue count says.</div></div></div>
-      <div class="qi"><div class="qn" style="background:rgba(34,197,94,.12);color:var(--g);">5</div><div class="qc"><div class="qt">Where the culture is — set by what I do, not what I say</div><div class="qd">Everyone got coffee. Top quartile and bottom quartile alike. Same setting, same respect. I walked into a venue rather than sat in a meeting room. I did a joint dormant visit with AM rather than talked about it. By 5pm the team knows how I operate. That is the culture.</div></div></div>
-    </div>
-  </div>
-
-</div>
-
-<div class="close-section">
+  <!-- END OF DAY BRIEF -->
+  <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--tgtg);margin-bottom:16px;font-family:'DM Mono',monospace;">End of Day — Chelsea Brief</div>
   <div class="close-box">
-    <div class="close-eye">End of day one</div>
-    <div class="close-text">By 5pm I have <strong>eight hours of real observation</strong> and something honest to say.<br><br>I have stood in front of the full team, heard from Jade Okafor and the AMs, walked with the top performers, sat with the bottom quartile, I have seen a live pitch. I have walked into a dormant venue with an AM and watched the activation conversation happen in real time. I have the data, I have the field reality, and I have a specific view on what changes on Tuesday.<br><br><strong>That is not a posture. That is a plan.</strong></div>
+    <div class="close-eye">Copy to Chelsea at 17:00</div>
+    <div class="close-title">What I saw today. What I'm doing about it.</div>
+    <div class="close-text" id="brief-text">
+      <strong>Day 1 brief — [DATE]</strong><br><br>
+      Attended all three standups. Met every rep individually. Sat in on [X] live calls.<br><br>
+      <strong>Three observations:</strong><br>
+      1. [SPECIFIC THING — e.g. "Acquisition team has strong energy in standup but TL is reporting numbers rather than coaching specific techniques".]<br>
+      2. [SPECIFIC THING — e.g. "Pipeline has [X] deals with no next step or date — reviewing with TL tomorrow."]<br>
+      3. [SPECIFIC THING — e.g. "Best close rate rep ([NAME]) has a strong surplus discovery opener — not yet documented or shared with the team."]<br><br>
+      <strong>This week I'm focused on:</strong><br>
+      Individual TL 1:1s (days 2, 3, 4) · Pipeline audit with each TL · First call quality baseline from AI analysis<br><br>
+      <strong>One thing I need from you:</strong><br>
+      [SPECIFIC ASK — e.g. "Access to the last 90 days of partner churn data by rep and by team."]<br><br>
+      More Friday.
+    </div>
+    <button class="copy-btn" onclick="copyBrief()">Copy brief to clipboard</button>
   </div>
+
 </div>
 
-<script src="/nav.js"></script>
+<script>
+function copyBrief(){
+  var text = document.getElementById('brief-text').innerText;
+  navigator.clipboard.writeText(text).then(function(){
+    var btn = document.querySelector('.copy-btn');
+    btn.textContent = 'Copied ✓';
+    btn.classList.add('copied');
+    setTimeout(function(){btn.textContent='Copy brief to clipboard';btn.classList.remove('copied');},2000);
+  });
+}
+</script>
 </body>
 </html>
