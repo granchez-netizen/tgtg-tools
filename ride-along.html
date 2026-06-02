@@ -362,7 +362,7 @@ var meddic = {};
 var meddicEls = {};
 
 async function loadTeam() {
-  var sel = document.getElementById('s1-bdm');
+  var sel = document.getElementById('s1-rep');
   if(!SHEET_CSV_URL){ populateDropdown(FALLBACK_TEAM); return; }
   try {
     var res = await fetch(SHEET_CSV_URL);
@@ -373,7 +373,7 @@ async function loadTeam() {
 }
 
 function populateDropdown(names) {
-  var sel = document.getElementById('s1-bdm');
+  var sel = document.getElementById('s1-rep');
   names.forEach(function(n){
     var o = document.createElement('option');
     o.value = n; o.textContent = n;
@@ -386,7 +386,7 @@ function populateDropdown(names) {
 }
 
 function getRepName(){
-  var sel = document.getElementById('s1-bdm');
+  var sel = document.getElementById('s1-rep');
   var custom = document.getElementById('s1-rep-custom');
   if(sel.value === '__custom' || sel.style.display === 'none'){
     return custom.value.trim() || 'Unknown rep';
@@ -470,7 +470,7 @@ function buildScoreSummary() {
 
 function submit() {
   var payload = {
-    bdm:         getRepName(),
+    rep:         getRepName(),
     venue:       g('s1-venue').value,
     visitType:   g('s1-type').value,
     outcome:     g('s1-outcome').value,
