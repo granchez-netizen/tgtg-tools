@@ -4,34 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Too Good To Go · Call Review Scorecard</title>
-<link rel="stylesheet" href="/brand.css">
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{--y:#6DBE4F;--yd:rgba(109,190,79,.10);--yl:rgba(109,190,79,.22);--g:#22C55E;--gd:rgba(34,197,94,.08);--gl:rgba(34,197,94,.22);--r:#EF4444;--rd:rgba(239,68,68,.08);--rl:rgba(239,68,68,.22);--bg:#ffffff;--s:#f7f8f5;--b1:#dde3d8;--t:#1a1a1a;--m:#5a6454;}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);-webkit-font-smoothing:antialiased;}
-.hdr{background:#f7f8f5;border-bottom:1px solid var(--b1);padding:13px 24px 13px 60px;position:sticky;top:0;z-index:100;display:flex;align-items:center;}
-.brand{font-size:13px;font-weight:800;}.brand em{color:var(--y);font-style:normal;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;}
+.hdr{background:#f7f8f5;border-bottom:1px solid var(--border);padding:13px 20px;position:sticky;top:0;z-index:100;display:flex;align-items:center;}
+.brand{font-size:13px;font-weight:800;}.brand em{color:var(--tgtg);font-style:normal;}
 .hero{max-width:880px;margin:0 auto;padding:36px 24px 20px;}
-.eye{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--y);margin-bottom:8px;}
+.eye{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--tgtg);margin-bottom:8px;}
 .h1{font-size:clamp(24px,4vw,38px);font-weight:900;letter-spacing:-1px;line-height:1.1;margin-bottom:8px;}
-.h1 em{color:var(--y);font-style:normal;}
-.sub{font-size:13px;color:#888;line-height:1.75;max-width:640px;}
+.h1 em{color:var(--tgtg);font-style:normal;}
+.sub{font-size:13px;color:var(--muted);line-height:1.75;max-width:640px;}
 .wrap{max-width:880px;margin:0 auto;padding:0 24px 60px;}
 .crit{background:#ffffff;border:1px solid #dde3d8;border-radius:11px;padding:16px 18px;margin-bottom:10px;}
 .crit-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px;}
-.crit-cat{font-size:9px;font-weight:700;color:var(--y);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;}
+.crit-cat{font-size:9px;font-weight:700;color:var(--tgtg);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;}
 .crit-label{font-size:14px;font-weight:800;margin-bottom:4px;}
-.crit-desc{font-size:12px;color:#666;line-height:1.6;}
-select.score-sel{background:#f7f8f5;border:1px solid #333;border-radius:7px;color:var(--t);font-family:'Inter',sans-serif;font-size:12px;font-weight:700;padding:6px 10px;min-width:120px;flex-shrink:0;cursor:pointer;}
+.crit-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+select.score-sel{background:#f7f8f5;border:1px solid #333;border-radius:7px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;padding:6px 10px;min-width:120px;flex-shrink:0;cursor:pointer;}
 .examples{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .ex{background:#f0f2ed;border-radius:7px;padding:10px 12px;font-size:11px;line-height:1.6;}
-.ex.good{color:var(--g);}.ex.bad{color:var(--r);}
+.ex.good{color:var(--good);}.ex.bad{color:var(--danger);}
 .ex strong{display:block;margin-bottom:3px;}
-.total{margin-top:16px;background:#f7f8f5;border:2px solid var(--b1);border-radius:12px;padding:20px;display:flex;align-items:center;justify-content:space-between;}
-.total-lbl{font-size:13px;color:#888;}
-.total-n{font-size:36px;font-weight:900;color:var(--y);}
-.notes{width:100%;margin-top:12px;background:#ffffff;border:1px solid #dde3d8;border-radius:9px;color:var(--t);font-family:'Inter',sans-serif;font-size:13px;padding:14px;min-height:80px;resize:vertical;}
+.total{margin-top:16px;background:#f7f8f5;border:2px solid var(--border);border-radius:12px;padding:20px;display:flex;align-items:center;justify-content:space-between;}
+.total-lbl{font-size:13px;color:var(--muted);}
+.total-n{font-size:36px;font-weight:900;color:var(--tgtg);}
+.notes{width:100%;margin-top:12px;background:#ffffff;border:1px solid #dde3d8;border-radius:9px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;padding:14px;min-height:80px;resize:vertical;}
 </style>
 </head>
 <body>
@@ -48,7 +48,7 @@ var DATA = [
   {id:"cr2",cat:"Discovery",w:15,label:"Found the specific quiet period",desc:"Did the rep identify which sessions are genuinely empty and confirm this before pitching?",good:"Asked about surplus pattern: 'What do you typically have left at the end of a Tuesday?'",bad:"Moved straight to pitch without confirming the quiet period"},
   {id:"cr3",cat:"Pitch",w:15,label:"Waste-to-revenue frame landed",desc:"Did the rep frame the Surprise Bag as found revenue — food that already exists and would go to waste — now turned into found revenue. Without TGTG: £0. With TGTG: paid, reserved, collected.?",good:"Articulated clearly that fixed costs are already paid and TGTG revenue is found money",bad:"Led with platform features or customer base size without anchoring on the economics"},
   {id:"cr4",cat:"Brand objection",w:15,label:"Handled brand objection without hesitation",desc:"When the operator raised brand damage or training customers to wait, was it handled directly?",good:"Held the frame: 'The Surprise Bag only shows in the collection window — your regular customers never see it'",bad:"Deflected, agreed partially, or moved on without resolving it"},
-  {id:"cr5",cat:"AI recommendation",w:10,label:"Showed TGTG AI offer suggestion",desc:"Did the rep show that TGTG's AI suggests the right offer type and depth based on cover patterns?",good:"Walked the partner through the TGTG partner app live on the call's phone",bad:"Described the Surprise Bag listing without walking through the app live"},
+  {id:"cr5",cat:"Onboarding",w:10,label:"Walked partner through app live on the call",desc:"Did the rep attempt to set up the Surprise Bag listing together with the partner while still on the phone — not leaving it to follow-up? offer type and depth based on cover patterns?",good:"Walked the partner through the TGTG partner app live on the call's phone",bad:"Described the Surprise Bag listing without walking through the app live"},
   {id:"cr6",cat:"Offer window",w:20,label:"Agreed a specific offer window before ending",desc:"Was a specific day, time, and session committed before the call ended?",good:"Confirmed: Let's set up your first Surprise Bag now while we're on the call — takes 8 minutes",bad:"Closed without a committed window — left setup to AM or to the venue"},
   {id:"cr7",cat:"Close",w:15,label:"Clear next step with a specific time",desc:"Did the call end with a named next action, a specific time, and clear ownership?",good:"Ended with: Your first bag is live. Your account manager will call you tomorrow to see how it went.",bad:"Ended with I'll follow up or left the next step undefined"}
 ];
