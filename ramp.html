@@ -339,12 +339,12 @@ const GATES=[
    targets:[{k:'first_call',l:'First call logged'},{k:'crm_setup',l:'CRM set up'},{k:'pitch_pass',l:'Territory map submitted'}]},
   {week:4,key:'w4',title:'First deal signed',desc:'Quality-gated (≥4.0). Leave-behind installed. Offer confirmed against genuine quiet period.',
    targets:[{k:'deal1',l:'1 deal signed'},{k:'quality1',l:'≥4.0 review score'},{k:'lb1',l:'Leave-behind installed'}]},
-  {week:6,key:'w6',title:'Building velocity',desc:'3+ deals. Deal score ≥40%. First partner live on platform.',
+  {week:6,key:'w6',title:'Building velocity',desc:'3+ Surprise Bags agreed and live. First partner uploading bags consistently.',
    targets:[{k:'deal3',l:'3+ deals'},{k:'score40',l:'Deal score ≥40%'},{k:'live1',l:'1 partner live'}]},
-  {week:8,key:'w8',title:'Velocity confirmed',desc:'6+ deals. First activation in genuine quiet period. CRM 100%.',
+  {week:8,key:'w8',title:'Velocity confirmed',desc:'6+ Surprise Bags agreed. Bags selling consistently. CRM 100% compliance.',
    targets:[{k:'deal6',l:'6+ deals'},{k:'act1',l:'1 partner activated'},{k:'crm100',l:'CRM 100%'}]},
-  {week:12,key:'w12',title:'Graduation gate',desc:'On full target velocity. Deal score ≥50%. Activation rate ≥70%. TL sign-off.',
-   targets:[{k:'vel',l:'On target velocity'},{k:'score50',l:'Deal score ≥50%'},{k:'act70',l:'Activation ≥70%'},{k:'sm',l:'TL sign-off'}]},
+  {week:12,key:'w12',title:'Graduation gate',desc:'On full target velocity. Bags agreed at team average or above. Activation rate ≥70%. TL sign-off.',
+   targets:[{k:'vel',l:'On target velocity'},{k:'score50',l:'Bags agreed at team average or above'},{k:'act70',l:'Activation ≥70%'},{k:'sm',l:'TL sign-off'}]},
 ];
 
 function daysAgo(n){const d=new Date();d.setDate(d.getDate()-n);return d.toISOString().slice(0,10);}
@@ -354,26 +354,26 @@ let REPS=[
    deals:9,dealScore:54,activationRate:78,crmCompliance:100,
    completed:{w2:['first_call','crm_setup','pitch_pass'],w4:['deal1','quality1','lb1'],w6:['deal3','score40','live1'],w8:['deal6','act1','crm100'],w12:['vel','score50','act70','sm']},
    notes:[{author:'HoI',date:'3 days ago',text:'Graduated at week 11. First deal day 11, deal score above 50% from week 5. Strongest Hackney corridor rep. Watch for TL potential.'},{author:'Sophie L',date:'8 days ago',text:'Activation rate best in class. Every signed venue had a pre-filled First Forty brief on handoff.'}]},
-  {id:2,name:'James Murphy',city:'London',manager:'Northern TL',am:'Tom B',startDate:daysAgo(35),status:'at-risk',cohort:'Cohort 1',source:'Salesforce',
+  {id:2,name:'James Murphy',city:'London',manager:'Acquisition TL',am:'Tom B',startDate:daysAgo(35),status:'at-risk',cohort:'Cohort 1',source:'Salesforce',
    deals:3,dealScore:38,activationRate:33,crmCompliance:82,
    completed:{w2:['first_call','crm_setup','pitch_pass'],w4:['deal1'],w6:[],w8:[],w12:[]},
-   notes:[{author:'Northern TL',date:'2 days ago',text:'Week 6 gate missed — 3 deals vs 6 target. Deal score 38%. Call-along booked Thursday. Root cause: not proposing the offer — asking.'},{author:'HoI',date:'5 days ago',text:'Joined Northern standup. Skill gap on Challenger clear — Teach moment not landing. Coaching session Monday.'}]},
+   notes:[{author:'Acquisition TL',date:'2 days ago',text:'Week 6 gate missed — 3 deals vs 6 target. Deal score 38%. Call-along booked Thursday. Root cause: not proposing the offer — asking.'},{author:'HoI',date:'5 days ago',text:'Joined Northern standup. Skill gap on Challenger clear — Teach moment not landing. Coaching session Monday.'}]},
   {id:3,name:'Priya Patel',city:'London · SE15',manager:'HoI',am:'Sophie L',startDate:daysAgo(48),status:'on-track',cohort:'Cohort 1',source:'Salesforce',
    deals:7,dealScore:51,activationRate:71,crmCompliance:100,
    completed:{w2:['first_call','crm_setup','pitch_pass'],w4:['deal1','quality1','lb1'],w6:['deal3','score40','live1'],w8:['deal6','act1','crm100'],w12:[]},
    notes:[{author:'HoI',date:'1 day ago',text:'Week 12 gate in 2 weeks. Deal score crossed 50% this week. Three strong offer structure conversations in Peckham.'}]},
-  {id:4,name:'Marcus Johnson',city:'London',manager:'Northern TL',am:'Tom B',startDate:daysAgo(14),status:'on-track',cohort:'Cohort 2',source:'Salesforce',
+  {id:4,name:'Marcus Johnson',city:'London',manager:'Acquisition TL',am:'Tom B',startDate:daysAgo(14),status:'on-track',cohort:'Cohort 2',source:'Salesforce',
    deals:1,dealScore:null,activationRate:null,crmCompliance:100,
    completed:{w2:['first_call','crm_setup','pitch_pass'],w4:['deal1','quality1','lb1'],w6:[],w8:[],w12:[]},
-   notes:[{author:'Northern TL',date:'3 days ago',text:'First deal day 11 — Clifton independent, 4.4 stars, Tue–Thu Early Bird. Clean handoff. CRM excellent from day 1.'}]},
-  {id:5,name:'Emma Williams',city:'London',manager:'Northern TL',am:'Tom B',startDate:daysAgo(5),status:'on-track',cohort:'Cohort 2',source:'Salesforce',
+   notes:[{author:'Acquisition TL',date:'3 days ago',text:'First deal day 11 — Clifton independent, 4.4 stars, Tue–Thu Early Bird. Clean handoff. CRM excellent from day 1.'}]},
+  {id:5,name:'Emma Williams',city:'London',manager:'Acquisition TL',am:'Tom B',startDate:daysAgo(5),status:'on-track',cohort:'Cohort 2',source:'Salesforce',
    deals:0,dealScore:null,activationRate:null,crmCompliance:100,
    completed:{w2:[],w4:[],w6:[],w8:[],w12:[]},
-   notes:[{author:'Northern TL',date:'4 days ago',text:'First week. Territory walk done. CRM live day 1. First prospect calls booked for tomorrow.'}]},
+   notes:[{author:'Acquisition TL',date:'4 days ago',text:'First week. Territory walk done. CRM live day 1. First prospect calls booked for tomorrow.'}]},
   {id:6,name:'Tom Richards',city:'London',manager:'HoI',am:'Sophie L',startDate:daysAgo(45),status:'intervention',cohort:'Cohort 1',source:'Salesforce',
    deals:2,dealScore:31,activationRate:0,crmCompliance:67,
    completed:{w2:['first_call','crm_setup'],w4:['deal1'],w6:[],w8:[],w12:[]},
-   notes:[{author:'HoI',date:'1 day ago',text:'PIP initiated. Week 8 gate missed — 2 deals vs 6, deal score 31%, CRM 67%. Will gap, not skill gap. 4-week plan with weekly call-alongs. Next review confirmed.'},{author:'Northern TL',date:'12 days ago',text:'AI pipeline review flagged same three Islington venues mentioned two weeks running with no movement. Escalated to Grant.'}]},
+   notes:[{author:'HoI',date:'1 day ago',text:'PIP initiated. Week 8 gate missed — 2 deals vs 6, deal score 31%, CRM 67%. Will gap, not skill gap. 4-week plan with weekly call-alongs. Next review confirmed.'},{author:'Acquisition TL',date:'12 days ago',text:'AI pipeline review flagged same three Islington venues mentioned two weeks running with no movement. Escalated to Grant.'}]},
   {id:7,name:'Aisha Okonkwo',city:'London · SW9',manager:'HoI',am:'Sophie L',startDate:daysAgo(84),status:'graduated',cohort:'Cohort 1',source:'Salesforce',
    deals:14,dealScore:58,activationRate:79,crmCompliance:100,
    completed:{w2:['first_call','crm_setup','pitch_pass'],w4:['deal1','quality1','lb1'],w6:['deal3','score40','live1'],w8:['deal6','act1','crm100'],w12:['vel','score50','act70','sm']},
@@ -382,10 +382,10 @@ let REPS=[
 
 const HS_PULL_RESULTS=[
   {id:'hs-1',name:'Sarah Chen',city:'London · E2',manager:'HoI',startDate:daysAgo(62),deals:9,crmCompliance:100,source:'Salesforce'},
-  {id:'hs-2',name:'James Murphy',city:'London',manager:'Northern TL',startDate:daysAgo(35),deals:3,crmCompliance:82,source:'Salesforce'},
+  {id:'hs-2',name:'James Murphy',city:'London',manager:'Acquisition TL',startDate:daysAgo(35),deals:3,crmCompliance:82,source:'Salesforce'},
   {id:'hs-3',name:'Priya Patel',city:'London · SE15',manager:'HoI',startDate:daysAgo(48),deals:7,crmCompliance:100,source:'Salesforce'},
-  {id:'hs-4',name:'Marcus Johnson',city:'London',manager:'Northern TL',startDate:daysAgo(14),deals:1,crmCompliance:100,source:'Salesforce'},
-  {id:'hs-5',name:'Emma Williams',city:'London',manager:'Northern TL',startDate:daysAgo(5),deals:0,crmCompliance:100,source:'Salesforce'},
+  {id:'hs-4',name:'Marcus Johnson',city:'London',manager:'Acquisition TL',startDate:daysAgo(14),deals:1,crmCompliance:100,source:'Salesforce'},
+  {id:'hs-5',name:'Emma Williams',city:'London',manager:'Acquisition TL',startDate:daysAgo(5),deals:0,crmCompliance:100,source:'Salesforce'},
   {id:'hs-6',name:'Tom Richards',city:'London',manager:'HoI',startDate:daysAgo(45),deals:2,crmCompliance:67,source:'Salesforce'},
   {id:'hs-7',name:'Aisha Okonkwo',city:'London · SW9',manager:'HoI',startDate:daysAgo(84),deals:14,crmCompliance:100,source:'Salesforce'},
   {id:'hs-8',name:'Daniel Park',city:'London · E8',manager:'HoI',startDate:daysAgo(21),deals:4,crmCompliance:91,source:'Salesforce'},
@@ -597,7 +597,7 @@ async function pullFromSalesforce(){
 
       try {
         const dealsResp = await fetch(
-          `https://api.hubapi.com/crm/v3/objects/contacts/${c.id}/associations/deals`,
+          `https://[salesforce-instance].salesforce.com/services/data/v57.0/sobjects/Contact/${c.id}/ActivityHistories`,
           { headers: { 'Authorization': 'Bearer ' + key } }
         );
         if (dealsResp.ok) {
