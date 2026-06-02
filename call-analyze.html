@@ -99,6 +99,7 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.7;}
     <button class="tnav" onclick="setTool('revival',this)">🔄 Revival Script</button>
     <button class="tnav" onclick="setTool('1on1',this)">💬 1:1 Prep</button>
     <button class="tnav" onclick="setTool('standup-gen',this)">☀️ Standup Script</button>
+    <button class="tnav" onclick="setTool('call-analysis',this)">📞 Call Analysis</button>
   </div>
 
   <!-- ═══ CHELSEA BRIEF ═══ -->
@@ -455,6 +456,55 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.7;}
     </div>
   </div>
 
+
+  <!-- ═══ CALL ANALYSIS ═══ -->
+  <div class="tool-panel" id="panel-call-analysis">
+    <div class="time-pill">⏱ Saves ~20 min per coaching session</div>
+    <div class="tool-intro"><strong>AI Call Analysis — Salesforce transcript.</strong> Copy a call transcript from Salesforce and paste it below. The AI scores the call across 7 TGTG-specific criteria, pulls direct evidence from the transcript, writes a coaching plan for the rep, and gives the Team Lead the exact words to use in the debrief. No manual scoring. No guessing what to coach.</div>
+
+    <div class="ai-form">
+      <label class="form-label">Rep name</label>
+      <input class="form-input" id="ca-rep" placeholder="e.g. Sarah">
+
+      <label class="form-label">Team</label>
+      <select class="form-select" id="ca-team">
+        <option>Acquisition</option>
+        <option>Account Management</option>
+        <option>Growth</option>
+      </select>
+
+      <label class="form-label">Paste call transcript from Salesforce</label>
+      <textarea class="form-input" id="ca-transcript" style="min-height:200px;" placeholder="Paste the full call transcript here. Include timestamps if available. The more complete the transcript, the more specific the coaching output.&#10;&#10;Example format:&#10;[00:00] Rep: Hi, is that Ahmed?&#10;[00:04] Owner: Yes, speaking.&#10;[00:06] Rep: Great, I'm calling from Too Good To Go..."></textarea>
+
+      <label class="form-label">Context (optional — anything the AI should know)</label>
+      <input class="form-input" id="ca-context" placeholder="e.g. Second call with this owner. Rep has been coached on closing the Surprise Bag window. This is the first call since that coaching session.">
+
+      <button class="ai-btn" id="btn-call-analysis" onclick="runCallAnalysis()">
+        <div class="spinner"></div>
+        <span class="btn-text">✦ Analyse Call &amp; Generate Coaching</span>
+      </button>
+    </div>
+
+    <div class="output-box" id="out-call-analysis">
+      <div class="output-eye">Call Analysis — Scores · Evidence · Coaching Plan · TL Debrief Script</div>
+      <div class="output-content" id="out-call-analysis-content"></div>
+      <div class="copy-strip">
+        <button class="copy-btn" onclick="copyOut('out-call-analysis-content',this)">Copy full analysis</button>
+        <button class="copy-btn sec" onclick="clearOut('out-call-analysis')">Clear</button>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;background:var(--bg2);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--tgtg);margin-bottom:10px;font-family:'DM Mono',monospace;">How to get a transcript from Salesforce</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.85;">
+        <strong style="color:var(--text);">If using Salesforce Einstein Conversation Insights:</strong> Open the activity record → click the call → find the transcript tab → select all and copy.<br><br>
+        <strong style="color:var(--text);">If using a connected dialler (e.g. Aircall, Dialpad, Gong):</strong> Open the call log in Salesforce → click through to the recording → find the transcript or auto-generated notes → copy the full text.<br><br>
+        <strong style="color:var(--text);">If no auto-transcript:</strong> Play the recording and type key moments — even a partial transcript (opening, objection handling, close attempt) gives the AI enough to score the critical criteria.<br><br>
+        <strong style="color:var(--text);">Quick tip:</strong> The rep name and call date usually appear at the top of the Salesforce activity record. Include them in the paste so the coaching output is named correctly.
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <script>
@@ -759,6 +809,105 @@ function clearOut(id) {
   box.classList.remove('visible');
   box.querySelector('.output-content').textContent = '';
 }
+
+function runCallAnalysis() {
+  var rep = document.getElementById('ca-rep').value || 'the rep';
+  var team = document.getElementById('ca-team').value;
+  var transcript = document.getElementById('ca-transcript').value;
+  var context = document.getElementById('ca-context').value;
+
+  if (!transcript || transcript.length < 50) {
+    alert('Please paste a call transcript before analysing.');
+    return;
+  }
+
+  var prompt = `You are analysing a sales call made by ${rep} on the ${team} team at Too Good To Go UK & Ireland.
+
+Too Good To Go is a food waste reduction platform. Partners create Surprise Bags of surplus food/stock that customers reserve and collect via the TGTG app. The rep's job is to phone prospective partners, discover their surplus, explain the Surprise Bag model, handle objections, and close an agreed Surprise Bag window on the call itself — then onboard the partner live (within 2 hours).
+
+Additional context: ${context || 'None provided'}
+
+CALL TRANSCRIPT:
+${transcript}
+
+Score this call across these 7 criteria. For each: give a score out of 100, quote the specific line from the transcript that supports the score (or note its absence), and write one coaching action.
+
+CRITERIA:
+1. OPENING (10%) — Did the rep lead with the partner's surplus problem, not with TGTG? Did they avoid opening with credentials or platform stats?
+2. SURPLUS DISCOVERY (20%) — Did the rep ask about surplus before pitching? Did they follow the owner's answers to understand type, volume, and timing?
+3. WASTE-TO-REVENUE FRAME (20%) — Did the rep frame the Surprise Bag as found revenue from inventory that was heading for the bin? Did they walk through the financial logic?
+4. OBJECTION HANDLING (15%) — Did the rep handle objections without backing off? Did they hold the waste-to-revenue frame through resistance?
+5. SURPRISE BAG CLOSE (20%) — Did the rep close a specific Surprise Bag window (day, time, quantity, price) on this call? Or did they leave it open?
+6. ONBOARDING MOMENTUM (10%) — Did the rep attempt to set up the listing live, or at minimum book a specific time to do it within 2 hours?
+7. NEXT STEP CLARITY (5%) — Did the call end with a concrete next action, owner commitment, and a specific date/time?
+
+OUTPUT FORMAT — use exactly this structure:
+
+CALL ANALYSIS — ${rep} — ${team} Team
+
+OVERALL SCORE: [weighted total]/100
+[One sentence summary of the call]
+
+---
+
+CRITERION SCORES
+
+1. Opening — [score]/100
+Evidence: "[direct quote or 'not present in transcript']"
+Gap: [what was missing or what they did well]
+
+2. Surplus Discovery — [score]/100
+Evidence: "[direct quote or 'not present']"
+Gap: [specific coaching point]
+
+3. Waste-to-Revenue Frame — [score]/100
+Evidence: "[direct quote or 'not present']"
+Gap: [specific coaching point]
+
+4. Objection Handling — [score]/100
+Evidence: "[direct quote or 'not present']"
+Gap: [specific coaching point]
+
+5. Surprise Bag Close — [score]/100
+Evidence: "[direct quote or 'not present']"
+Gap: [specific coaching point]
+
+6. Onboarding Momentum — [score]/100
+Evidence: "[direct quote or 'not present']"
+Gap: [specific coaching point]
+
+7. Next Step Clarity — [score]/100
+Evidence: "[direct quote or 'not present']"
+Gap: [specific coaching point]
+
+---
+
+COACHING PLAN — THIS WEEK
+
+Priority skill to develop: [one specific skill — not a category, the exact behaviour]
+The moment it went wrong: [timestamp or quote — the precise line where the call lost momentum]
+What to say instead: "[write the exact replacement line the rep should use next time]"
+Practice method: [specific — role-play, call-along, AI re-run — with a named scenario]
+
+---
+
+TL DEBRIEF SCRIPT
+
+Use this in the 1:1 or immediately after the call:
+
+"[Rep name], I listened to your call with [partner name if mentioned, otherwise 'the owner']. 
+
+At [timestamp/moment], you said [quote from transcript]. The effect was [what happened — owner disengaged, call stalled, etc.].
+
+What I want you to try instead is: [exact replacement line].
+
+On your next call, when [specific trigger], your line is: [specific script].
+
+One thing you did really well: [genuine specific positive — always end here]."`;
+
+  callClaude(SYSTEM_BASE, prompt, 'btn-call-analysis', 'out-call-analysis', 'out-call-analysis-content');
+}
+
 </script>
 </body>
 </html>
