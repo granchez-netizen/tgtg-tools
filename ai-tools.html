@@ -101,7 +101,7 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.7;}
     <button class="tnav" onclick="setTool('revival',this)">🔄 Revival Script</button>
     <button class="tnav" onclick="setTool('1on1',this)">💬 1:1 Prep</button>
     <button class="tnav" onclick="setTool('standup-gen',this)">☀️ Standup Script</button>
-    <button class="tnav" onclick="setTool('call-analysis',this)">📞 Call Analysis <span class="badge">10 criteria</span></button>
+    <button class="tnav" onclick="setTool('call-analysis',this)">📞 Call Analysis <span class="badge">11 criteria</span></button>
   </div>
 
   <!-- ═══ CHELSEA BRIEF ═══ -->
@@ -462,7 +462,7 @@ textarea.form-input{resize:vertical;min-height:80px;line-height:1.7;}
   <!-- ═══ CALL ANALYSIS ═══ -->
   <div class="tool-panel" id="panel-call-analysis">
     <div class="time-pill">⏱ Saves ~20 min per coaching session</div>
-    <div class="tool-intro"><strong>AI Call Analysis — Salesforce transcript.</strong> Paste a call transcript from Salesforce. The AI scores the call across 10 criteria covering the full TGTG sales process — decision maker confirmed, intro, fact-find, surplus discovery, waste-to-revenue frame, objection handling, Surprise Bag close, onboarding, CRM, and call control. Direct evidence pulled from the transcript. Coaching plan and TL debrief script written for you.</div>
+    <div class="tool-intro"><strong>AI Call Analysis — Salesforce transcript.</strong> Paste a call transcript from Salesforce. The AI scores the call across 11 criteria covering the full TGTG sales process — decision maker confirmed, intro, fact-find, surplus discovery, waste-to-revenue frame, objection handling, Surprise Bag close, onboarding, CRM, and call control. Direct evidence pulled from the transcript. Coaching plan and TL debrief script written for you.</div>
 
     <div class="ai-form">
       <label class="form-label">Rep name</label>
@@ -831,13 +831,14 @@ function runCallAnalysis() {
     '3. Fact-find — understand the business, its trading pattern, quiet periods, surplus type before pitching anything\n' +
     '4. Surplus discovery — specifically what surplus, when, how much\n' +
     '5. Waste-to-revenue frame — food already cost money, without TGTG it earns nothing, with TGTG it earns revenue\n' +
-    '6. Objection handling — hold the frame, address directly, do not back off\n' +
+    '6. Win-win-win-win frame — partner gets found revenue, TGTG earns commission, end customer gets good food cheaper, planet benefits from food rescued\n' +
+    '7. Objection handling — hold the frame, address directly, do not back off\n' +
     '7. Surprise Bag close — specific day, time, bag count, price agreed on this call\n' +
     '8. Onboarding — first bag listed in the partner app before the call ends\n' +
     '9. CRM — logged in Salesforce within 30 minutes\n\n' +
     'Additional context: ' + (context || 'None provided') + '\n\n' +
     'CALL TRANSCRIPT:\n' + transcript + '\n\n' +
-    'Score this call across ALL 10 criteria below. For each: give a score out of 100, quote the EXACT line from the transcript (or state not evidenced), and write one specific coaching action.\n\n' +
+    'Score this call across ALL 11 criteria below. For each: give a score out of 100, quote the EXACT line from the transcript (or state not evidenced), and write one specific coaching action.\n\n' +
     'CRITERIA:\n\n' +
     '1. DECISION MAKER CONFIRMED (10%)\n' +
     'Did the rep confirm they were speaking to the owner or decision maker BEFORE pitching? Did they ask directly — "Are you the owner?" or "Is it yourself who makes decisions about the business?" If they pitched without confirming — score 0. If they got through to a staff member who said they would pass a message — score 0. Confirm first, pitch second.\n\n' +
@@ -849,7 +850,9 @@ function runCallAnalysis() {
     'Specifically: did the rep identify what surplus exists, when it occurs, and roughly how much? Did they ask "What do you typically have left at the end of a Tuesday?" or equivalent — and listen to the answer before proposing anything? Did they connect the Surprise Bag proposal directly to the specific surplus the owner described?\n\n' +
     '5. WASTE-TO-REVENUE FRAME (15%)\n' +
     'Did the rep explain that the food already cost money to produce — and without TGTG it earns £0? Did they make the financial case: bag price minus TGTG commission = found revenue that did not exist before? Did they avoid leading with platform size or customer numbers instead of the financial logic?\n\n' +
-    '6. OBJECTION HANDLING (10%)\n' +
+    '6. WIN-WIN-WIN-WIN FRAME (10%)\n' +
+    'Did the rep articulate all four wins — not just the partner revenue angle? The full TGTG frame is: (1) Partner wins — found revenue from food that was heading for the bin at zero cost; (2) TGTG wins — commission on every bag, platform grows with the network; (3) End customer wins — good food at lower price, rescued not wasted, a reason to come back; (4) Planet wins — every bag is roughly 2.5kg of CO2 equivalent not emitted, food waste is 10% of global emissions, this is a measurable impact not a tagline. A rep who only pitches the partner revenue angle is leaving the most powerful part of the frame on the table. The mission is the competitive advantage — use it.\n\n' +
+    '7. OBJECTION HANDLING (10%)\n' +
     'When the owner pushed back — on brand, commission, time, effort, or anything else — did the rep hold the frame and address it directly? Did they avoid backing off, agreeing partially, or changing subject? Key objections: "we do not really have waste," "I do not want to discount," "what is in the bag," "I need to speak to my partner," "we already donate to a food bank."\n\n' +
     '7. SURPRISE BAG CLOSE (15%)\n' +
     'Did the rep close a specific Surprise Bag on this call — agreed day, collection time window, bag count, price — before ending the call? Or did they leave it open: "I will send more information" / "have a think and I will call back." The standard is: close the window on this call. Score 0 if no close was attempted.\n\n' +
@@ -880,19 +883,22 @@ function runCallAnalysis() {
     '5. Waste-to-Revenue Frame — [score]/100\n' +
     'Evidence: "[exact quote]"\n' +
     'Gap: [coaching point]\n\n' +
-    '6. Objection Handling — [score]/100\n' +
+    '6. Win-Win-Win-Win Frame — [score]/100\n' +
+    'Evidence: "[quote showing which wins were articulated — or: only partner revenue mentioned, mission/customer/planet not raised]"\n' +
+    'Gap: [which of the four wins was missing and what the rep should have said]\n\n' +
+    '7. Objection Handling — [score]/100\n' +
     'Evidence: "[exact quote of objection and rep response]"\n' +
     'Gap: [coaching point]\n\n' +
-    '7. Surprise Bag Close — [score]/100\n' +
+    '8. Surprise Bag Close — [score]/100\n' +
     'Evidence: "[exact quote of close attempt — or: no close attempted]"\n' +
     'Gap: [coaching point]\n\n' +
-    '8. Onboarding Momentum — [score]/100\n' +
+    '9. Onboarding Momentum — [score]/100\n' +
     'Evidence: "[exact quote]"\n' +
     'Gap: [coaching point]\n\n' +
-    '9. CRM and Next Step — [score]/100\n' +
+    '10. CRM and Next Step — [score]/100\n' +
     'Evidence: "[exact quote]"\n' +
     'Gap: [coaching point]\n\n' +
-    '10. Overall Call Control — [score]/100\n' +
+    '11. Overall Call Control — [score]/100\n' +
     'Evidence: "[observation on call dynamics]"\n' +
     'Gap: [coaching point]\n\n' +
     '---\n\n' +
