@@ -252,7 +252,7 @@ body{
     <div class="source-card">
       <div class="sc-icon" style="color:#6DBE4F;">🌙</div>
       <div class="sc-name">TGTG Platform</div>
-      <div class="sc-fields" style="color:#aaa;">Deal score · Activation rate · Partners live · First redemption date</div>
+      <div class="sc-fields" style="color:#aaa;">Bags agreed · Activation rate · Partners live · First Surprise Bag reservede</div>
       <span class="sc-badge badge-auto">Auto-syncs daily at 06:00</span>
     </div>
     <div class="source-card">
@@ -340,7 +340,7 @@ const GATES=[
   {week:4,key:'w4',title:'First deal signed',desc:'Quality-gated (≥4.0). Leave-behind installed. Offer confirmed against genuine quiet period.',
    targets:[{k:'deal1',l:'1 deal signed'},{k:'quality1',l:'≥4.0 review score'},{k:'lb1',l:'Leave-behind installed'}]},
   {week:6,key:'w6',title:'Building velocity',desc:'3+ Surprise Bags agreed and live. First partner uploading bags consistently.',
-   targets:[{k:'deal3',l:'3+ deals'},{k:'score40',l:'Deal score ≥40%'},{k:'live1',l:'1 partner live'}]},
+   targets:[{k:'bags3',l:'3+ bags agreed'},{k:'close_call',l:'Closing on the call'},{k:'live1',l:'1 partner live'}]},
   {week:8,key:'w8',title:'Velocity confirmed',desc:'6+ Surprise Bags agreed. Bags selling consistently. CRM 100% compliance.',
    targets:[{k:'deal6',l:'6+ deals'},{k:'act1',l:'1 partner activated'},{k:'crm100',l:'CRM 100%'}]},
   {week:12,key:'w12',title:'Graduation gate',desc:'On full target velocity. Bags agreed at team average or above. Activation rate ≥70%. TL sign-off.',
@@ -353,19 +353,19 @@ let REPS=[
   {id:1,name:'Sarah Chen',city:'London · E2',manager:'HoI',am:'Sophie L',startDate:daysAgo(62),status:'graduated',cohort:'Cohort 1',source:'Salesforce',
    deals:9,dealScore:54,activationRate:78,crmCompliance:100,
    completed:{w2:['first_call','crm_setup','pitch_pass'],w4:['deal1','quality1','lb1'],w6:['deal3','score40','live1'],w8:['deal6','act1','crm100'],w12:['vel','score50','act70','sm']},
-   notes:[{author:'HoI',date:'3 days ago',text:'Graduated at week 11. First deal day 11, deal score above 50% from week 5. Strongest Hackney corridor rep. Watch for TL potential.'},{author:'Sophie L',date:'8 days ago',text:'Activation rate best in class. Every signed venue had a pre-filled First Forty brief on handoff.'}]},
+   notes:[{author:'HoI',date:'3 days ago',text:'Graduated at week 11. First deal day 11, closing on the call consistently from week 5. Strongest Hackney corridor rep. Watch for TL potential.'},{author:'Sophie L',date:'8 days ago',text:'Activation rate best in class. Every signed venue had a pre-filled First Forty brief on handoff.'}]},
   {id:2,name:'James Murphy',city:'London',manager:'Acquisition TL',am:'Tom B',startDate:daysAgo(35),status:'at-risk',cohort:'Cohort 1',source:'Salesforce',
    deals:3,dealScore:38,activationRate:33,crmCompliance:82,
    completed:{w2:['first_call','crm_setup','pitch_pass'],w4:['deal1'],w6:[],w8:[],w12:[]},
-   notes:[{author:'Acquisition TL',date:'2 days ago',text:'Week 6 gate missed — 3 deals vs 6 target. Deal score 38%. Call-along booked Thursday. Root cause: not proposing the offer — asking.'},{author:'HoI',date:'5 days ago',text:'Joined Northern standup. Skill gap on Challenger clear — Teach moment not landing. Coaching session Monday.'}]},
+   notes:[{author:'Acquisition TL',date:'2 days ago',text:'Week 6 gate missed — 3 deals vs 6 target. Bag close rate 38%. Call-along booked Thursday. Root cause: not proposing the offer — asking.'},{author:'HoI',date:'5 days ago',text:'Joined Northern standup. Skill gap on Challenger clear — Teach moment not landing. Coaching session Monday.'}]},
   {id:3,name:'Priya Patel',city:'London · SE15',manager:'HoI',am:'Sophie L',startDate:daysAgo(48),status:'on-track',cohort:'Cohort 1',source:'Salesforce',
    deals:7,dealScore:51,activationRate:71,crmCompliance:100,
    completed:{w2:['first_call','crm_setup','pitch_pass'],w4:['deal1','quality1','lb1'],w6:['deal3','score40','live1'],w8:['deal6','act1','crm100'],w12:[]},
-   notes:[{author:'HoI',date:'1 day ago',text:'Week 12 gate in 2 weeks. Deal score crossed 50% this week. Three strong offer structure conversations in Peckham.'}]},
+   notes:[{author:'HoI',date:'1 day ago',text:'Week 12 gate in 2 weeks. Closing on the call consistently this week. Three strong offer structure conversations in Peckham.'}]},
   {id:4,name:'Marcus Johnson',city:'London',manager:'Acquisition TL',am:'Tom B',startDate:daysAgo(14),status:'on-track',cohort:'Cohort 2',source:'Salesforce',
    deals:1,dealScore:null,activationRate:null,crmCompliance:100,
    completed:{w2:['first_call','crm_setup','pitch_pass'],w4:['deal1','quality1','lb1'],w6:[],w8:[],w12:[]},
-   notes:[{author:'Acquisition TL',date:'3 days ago',text:'First deal day 11 — Clifton independent, 4.4 stars, Tue–Thu Early Bird. Clean handoff. CRM excellent from day 1.'}]},
+   notes:[{author:'Acquisition TL',date:'3 days ago',text:'First Surprise Bag agreed day 11 — café, morning surplus window, Tue–Thu Early Bird. Clean handoff. CRM excellent from day 1.'}]},
   {id:5,name:'Emma Williams',city:'London',manager:'Acquisition TL',am:'Tom B',startDate:daysAgo(5),status:'on-track',cohort:'Cohort 2',source:'Salesforce',
    deals:0,dealScore:null,activationRate:null,crmCompliance:100,
    completed:{w2:[],w4:[],w6:[],w8:[],w12:[]},
@@ -373,7 +373,7 @@ let REPS=[
   {id:6,name:'Tom Richards',city:'London',manager:'HoI',am:'Sophie L',startDate:daysAgo(45),status:'intervention',cohort:'Cohort 1',source:'Salesforce',
    deals:2,dealScore:31,activationRate:0,crmCompliance:67,
    completed:{w2:['first_call','crm_setup'],w4:['deal1'],w6:[],w8:[],w12:[]},
-   notes:[{author:'HoI',date:'1 day ago',text:'PIP initiated. Week 8 gate missed — 2 deals vs 6, deal score 31%, CRM 67%. Will gap, not skill gap. 4-week plan with weekly call-alongs. Next review confirmed.'},{author:'Acquisition TL',date:'12 days ago',text:'AI pipeline review flagged same three Islington venues mentioned two weeks running with no movement. Escalated to Grant.'}]},
+   notes:[{author:'HoI',date:'1 day ago',text:'PIP initiated. Week 8 gate missed — 2 deals vs 6, only 1 bag agreed per week, CRM 67%. Will gap, not skill gap. 4-week plan with weekly call-alongs. Next review confirmed.'},{author:'Acquisition TL',date:'12 days ago',text:'AI pipeline review flagged same three Islington venues mentioned two weeks running with no movement. Escalated to Grant.'}]},
   {id:7,name:'Aisha Okonkwo',city:'London · SW9',manager:'HoI',am:'Sophie L',startDate:daysAgo(84),status:'graduated',cohort:'Cohort 1',source:'Salesforce',
    deals:14,dealScore:58,activationRate:79,crmCompliance:100,
    completed:{w2:['first_call','crm_setup','pitch_pass'],w4:['deal1','quality1','lb1'],w6:['deal3','score40','live1'],w8:['deal6','act1','crm100'],w12:['vel','score50','act70','sm']},
@@ -488,7 +488,7 @@ function showDetail(id){
 
   const mets=[
     {l:'Deals signed',t:'Wk6: 3+ · Wk8: 6+',v:rep.deals,vs:String(rep.deals),c:metCls(rep.deals,[6,3])},
-    {l:'Deal score',t:'Wk6: ≥40% · Wk12: ≥50%',v:rep.dealScore,vs:rep.dealScore===null?'—':rep.dealScore+'%',c:metCls(rep.dealScore,[50,40])},
+    {l:'Bags/week',t:'Wk6: ≥40% · Wk12: ≥50%',v:rep.dealScore,vs:rep.dealScore===null?'—':rep.dealScore+'%',c:metCls(rep.dealScore,[50,40])},
     {l:'Activation rate',t:'Wk12: ≥70%',v:rep.activationRate,vs:rep.activationRate===null?'—':rep.activationRate+'%',c:metCls(rep.activationRate,[70,50])},
     {l:'CRM compliance',t:'100% always',v:rep.crmCompliance,vs:rep.crmCompliance+'%',c:metCls(rep.crmCompliance,[100,80])},
   ];
@@ -504,7 +504,7 @@ function showDetail(id){
       <div class="dh-stats">
         <div class="dh-stat"><div class="dhs-n" style="color:${dc}">${rep.status==='graduated'?'✓':age+' days'}</div><div class="dhs-l">In programme</div></div>
         <div class="dh-stat"><div class="dhs-n" style="color:${rep.deals>=6?'#22C55E':rep.deals>=3?'#6DBE4F':'#E57373'}">${rep.deals}</div><div class="dhs-l">Deals</div></div>
-        <div class="dh-stat"><div class="dhs-n" style="color:${rep.dealScore===null?'#333':rep.dealScore>=50?'#22C55E':'#6DBE4F'}">${rep.dealScore===null?'—':rep.dealScore+'%'}</div><div class="dhs-l">Deal score</div></div>
+        <div class="dh-stat"><div class="dhs-n" style="color:${rep.dealScore===null?'#333':rep.dealScore>=50?'#22C55E':'#6DBE4F'}">${rep.dealScore===null?'—':rep.dealScore+'%'}</div><div class="dhs-l">Bags agreed/week</div></div>
         <div class="dh-stat"><div class="dhs-n" style="color:${rep.crmCompliance===100?'#22C55E':'#E57373'}">${rep.crmCompliance}%</div><div class="dhs-l">CRM</div></div>
       </div>
     </div>
@@ -569,7 +569,7 @@ async function pullFromSalesforce(){
 
     
     const contactsResp = await fetch(
-      'https://api.hubapi.com/crm/v3/objects/contacts?limit=100&properties=firstname,lastname,email,jobtitle,city,hs_object_id,createdate,salesforce_owner_id&filterGroups=[{"filters":[{"propertyName":"jobtitle","operator":"CONTAINS_TOKEN","value":"rep"}]}]',
+      'https://[your-salesforce-instance].salesforce.com/services/data/v57.0/query?q=SELECT+Id,FirstName,LastName,Email,Title,City_object_id,createdate,salesforce_owner_id&filterGroups=[{"filters":[{"propertyName":"jobtitle","operator":"CONTAINS_TOKEN","value":"rep"}]}]',
       { headers: { 'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json' } }
     );
 
@@ -703,7 +703,7 @@ function importSelected(){
       startDate:r.startDate,status:'on-track',cohort:'Cohort 2',source:'Salesforce',
       deals:r.deals,dealScore:null,activationRate:null,crmCompliance:r.crmCompliance,
       completed:{w2:[],w4:[],w6:[],w8:[],w12:[]},
-      notes:[{author:'System',date:'just now',text:'Imported from Salesforce. Deal score and activation rate will sync from TGTG platform at 06:00. Team Lead to complete gate sign-offs for milestones already passed.'}]
+      notes:[{author:'System',date:'just now',text:'Imported from Salesforce. Bags agreed/week and activation rate will sync from TGTG platform at 06:00. Team Lead to complete gate sign-offs for milestones already passed.'}]
     });
   });
   document.getElementById('setup-success').style.display='block';
