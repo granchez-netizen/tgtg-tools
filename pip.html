@@ -151,7 +151,7 @@ textarea.fi{resize:vertical;min-height:65px;line-height:1.6;}
   <div class="modal">
     <div class="modal-title">Add Rep to <em>PIP</em></div>
     <label class="fl">Rep name</label>
-    <input class="fi" id="new-bdm" type="text" placeholder="Full name">
+    <input class="fi" id="new-rep" type="text" placeholder="Full name">
     <label class="fl">City / territory</label>
     <input class="fi" id="new-city" type="text" placeholder="e.g. London N1">
     <label class="fl">Team Lead</label>
@@ -208,13 +208,13 @@ function daysAhead(n){var d=new Date();d.setDate(d.getDate()+n);return d.toISOSt
 
 var PIPS = [
   {
-    id:1, bdm:'Tom Richards', city:'London · N1', sm:'HoI',
+    id:1, bdm:'Tom Richards', city:'London', sm:'HoI',
     startDate:daysAgo(14), reviewDate:daysAhead(14),
     status:'concern',
     rootCause:'Will gap not skill gap. Consistent high-quality phone reps in the same territory close 3× more. Activity level is the problem — CRM shows 3 prospect calls last week against a target of 10.',
     goals:[
       {text:'6 quality-gated deals signed (≥4.0 stars) in 4 weeks',target:'6 deals',progress:'missed'},
-      {text:'CRM compliance at 100% — every visit logged same day',target:'100%',progress:'missed'},
+      {text:'CRM compliance at 100% — every call logged within 30 minutes',target:'100%',progress:'missed'},
       {text:'10+ prospect calls per week logged in HubSpot',target:'10/week',progress:'missed'},
       {text:'Deal score ≥40% on all new closes',target:'≥40%',progress:'partial'},
       {text:'No stale deals — every open deal with activity within 7 days',target:'0 stale',progress:'missed'},
@@ -286,7 +286,7 @@ function renderPIPs() {
 
     html+='<div class="pip-card status-'+sc+'" id="pip-'+p.id+'">';
     html+='<div class="pc-head">';
-    html+='<div><div class="pc-name">'+p.bdm+'</div><div class="pc-meta">'+p.city+' · TL: '+p.sm+'</div></div>';
+    html+='<div><div class="pc-name">'+p.rep+'</div><div class="pc-meta">'+p.city+' · TL: '+p.sm+'</div></div>';
     html+='<div class="pc-right"><div class="pc-days">Day '+daysIn+'</div><div class="pc-days-l">'+daysLeft+'d to review</div><span class="status-pill '+pc+'">'+pl+'</span></div>';
     html+='</div>';
     html+='<div class="pc-goals"><div class="pc-goals-label">Improvement Goals</div>'+goalsHtml+'</div>';
@@ -418,11 +418,11 @@ A PIP is NOT appropriate as a surprise. If the rep does not know they are strugg
 
 PREPARING FOR THE CONVERSATION
 Before the meeting:
-— Pull 4 weeks of data: deals signed, CRM compliance, visit activity, deal score
+— Pull 4 weeks of data: dials, meaningful conversations, bags agreed, CRM compliance
 — Identify whether this is a skill gap or a will gap. The support plan differs.
 — Confirm with HR that a PIP is the right step and that documentation is in order
 — Prepare 3-5 specific, measurable improvement goals — not vague improvement language
-— Set a realistic review date: 4 weeks is standard for field sales roles
+— Set a realistic review date: 4 weeks is standard for phone sales roles
 
 THE OPENING CONVERSATION
 Three things you must communicate:
