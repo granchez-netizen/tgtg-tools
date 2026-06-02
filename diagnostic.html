@@ -338,7 +338,7 @@ async function runDiagnosis() {
     ? ' Split by tier: ' + vtP + '% premium anchors, ' + vtM + '% mid-market, ' + vtC + '% casual. Premium venues may legitimately show lower frequency by design — apply the median within tiers, not across the whole portfolio.'
     : '';
   var loginCtx = l30 > 20
-    ? ' ' + l30 + '% of venues have not logged in for 30+ days. Before diagnosing offer structure, identify which venues are disengaged entirely — they need an AM visit before anything else changes.'
+    ? ' ' + l30 + '% of venues have not logged in for 30+ days. Before diagnosing offer structure, identify which venues are disengaged entirely — they need an AM call this week before anything else changes.'
     : '';
   set('p1-root', 'Root cause: £' + med + ' median weekly revenue ÷ £' + aov + ' AOV = ' + covers + ' covers per week per venue. The offer is live on the wrong nights.' + tierCtx + loginCtx);
   set('p1-detail', 'The venue signed up and set a weekend offer. A few redemptions came in on Friday — covers the venue would have sold at full price anyway. They read the commission statement and concluded TGTG costs money. It did. Because the offer was in the wrong window. The same venue with a Tuesday at 6pm offer is a completely different financial outcome. The product works. The offer window does not.');
