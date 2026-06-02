@@ -208,15 +208,15 @@ function daysAhead(n){var d=new Date();d.setDate(d.getDate()+n);return d.toISOSt
 
 var PIPS = [
   {
-    id:1, bdm:'Tom Richards', city:'London', sm:'HoI',
+    id:1, rep:'Tom Richards', city:'London', sm:'HoI',
     startDate:daysAgo(14), reviewDate:daysAhead(14),
     status:'concern',
     rootCause:'Will gap not skill gap. Consistent high-quality phone reps in the same territory close 3× more. Activity level is the problem — CRM shows 3 prospect calls last week against a target of 10.',
     goals:[
       {text:'6 quality-gated deals signed (≥4.0 stars) in 4 weeks',target:'6 deals',progress:'missed'},
       {text:'CRM compliance at 100% — every call logged within 30 minutes',target:'100%',progress:'missed'},
-      {text:'10+ prospect calls per week logged in HubSpot',target:'10/week',progress:'missed'},
-      {text:'Deal score ≥40% on all new closes',target:'≥40%',progress:'partial'},
+      {text:'50+ dials per day logged in Salesforce within 30 minutes',target:'10/week',progress:'missed'},
+      {text:'Surprise Bag window closed on call — not deferred to follow-up',target:'≥40%',progress:'partial'},
       {text:'No stale deals — every open deal with activity within 7 days',target:'0 stale',progress:'missed'},
     ],
     checkins:[
@@ -450,10 +450,10 @@ AFTER THE CONVERSATION
 30 minutes. Same time every week. Non-negotiable.
 
 BEFORE THE MEETING (5 minutes)
-Pull this week's data from HubSpot:
+Pull this week's data from Salesforce:
 — Deals signed this week
-— CRM compliance this week (% of visits logged same day)
-— Venue visits logged
+— CRM compliance this week (% of calls logged within 30 min)
+— Partner calls logged
 — Open deals and last activity date on each
 — Any stale deals (no movement in 7+ days)
 
@@ -509,7 +509,7 @@ THE SBI MODEL
 
 Situation — describe when and where
 "In last Tuesday's call-along at the Islington venue..."
-"Looking at your HubSpot data from this week..."
+"Looking at your Salesforce data from this week..."
 Specific, observable, unchallengeable.
 
 Behaviour — describe what happened, not what you think it means
@@ -518,7 +518,7 @@ YES: "You walked in without having checked their Google rating or whether they w
 Describe the action. Not the character trait you have inferred from it.
 
 Impact — describe the effect
-"The operator spotted that you did not know they were on OpenTable. That eroded trust in the first two minutes."
+"The operator spotted that you did not know they were on Google reviews. That eroded trust in the first two minutes."
 "The offer you proposed was for Friday evenings — their busiest night. They felt unheard and the conversation ended."
 
 HANDLING THE EMOTIONAL RESPONSE
@@ -560,7 +560,7 @@ CRM compliance
 — Below threshold: <90% for two consecutive weeks = immediate coaching conversation
 
 Venue visits per week
-— Meeting standard: 10+ visits per week logged in HubSpot
+— Meeting standard: 10+ visits per week logged in Salesforce
 — Includes cold dials, warm intros, follow-ups, and objection handling visits
 — Below threshold: <6 visits per week for two consecutive weeks = performance concern
 
@@ -594,7 +594,7 @@ Good documentation protects the rep (they know exactly where they stand) and the
 WHAT TO DOCUMENT — AND WHEN
 
 Before the PIP starts
-— Informal coaching conversations and their dates (even a quick note in HubSpot or Notion)
+— Informal coaching conversations and their dates (even a quick note in Salesforce or Notion)
 — The data that prompted the PIP decision
 — HR confirmation that a PIP is the right step
 
