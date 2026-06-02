@@ -222,8 +222,8 @@
         <div class="field-row fr-3">
           <div class="field-group"><label class="fl">Offer Type</label>
             <select id="f-offertype">
-              <option>Early Bird</option><option>Peak Slots</option>
-              <option>Late Dining</option><option>Multiple</option>
+              <option>Morning surplus</option><option>Lunchtime surplus</option>
+              <option>End of day surplus</option><option>Multiple windows</option>
             </select></div>
           <div class="field-group"><label class="fl">Discount (%)</label>
             <input type="number" id="f-discount" placeholder="25"></div>
@@ -485,9 +485,9 @@ document.getElementById('f-livedate').valueAsDate=d;
 document.getElementById('dash-date').textContent=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
 
 const demo=[
-  {name:'Meze & More Bethnal Green',city:'London E2',rep:'Marco R',am:'Sophie L',contact:'Ahmed Hassan',phone:'+44 7700 900123',signDate:offsetDate(-8),liveDate:offsetDate(-6),aov:'72',offerType:'Early Bird',discount:'25',cap:'8',slot:'Tue–Thu 5:30–7:30pm',completed:{signed:true,portal:true,whatsapp:true,leavebehind:true,day7:true},notes:[{text:'First redemption hit day 6 — owner texted to say it went well.',date:'3 days ago'},{text:'QR tent confirmed in window by rep on pass.',date:'5 days ago'}]},
+  {name:'Meze & More Bethnal Green',city:'London E2',rep:'Marco R',am:'Sophie L',contact:'Ahmed Hassan',phone:'+44 7700 900123',signDate:offsetDate(-8),liveDate:offsetDate(-6),aov:'72',offerType:'Morning surplus',discount:'25',cap:'8',slot:'Tue–Thu 5:30–7:30pm',completed:{signed:true,portal:true,whatsapp:true,leavebehind:true,day7:true},notes:[{text:'First redemption hit day 6 — owner texted to say it went well.',date:'3 days ago'},{text:'QR tent confirmed in window by rep on pass.',date:'5 days ago'}]},
   {name:'Meze & More',city:'London E2',rep:'Marco R',am:'Sophie L',contact:'Imran Khan',phone:'+44 7700 900456',signDate:offsetDate(-15),liveDate:offsetDate(-13),aov:'58',offerType:'Peak Slots',discount:'20',cap:'10',slot:'Mon–Wed 6–8pm',completed:{signed:true,portal:true,whatsapp:true,leavebehind:true,day7:true,day14:true},notes:[{text:'Day 14 review done. Offer performing well on Wednesday. Monday still thin.',date:'1 day ago'}]},
-  {name:'The Good Egg',city:'London EC2',rep:'Sarah C',am:'Tom B',contact:'Alan Rusk',phone:'+44 7700 900789',signDate:offsetDate(-3),liveDate:offsetDate(-1),aov:'68',offerType:'Late Dining',discount:'25',cap:'6',slot:'Wed–Fri 9–10:30pm',completed:{signed:true,portal:true},notes:[{text:'Portal live. WhatsApp intro sent. Awaiting first redemption.',date:'1 day ago'}]},
+  {name:'The Good Egg',city:'London EC2',rep:'Sarah C',am:'Tom B',contact:'Alan Rusk',phone:'+44 7700 900789',signDate:offsetDate(-3),liveDate:offsetDate(-1),aov:'68',offerType:'End of day surplus',discount:'25',cap:'6',slot:'Wed–Fri 9–10:30pm',completed:{signed:true,portal:true},notes:[{text:'Portal live. WhatsApp intro sent. Awaiting first redemption.',date:'1 day ago'}]},
 ];
 function offsetDate(days){const d=new Date();d.setDate(d.getDate()+days);return d.toISOString().slice(0,10);}
 venues=demo;
