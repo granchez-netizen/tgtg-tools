@@ -163,7 +163,7 @@ body{
 .pr-title{font-size:13px;font-weight:700;}
 .pr-count{font-size:11px;color:#aaa;}
 
-.bdm-import-row{display:flex;align-items:center;gap:12px;padding:11px 14px;background:#1a1a1a;border:1px solid #3a3a3a;border-radius:10px;margin-bottom:8px;}
+.rep-import-row{display:flex;align-items:center;gap:12px;padding:11px 14px;background:#1a1a1a;border:1px solid #3a3a3a;border-radius:10px;margin-bottom:8px;}
 .bim-check{width:20px;height:20px;border-radius:4px;border:2px solid #6DBE4F;background:rgba(109,190,79,.15);display:flex;align-items:center;justify-content:center;font-size:12px;color:#6DBE4F;flex-shrink:0;cursor:pointer;}
 .bim-info{flex:1;}
 .bim-name{font-size:13px;font-weight:700;}
@@ -228,7 +228,7 @@ body{
     <div class="ftab" onclick="filter('intervention',this)">Intervention</div>
     <div class="ftab" onclick="filter('graduated',this)">Graduated</div>
   </div>
-  <div id="dashboard"><div class="rep-grid" id="bdm-grid"></div></div>
+  <div id="dashboard"><div class="rep-grid" id="rep-grid"></div></div>
   <div id="detail-view">
     <div class="back-btn" onclick="showDash()">← All phone reps</div>
     <div id="detail-content"></div>
@@ -239,13 +239,13 @@ body{
 
   <div class="setup-intro">
     <div class="si-title">How the tracker populates</div>
-    <div class="si-sub" style="color:#aaa;">Connect HubSpot and the TGTG platform. The tracker pulls every rep with a start date after your chosen date — name, city, manager, deal count. Quality metrics come from the TGTG platform. Gate milestones and coaching notes are added by the Team Lead. Nothing is entered twice.</div>
+    <div class="si-sub" style="color:#aaa;">Connect Salesforce and the TGTG platform. The tracker pulls every rep with a start date after your chosen date — name, city, manager, deal count. Quality metrics come from the TGTG platform. Gate milestones and coaching notes are added by the Team Lead. Nothing is entered twice.</div>
   </div>
 
   <div class="source-grid">
     <div class="source-card">
       <div class="sc-icon">🔶</div>
-      <div class="sc-name">HubSpot CRM</div>
+      <div class="sc-name">Salesforce CRM</div>
       <div class="sc-fields" style="color:#aaa;">Rep name · Start date · City / territory · Manager · Deals closed · CRM compliance</div>
       <span class="sc-badge badge-auto">Auto-syncs daily at 06:00</span>
     </div>
@@ -272,9 +272,9 @@ body{
   <div class="hs-connect">
     <div class="hs-title">
       <div class="hs-dot" id="hs-dot"></div>
-      HubSpot Connection
+      Salesforce Connection
     </div>
-    <div class="hs-lbl" style="color:#aaa;">HubSpot API Key</div>
+    <div class="hs-lbl" style="color:#aaa;">Salesforce API Key</div>
     <div class="hs-row">
       <input class="hs-input" id="hs-key" type="password" placeholder="pat-eu1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx">
     </div>
@@ -294,17 +294,17 @@ body{
         </select>
       </div>
     </div>
-    <button class="pull-btn" id="pull-btn" onclick="pullFromHubSpot()">Pull phone reps from HubSpot →</button>
+    <button class="pull-btn" id="pull-btn" onclick="pullFromSalesforce()">Pull phone reps from Salesforce →</button>
   </div>
 
   <div class="pull-loading" id="pull-loading">
     <div class="pull-spinner"></div>
-    <div class="pull-text" id="pull-text">Connecting to HubSpot...</div>
+    <div class="pull-text" id="pull-text">Connecting to Salesforce...</div>
   </div>
 
   <div class="pull-results" id="pull-results">
     <div class="pr-header">
-      <div class="pr-title">phone reps found in HubSpot</div>
+      <div class="pr-title">phone reps found in Salesforce</div>
       <div class="pr-count" id="pr-count"></div>
     </div>
     <div id="import-list"></div>
@@ -320,7 +320,7 @@ body{
   </div>
 
   <div class="manual-add">
-    <div class="ma-title" style="color:#888;">Add a rep manually — for anyone not yet in HubSpot</div>
+    <div class="ma-title" style="color:#888;">Add a rep manually — for anyone not yet in Salesforce</div>
     <div class="ma-grid">
       <input class="ma-input" id="ma-name" placeholder="Full name">
       <input class="ma-input" id="ma-city" placeholder="City / territory">
@@ -350,54 +350,54 @@ const GATES=[
 function daysAgo(n){const d=new Date();d.setDate(d.getDate()-n);return d.toISOString().slice(0,10);}
 
 let REPS=[
-  {id:1,name:'Sarah Chen',city:'London · E2',manager:'HoI',am:'Sophie L',startDate:daysAgo(62),status:'graduated',cohort:'Cohort 1',source:'hubspot',
+  {id:1,name:'Sarah Chen',city:'London · E2',manager:'HoI',am:'Sophie L',startDate:daysAgo(62),status:'graduated',cohort:'Cohort 1',source:'Salesforce',
    deals:9,dealScore:54,activationRate:78,crmCompliance:100,
    completed:{w2:['first_call','crm_setup','pitch_pass'],w4:['deal1','quality1','lb1'],w6:['deal3','score40','live1'],w8:['deal6','act1','crm100'],w12:['vel','score50','act70','sm']},
    notes:[{author:'HoI',date:'3 days ago',text:'Graduated at week 11. First deal day 11, deal score above 50% from week 5. Strongest Hackney corridor rep. Watch for TL potential.'},{author:'Sophie L',date:'8 days ago',text:'Activation rate best in class. Every signed venue had a pre-filled First Forty brief on handoff.'}]},
-  {id:2,name:'James Murphy',city:'London',manager:'Northern TL',am:'Tom B',startDate:daysAgo(35),status:'at-risk',cohort:'Cohort 1',source:'hubspot',
+  {id:2,name:'James Murphy',city:'London',manager:'Northern TL',am:'Tom B',startDate:daysAgo(35),status:'at-risk',cohort:'Cohort 1',source:'Salesforce',
    deals:3,dealScore:38,activationRate:33,crmCompliance:82,
    completed:{w2:['first_call','crm_setup','pitch_pass'],w4:['deal1'],w6:[],w8:[],w12:[]},
    notes:[{author:'Northern TL',date:'2 days ago',text:'Week 6 gate missed — 3 deals vs 6 target. Deal score 38%. Call-along booked Thursday. Root cause: not proposing the offer — asking.'},{author:'HoI',date:'5 days ago',text:'Joined Northern standup. Skill gap on Challenger clear — Teach moment not landing. Coaching session Monday.'}]},
-  {id:3,name:'Priya Patel',city:'London · SE15',manager:'HoI',am:'Sophie L',startDate:daysAgo(48),status:'on-track',cohort:'Cohort 1',source:'hubspot',
+  {id:3,name:'Priya Patel',city:'London · SE15',manager:'HoI',am:'Sophie L',startDate:daysAgo(48),status:'on-track',cohort:'Cohort 1',source:'Salesforce',
    deals:7,dealScore:51,activationRate:71,crmCompliance:100,
    completed:{w2:['first_call','crm_setup','pitch_pass'],w4:['deal1','quality1','lb1'],w6:['deal3','score40','live1'],w8:['deal6','act1','crm100'],w12:[]},
    notes:[{author:'HoI',date:'1 day ago',text:'Week 12 gate in 2 weeks. Deal score crossed 50% this week. Three strong offer structure conversations in Peckham.'}]},
-  {id:4,name:'Marcus Johnson',city:'London',manager:'Northern TL',am:'Tom B',startDate:daysAgo(14),status:'on-track',cohort:'Cohort 2',source:'hubspot',
+  {id:4,name:'Marcus Johnson',city:'London',manager:'Northern TL',am:'Tom B',startDate:daysAgo(14),status:'on-track',cohort:'Cohort 2',source:'Salesforce',
    deals:1,dealScore:null,activationRate:null,crmCompliance:100,
    completed:{w2:['first_call','crm_setup','pitch_pass'],w4:['deal1','quality1','lb1'],w6:[],w8:[],w12:[]},
    notes:[{author:'Northern TL',date:'3 days ago',text:'First deal day 11 — Clifton independent, 4.4 stars, Tue–Thu Early Bird. Clean handoff. CRM excellent from day 1.'}]},
-  {id:5,name:'Emma Williams',city:'London',manager:'Northern TL',am:'Tom B',startDate:daysAgo(5),status:'on-track',cohort:'Cohort 2',source:'hubspot',
+  {id:5,name:'Emma Williams',city:'London',manager:'Northern TL',am:'Tom B',startDate:daysAgo(5),status:'on-track',cohort:'Cohort 2',source:'Salesforce',
    deals:0,dealScore:null,activationRate:null,crmCompliance:100,
    completed:{w2:[],w4:[],w6:[],w8:[],w12:[]},
    notes:[{author:'Northern TL',date:'4 days ago',text:'First week. Territory walk done. CRM live day 1. First prospect calls booked for tomorrow.'}]},
-  {id:6,name:'Tom Richards',city:'London',manager:'HoI',am:'Sophie L',startDate:daysAgo(45),status:'intervention',cohort:'Cohort 1',source:'hubspot',
+  {id:6,name:'Tom Richards',city:'London',manager:'HoI',am:'Sophie L',startDate:daysAgo(45),status:'intervention',cohort:'Cohort 1',source:'Salesforce',
    deals:2,dealScore:31,activationRate:0,crmCompliance:67,
    completed:{w2:['first_call','crm_setup'],w4:['deal1'],w6:[],w8:[],w12:[]},
    notes:[{author:'HoI',date:'1 day ago',text:'PIP initiated. Week 8 gate missed — 2 deals vs 6, deal score 31%, CRM 67%. Will gap, not skill gap. 4-week plan with weekly call-alongs. Next review confirmed.'},{author:'Northern TL',date:'12 days ago',text:'AI pipeline review flagged same three Islington venues mentioned two weeks running with no movement. Escalated to Grant.'}]},
-  {id:7,name:'Aisha Okonkwo',city:'London · SW9',manager:'HoI',am:'Sophie L',startDate:daysAgo(84),status:'graduated',cohort:'Cohort 1',source:'hubspot',
+  {id:7,name:'Aisha Okonkwo',city:'London · SW9',manager:'HoI',am:'Sophie L',startDate:daysAgo(84),status:'graduated',cohort:'Cohort 1',source:'Salesforce',
    deals:14,dealScore:58,activationRate:79,crmCompliance:100,
    completed:{w2:['first_call','crm_setup','pitch_pass'],w4:['deal1','quality1','lb1'],w6:['deal3','score40','live1'],w8:['deal6','act1','crm100'],w12:['vel','score50','act70','sm']},
    notes:[{author:'HoI',date:'12 days ago',text:'Graduated week 10 — two weeks ahead. Now mentoring James Murphy. Watching for TL potential.'}]},
 ];
 
 const HS_PULL_RESULTS=[
-  {id:'hs-1',name:'Sarah Chen',city:'London · E2',manager:'HoI',startDate:daysAgo(62),deals:9,crmCompliance:100,source:'hubspot'},
-  {id:'hs-2',name:'James Murphy',city:'London',manager:'Northern TL',startDate:daysAgo(35),deals:3,crmCompliance:82,source:'hubspot'},
-  {id:'hs-3',name:'Priya Patel',city:'London · SE15',manager:'HoI',startDate:daysAgo(48),deals:7,crmCompliance:100,source:'hubspot'},
-  {id:'hs-4',name:'Marcus Johnson',city:'London',manager:'Northern TL',startDate:daysAgo(14),deals:1,crmCompliance:100,source:'hubspot'},
-  {id:'hs-5',name:'Emma Williams',city:'London',manager:'Northern TL',startDate:daysAgo(5),deals:0,crmCompliance:100,source:'hubspot'},
-  {id:'hs-6',name:'Tom Richards',city:'London',manager:'HoI',startDate:daysAgo(45),deals:2,crmCompliance:67,source:'hubspot'},
-  {id:'hs-7',name:'Aisha Okonkwo',city:'London · SW9',manager:'HoI',startDate:daysAgo(84),deals:14,crmCompliance:100,source:'hubspot'},
-  {id:'hs-8',name:'Daniel Park',city:'London · E8',manager:'HoI',startDate:daysAgo(21),deals:4,crmCompliance:91,source:'hubspot'},
-  {id:'hs-9',name:'Fatima Al-Hassan',city:'Manchester · M4',manager:'Northern TL',startDate:daysAgo(18),deals:2,crmCompliance:100,source:'hubspot'},
-  {id:'hs-10',name:'Ollie Brennan',city:'London · SE1',manager:'HoI',startDate:daysAgo(9),deals:0,crmCompliance:100,source:'hubspot'},
+  {id:'hs-1',name:'Sarah Chen',city:'London · E2',manager:'HoI',startDate:daysAgo(62),deals:9,crmCompliance:100,source:'Salesforce'},
+  {id:'hs-2',name:'James Murphy',city:'London',manager:'Northern TL',startDate:daysAgo(35),deals:3,crmCompliance:82,source:'Salesforce'},
+  {id:'hs-3',name:'Priya Patel',city:'London · SE15',manager:'HoI',startDate:daysAgo(48),deals:7,crmCompliance:100,source:'Salesforce'},
+  {id:'hs-4',name:'Marcus Johnson',city:'London',manager:'Northern TL',startDate:daysAgo(14),deals:1,crmCompliance:100,source:'Salesforce'},
+  {id:'hs-5',name:'Emma Williams',city:'London',manager:'Northern TL',startDate:daysAgo(5),deals:0,crmCompliance:100,source:'Salesforce'},
+  {id:'hs-6',name:'Tom Richards',city:'London',manager:'HoI',startDate:daysAgo(45),deals:2,crmCompliance:67,source:'Salesforce'},
+  {id:'hs-7',name:'Aisha Okonkwo',city:'London · SW9',manager:'HoI',startDate:daysAgo(84),deals:14,crmCompliance:100,source:'Salesforce'},
+  {id:'hs-8',name:'Daniel Park',city:'London · E8',manager:'HoI',startDate:daysAgo(21),deals:4,crmCompliance:91,source:'Salesforce'},
+  {id:'hs-9',name:'Fatima Al-Hassan',city:'Manchester · M4',manager:'Northern TL',startDate:daysAgo(18),deals:2,crmCompliance:100,source:'Salesforce'},
+  {id:'hs-10',name:'Ollie Brennan',city:'London · SE1',manager:'HoI',startDate:daysAgo(9),deals:0,crmCompliance:100,source:'Salesforce'},
 ];
 
 function days(d){return Math.floor((new Date()-new Date(d))/86400000);}
 function pct(n){return Math.min(100,Math.round(Math.max(0,n)/84*100));}
 function gateStatus(bdm,gate){
-  const age=days(bdm.startDate),due=gate.week*7;
-  const done=(bdm.completed[gate.key]||[]).length,total=gate.targets.length;
+  const age=days(rep.startDate),due=gate.week*7;
+  const done=(rep.completed[gate.key]||[]).length,total=gate.targets.length;
   if(done>=total)return'done';
   if(age>due+7)return'late';
   if(age>=due-3)return'due';
@@ -419,7 +419,7 @@ function filter(f,el){
 }
 
 function renderGrid(){
-  const grid=document.getElementById('bdm-grid');
+  const grid=document.getElementById('rep-grid');
   grid.innerHTML='';
   const list=REPS.filter(b=>currentFilter==='all'||b.status===currentFilter);
   document.getElementById('st-total').textContent=REPS.filter(b=>b.status!=='graduated').length;
@@ -429,7 +429,7 @@ function renderGrid(){
   document.getElementById('st-grad').textContent=REPS.filter(b=>b.status==='graduated').length;
 
   list.forEach(bdm=>{
-    const age=days(bdm.startDate),p=pct(age),dc=dayColour(bdm.status);
+    const age=days(rep.startDate),p=pct(age),dc=dayColour(rep.status);
     const chips=GATES.map(g=>{
       const st=gateStatus(bdm,g);
       if(st==='future')return'';
@@ -439,21 +439,21 @@ function renderGrid(){
     }).filter(Boolean).join('');
 
     const card=document.createElement('div');
-    card.className='bdm-card';card.onclick=()=>showDetail(bdm.id);
+    card.className='rep-card';card.onclick=()=>showDetail(rep.id);
     card.innerHTML=`
       <div class="bdc-head">
-        <div><div class="bdc-name-row"><div class="status-dot ${dotCls(bdm.status)}"></div><div class="bdc-name">${bdm.name}</div></div>
-        <div class="bdc-meta">${bdm.city} · ${bdm.manager}</div></div>
-        <div><div class="bdc-day" style="color:${dc}">${bdm.status==='graduated'?'✓':age}</div><div class="bdc-day-l">${bdm.status==='graduated'?'Graduated':'of 84 days'}</div></div>
+        <div><div class="bdc-name-row"><div class="status-dot ${dotCls(rep.status)}"></div><div class="bdc-name">${rep.name}</div></div>
+        <div class="bdc-meta">${rep.city} · ${rep.manager}</div></div>
+        <div><div class="bdc-day" style="color:${dc}">${rep.status==='graduated'?'✓':age}</div><div class="bdc-day-l">${rep.status==='graduated'?'Graduated':'of 84 days'}</div></div>
       </div>
       <div class="bdc-progress">
         <div class="gate-labels"><span>Wk2</span><span>Wk4</span><span>Wk6</span><span>Wk8</span><span>Wk12</span></div>
-        <div class="bar-wrap"><div class="bar-fill ${barCls(bdm.status)}" style="width:${p}%"></div></div>
+        <div class="bar-wrap"><div class="bar-fill ${barCls(rep.status)}" style="width:${p}%"></div></div>
       </div>
       <div class="bdc-metrics">
-        <div class="bdc-metric"><div class="bm-val" style="color:${bdm.deals>=6?'#22C55E':bdm.deals>=3?'#6DBE4F':'#E57373'}">${bdm.deals}</div><div class="bm-lbl">Deals</div></div>
-        <div class="bdc-metric"><div class="bm-val" style="color:${bdm.dealScore===null?'#333':bdm.dealScore>=50?'#22C55E':bdm.dealScore>=40?'#6DBE4F':'#E57373'}">${bdm.dealScore===null?'—':bdm.dealScore+'%'}</div><div class="bm-lbl">Deal Score</div></div>
-        <div class="bdc-metric"><div class="bm-val" style="color:${bdm.crmCompliance===100?'#22C55E':bdm.crmCompliance>=80?'#6DBE4F':'#E57373'}">${bdm.crmCompliance}%</div><div class="bm-lbl">CRM</div></div>
+        <div class="bdc-metric"><div class="bm-val" style="color:${rep.deals>=6?'#22C55E':rep.deals>=3?'#6DBE4F':'#E57373'}">${rep.deals}</div><div class="bm-lbl">Deals</div></div>
+        <div class="bdc-metric"><div class="bm-val" style="color:${rep.dealScore===null?'#333':rep.dealScore>=50?'#22C55E':rep.dealScore>=40?'#6DBE4F':'#E57373'}">${rep.dealScore===null?'—':rep.dealScore+'%'}</div><div class="bm-lbl">Deal Score</div></div>
+        <div class="bdc-metric"><div class="bm-val" style="color:${rep.crmCompliance===100?'#22C55E':rep.crmCompliance>=80?'#6DBE4F':'#E57373'}">${rep.crmCompliance}%</div><div class="bm-lbl">CRM</div></div>
       </div>
       <div class="bdc-chips">${chips||'<span class="chip" style="background:#1a1a1a;color:#333;border:1px solid #222;">Week 2 gate upcoming</span>'}</div>`;
     grid.appendChild(card);
@@ -461,16 +461,16 @@ function renderGrid(){
 }
 
 function showDetail(id){
-  const bdm=BDMS.find(b=>b.id===id);
-  document.getElementById('bdm-grid').style.display='none';
+  const rep=REPS.find(b=>b.id===id);
+  document.getElementById('rep-grid').style.display='none';
   document.querySelector('.stats').style.display='none';
   document.querySelector('.filters').style.display='none';
   document.getElementById('detail-view').style.display='block';
-  const age=days(bdm.startDate),dc=dayColour(bdm.status);
+  const age=days(rep.startDate),dc=dayColour(rep.status);
 
   const gatesHTML=GATES.map(g=>{
     const st=gateStatus(bdm,g);
-    const done=bdm.completed[g.key]||[];
+    const done=rep.completed[g.key]||[];
     const icons={done:'✓',due:'→',late:'!',future:'○'};
     const cls={done:'gi-done',due:'gi-due',late:'gi-late',future:'gi-future'};
     const tags=g.targets.map(t=>{
@@ -478,7 +478,7 @@ function showDetail(id){
       const c=hit?'gt-hit':st==='future'?'gt-todo':'gt-miss';
       return`<span class="gt ${c}">${hit?'✓ ':st!=='future'?'✗ ':''}${t.l}</span>`;
     }).join('');
-    const due=new Date(bdm.startDate);due.setDate(due.getDate()+g.week*7);
+    const due=new Date(rep.startDate);due.setDate(due.getDate()+g.week*7);
     const dateStr=st==='done'?'Complete':st==='late'?'Overdue':st==='due'?'Due now':'Due '+due.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
     return`<div class="gate-item">
       <div class="gate-icon ${cls[st]}" onclick="toggleGate(${id},'${g.key}')">${icons[st]}</div>
@@ -487,25 +487,25 @@ function showDetail(id){
   }).join('');
 
   const mets=[
-    {l:'Deals signed',t:'Wk6: 3+ · Wk8: 6+',v:bdm.deals,vs:String(bdm.deals),c:metCls(bdm.deals,[6,3])},
-    {l:'Deal score',t:'Wk6: ≥40% · Wk12: ≥50%',v:bdm.dealScore,vs:bdm.dealScore===null?'—':bdm.dealScore+'%',c:metCls(bdm.dealScore,[50,40])},
-    {l:'Activation rate',t:'Wk12: ≥70%',v:bdm.activationRate,vs:bdm.activationRate===null?'—':bdm.activationRate+'%',c:metCls(bdm.activationRate,[70,50])},
-    {l:'CRM compliance',t:'100% always',v:bdm.crmCompliance,vs:bdm.crmCompliance+'%',c:metCls(bdm.crmCompliance,[100,80])},
+    {l:'Deals signed',t:'Wk6: 3+ · Wk8: 6+',v:rep.deals,vs:String(rep.deals),c:metCls(rep.deals,[6,3])},
+    {l:'Deal score',t:'Wk6: ≥40% · Wk12: ≥50%',v:rep.dealScore,vs:rep.dealScore===null?'—':rep.dealScore+'%',c:metCls(rep.dealScore,[50,40])},
+    {l:'Activation rate',t:'Wk12: ≥70%',v:rep.activationRate,vs:rep.activationRate===null?'—':rep.activationRate+'%',c:metCls(rep.activationRate,[70,50])},
+    {l:'CRM compliance',t:'100% always',v:rep.crmCompliance,vs:rep.crmCompliance+'%',c:metCls(rep.crmCompliance,[100,80])},
   ];
   const metsHTML=mets.map(m=>`<tr><td class="m-lbl">${m.l}</td><td class="m-tgt">${m.t}</td><td class="m-val ${m.c}">${m.vs}</td></tr>`).join('');
-  const notesHTML=bdm.notes.map(n=>`<div class="note-item"><div class="note-hdr"><span class="note-author">${n.author}</span><span class="note-date">${n.date}</span></div><div class="note-text">${n.text}</div></div>`).join('');
+  const notesHTML=rep.notes.map(n=>`<div class="note-item"><div class="note-hdr"><span class="note-author">${n.author}</span><span class="note-date">${n.date}</span></div><div class="note-text">${n.text}</div></div>`).join('');
 
   document.getElementById('detail-content').innerHTML=`
     <div class="detail-head">
       <div class="dh-top">
-        <div><div class="dh-name">${bdm.name}</div><div class="dh-meta">${bdm.city} · ${bdm.manager} · ${bdm.am} · Started ${bdm.startDate}</div></div>
-        <div class="status-badge ${statusCls(bdm.status)}">${statusLabel(bdm.status)}</div>
+        <div><div class="dh-name">${rep.name}</div><div class="dh-meta">${rep.city} · ${rep.manager} · ${rep.am} · Started ${rep.startDate}</div></div>
+        <div class="status-badge ${statusCls(rep.status)}">${statusLabel(rep.status)}</div>
       </div>
       <div class="dh-stats">
-        <div class="dh-stat"><div class="dhs-n" style="color:${dc}">${bdm.status==='graduated'?'✓':age+' days'}</div><div class="dhs-l">In programme</div></div>
-        <div class="dh-stat"><div class="dhs-n" style="color:${bdm.deals>=6?'#22C55E':bdm.deals>=3?'#6DBE4F':'#E57373'}">${bdm.deals}</div><div class="dhs-l">Deals</div></div>
-        <div class="dh-stat"><div class="dhs-n" style="color:${bdm.dealScore===null?'#333':bdm.dealScore>=50?'#22C55E':'#6DBE4F'}">${bdm.dealScore===null?'—':bdm.dealScore+'%'}</div><div class="dhs-l">Deal score</div></div>
-        <div class="dh-stat"><div class="dhs-n" style="color:${bdm.crmCompliance===100?'#22C55E':'#E57373'}">${bdm.crmCompliance}%</div><div class="dhs-l">CRM</div></div>
+        <div class="dh-stat"><div class="dhs-n" style="color:${dc}">${rep.status==='graduated'?'✓':age+' days'}</div><div class="dhs-l">In programme</div></div>
+        <div class="dh-stat"><div class="dhs-n" style="color:${rep.deals>=6?'#22C55E':rep.deals>=3?'#6DBE4F':'#E57373'}">${rep.deals}</div><div class="dhs-l">Deals</div></div>
+        <div class="dh-stat"><div class="dhs-n" style="color:${rep.dealScore===null?'#333':rep.dealScore>=50?'#22C55E':'#6DBE4F'}">${rep.dealScore===null?'—':rep.dealScore+'%'}</div><div class="dhs-l">Deal score</div></div>
+        <div class="dh-stat"><div class="dhs-n" style="color:${rep.crmCompliance===100?'#22C55E':'#E57373'}">${rep.crmCompliance}%</div><div class="dhs-l">CRM</div></div>
       </div>
     </div>
     <div class="section-card"><div class="sc-head">Ramp Gates</div>${gatesHTML}</div>
@@ -519,22 +519,22 @@ function showDetail(id){
 }
 
 function showDash(){
-  document.getElementById('bdm-grid').style.display='';
+  document.getElementById('rep-grid').style.display='';
   document.querySelector('.stats').style.display='';
   document.querySelector('.filters').style.display='';
   document.getElementById('detail-view').style.display='none';
   renderGrid();
 }
 function toggleGate(id,key){
-  const bdm=BDMS.find(b=>b.id===id);const gate=GATES.find(g=>g.key===key);
-  if(!bdm.completed[key])bdm.completed[key]=[];
-  bdm.completed[key]=bdm.completed[key].length<gate.targets.length?gate.targets.map(t=>t.k):[];
+  const rep=REPS.find(b=>b.id===id);const gate=GATES.find(g=>g.key===key);
+  if(!rep.completed[key])rep.completed[key]=[];
+  rep.completed[key]=rep.completed[key].length<gate.targets.length?gate.targets.map(t=>t.k):[];
   showDetail(id);
 }
 function addNote(id){
   const inp=document.getElementById('ni-'+id);const t=inp.value.trim();
   if(!t)return;
-  BDMS.find(b=>b.id===id).notes.unshift({author:'HoI',date:'just now',text:t});
+  REPS.find(b=>b.id===id).notes.unshift({author:'HoI',date:'just now',text:t});
   inp.value='';showDetail(id);
 }
 
@@ -548,7 +548,7 @@ function switchTab(tab){
   if(tab==='dash')renderGrid();
 }
 
-async function pullFromHubSpot(){
+async function pullFromSalesforce(){
   const key=document.getElementById('hs-key').value.trim();
   const fromDate=document.getElementById('start-from').value;
   if(!key){document.getElementById('hs-key').style.borderColor='#E57373';setTimeout(()=>document.getElementById('hs-key').style.borderColor='',1500);return;}
@@ -565,17 +565,17 @@ async function pullFromHubSpot(){
     
     localStorage.setItem('hs_ramp_key', key);
 
-    setStatus('Connecting to HubSpot...');
+    setStatus('Connecting to Salesforce...');
 
     
     const contactsResp = await fetch(
-      'https://api.hubapi.com/crm/v3/objects/contacts?limit=100&properties=firstname,lastname,email,jobtitle,city,hs_object_id,createdate,hubspot_owner_id&filterGroups=[{"filters":[{"propertyName":"jobtitle","operator":"CONTAINS_TOKEN","value":"rep"}]}]',
+      'https://api.hubapi.com/crm/v3/objects/contacts?limit=100&properties=firstname,lastname,email,jobtitle,city,hs_object_id,createdate,salesforce_owner_id&filterGroups=[{"filters":[{"propertyName":"jobtitle","operator":"CONTAINS_TOKEN","value":"rep"}]}]',
       { headers: { 'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json' } }
     );
 
     if (!contactsResp.ok) {
       const err = await contactsResp.json();
-      throw new Error('HubSpot error: ' + (err.message || contactsResp.status));
+      throw new Error('Salesforce error: ' + (err.message || contactsResp.status));
     }
 
     setStatus('Fetching rep contacts...');
@@ -612,14 +612,14 @@ async function pullFromHubSpot(){
         id: c.id,
         name,
         city: props.city || 'Unknown',
-        manager: props.hubspot_owner_id ? 'From HubSpot' : 'Unassigned',
+        manager: props.salesforce_owner_id ? 'From Salesforce' : 'Unassigned',
         am: '',
         startDate,
         deals,
         dealScore,
         crmCompliance,
         activationRate: 0,
-        source: 'hubspot'
+        source: 'salesforce'
       };
     }));
 
@@ -638,11 +638,11 @@ async function pullFromHubSpot(){
       const demo = HS_PULL_RESULTS.filter(r=>!fromDate||r.startDate>=fromDate);
       renderImportList(demo);
       document.getElementById('pull-results').style.display='block';
-      document.getElementById('pr-count').textContent=demo.length+' phone reps (demo data — no rep contacts found in HubSpot)';
+      document.getElementById('pr-count').textContent=demo.length+' phone reps (demo data — no rep contacts found in Salesforce)';
     } else {
       renderImportList(filtered);
       document.getElementById('pull-results').style.display='block';
-      document.getElementById('pr-count').textContent=filtered.length+' phone reps found in HubSpot';
+      document.getElementById('pr-count').textContent=filtered.length+' phone reps found in Salesforce';
     }
 
   } catch(e) {
@@ -667,14 +667,14 @@ function renderImportList(results){
   const list=document.getElementById('import-list');
   list.innerHTML=results.map(r=>{
     const age=days(r.startDate);
-    const alreadyIn=BDMS.some(b=>b.name===r.name);
-    return`<div class="bdm-import-row" id="row-${r.id}">
+    const alreadyIn=REPS.some(b=>b.name===r.name);
+    return`<div class="rep-import-row" id="row-${r.id}">
       <div class="bim-check" onclick="toggleImport('${r.id}')" id="chk-${r.id}" style="${alreadyIn?'opacity:.4;cursor:not-allowed':''}">✓</div>
       <div class="bim-info">
         <div class="bim-name">${r.name} ${alreadyIn?'<span style="font-size:10px;color:#444;font-weight:400;">already imported</span>':''}</div>
         <div class="bim-meta">${r.city} · ${r.manager} · Started ${r.startDate} · Day ${age}</div>
         <div style="display:flex;gap:5px;margin-top:4px;">
-          <span class="source-key key-hs">HubSpot: ${r.deals} deals · CRM ${r.crmCompliance}%</span>
+          <span class="source-key key-hs">Salesforce: ${r.deals} deals · CRM ${r.crmCompliance}%</span>
           <span class="source-key key-ec">TGTG: sync pending</span>
         </div>
       </div>
@@ -684,7 +684,7 @@ function renderImportList(results){
       </div>
     </div>`;
   }).join('');
-  selectedImports=new Set(results.filter(r=>!BDMS.some(b=>b.name===r.name)).map(r=>r.id));
+  selectedImports=new Set(results.filter(r=>!REPS.some(b=>b.name===r.name)).map(r=>r.id));
 }
 
 function toggleImport(id){
@@ -696,14 +696,14 @@ function toggleImport(id){
 }
 
 function importSelected(){
-  const toImport=HS_PULL_RESULTS.filter(r=>selectedImports.has(r.id)&&!BDMS.some(b=>b.name===r.name));
+  const toImport=HS_PULL_RESULTS.filter(r=>selectedImports.has(r.id)&&!REPS.some(b=>b.name===r.name));
   toImport.forEach((r,i)=>{
-    BDMS.push({
+    REPS.push({
       id:100+i,name:r.name,city:r.city,manager:r.manager,am:'TBC',
-      startDate:r.startDate,status:'on-track',cohort:'Cohort 2',source:'hubspot',
+      startDate:r.startDate,status:'on-track',cohort:'Cohort 2',source:'Salesforce',
       deals:r.deals,dealScore:null,activationRate:null,crmCompliance:r.crmCompliance,
       completed:{w2:[],w4:[],w6:[],w8:[],w12:[]},
-      notes:[{author:'System',date:'just now',text:'Imported from HubSpot. Deal score and activation rate will sync from TGTG platform at 06:00. Team Lead to complete gate sign-offs for milestones already passed.'}]
+      notes:[{author:'System',date:'just now',text:'Imported from Salesforce. Deal score and activation rate will sync from TGTG platform at 06:00. Team Lead to complete gate sign-offs for milestones already passed.'}]
     });
   });
   document.getElementById('setup-success').style.display='block';
@@ -724,10 +724,10 @@ function addManual(){
   const mgr=document.getElementById('ma-manager').value.trim();
   const start=document.getElementById('ma-start').value;
   if(!name||!start){alert('Name and start date required.');return;}
-  const newId=BDMS.length+200;
-  BDMS.push({id:newId,name,city:city||'TBC',manager:mgr||'TBC',am:'TBC',startDate:start,status:'on-track',cohort:'Manual',source:'manual',
+  const newId=REPS.length+200;
+  REPS.push({id:newId,name,city:city||'TBC',manager:mgr||'TBC',am:'TBC',startDate:start,status:'on-track',cohort:'Manual',source:'manual',
     deals:0,dealScore:null,activationRate:null,crmCompliance:100,completed:{w2:[],w4:[],w6:[],w8:[],w12:[]},
-    notes:[{author:'System',date:'just now',text:'Added manually. Connect to HubSpot to sync deal data and CRM compliance.'}]});
+    notes:[{author:'System',date:'just now',text:'Added manually. Connect to Salesforce to sync deal data and CRM compliance.'}]});
   ['ma-name','ma-city','ma-manager','ma-start'].forEach(id=>document.getElementById(id).value='');
   renderGrid();
   switchTab('dash');
